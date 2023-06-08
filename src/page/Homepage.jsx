@@ -30,6 +30,7 @@ function Homepage() {
             query.locale === "vi"
               ? navigate("")
               : navigate({ search: "?locale=vi" });
+            console.log(query);
           }}
         >
           Language: {t.commons.en}
