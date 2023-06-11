@@ -3,7 +3,6 @@ import { generatePath, useLocation, useNavigate } from "react-router-dom";
 import qs from "qs";
 import { useState } from "react";
 import { ROUTES } from "constants/routes";
-import Footer from "components/Footer";
 
 function Homepage() {
   const t = useTranslate();
@@ -40,7 +39,6 @@ function Homepage() {
           Language: {t.commons.en}
         </button>
       </div>
-      <Footer></Footer>
     </div>
   );
 }

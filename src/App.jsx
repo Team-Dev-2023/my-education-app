@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage";
 import CourseDetailPage from "./pages/CourseDetailPage";
 import CourseListPage from "./pages/CourseListPage";
 import { useEffect } from "react";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
 function App() {
   const { pathname } = useLocation();
@@ -13,6 +15,7 @@ function App() {
   }, [pathname]);
   return (
     <>
+      <Header />
       <Routes>
         <Route path={ROUTES.USER.HOME_PAGE} element={<HomePage />} />
         <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
@@ -22,6 +25,7 @@ function App() {
         />
         <Route path="*" element={<div>404</div>} />
       </Routes>
+      <Footer></Footer>
     </>
   );
 }
