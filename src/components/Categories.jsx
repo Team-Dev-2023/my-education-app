@@ -2,11 +2,11 @@ import { Menu } from "antd";
 import categoriesArray from "../asset/categoriesArray";
 
 const Categories = () => {
-  const categories = categoriesArray.map((e, index) => {
+  const categories = categoriesArray.map((item, index) => {
     return {
-      label: e.categories,
-      key: `category_${e.categories}_${index}`,
-      children: e.subCategories,
+      label: item.categories,
+      key: item.categories,
+      children: item.subCategories,
     };
   });
   console.log("render cate");

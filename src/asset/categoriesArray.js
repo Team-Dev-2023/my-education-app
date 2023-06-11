@@ -3,7 +3,7 @@ const categoriesArray = [
     categories: "Development",
     subCategories: [
       {
-        key: "1",
+        key: "WebDev",
         label: (
           <a rel="noopener noreferrer" href="/">
             Web Development
@@ -11,7 +11,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "2",
+        key: "MobDev",
         label: (
           <a rel="noopener noreferrer" href="/">
             Mobile Development
@@ -19,7 +19,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "3",
+        key: "ProLang",
         label: (
           <a rel="noopener noreferrer" href="/">
             Programming Languages
@@ -27,7 +27,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "4",
+        key: "GameDev",
         label: (
           <a rel="noopener noreferrer" href="/">
             Game Development
@@ -77,7 +77,7 @@ const categoriesArray = [
     categories: "Finance & Accounting",
     subCategories: [
       {
-        key: "1",
+        key: "5",
         label: (
           <a rel="noopener noreferrer" href="/">
             Web Development
@@ -85,7 +85,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "2",
+        key: "6",
         label: (
           <a rel="noopener noreferrer" href="/">
             Mobile Development
@@ -93,7 +93,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "3",
+        key: "7",
         label: (
           <a rel="noopener noreferrer" href="/">
             Programming Languages
@@ -101,7 +101,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "4",
+        key: "8",
         label: (
           <a rel="noopener noreferrer" href="/">
             Game Development
@@ -114,7 +114,7 @@ const categoriesArray = [
     categories: "IT & Software",
     subCategories: [
       {
-        key: "1",
+        key: "9",
         label: (
           <a rel="noopener noreferrer" href="/">
             Web Development
@@ -122,7 +122,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "2",
+        key: "a",
         label: (
           <a rel="noopener noreferrer" href="/">
             Mobile Development
@@ -130,7 +130,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "3",
+        key: "b",
         label: (
           <a rel="noopener noreferrer" href="/">
             Programming Languages
@@ -138,7 +138,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "4",
+        key: "c",
         label: (
           <a rel="noopener noreferrer" href="/">
             Game Development
@@ -151,7 +151,7 @@ const categoriesArray = [
     categories: "Office Productivity",
     subCategories: [
       {
-        key: "1",
+        key: "d",
         label: (
           <a rel="noopener noreferrer" href="/">
             Web Development
@@ -159,7 +159,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "2",
+        key: "e",
         label: (
           <a rel="noopener noreferrer" href="/">
             Mobile Development
@@ -167,7 +167,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "3",
+        key: "f",
         label: (
           <a rel="noopener noreferrer" href="/">
             Programming Languages
@@ -175,7 +175,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "4",
+        key: "g",
         label: (
           <a rel="noopener noreferrer" href="/">
             Game Development
@@ -188,7 +188,7 @@ const categoriesArray = [
     categories: "Personal Development",
     subCategories: [
       {
-        key: "1",
+        key: "h",
         label: (
           <a rel="noopener noreferrer" href="/">
             Web Development
@@ -196,7 +196,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "2",
+        key: "k",
         label: (
           <a rel="noopener noreferrer" href="/">
             Mobile Development
@@ -204,7 +204,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "3",
+        key: "l",
         label: (
           <a rel="noopener noreferrer" href="/">
             Programming Languages
@@ -212,7 +212,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "4",
+        key: "m",
         label: (
           <a rel="noopener noreferrer" href="/">
             Game Development
@@ -225,7 +225,7 @@ const categoriesArray = [
     categories: "Design",
     subCategories: [
       {
-        key: "1",
+        key: "w",
         label: (
           <a rel="noopener noreferrer" href="/">
             Web Development
@@ -233,7 +233,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "2",
+        key: "o",
         label: (
           <a rel="noopener noreferrer" href="/">
             Mobile Development
@@ -241,7 +241,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "3",
+        key: "p",
         label: (
           <a rel="noopener noreferrer" href="/">
             Programming Languages
@@ -249,7 +249,7 @@ const categoriesArray = [
         ),
       },
       {
-        key: "4",
+        key: "q",
         label: (
           <a rel="noopener noreferrer" href="/">
             Game Development

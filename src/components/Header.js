@@ -16,9 +16,7 @@ function Header() {
         <div className="w-24 mx-4">
           <img src={logo} alt="logo" className="object-contain" />
         </div>
-        {/* <div className="mx-2 text-base"> */}
         <Categories className="mx-2 text-base" />
-        {/* </div> */}
         <div className="flex-auto grid w-64 py-2 mx-2">
           <div className="inline-flex items-center rounded-full border-2 border-black">
             <AiOutlineSearch className="ml-1 opacity-80" />
@@ -52,7 +50,6 @@ function Header() {
           <div className="text-white font-bold">CC</div>
         </div>
       </div>
-      {/* Ant design menu for header */}
       <hr className="my-0 border-gray-300 border-t-2" />
       <HorizontalMenuDropdown />
     </>
