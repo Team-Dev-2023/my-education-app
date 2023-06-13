@@ -3,6 +3,7 @@ import { generatePath, useLocation, useNavigate } from "react-router-dom";
 import qs from "qs";
 import { useState } from "react";
 import { ROUTES } from "constants/routes";
+import Slider from "components/Slider";
 
 function Homepage() {
   const t = useTranslate();
@@ -14,6 +15,7 @@ function Homepage() {
 
   return (
     <div className="block m-auto">
+      <Slider />
       <div>This is HomePage</div>
       <div>
         <button
