@@ -72,9 +72,12 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
           {renderItemSwiper(listProduct)}
         </Swiper>
         <div
-          className={`swiper-button-next-unique-${nameCarousel} absolute xxs:hidden sm:block top-[30px] z-10 sm:right-[-20px] `}
+          className={`swiper-button-next-unique-${nameCarousel}  absolute xxs:hidden sm:block top-[30px] z-10 sm:right-[-20px] `}
         >
-          <button className=" !text-white rounded-[999px] bg-black">
+          <button
+            className=" !text-white rounded-[999px] border-[0.8px]
+          border-[#696f74] hover:bg-[#5b5959]  bg-black"
+          >
             <img
               className="w-[40px]"
               src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/icon-next-danhmuc.svg"
@@ -85,9 +88,12 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
         <div
           className={`swiper-button-prev-unique-${nameCarousel} absolute  xxs:hidden sm:block top-[30px] z-10 sm:left-[-20px] `}
         >
-          <button className=" !text-white">
+          <button
+            className="  !text-white rounded-[999px] border-[0.8px]
+          border-[#696f74] hover:bg-[#5b5959]  bg-black"
+          >
             <img
-              className="w-[40px] rounded-[999px] bg-black"
+              className="w-[40px] rounded-[999px]  "
               src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/icon-prev-danhmuc.svg"
               alt=""
             />

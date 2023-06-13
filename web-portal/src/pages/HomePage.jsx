@@ -19,7 +19,7 @@ function Homepage() {
       <div className="my-[200px] xxs:max-w-full overflow-hidden lg:max-w-[1200px] flex justify-center ">
         <CarouselListProduct
           listProduct={carouselProducts}
-          nameCarousel={"recomend"}
+          nameCarousel={"recommend"}
         />
       </div>
     </div>

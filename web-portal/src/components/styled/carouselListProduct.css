@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
 }
-.swiper-button-next {
+/* .swiper-button-next {
   --swiper-navigation-size: 18px !important;
   padding: 14px;
   border-radius: 100%;
@@ -34,9 +34,9 @@
 .swiper-button-prev:hover {
   transform: scale(1.2) !important;
   traslation: all 0.3s !important;
-}
+} */
 .swiper-button-disabled {
-  opacity: 0.5 !important;
+  /* opacity: 0.5 !important; */
   display: none !important;
 }
 .swiper-button-hidden {
