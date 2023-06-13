@@ -7,9 +7,9 @@ import { TfiWorld } from "react-icons/tfi";
 function Footer() {
   const t = useTranslate();
   let leftButtomFooter = [
-    { content: t.leftBottomFooter.About, route: "#" },
-    { content: t.leftBottomFooter.Contact, route: "#" },
-    { content: t.leftBottomFooter.Udemy_Business, route: "#" },
+    { content: t.leftBottomFooter.about, route: "#" },
+    { content: t.leftBottomFooter.contact, route: "#" },
+    { content: t.leftBottomFooter.udemy_Business, route: "#" },
     { content: t.leftBottomFooter.download_app, route: "#" },
     { content: t.leftBottomFooter.teach, route: "#" },
   ];
@@ -21,11 +21,11 @@ function Footer() {
     { content: t.centerBottomFooter.investors, route: "#" },
   ];
   let rightButtomFooter = [
-    { content: t.rightBottomFooter.Terms, route: "#" },
-    { content: t.rightBottomFooter.Privacy_policy, route: "#" },
-    { content: t.rightBottomFooter.Cookie, route: "#" },
-    { content: t.rightBottomFooter.Sitemap, route: "#" },
-    { content: t.rightBottomFooter.Accessibility_statement, route: "#" },
+    { content: t.rightBottomFooter.terms, route: "#" },
+    { content: t.rightBottomFooter.privacy_policy, route: "#" },
+    { content: t.rightBottomFooter.cookie, route: "#" },
+    { content: t.rightBottomFooter.sitemap, route: "#" },
+    { content: t.rightBottomFooter.accessibility_statement, route: "#" },
   ];
   const renderListTitleFooter = (array) => {
     return array.map((item, index) => {
@@ -38,9 +38,8 @@ function Footer() {
       );
     });
   };
-  console.log("aaaa", [t.leftBottomFooter]);
+
   const navigate = useNavigate();
-  const [language, setLanguage] = useState("en");
   const { search } = useLocation();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
 
@@ -48,8 +47,8 @@ function Footer() {
     <div className="Footer px-[24px] bg-[#1c1d1f] py-2">
       <div className="w-full md:flex xxs:inline mt-2 py-4 justify-between ">
         <div className="xxs:w-full flex flex-wrap gap-3">
-          <h4 className="text-[20px] w-full ">{t.topFooter.title}</h4>
-          <h1>{t.topFooter.content}</h1>
+          <h4 className="text-[20px] w-full text-white">{t.topFooter.title}</h4>
+          <h1 className="text-white">{t.topFooter.content}</h1>
         </div>
         <button className="h-[48px] md:min-w-fit xxs:w-full md:w-0 xxs:my-2 inline-block text-white font-[500]  border-[0.8px] border-white px-3 py-2">
           {t.topFooter.button}
