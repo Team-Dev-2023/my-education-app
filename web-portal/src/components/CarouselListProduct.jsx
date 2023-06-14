@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import "./styled/carouselListProduct.css";
+import "./styles/carouselListProduct.css";
 import { Navigation } from "swiper";
 
 import ItemCarouseIlListProduct from "./ItemCarouseIlListProduct";
@@ -27,6 +27,7 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
         <Swiper
           // navigation={true}
           modules={[Navigation]}
+          nameCarousel={"carouselProducts"}
           // centeredSlides={true}
           grabCursor={true}
           keyboard={{

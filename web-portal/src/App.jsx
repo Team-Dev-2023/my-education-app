@@ -15,7 +15,7 @@ function App() {
   }, [pathname]);
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path={ROUTES.USER.HOME_PAGE} element={<HomePage />} />
         <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
