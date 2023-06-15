@@ -4,6 +4,7 @@ import qs from "qs";
 import { useState } from "react";
 import { ROUTES } from "constants/routes";
 import Slider from "components/Slider";
+import TopicRecommended from "components/TopicRecommended";
 
 function Homepage() {
   const t = useTranslate();
@@ -16,7 +17,7 @@ function Homepage() {
   return (
     <div className="block m-auto">
       <Slider />
-      <div>This is HomePage</div>
+      <TopicRecommended />
       <div>
         <button
           className="bg-[#7a0fe411] rounded-md p-2 mx-2"
