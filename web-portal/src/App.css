@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+.ant-rate-star {
+  margin-inline-end: 1px !important;
+}
+.ant-tooltip-inner {
+  min-width: 300px !important;
+}
+.textShowDetailHome {
+  color: green !important;
+}

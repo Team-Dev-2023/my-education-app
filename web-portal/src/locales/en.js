@@ -4,6 +4,7 @@ const en = {
     en: "English",
     vi: "Vietnamese",
   },
+  //foot
   topFooter: {
     title: "Teach the world online",
     content:
@@ -16,11 +17,11 @@ const en = {
     right_Title: "to build in-demand career skills.",
   },
   leftBottomFooter: {
-    Udemy_Business: "Udemy Business",
+    udemy_Business: "Udemy Business",
     teach: "Teach on Udemy",
     download_app: "Get the app",
-    About: "About us",
-    Contact: "Contact us",
+    about: "About us",
+    contact: "Contact us",
   },
   centerBottomFooter: {
     career: "Careers",
@@ -30,11 +31,23 @@ const en = {
     investors: "Investors",
   },
   rightBottomFooter: {
-    Terms: "Terms",
-    Privacy_policy: "Privacy policy",
-    Cookie: "Cookie settings",
-    Sitemap: "Sitemap",
-    Accessibility_statement: "Accessibility statement",
+    terms: "Terms",
+    privacy_policy: "Privacy policy",
+    cookie: "Cookie settings",
+    sitemap: "Sitemap",
+    accessibility_statement: "Accessibility statement",
+  },
+  //home
+  product: {
+    bestseller: "Bestseller",
+    highest_rated: "Highest rated",
+    new: "New",
+    updated: "Updated",
+    totalTime: "total hours",
+    allLevel: "All Levels",
+    beginnerLevel: "Beginner Level",
+    subtitle: "Subtitle",
+    add_to_cart: "Add to cart",
   },
 };
 export default en;
