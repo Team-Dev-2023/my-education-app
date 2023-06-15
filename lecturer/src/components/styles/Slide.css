@@ -1,0 +1,22 @@
+.swiper-button-next {
+  --swiper-navigation-size: 18px !important;
+  padding: 14px;
+  border-radius: 100%;
+  background-color: #1c1d1f;
+  color: #ffff !important;
+}
+.swiper-button-next:hover {
+  transform: scale(1.2) !important;
+  traslation: all 0.3s !important;
+}
+.swiper-button-prev {
+  --swiper-navigation-size: 16px !important;
+  padding: 14px;
+  border-radius: 100%;
+  background-color: #1c1d1f;
+  color: #ffff !important;
+}
+.swiper-button-prev:hover {
+  transform: scale(1.2) !important;
+  traslation: all 0.3s !important;
+}
