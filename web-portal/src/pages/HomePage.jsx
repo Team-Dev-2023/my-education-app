@@ -27,29 +27,29 @@ function Homepage() {
           listProduct={carouselProducts}
           nameCarousel={"recommend"}
         />
-        <button
-          className="bg-[#7a0fe411] rounded-md p-2 mx-2"
-          onClick={() => {
-            navigate({
-              pathname: ROUTES.USER.LIST_PRODUCT,
-              search: query.locale === "vi" ? "?locale=vi" : "",
-            });
-          }}
-        >
-          CourseListPage
-        </button>
-
-        <button
-          className="bg-[#7a0fe411] rounded-md p-2"
-          onClick={() => {
-            query.locale === "vi"
-              ? navigate({ search: "" })
-              : navigate({ search: "?locale=vi" });
-          }}
-        >
-          Language: {t.commons.en}
-        </button>
       </div>
+      <button
+        className="bg-[#7a0fe411] rounded-md p-2 mx-2"
+        onClick={() => {
+          navigate({
+            pathname: ROUTES.USER.LIST_PRODUCT,
+            search: query.locale === "vi" ? "?locale=vi" : "",
+          });
+        }}
+      >
+        CourseListPage
+      </button>
+
+      <button
+        className="bg-[#7a0fe411] rounded-md p-2"
+        onClick={() => {
+          query.locale === "vi"
+            ? navigate({ search: "" })
+            : navigate({ search: "?locale=vi" });
+        }}
+      >
+        Language: {t.commons.en}
+      </button>
     </div>
   );
 }

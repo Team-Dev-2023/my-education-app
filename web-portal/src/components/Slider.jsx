@@ -20,12 +20,12 @@ export default function Slider() {
     backgroundImage: `url(${slide02})`,
   };
   return (
-    <>
+    <div className="container">
       <Swiper
         loop={true}
         navigation={true}
         modules={[Navigation]}
-        className="mySwiper"
+        // className="mySwiper"
       >
         <SwiperSlide>
           <div className="swiper-slide mx-auto flex justify-center">
@@ -72,6 +72,6 @@ export default function Slider() {
           </div>
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 }
