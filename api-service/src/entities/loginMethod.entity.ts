@@ -17,8 +17,8 @@ export class LoginMethod extends BaseEntityAudit {
   @Column({ type: 'varchar', length: 256, nullable: false })
   username: string;
 
-    @Column({ type: 'varchar', length: 256, nullable: false })
-        password: string;
+  @Column({ type: 'varchar', length: 256, nullable: false })
+  password: string;
 
   @Column({ type: 'tinyint', default: ELoginMethod.password })
   role: ELoginMethod;

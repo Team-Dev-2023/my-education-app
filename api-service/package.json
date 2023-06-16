@@ -31,8 +31,7 @@
     "typeorm:generate": "npm run typeorm -- migration:generate",
     "typeorm:run": "npm run typeorm migration:run",
     "typeorm:revert": "npm run typeorm migration:revert",
-    "typeorm:restart": "npm run typeorm migration:revert && npm run typeorm migration:run",
-    "prepare": "husky install"
+    "typeorm:restart": "npm run typeorm migration:revert && npm run typeorm migration:run"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
