@@ -1,0 +1,35 @@
+service:
+  name: api-education
+  title: Education API
+  description: Swagger specification for API Education
+  baseUrl: api/education
+  docsBaseUrl: docs/education
+  apiVersion: 0.1.0
+  appVersion: 0.1.0
+
+server:
+  host: 127.0.0.1
+  port: 3000
+  hostname: 127.0.0.1:3000
+  swaggerSchema: http
+
+typeorm:
+  type: mysql
+  host: localhost
+  username: education_db
+  password: education_password
+  port: 3406
+  database: education_dev
+  entities: []
+  logging: true
+
+jwt:
+  at_secret: at_secret
+  rt_secret: rt_secret
+
+fileSettings:
+  maxFileSize: 20000
+
+allowedOrigins: '*'
+
+shutdownDelay: 5000
