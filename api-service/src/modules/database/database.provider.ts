@@ -1,4 +1,4 @@
-import { getDbConnection } from 'src/shared/helpers';
+import { getDbConnection } from 'src/shared/config.constant';
 import { DataSource, DataSourceOptions } from 'typeorm';
 export const DBConnectionToken = 'DATA_SOURCE';
 export const databaseProviders = [

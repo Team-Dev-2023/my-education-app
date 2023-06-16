@@ -12,6 +12,6 @@ export class RolePermission {
   @Column({ type: 'varchar', length: 100, nullable: false })
   module: string;
 
-  @Column({ type: 'tinyint', enum: EAction })
+  @Column({ type: 'tinyint' })
   action: EAction;
 }

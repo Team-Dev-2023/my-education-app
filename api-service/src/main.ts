@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as config from 'config';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
-import { getAllowedOrigins, getHost } from './shared/helpers';
+import { getAllowedOrigins, getHost } from './shared/config.constant';
 import { SERVICE_CONFIG } from './shared/contants';
 import { Logger } from 'nestjs-pino';
 import { createLightship } from 'lightship';
@@ -10,6 +10,7 @@ import * as express from 'express';
 import * as httpContext from 'express-http-context';
 import { correlationIdMiddleware } from './middlewares/correlationid.middleware';
 import { initSwaggerDocs } from './shared/swagger';
+import { ResponseInterceptor } from './interceptors/response.interceptors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -28,6 +29,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  app.useGlobalInterceptors(new ResponseInterceptor());
   app.setGlobalPrefix(config.get('service.baseUrl'));
   await initSwaggerDocs(app);
   const lightship = createLightship({});

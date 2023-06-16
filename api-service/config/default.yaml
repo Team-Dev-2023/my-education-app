@@ -25,7 +25,10 @@ typeorm:
 
 jwt:
   at_secret: at_secret
+  at_expires_in: 12h
   rt_secret: rt_secret
+  rf_expires_in: 5d
+  secret: eda9)#k#Poks
 
 fileSettings:
   maxFileSize: 20000

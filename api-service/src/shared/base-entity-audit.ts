@@ -16,6 +16,6 @@ export class BaseEntityAudit {
   @Column({ type: 'varchar', length: 500, nullable: false })
   createdBy: string;
 
-  @Column({ type: 'varchar', length: 500, nullable: false })
+  @Column({ type: 'varchar', length: 500, nullable: true })
   lastUpdatedBy: string;
 }

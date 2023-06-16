@@ -34,3 +34,8 @@ export enum EAction {
   GET_ONE = 'GET_ONE',
   GET_ALL = 'GET_ALL',
 }
+
+export interface JwtPayload {
+  uuid: string;
+  username: string;
+}

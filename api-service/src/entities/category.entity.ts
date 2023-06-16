@@ -1,4 +1,4 @@
-import { BaseEntityAudit } from 'src/shared/baseEntity';
+import { BaseEntityAudit } from 'src/shared/base-entity-audit';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'categories' })

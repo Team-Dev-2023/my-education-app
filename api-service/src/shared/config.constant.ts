@@ -37,13 +37,38 @@ export const getDbConnection = (): DataSourceOptions => {
     synchronize: false,
     migrations: [
       isProduction
-        ? `${process.cwd()}/dist/migrations/**/*{.ts,.js}`
-        : `${process.cwd()}/dist/migrations/**/*{.ts,.js}`,
+        ? `${process.cwd()}/dist/src/migrations/**/*{.ts,.js}`
+        : `${process.cwd()}/dist/src/migrations/**/*{.ts,.js}`,
     ],
     entities: [
       isProduction
-        ? `${process.cwd()}/dist/**/*.entity{.ts,.js}`
-        : `${process.cwd()}/dist/**/*.entity{.ts,.js}`,
+        ? `${process.cwd()}/dist/src/**/*.entity{.ts,.js}`
+        : `${process.cwd()}/dist/src/**/*.entity{.ts,.js}`,
     ],
   };
 };
+
+export type JwtConfig = {
+  accessTokenSecret: string;
+  accessTokenExpiresIn: string;
+  refreshTokenSecret: string;
+  refreshTokenExpiresIn: string;
+  jwtSecret: string;
+};
+export const getJwtConfig = (): JwtConfig => {
+  const jwtConfig = config.get('jwt');
+  return {
+    accessTokenSecret: jwtConfig?.at_secret || '',
+    accessTokenExpiresIn: jwtConfig?.at_expires_in,
+    refreshTokenSecret: jwtConfig?.rt_secret,
+    refreshTokenExpiresIn: jwtConfig?.rf_expires_in,
+    jwtSecret: jwtConfig?.secret,
+  };
+};
+
+export const getPinoLoggerOptions = () => ({
+  pinoHttp: {
+    enabled: true,
+    level: isProduction ? 'info' : 'debug',
+  },
+});

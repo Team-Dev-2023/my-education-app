@@ -1,5 +1,5 @@
 import { Category } from 'src/entities/category.entity';
-import { repoTokens } from 'src/shared/repoTokens.constant';
+import { repoTokens } from 'src/shared/repo-tokens.constant';
 import { DataSource } from 'typeorm';
 import { DBConnectionToken } from '../database/database.provider';
 
