@@ -177,10 +177,20 @@
         ]
       }
     },
-    "/api/education/users": {
+    "/api/education/users/admin": {
       "post": {
-        "operationId": "UserController_createOne",
+        "operationId": "UserController_createAdminUser",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAdminUserInputDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": ""
@@ -194,7 +204,28 @@
             "Authorization": []
           }
         ]
-      },
+      }
+    },
+    "/api/education/users/profile": {
+      "get": {
+        "operationId": "UserController_profile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/education/users": {
       "get": {
         "operationId": "UserController_getAll",
         "parameters": [
@@ -215,25 +246,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "User"
-        ],
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      }
-    },
-    "/api/education/users/profile": {
-      "get": {
-        "operationId": "UserController_profile",
-        "parameters": [],
         "responses": {
           "200": {
             "description": ""
@@ -322,6 +334,32 @@
       }
     },
     "schemas": {
+      "CreateAdminUserInputDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "role": {
+            "type": "number",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "default": 1
+          }
+        },
+        "required": [
+          "username",
+          "password",
+          "role"
+        ]
+      },
       "RegisterInputDto": {
         "type": "object",
         "properties": {
@@ -351,8 +389,10 @@
             "enum": [
               0,
               1,
-              2
-            ]
+              2,
+              3
+            ],
+            "default": 3
           }
         },
         "required": [

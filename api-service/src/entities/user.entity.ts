@@ -1,4 +1,4 @@
-import { BaseEntityAudit } from 'src/shared/base-entity-audit';
+import { BaseEntityAudit } from 'src/entities/base-entity-audit';
 import { EUserRole } from 'src/shared/constants/common.contants';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { LoginMethod } from './login-method.entity';

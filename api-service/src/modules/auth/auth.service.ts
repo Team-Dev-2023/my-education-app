@@ -16,14 +16,15 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
   async register(data: RegisterInputDto): Promise<RegisterResponseDto> {
-    if (data.role === EUserRole.admin) {
+    if ([EUserRole.admin, EUserRole.superadmin].includes(data.role)) {
       throw new BadRequestException(Errors.CANNOT_CREATE_ADMIN_ACCOUNT);
     }
     if (!countries.find((c) => c.value === data.country)) {
       throw new BadRequestException(Errors.INVALID_COUNTRY_CODE);
     }
     await this.userService.checkUsernameHasBeenUsedLoggedIn(data.username);
-    const hashPassword = await bcrypt.hash(data.password, 10);
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(data.password, salt);
     const user = await this.userService.createUserWithPasswordAuth({
       ...data,
       password: hashPassword,
@@ -31,6 +32,7 @@ export class AuthService {
     const { accessToken, refreshToken } = await this.generateTokens({
       username: data.username,
       uuid: user.uuid,
+      role: user.role,
     });
     await this.userService.updateUserRefreshToken(user.uuid, refreshToken);
     delete data.password;
@@ -53,6 +55,7 @@ export class AuthService {
     const { accessToken, refreshToken } = await this.generateTokens({
       uuid: user.uuid,
       username,
+      role: user.role,
     });
     await this.userService.updateUserRefreshToken(user.uuid, refreshToken);
     return {

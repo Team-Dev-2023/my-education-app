@@ -8,14 +8,13 @@ import { JwtPayload } from 'src/shared/constants/common.contants';
 export class UserMiddleware implements NestMiddleware {
   constructor(private jwtService: JwtService) {}
   async use(req: any, res: any, next: (error?: any) => void) {
-    const accessToken = req.get('access-token');
-
+    const accessToken = req.headers['authorization']
+      ?.replace('Bearer', '')
+      ?.trim();
     if (!accessToken) {
       return next();
     }
-
     let userPayload: JwtPayload;
-
     try {
       userPayload = (await this.jwtService.decode(accessToken)) as JwtPayload;
       httpContext.set('user', userPayload);

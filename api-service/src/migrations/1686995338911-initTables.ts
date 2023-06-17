@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class InitFirstTables1686936956079 implements MigrationInterface {
-  name = 'InitFirstTables1686936956079';
+export class InitTables1686995338911 implements MigrationInterface {
+  name = 'InitTables1686995338911';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
@@ -13,10 +13,11 @@ export class InitFirstTables1686936956079 implements MigrationInterface {
                 \`uuid\` varchar(36) NOT NULL,
                 \`email\` varchar(320) NOT NULL,
                 \`phone\` varchar(20) NULL,
+                \`avatar\` varchar(500) NULL,
                 \`firstName\` varchar(128) NULL,
                 \`lastName\` varchar(128) NULL,
                 \`country\` varchar(2) NOT NULL,
-                \`role\` tinyint NOT NULL DEFAULT '0',
+                \`role\` tinyint NOT NULL DEFAULT '3',
                 \`refreshToken\` varchar(500) NULL,
                 PRIMARY KEY (\`uuid\`)
             ) ENGINE = InnoDB
@@ -36,7 +37,7 @@ export class InitFirstTables1686936956079 implements MigrationInterface {
     await queryRunner.query(`
             CREATE TABLE \`role_permission\` (
                 \`uuid\` varchar(36) NOT NULL,
-                \`role\` tinyint NOT NULL DEFAULT '0',
+                \`role\` tinyint NOT NULL DEFAULT '3',
                 \`module\` varchar(100) NOT NULL,
                 \`action\` tinyint NOT NULL,
                 PRIMARY KEY (\`uuid\`)
@@ -50,6 +51,7 @@ export class InitFirstTables1686936956079 implements MigrationInterface {
                 \`lastUpdatedBy\` varchar(500) NULL,
                 \`uuid\` varchar(36) NOT NULL,
                 \`name\` varchar(200) NOT NULL,
+                \`image\` varchar(200) NOT NULL,
                 PRIMARY KEY (\`uuid\`)
             ) ENGINE = InnoDB
         `);
