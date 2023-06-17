@@ -6,7 +6,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { EUserRole } from 'src/shared/contants';
+import { EUserRole } from 'src/shared/constants/common.contants';
 
 export class RegisterInputDto {
   @ApiProperty({ type: String, required: true })

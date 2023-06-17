@@ -1,4 +1,4 @@
-import { ELoginMethod } from 'src/shared/contants';
+import { ELoginMethod } from 'src/shared/constants/common.contants';
 import {
   Column,
   Entity,

@@ -1,8 +1,8 @@
 import { NestMiddleware } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from 'src/shared/contants';
 import * as httpContext from 'express-http-context';
+import { JwtPayload } from 'src/shared/constants/common.contants';
 
 @Injectable()
 export class UserMiddleware implements NestMiddleware {

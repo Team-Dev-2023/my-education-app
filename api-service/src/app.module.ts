@@ -10,7 +10,10 @@ import { CategoryModule } from './modules/category/category.module';
 import { DatabaseModule } from './modules/database/database.module';
 import { HealthModule } from './modules/health/health.module';
 import { UserModule } from './modules/user/user.module';
-import { getJwtConfig, getPinoLoggerOptions } from './shared/config.constant';
+import {
+  getJwtConfig,
+  getPinoLoggerOptions,
+} from './shared/constants/config.constant';
 @Module({
   imports: [
     HealthModule,

@@ -1,4 +1,4 @@
-import { EAction, EUserRole } from 'src/shared/contants';
+import { EAction, EUserRole } from 'src/shared/constants/common.contants';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'role_permission' })

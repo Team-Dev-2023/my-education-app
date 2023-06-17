@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { EUserRole } from 'src/shared/contants';
+import { EUserRole } from 'src/shared/constants/common.contants';
 
 export class UserResponseDto {
   @ApiProperty({ type: String, required: false })
   uuid: string;
 
   @ApiProperty({ type: String, required: false })
-  username: string;
+  username?: string;
 
   @ApiProperty({ type: String, required: false })
   password?: string;

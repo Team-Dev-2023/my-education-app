@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Category } from 'src/entities/category.entity';
-import { repoTokens } from 'src/shared/repo-tokens.constant';
+import { repoTokens } from 'src/shared/constants/repo-tokens.constant';
 import { Repository } from 'typeorm';
 
 @Injectable()

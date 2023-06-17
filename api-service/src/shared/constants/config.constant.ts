@@ -1,6 +1,6 @@
 import * as config from 'config';
 import { DataSourceOptions } from 'typeorm';
-import { isProduction } from './contants';
+import { isProduction } from './common.contants';
 
 export const getAllowedOrigins = (): string | string[] => {
   const allowedOrigins = config.get<string>('allowedOrigins').split(',');
