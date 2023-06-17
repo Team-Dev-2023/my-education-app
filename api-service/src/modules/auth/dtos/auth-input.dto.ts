@@ -23,32 +23,39 @@ export class RegisterInputDto {
   @IsOptional()
   @IsString()
   @IsEmail()
-  email: string;
+  email?: string;
 
   @ApiProperty({ type: String, required: false })
   @IsOptional()
   @IsString()
-  firstName: string;
+  firstName?: string;
 
   @ApiProperty({ type: String, required: false })
   @IsOptional()
   @IsString()
-  lastName: string;
+  lastName?: string;
 
   @ApiProperty({ type: String, required: false })
   @IsOptional()
   @IsString()
-  phone: string;
+  phone?: string;
 
   @ApiProperty({ type: String, required: true })
   @IsNotEmpty()
   @IsString()
-  country: string;
+  country?: string;
 
-  @ApiProperty({ type: EUserRole, enum: EUserRole, required: true })
+  @ApiProperty({
+    type: EUserRole,
+    enum: EUserRole,
+    default: EUserRole.student,
+    required: true,
+  })
   @IsEnum(EUserRole)
   @IsNotEmpty()
   role: EUserRole;
+
+  createdBy?: string;
 }
 
 export class LoginInputDto {

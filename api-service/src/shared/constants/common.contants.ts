@@ -13,9 +13,10 @@ export const SERVICE_CONFIG: ServiceConfig = config.get('service');
 export const isProduction = process.env.NODE_ENV === 'prod' ? true : false;
 
 export enum EUserRole {
-  student = 0,
-  lecturer = 1,
-  admin = 2,
+  superadmin = 0,
+  admin = 1,
+  lecturer = 2,
+  student = 3,
 }
 
 export enum ELoginMethod {
@@ -38,6 +39,7 @@ export enum EAction {
 export interface JwtPayload {
   uuid: string;
   username: string;
+  role: EUserRole;
 }
 
 export interface IPagination {

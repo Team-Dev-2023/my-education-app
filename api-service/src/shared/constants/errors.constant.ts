@@ -17,6 +17,10 @@ export const Errors = {
     message: 'Cannot create admin account',
     statusCode: HttpStatus.BAD_REQUEST,
   },
+  CANNOT_CREATE_SUPERADMIN_ACCOUNT: {
+    message: 'Cannot create superadmin account',
+    statusCode: HttpStatus.BAD_REQUEST,
+  },
   INVALID_COUNTRY_CODE: {
     message: 'Invalid country code',
     statusCode: HttpStatus.BAD_REQUEST,

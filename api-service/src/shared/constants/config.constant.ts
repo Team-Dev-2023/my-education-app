@@ -42,9 +42,10 @@ export const getDbConnection = (): DataSourceOptions => {
     ],
     entities: [
       isProduction
-        ? `${process.cwd()}/dist/src/**/*.entity{.ts,.js}`
-        : `${process.cwd()}/dist/src/**/*.entity{.ts,.js}`,
+        ? `${process.cwd()}/dist/src/entities/*.entity{.ts,.js}`
+        : `${process.cwd()}/dist/src/entities/*.entity{.ts,.js}`,
     ],
+    migrationsRun: false,
   };
 };
 
