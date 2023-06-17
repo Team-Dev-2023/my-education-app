@@ -8,10 +8,12 @@ import { UserMiddleware } from './middlewares/user.middleware';
 import { AuthModule } from './modules/auth/auth.module';
 import { CategoryModule } from './modules/category/category.module';
 import { DatabaseModule } from './modules/database/database.module';
+import { HealthModule } from './modules/health/health.module';
 import { UserModule } from './modules/user/user.module';
 import { getJwtConfig, getPinoLoggerOptions } from './shared/config.constant';
 @Module({
   imports: [
+    HealthModule,
     LoggerModule.forRoot(getPinoLoggerOptions()),
     JwtModule.register({
       global: true,
