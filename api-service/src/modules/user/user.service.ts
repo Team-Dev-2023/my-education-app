@@ -1,10 +1,17 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { LoginMethod } from 'src/entities/login-method.entity';
 import { User } from 'src/entities/user.entity';
-import { ELoginMethod } from 'src/shared/contants';
-import { Errors } from 'src/shared/errors.constant';
-import { repoTokens } from 'src/shared/repo-tokens.constant';
-import { Repository } from 'typeorm';
+import {
+  ELoginMethod,
+  IPagination,
+} from 'src/shared/constants/common.contants';
+import { Errors } from 'src/shared/constants/errors.constant';
+import { aliases, repoTokens } from 'src/shared/constants/repo-tokens.constant';
+import {
+  IPaginatedReponse,
+  paginate,
+} from 'src/shared/helpers/paginate.helper';
+import { Repository, SelectQueryBuilder } from 'typeorm';
 import { RegisterInputDto } from '../auth/dtos/auth-input.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
 
@@ -18,14 +25,25 @@ export class UserService {
   async create() {
     return 'lskd';
   }
+  private getFields(): string[] {
+    return [
+      `${aliases.user}`,
+      `${aliases.loginMethod}.username`,
+      `${aliases.loginMethod}.method`,
+      `${aliases.loginMethod}.isVerified`,
+    ];
+  }
+
+  private getQuery(): SelectQueryBuilder<User> {
+    return this.userRepo
+      .createQueryBuilder(aliases.user)
+      .leftJoin(`${aliases.user}.loginMethods`, aliases.loginMethod)
+      .select(this.getFields());
+  }
+
   private formatResponse(user: User): UserResponseDto {
-    const pwLoginMethod = user?.loginMethods.find(
-      (method) => method.method === ELoginMethod.password,
-    );
     return {
       uuid: user.uuid,
-      username: pwLoginMethod.username,
-      password: pwLoginMethod.password,
       email: user.email,
       phone: user.phone,
       firstName: user?.firstName,
@@ -35,6 +53,7 @@ export class UserService {
       role: user.role,
     };
   }
+
   async checkUsernameHasBeenUsedLoggedIn(
     username: string,
     method = ELoginMethod.password,
@@ -92,6 +111,26 @@ export class UserService {
     if (!user) {
       throw new BadRequestException(Errors.INVALID_USERNAME);
     }
-    return this.formatResponse(user);
+
+    const pwLoginCredential = user?.loginMethods.find(
+      (method) => method.method === ELoginMethod.password,
+    );
+    return {
+      ...this.formatResponse(user),
+      username: pwLoginCredential?.username,
+      password: pwLoginCredential?.password,
+    };
+  }
+
+  async getAll(
+    pagination: IPagination,
+  ): Promise<IPaginatedReponse<UserResponseDto>> {
+    const query = this.getQuery();
+    const paginatedData = await paginate(
+      query,
+      { pagination },
+      this.formatResponse,
+    );
+    return paginatedData;
   }
 }

@@ -1,8 +1,10 @@
-import { Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { PaginationParamDecorator } from 'src/decorators/pagination.decorator';
 import { UserParamDecorator } from 'src/decorators/user.decorator';
 import { JwtGuard } from 'src/guards/jwt.guard';
-import { JwtPayload } from 'src/shared/contants';
+import { IPagination, JwtPayload } from 'src/shared/constants/common.contants';
+import { PaginationQueryDto } from 'src/shared/dtos/pagination-input.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
 import { UserService } from './user.service';
 
@@ -22,5 +24,14 @@ export class UserController {
     @UserParamDecorator() user: JwtPayload,
   ): Promise<UserResponseDto> {
     return this.userService.getUserByUsername(user.username);
+  }
+
+  @Get('/')
+  @UseGuards(JwtGuard)
+  async getAll(
+    @Query() query: PaginationQueryDto,
+    @PaginationParamDecorator() pagination: IPagination,
+  ) {
+    return this.userService.getAll(pagination);
   }
 }

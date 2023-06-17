@@ -2,9 +2,9 @@ import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 import * as config from 'config';
 import * as apiSpecConverter from 'api-spec-converter';
-import { SERVICE_CONFIG } from './contants';
 import * as swaggerUI from 'swagger-ui-express';
 import * as fs from 'fs';
+import { SERVICE_CONFIG } from './constants/common.contants';
 
 /* Initialize swagger docs */
 export async function initSwaggerDocs(app: INestApplication) {

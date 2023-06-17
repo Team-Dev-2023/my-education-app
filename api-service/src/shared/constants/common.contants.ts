@@ -39,3 +39,13 @@ export interface JwtPayload {
   uuid: string;
   username: string;
 }
+
+export interface IPagination {
+  page: number;
+  perPage: number;
+}
+
+export type TOrderBy = 'DESC' | 'ASC';
+
+export const DEFAULT_PAGINATION_PAGE = 20;
+export const DEFAULT_PAGINATION_PER_PAGE = 0;

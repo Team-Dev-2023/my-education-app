@@ -2,8 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as config from 'config';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
-import { getAllowedOrigins, getHost } from './shared/config.constant';
-import { SERVICE_CONFIG } from './shared/contants';
+import { getAllowedOrigins, getHost } from './shared/constants/config.constant';
 import { Logger } from 'nestjs-pino';
 import { createLightship } from 'lightship';
 import * as express from 'express';
@@ -11,6 +10,7 @@ import * as httpContext from 'express-http-context';
 import { correlationIdMiddleware } from './middlewares/correlationid.middleware';
 import { initSwaggerDocs } from './shared/swagger';
 import { ResponseInterceptor } from './interceptors/response.interceptors';
+import { SERVICE_CONFIG } from './shared/constants/common.contants';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

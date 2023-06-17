@@ -194,6 +194,40 @@
             "Authorization": []
           }
         ]
+      },
+      "get": {
+        "operationId": "UserController_getAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
       }
     },
     "/api/education/users/profile": {
