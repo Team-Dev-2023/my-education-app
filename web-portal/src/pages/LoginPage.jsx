@@ -32,18 +32,10 @@ function LoginPage() {
   const onFailureGoogle = (res) => {
     console.log("failure", res);
   };
-  const responseFacebook = (response) => {
-    console.log("success", response); // In thông tin đăng nhập Facebook của người dùng
-  };
-  const isHTTPS = () => {
-    return window.location.protocol === "https:";
-  };
+  // const responseFacebook = (response) => {
+  //   console.log("success", response); // In thông tin đăng nhập Facebook của người dùng
+  // };
 
-  if (isHTTPS()) {
-    console.log("Trình duyệt đã hỗ trợ HTTPS.");
-  } else {
-    console.log("Trình duyệt không hỗ trợ HTTPS.");
-  }
   const clientIdGoogle =
     "714084172265-dppb057n3nq3tfjfaagcg1g6lcp7phef.apps.googleusercontent.com";
   return (
@@ -58,12 +50,12 @@ function LoginPage() {
           buttonText="Continue with Google"
           className="w-full h-[48px] !text-[black]"
         />
-        <FacebookLogin
+        {/* <FacebookLogin
           appId="201240905777824" // Thay YOUR_APP_ID bằng ID ứng dụng của bạn
           autoLoad={true}
           fields="name,email,picture"
           callback={responseFacebook}
-        />
+        /> */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-2 w-full"
