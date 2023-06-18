@@ -28,7 +28,7 @@ function Homepage() {
           nameCarousel={"recommend"}
         />
       </div>
-      <button
+      {/* <button
         className="bg-[#7a0fe411] rounded-md p-2 mx-2"
         onClick={() => {
           navigate({
@@ -49,7 +49,7 @@ function Homepage() {
         }}
       >
         Language: {t.commons.en}
-      </button>
+      </button> */}
     </div>
   );
 }

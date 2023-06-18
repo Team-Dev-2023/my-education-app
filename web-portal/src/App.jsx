@@ -9,6 +9,7 @@ import Header from "components/Header";
 import Footer from "components/Footer";
 import LoginPage from "pages/LoginPage";
 import { gapi } from "gapi-script";
+import LoginWebportal from "pages/LoginWebportal";
 
 function App() {
   gapi.load("client:auth2", () => {
@@ -26,6 +27,7 @@ function App() {
       <Header />
       <Routes>
         <Route path={ROUTES.USER.HOME_PAGE} element={<HomePage />} />
+        <Route path={ROUTES.USER.LOGIN} element={<LoginWebportal />} />
         <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
         <Route
           path={ROUTES.USER.DETAIL_PRODUCT}
