@@ -7,8 +7,16 @@ import CourseListPage from "./pages/CourseListPage";
 import { useEffect } from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
+import LoginPage from "pages/LoginPage";
+import { gapi } from "gapi-script";
 
 function App() {
+  gapi.load("client:auth2", () => {
+    gapi.client.init({
+      clientId: "*****.apps.googleusercontent.com",
+      plugin_name: "chat",
+    });
+  });
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,6 +32,7 @@ function App() {
           element={<CourseDetailPage />}
         />
         <Route path="*" element={<div>404</div>} />
+        <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
       </Routes>
       <Footer></Footer>
     </>
