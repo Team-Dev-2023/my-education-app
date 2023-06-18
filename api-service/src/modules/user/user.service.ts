@@ -21,7 +21,7 @@ import { Repository, SelectQueryBuilder } from 'typeorm';
 import { RegisterInputDto } from '../auth/dtos/auth-input.dto';
 import { CreateAdminUserInputDto } from './dtos/user-input.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 @Injectable()
 export class UserService {
   private readonly logger = new Logger(UserService.name);

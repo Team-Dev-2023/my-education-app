@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { LoginInputDto, RegisterInputDto } from './dtos/auth-input.dto';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { getJwtConfig } from 'src/shared/constants/config.constant';
 import { RegisterResponseDto } from './dtos/auth-response.dto';
 import * as countries from '../../../public/location/countries.json';
