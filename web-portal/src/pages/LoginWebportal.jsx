@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { Select, Space } from "antd";
+import { useNavigate } from "react-router-dom";
+// import countries from '../asset/countries_v1' assert { type: `json` }
+let countries = require("../asset/countries_v1.json");
 
 function LoginWebportal() {
   const [formData, setFormData] = useState({
@@ -13,6 +17,8 @@ function LoginWebportal() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { target } = event;
@@ -42,6 +48,9 @@ function LoginWebportal() {
       setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
   };
+  const handleCountryChange = (event) => {
+    setFormData((prevFormData) => ({ ...prevFormData, country: event }));
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -57,6 +66,8 @@ function LoginWebportal() {
       lastName: "",
       country: "",
     });
+
+    navigate("/");
   };
 
   return (
@@ -135,6 +146,18 @@ function LoginWebportal() {
             required
             className="border border-black py-4 px-[1.6rem] mb-3"
           />
+          <Space wrap className="border border-black py-4 px-[1.6rem] mb-3">
+            <Select
+              defaultValue={"Vietnam"}
+              onChange={handleCountryChange}
+              name="country"
+              options={countries}
+              style={{
+                width: 300,
+              }}
+              required
+            />
+          </Space>
           <button
             type="submit"
             className="bg-[#a435f0] hover:bg-[#8710d8] disabled:bg-slate-500 text-[1rem] font-bold text-white h-[48px]"

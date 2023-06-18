@@ -27,20 +27,20 @@ function Header() {
             />
           </div>
         </div>
-        <div className="mx-2 text-sm">
+        <div className="mx-2 text-sm hidden lg:block">
           <a href="/" className="text-base">
             Become a Teacher
           </a>
         </div>
-        <div className="mx-2 text-sm">
+        <div className="mx-2 text-sm hidden lg:block">
           <a href="/" className="text-base">
             My Learning
           </a>
         </div>
-        <div className="mx-2 w-auto">
+        <div className="mx-2 w-auto hidden md:block">
           <AiOutlineHeart size={25} />
         </div>
-        <div className="mx-2 w-auto">
+        <div className="mx-2 w-auto hidden sm:block">
           <AiOutlineShoppingCart size={25} />
         </div>
         <div className="mx-2 w-auto">
