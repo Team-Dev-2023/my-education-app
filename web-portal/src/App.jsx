@@ -7,6 +7,7 @@ import CourseListPage from "./pages/CourseListPage";
 import { useEffect } from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
+import LoginWebportal from "pages/LoginWebportal";
 
 function App() {
   const { pathname } = useLocation();
@@ -18,6 +19,7 @@ function App() {
       <Header />
       <Routes>
         <Route path={ROUTES.USER.HOME_PAGE} element={<HomePage />} />
+        <Route path={ROUTES.USER.LOGIN} element={<LoginWebportal />} />
         <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
         <Route
           path={ROUTES.USER.DETAIL_PRODUCT}
