@@ -13,7 +13,12 @@ export class CreateAdminUserInputDto {
   @IsString()
   password: string;
 
-  @ApiProperty({ type: EUserRole, enum: EUserRole, default: EUserRole.admin, required: true })
+  @ApiProperty({
+    type: EUserRole,
+    enum: EUserRole,
+    default: EUserRole.admin,
+    required: true,
+  })
   @IsEnum(EUserRole)
   @IsNotEmpty()
   role: EUserRole;
