@@ -25,7 +25,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: cd api-service && npm ci
-    - run: cd api-service && npm run build --if-present
-    - run: cd api-service && npm test
+        cache: 'yarn'
+    - run: cd api-service && yarn
+    - run: cd api-service && yarn run build --if-present
+    - run: cd api-service && yarn test
