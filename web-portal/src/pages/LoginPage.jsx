@@ -38,10 +38,10 @@ function LoginPage() {
     setPasswordShown(passwordShown ? false : true);
   };
   //GOOGLE
-  // const onSuccessGoogle = (res) => {
-  //   console.log("success", res);
-  //   refreshTokenSetup(res);
-  // };
+  const onSuccessGoogle = (res) => {
+    console.log("success", res);
+    refreshTokenSetup(res);
+  };
   const onFailureGoogle = (res) => {
     console.log("failure", res);
   };
@@ -55,7 +55,7 @@ function LoginPage() {
       <div className="flex flex-col items-center w-[400px] justify-center gap-2">
         <GoogleLogin
           clientId={clientIdGoogle}
-          // onSuccess={onSuccessGoogle}
+          onSuccess={onSuccessGoogle}
           onFailure={onFailureGoogle}
           cookiePolicy={"single_host_origin"}
           isSignedIn={true}
