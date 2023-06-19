@@ -1,24 +1,69 @@
 version: '3.8'
 
 services:
-    mysql:
-        image: mysql
-        container_name: education-mysql
-        command: --default-authentication-plugin=mysql_native_password
+    mongo:
+        image: mongo
+        container_name: todo-mongo
         ports:
-            - 3406:3306
+            - 27022:27017
         environment:
-            - MYSQL_ROOT_HOST=localhost
-            - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_USER=education_db
-            - MYSQL_PASSWORD=education_password
-            - MYSQL_DATABASE=education_dev
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=password2
+        restart: on-failure
         networks:
-            - education-local-network
+            - nesjs-network
         volumes:
-            - /tmp/education:/var/lib/mysql
+            - todoapp2:/data/db
+    mongo_express:
+        image: mongo-express
+        ports: 
+            - 8089:8081
+        environment:
+            - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+            - ME_CONFIG_MONGODB_SERVER=mongo
+        networks:
+            - nesjs-network
+        depends_on:
+            - 'mongo'
+    dev:
+        container_name: todoapp2-dev
+        image: todoapp2-dev:1.0.0
+        build:
+            context: .
+            target: development
+            dockerfile: ./Dockerfile
+        # command: yarn run start:dev
+        ports:
+            - 3000:3000
+            - 9229:9229
+        networks:
+            - nesjs-network
+        volumes:
+            - .:/todoapp2/
+            - /todoapp2/node_modules
+        # restart: unless-stopped
+        depends_on:
+            - 'mongo'
+    prod:
+        container_name: nestjs_api_prod
+        image: todoapp2-prod:1.0.0
+        build:
+            context: .
+            target: production
+            dockerfile: ./Dockerfile
+        command: npm run start:prod
+        ports:
+            - 3000:3000
+            - 9229:9229
+        networks:
+            - nesjs-network
+        volumes:
+            - .:/todoapp2/
+            - /todoapp2/node_modules
+        restart: unless-stopped
+
 networks:
-    education-local-network:
+    nesjs-network:
 volumes:
-    education:
-        driver: local
+    todoapp2:

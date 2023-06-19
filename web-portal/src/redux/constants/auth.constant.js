@@ -1,0 +1,5 @@
+export const AUTH_ACTION = {
+  LOGIN: "AUTH/LOGIN",
+  REGISTER: "AUTH/REGISTER",
+  LOGOUT: "AUTH/LOGOUT",
+};
