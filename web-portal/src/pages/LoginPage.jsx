@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginAction } from "redux/actions";
+
 import ReactDOM from "react-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,6 +15,10 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 function LoginPage() {
+  const dispatch = useDispatch();
+  const clientIdGoogle =
+    "714084172265-dppb057n3nq3tfjfaagcg1g6lcp7phef.apps.googleusercontent.com";
+  //FORM REACT HOOK
   const {
     register,
     handleSubmit,
@@ -20,11 +27,17 @@ function LoginPage() {
   const onSubmit = (data) => {
     console.log("asdsa");
     console.log(data);
+    dispatch(
+      loginAction({
+        data: { ...data },
+      })
+    );
   };
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+  //GOOGLE
   // const onSuccessGoogle = (res) => {
   //   console.log("success", res);
   //   refreshTokenSetup(res);
@@ -32,12 +45,11 @@ function LoginPage() {
   const onFailureGoogle = (res) => {
     console.log("failure", res);
   };
+  //FACEBOOK
   // const responseFacebook = (response) => {
   //   console.log("success", response); // In thông tin đăng nhập Facebook của người dùng
   // };
 
-  const clientIdGoogle =
-    "714084172265-dppb057n3nq3tfjfaagcg1g6lcp7phef.apps.googleusercontent.com";
   return (
     <div className="my-[200px] w-full flex  justify-center items-center">
       <div className="flex flex-col items-center w-[400px] justify-center gap-2">
