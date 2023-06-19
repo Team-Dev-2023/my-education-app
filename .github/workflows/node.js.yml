@@ -6,21 +6,13 @@ name: Node.js CI
 on:
   push:
     branches: [ "develop" ]
-      inputs:
-        chosen-os:
-          required: true
-          type: choice
-          options:
-          - Ubuntu
-          - macOS
-          - Windows
   pull_request:
     branches: [ "develop" ]
 
 jobs:
   build:
 
-    runs-on: ["${{ github.event.inputs.chosen-os }}"]
+    runs-on: [macOS, Ubuntu]
 
     strategy:
       matrix:
