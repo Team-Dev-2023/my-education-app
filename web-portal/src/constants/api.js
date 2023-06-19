@@ -1,9 +1,6 @@
 export const API = {
-  url: "",
+  URL: "http://localhost:3000",
 };
 export const API_ENDPOINT = {
   LOGIN: "/auth/login",
-  REGISTER: "/auth/signup",
-  RESET_PASSWORD: "/auth/reset",
-  CHANGE_PASSWORD: "/auth/change",
 };
