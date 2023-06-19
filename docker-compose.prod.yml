@@ -18,10 +18,11 @@ services:
         volumes:
             - /tmp/education-prod:/var/lib/mysql
     api-education-prod:
-        image: api-education
-        build:
-            context: ./api-service
-            dockerfile: ./Dockerfile
+        platform: linux/amd64
+        image: strider2598/strider:latest
+        # build:
+        #     context: ./api-service
+        #     dockerfile: ./Dockerfile
         container_name: api-education-prod
         ports:
             - 10005:3000
