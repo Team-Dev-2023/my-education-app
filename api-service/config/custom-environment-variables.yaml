@@ -1,0 +1,22 @@
+typeorm:
+  host: TYPEORM_HOST
+  port: TYPEORM_PORT
+  username: TYPEORM_USERNAME
+  password: TYPEORM_PASSWORD
+  database: TYPEORM_DB
+  logging: TYPEORM_LOGGING
+
+service:
+  name: SERVICE_NAME
+  title: SERVICE_TITLE
+  description: SERVICE_DESCRIPTION
+  baseUrl: SERVICE_BASE_URL
+  docsBaseUrl: SERVICE_DOCS_BASE_URL
+  apiVersion: SERVICE_API_VERSION
+  appVersion: SERVICE_APP_VERSION
+
+server:
+  host: SERVER_HOST
+  port: SERVER_PORT
+  hostname: SERVER_HOSTNAME
+  swaggerSchema: SERVER_SWAGGER_SCHEMA
