@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import RegisterWebportal from "pages/RegisterWebportal";
-import LoginPage from "pages/LoginPage";
 
 function App() {
   const { pathname } = useLocation();
@@ -21,7 +20,6 @@ function App() {
       <Routes>
         <Route path={ROUTES.USER.HOME_PAGE} element={<HomePage />} />
         <Route path={ROUTES.USER.REGISTER} element={<RegisterWebportal />} />
-        <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
         <Route
           path={ROUTES.USER.DETAIL_PRODUCT}
