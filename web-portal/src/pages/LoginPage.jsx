@@ -1,25 +1,31 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { useDispatch } from "react-redux";
+import { loginAction } from "redux/actions";
+
+import { useForm } from "react-hook-form";
 import { GoogleLogin } from "react-google-login";
 import refreshTokenSetup from "utils/hook/refreshTokenSetup";
-import FacebookLogin from "react-facebook-login";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 function LoginPage() {
+  const dispatch = useDispatch();
+  const googleClientId =
+    "714084172265-dppb057n3nq3tfjfaagcg1g6lcp7phef.apps.googleusercontent.com";
+  //FORM REACT HOOK
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log("asdsa");
-    console.log(data);
+    dispatch(
+      loginAction({
+        data: { ...data },
+      })
+    );
   };
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
@@ -33,17 +39,12 @@ function LoginPage() {
   const onFailureGoogle = (res) => {
     console.log("failure", res);
   };
-  // const responseFacebook = (response) => {
-  //   console.log("success", response); // In thông tin đăng nhập Facebook của người dùng
-  // };
 
-  const clientIdGoogle =
-    "714084172265-dppb057n3nq3tfjfaagcg1g6lcp7phef.apps.googleusercontent.com";
   return (
     <div className="my-[200px] w-full flex  justify-center items-center">
       <div className="flex flex-col items-center w-[400px] justify-center gap-2">
         <GoogleLogin
-          clientId={clientIdGoogle}
+          clientId={googleClientId}
           onSuccess={onSuccessGoogle}
           onFailure={onFailureGoogle}
           cookiePolicy={"single_host_origin"}
@@ -51,12 +52,7 @@ function LoginPage() {
           buttonText="Continue with Google"
           className="w-full h-[48px] !text-[black]"
         />
-        {/* <FacebookLogin
-          appId="201240905777824" // Thay YOUR_APP_ID bằng ID ứng dụng của bạn
-          autoLoad={true}
-          fields="name,email,picture"
-          callback={responseFacebook}
-        /> */}
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-2 w-full"

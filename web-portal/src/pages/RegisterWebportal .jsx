@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import countries from '../asset/countries_v1' assert { type: `json` }
 let countries = require("../asset/countries_v1.json");
 
-function LoginWebportal() {
+function RegisterWebportal() {
   const [formData, setFormData] = useState({
     password: "",
     username: "",
@@ -178,4 +178,4 @@ function LoginWebportal() {
   );
 }
 
-export default LoginWebportal;
+export default RegisterWebportal;
