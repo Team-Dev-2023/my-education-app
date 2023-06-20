@@ -1,13 +1,16 @@
 import { put, takeEvery } from "redux-saga/effects";
-import { notification } from "antd";
 import axios from "axios";
 
 import { AUTH_ACTION, REQUEST, SUCCESS, FAIL } from "../constants";
-import { API, API_ENDPOINT } from "../../constants/api";
+import { API_ENDPOINT } from "../../constants/api";
+
+const api = process.env.REACT_APP_API;
+
 function* loginSaga(action) {
   try {
     const { data } = action.payload;
-    const result = yield axios.post(`${API.URL}${API_ENDPOINT.LOGIN}`, data);
+    const result = yield axios.post(`${api}${API_ENDPOINT.LOGIN}`, data);
+
     yield localStorage.setItem("accessToken", result.data.accessToken);
     yield put({
       type: SUCCESS(AUTH_ACTION.LOGIN),
@@ -16,7 +19,6 @@ function* loginSaga(action) {
       },
     });
   } catch (e) {
-    console.log("LOGIN FAIL", e);
     yield put({
       type: FAIL(AUTH_ACTION.LOGIN),
       payload: {
