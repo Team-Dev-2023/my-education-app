@@ -27,7 +27,7 @@ function ItemCarouseIlListProduct({ carouseProduct }) {
   const renderListImpression = (listImpression) => {
     return listImpression.map((item, index) => {
       return (
-        <div key={index}>
+        <div key={item}>
           {item === 1 ? (
             <div className="px-[6px] py-[4px] w-fit font-[600] text-[12px] bg-[#eceb98]">
               {t.product.bestseller}
