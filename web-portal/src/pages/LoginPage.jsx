@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginAction } from "redux/actions";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfoAction, loginAction } from "redux/actions";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
 import { GoogleLogin } from "react-google-login";
 import refreshTokenSetup from "utils/hook/refreshTokenSetup";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-const eye = <FontAwesomeIcon icon={faEye} />;
+
+import { ROUTES } from "constants/routes";
 
 function LoginPage() {
+  const eye = <FontAwesomeIcon icon={faEye} />;
+  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  const { loginData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const googleClientId =
-    "714084172265-dppb057n3nq3tfjfaagcg1g6lcp7phef.apps.googleusercontent.com";
+  const navigate = useNavigate();
+
   //FORM REACT HOOK
   const {
     register,
@@ -24,6 +28,14 @@ function LoginPage() {
     dispatch(
       loginAction({
         data: { ...data },
+        callBack: (accessToken) => {
+          navigate(ROUTES.USER.HOME_PAGE);
+          dispatch(
+            getUserInfoAction({
+              accessToken: accessToken,
+            })
+          );
+        },
       })
     );
   };
@@ -41,8 +53,11 @@ function LoginPage() {
   };
 
   return (
-    <div className="my-[200px] w-full flex  justify-center items-center">
-      <div className="flex flex-col items-center w-[400px] justify-center gap-2">
+    <div className="my-[100px] xxs:px-[24px] w-full flex  justify-center items-center">
+      <div className="flex flex-col items-center xxs:w-full sm:w-[400px]  justify-center gap-2">
+        <div className="w-full font-[600] py-3 text-[20px]">
+          Log in to your Udemy account
+        </div>
         <GoogleLogin
           clientId={googleClientId}
           onSuccess={onSuccessGoogle}
@@ -50,29 +65,36 @@ function LoginPage() {
           cookiePolicy={"single_host_origin"}
           isSignedIn={true}
           buttonText="Continue with Google"
-          className="w-full h-[48px] !text-[black]"
+          className="w-full !h-[48px] !font-[600] !text-[black] !border-[black] 
+          !shadow-none"
         />
-
+        <div
+          className={`bg-[#dc46a3] w-full  font-[600] ${
+            loginData.error !== "" ? " py-3 px-2" : ""
+          }`}
+        >
+          {loginData.error}
+        </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-2 w-full"
         >
           <input
-            placeholder="Email"
+            placeholder="User Name"
             className="px-2 py-3 border-black border-[0.8px]  "
-            {...register("email", {
+            {...register("username", {
               required: true,
-              pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+              // pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
             })}
           />
-          {errors?.email?.type === "required" && (
-            <p className="text-[#f00] ">Email is required</p>
+          {errors?.username?.type === "required" && (
+            <p className="text-[#f00] ">User Name is required</p>
           )}
-          {errors?.email?.type === "pattern" && (
-            <p className="text-[#f00] ">Invalid email format.</p>
+          {errors?.username?.type === "pattern" && (
+            <p className="text-[#f00] ">Invalid User Name format.</p>
           )}
 
-          <div className="px-2 py-3 border-black border-[0.8px] relative ">
+          <div className="px-2 py-3 border-black border-[0.8px] relative overflow-hidden ">
             <input
               {...register("password", {
                 required: true,
@@ -81,7 +103,7 @@ function LoginPage() {
               type={passwordShown ? "text" : "password"}
             />
             <i
-              className="absolute right-4 top-[35%]"
+              className="absolute right-4 top-[35%] hover:cursor-pointer"
               onClick={togglePasswordVisiblity}
             >
               {eye}
@@ -91,7 +113,7 @@ function LoginPage() {
             <p className="text-[#f00] ">Password is required</p>
           )}
           <button
-            className="py-3 bg-[#a435f0] hover:bg-[#8710d8] text-white font-[600]"
+            className="py-3 mt-2 h-[48px] bg-[#a435f0] hover:bg-[#8710d8] text-white font-[600]"
             onClick={() => {
               handleSubmit(onSubmit);
             }}

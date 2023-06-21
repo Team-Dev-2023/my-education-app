@@ -9,12 +9,28 @@ import Header from "components/Header";
 import Footer from "components/Footer";
 import RegisterWebportal from "./pages/RegisterWebportal ";
 import LoginPage from "pages/LoginPage";
+import { useDispatch } from "react-redux";
+import { getUserInfoAction, logoutAction } from "redux/actions";
+require("moment/locale/vi");
 
 function App() {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
+  //SCROLL ON TOP WHEN CHANGE PAGE
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  //GET USER INFO
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken)
+      dispatch(
+        getUserInfoAction({
+          accessToken: accessToken,
+        })
+      );
+  }, []);
   return (
     <>
       <Header />
@@ -22,7 +38,6 @@ function App() {
         <Route path={ROUTES.USER.HOME_PAGE} element={<HomePage />} />
         <Route path={ROUTES.USER.REGISTER} element={<RegisterWebportal />} />
         <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
-
         <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
         <Route
           path={ROUTES.USER.DETAIL_PRODUCT}

@@ -24,15 +24,10 @@ const authReducer = createReducer(initialState, {
       },
     };
   },
-
   [SUCCESS(AUTH_ACTION.LOGIN)]: (state, action) => {
     const { data } = action.payload;
     return {
       ...state,
-      userInfo: {
-        ...state.userInfo,
-        data: data.user,
-      },
       loginData: {
         ...state.loginData,
         load: false,
@@ -44,6 +39,50 @@ const authReducer = createReducer(initialState, {
     return {
       ...state,
       loginData: {
+        load: false,
+        error: error,
+      },
+    };
+  },
+  //LOGOUT
+  [REQUEST(AUTH_ACTION.LOGOUT)]: (state, action) => {
+    localStorage.removeItem("accessToken");
+    return {
+      ...state,
+      userInfo: {
+        data: {},
+        error: "",
+      },
+    };
+  },
+  //GET INFO USER
+  [REQUEST(AUTH_ACTION.GET_USER_INFO)]: (state, action) => {
+    return {
+      ...state,
+      userInfo: {
+        ...state.userInfo,
+        load: true,
+        error: "",
+      },
+    };
+  },
+
+  [SUCCESS(AUTH_ACTION.GET_USER_INFO)]: (state, action) => {
+    const { data } = action.payload;
+    return {
+      ...state,
+      userInfo: {
+        ...state.userInfo,
+        data: data,
+        load: false,
+      },
+    };
+  },
+  [FAIL(AUTH_ACTION.GET_USER_INFO)]: (state, action) => {
+    const { error } = action.payload;
+    return {
+      ...state,
+      userInfo: {
         load: false,
         error: error,
       },
