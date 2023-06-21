@@ -1,25 +1,23 @@
-import React, { useEffect, useReducer, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserInfoAction, loginAction } from "redux/actions";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
 import { GoogleLogin } from "react-google-login";
 import refreshTokenSetup from "utils/hook/refreshTokenSetup";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { store } from "redux/store";
-import { useNavigate } from "react-router-dom";
+
 import { ROUTES } from "constants/routes";
-const eye = <FontAwesomeIcon icon={faEye} />;
 
 function LoginPage() {
+  const eye = <FontAwesomeIcon icon={faEye} />;
+  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const { loginData } = useSelector((state) => state.auth);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const googleClientId =
-    "714084172265-dppb057n3nq3tfjfaagcg1g6lcp7phef.apps.googleusercontent.com";
+
   //FORM REACT HOOK
   const {
     register,
@@ -30,11 +28,11 @@ function LoginPage() {
     dispatch(
       loginAction({
         data: { ...data },
-        callBack: (accessTokenLocal) => {
+        callBack: (accessToken) => {
           navigate(ROUTES.USER.HOME_PAGE);
           dispatch(
             getUserInfoAction({
-              accessTokenLocal: accessTokenLocal,
+              accessToken: accessToken,
             })
           );
         },

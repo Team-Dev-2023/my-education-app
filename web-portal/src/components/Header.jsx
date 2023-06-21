@@ -11,18 +11,16 @@ import { Dropdown, Space } from "antd";
 import logo from "../asset/logo-udemy.png";
 import HorizontalMenuDropdown from "./HorizontalMenuDropdown";
 import Categories from "./Categories";
+import { ROUTES } from "constants/routes";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { logoutAction } from "redux/actions";
 import qs from "qs";
-import { ROUTES } from "constants/routes";
 
 function Header() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
-  console.log("userInfo", userInfo);
   const navigate = useNavigate();
   const { search } = useLocation();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
@@ -33,7 +31,6 @@ function Header() {
         <div
           target="_blank"
           onClick={() => {
-            console.log("logout");
             dispatch(logoutAction());
           }}
         >
