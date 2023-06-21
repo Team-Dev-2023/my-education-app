@@ -56,7 +56,7 @@ const authReducer = createReducer(initialState, {
     };
   },
   //GET INFO USER
-  [REQUEST(AUTH_ACTION.GET_INFO_USER)]: (state, action) => {
+  [REQUEST(AUTH_ACTION.GET_USER_INFO)]: (state, action) => {
     return {
       ...state,
       userInfo: {
@@ -67,7 +67,7 @@ const authReducer = createReducer(initialState, {
     };
   },
 
-  [SUCCESS(AUTH_ACTION.GET_INFO_USER)]: (state, action) => {
+  [SUCCESS(AUTH_ACTION.GET_USER_INFO)]: (state, action) => {
     const { data } = action.payload;
     return {
       ...state,
@@ -78,7 +78,7 @@ const authReducer = createReducer(initialState, {
       },
     };
   },
-  [FAIL(AUTH_ACTION.GET_INFO_USER)]: (state, action) => {
+  [FAIL(AUTH_ACTION.GET_USER_INFO)]: (state, action) => {
     const { error } = action.payload;
     return {
       ...state,

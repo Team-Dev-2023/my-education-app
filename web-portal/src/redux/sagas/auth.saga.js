@@ -39,14 +39,14 @@ function* getInfoUserSaga(action) {
       }
     );
     yield put({
-      type: SUCCESS(AUTH_ACTION.GET_INFO_USER),
+      type: SUCCESS(AUTH_ACTION.GET_USER_INFO),
       payload: {
         data: result.data,
       },
     });
   } catch (e) {
     yield put({
-      type: FAIL(AUTH_ACTION.GET_INFO_USER),
+      type: FAIL(AUTH_ACTION.GET_USER_INFO),
       payload: {
         error: " get profile user is error",
       },
@@ -55,5 +55,5 @@ function* getInfoUserSaga(action) {
 }
 export default function* authSaga() {
   yield takeEvery(REQUEST(AUTH_ACTION.LOGIN), loginSaga);
-  yield takeEvery(REQUEST(AUTH_ACTION.GET_INFO_USER), getInfoUserSaga);
+  yield takeEvery(REQUEST(AUTH_ACTION.GET_USER_INFO), getInfoUserSaga);
 }

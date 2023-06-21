@@ -1,4 +1,4 @@
 export const API_ENDPOINT = {
   LOGIN: "/auth/login",
-  GET_INFO_USER: "/users/profile",
+  GET_USER_INFO: "/users/profile",
 };

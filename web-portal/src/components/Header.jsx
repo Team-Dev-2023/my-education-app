@@ -22,6 +22,7 @@ import { ROUTES } from "constants/routes";
 function Header() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
+  console.log("userInfo", userInfo);
   const navigate = useNavigate();
   const { search } = useLocation();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
