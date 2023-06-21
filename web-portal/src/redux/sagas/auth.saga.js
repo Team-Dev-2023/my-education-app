@@ -28,6 +28,31 @@ function* loginSaga(action) {
   }
 }
 
+function* registerSaga(action) {
+  try {
+    const { data, callback } = action.payload;
+    const result = yield axios.post(`${api}${API_ENDPOINT.REGISTER}`, data);
+
+    yield localStorage.setItem("accessToken", result.data.accessToken);
+
+    yield put({
+      type: REQUEST(AUTH_ACTION.REGISTER),
+      payload: {
+        data: result.data,
+      },
+    });
+    yield callback();
+  } catch (e) {
+    yield put({
+      type: FAIL(REQUEST(AUTH_ACTION.REGISTER)),
+      payload: {
+        error: "Invalid register credentials",
+      },
+    });
+  }
+}
+
 export default function* authSaga() {
   yield takeEvery(REQUEST(AUTH_ACTION.LOGIN), loginSaga);
+  yield takeEvery(REQUEST(AUTH_ACTION.REGISTER), registerSaga);
 }

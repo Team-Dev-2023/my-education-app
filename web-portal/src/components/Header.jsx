@@ -8,13 +8,21 @@ import {
 import logo from "../asset/logo-udemy.png";
 import HorizontalMenuDropdown from "./HorizontalMenuDropdown";
 import Categories from "./Categories";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="container my-0 mx-auto flex justify-around place-items-center  h-24">
         <div className="w-24 mx-4">
-          <img src={logo} alt="logo" className="object-contain" />
+          <img
+            onClick={() => navigate("/")}
+            src={logo}
+            alt="logo"
+            className="object-contain cursor-pointer"
+          />
         </div>
         <Categories className="mx-2 text-base" />
         <div className="flex-auto grid w-64 py-2 mx-2">

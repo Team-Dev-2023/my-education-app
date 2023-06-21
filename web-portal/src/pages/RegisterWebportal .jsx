@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Select, Space } from "antd";
 import { useNavigate } from "react-router-dom";
-// import countries from '../asset/countries_v1' assert { type: `json` }
+import { useDispatch } from "react-redux";
+import { registerAction } from "redux/actions";
+import { ROUTES } from "constants/routes";
 let countries = require("../asset/countries_v1.json");
 
 function RegisterWebportal() {
@@ -18,6 +20,7 @@ function RegisterWebportal() {
   const [passwordError, setPasswordError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
@@ -55,7 +58,13 @@ function RegisterWebportal() {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    localStorage.setItem("userLoginInfo", JSON.stringify(formData));
+    dispatch(
+      registerAction({
+        data: { ...formData },
+        callback: () => navigate(ROUTES.USER.HOME_PAGE),
+      }),
+    );
+    // localStorage.setItem("userLoginInfo", JSON.stringify(formData));
 
     setFormData({
       password: "",
@@ -98,7 +107,7 @@ function RegisterWebportal() {
             className="border border-black py-4 px-[1.6rem] mb-3"
           />
           {passwordError && (
-            <p className="mb-3 leading-5">
+            <p className="mb-3 leading-5 text-[#f00]">
               Please enter a valid password containning at least one number and
               one letter.
             </p>
@@ -114,7 +123,9 @@ function RegisterWebportal() {
             className="border border-black py-4 px-[1.6rem] mb-3"
           />
           {emailError && (
-            <p className="mb-3">Please enter a valid email address.</p>
+            <p className="mb-3 leading-5 text-[#f00]">
+              Please enter a valid email address.
+            </p>
           )}
           <input
             type="text"
@@ -126,7 +137,9 @@ function RegisterWebportal() {
             className="border border-black py-4 px-[1.6rem] mb-3"
           />
           {phoneError && (
-            <p className="mb-3 leading-5">Please enter a valid phone number.</p>
+            <p className="mb-3 leading-5 text-[#f00]">
+              Please enter a valid phone number.
+            </p>
           )}
           <input
             type="text"
