@@ -30,7 +30,6 @@ function* loginSaga(action) {
 function* getUserInfoSaga(action) {
   try {
     const { accessToken } = action.payload;
-
     const result = yield axios.get(
       `http://127.0.0.1:3000/api/education/users/profile`,
       {
