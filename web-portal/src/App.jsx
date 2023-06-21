@@ -9,8 +9,6 @@ import Header from "components/Header";
 import Footer from "components/Footer";
 import RegisterWebportal from "./pages/RegisterWebportal ";
 import LoginPage from "pages/LoginPage";
-import jwtDecode from "jwt-decode";
-import moment from "moment";
 import { useDispatch } from "react-redux";
 import { getUserInfoAction, logoutAction } from "redux/actions";
 require("moment/locale/vi");
@@ -22,21 +20,16 @@ function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  //GET TIME NOW
-  let now = Math.round(new Date().getTime() / 1000);
+
   //GET USER INFO
   useEffect(() => {
-    let accessTokenLocal = localStorage.getItem("accessToken");
-    if (accessTokenLocal) {
-      let decoded = jwtDecode(accessTokenLocal);
-      now >= decoded.exp
-        ? dispatch(logoutAction()) && localStorage.removeItem("accessToken")
-        : dispatch(
-            getUserInfoAction({
-              accessTokenLocal: accessTokenLocal,
-            })
-          );
-    }
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken)
+      dispatch(
+        getUserInfoAction({
+          accessToken: accessToken,
+        })
+      );
   }, []);
   return (
     <>

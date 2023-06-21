@@ -11,13 +11,12 @@ import { Dropdown, Space } from "antd";
 import logo from "../asset/logo-udemy.png";
 import HorizontalMenuDropdown from "./HorizontalMenuDropdown";
 import Categories from "./Categories";
+import { ROUTES } from "constants/routes";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { logoutAction } from "redux/actions";
 import qs from "qs";
-import { ROUTES } from "constants/routes";
 
 function Header() {
   const dispatch = useDispatch();

@@ -27,14 +27,15 @@ function* loginSaga(action) {
     });
   }
 }
-function* getInfoUserSaga(action) {
+function* getUserInfoSaga(action) {
   try {
-    const { accessTokenLocal } = action.payload;
+    const { accessToken } = action.payload;
+    console.log("access", accessToken);
     const result = yield axios.get(
       `http://127.0.0.1:3000/api/education/users/profile`,
       {
         headers: {
-          Authorization: `Bearer ${accessTokenLocal}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -55,5 +56,5 @@ function* getInfoUserSaga(action) {
 }
 export default function* authSaga() {
   yield takeEvery(REQUEST(AUTH_ACTION.LOGIN), loginSaga);
-  yield takeEvery(REQUEST(AUTH_ACTION.GET_USER_INFO), getInfoUserSaga);
+  yield takeEvery(REQUEST(AUTH_ACTION.GET_USER_INFO), getUserInfoSaga);
 }
