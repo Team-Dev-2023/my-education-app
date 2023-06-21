@@ -3,6 +3,8 @@ export const repoTokens = {
   user: 'USER_REPOSITORY',
   loginMethod: 'LOGIN_METHOD_REPOSITORY',
   rolePermission: 'ROLE_PERMISSION_REPOSITORY',
+  subCategory: 'SUB_CATEGORY_REPOSITORY',
+  topic: 'TOPIC_REPOSITORY',
 };
 
 export const aliases = {
@@ -10,4 +12,6 @@ export const aliases = {
   user: 'u',
   loginMethod: 'lm',
   rolePermission: 'rp',
+  subCategory: 'sc',
+  topic: 't',
 };

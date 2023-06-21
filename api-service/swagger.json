@@ -167,6 +167,16 @@
       "post": {
         "operationId": "CategoryController_createOne",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryInputDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": ""
@@ -174,6 +184,83 @@
         },
         "tags": [
           "Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "CategoryController_getAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/education/category/{categoryUuid}/sub-categories": {
+      "post": {
+        "operationId": "CategoryController_createSubcategory",
+        "parameters": [
+          {
+            "name": "categoryUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSubCategoryInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
         ]
       }
     },
@@ -334,6 +421,34 @@
       }
     },
     "schemas": {
+      "CreateCategoryInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CreateSubCategoryInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
       "CreateAdminUserInputDto": {
         "type": "object",
         "properties": {

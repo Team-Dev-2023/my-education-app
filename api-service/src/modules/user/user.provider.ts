@@ -1,6 +1,4 @@
-import { LoginMethod } from 'src/entities/login-method.entity';
-import { RolePermission } from 'src/entities/role-permission.entity';
-import { User } from 'src/entities/user.entity';
+import { LoginMethod, RolePermission, User } from 'src/entities';
 import { repoTokens } from 'src/shared/constants/repo-tokens.constant';
 import { DataSource } from 'typeorm';
 import { DBConnectionToken } from '../database/database.provider';

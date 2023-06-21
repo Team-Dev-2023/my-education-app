@@ -4,8 +4,6 @@ import {
   Injectable,
   Logger,
 } from '@nestjs/common';
-import { LoginMethod } from 'src/entities/login-method.entity';
-import { User } from 'src/entities/user.entity';
 import {
   ELoginMethod,
   EUserRole,
@@ -22,6 +20,7 @@ import { RegisterInputDto } from '../auth/dtos/auth-input.dto';
 import { CreateAdminUserInputDto } from './dtos/user-input.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
 import * as bcrypt from 'bcryptjs';
+import { LoginMethod, User } from 'src/entities';
 @Injectable()
 export class UserService {
   private readonly logger = new Logger(UserService.name);
