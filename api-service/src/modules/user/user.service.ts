@@ -78,7 +78,7 @@ export class UserService {
   async createAdminUser(
     data: CreateAdminUserInputDto,
     createdBy: string,
-  ): Promise<User> {
+  ): Promise<UserResponseDto> {
     if ([EUserRole.superadmin].includes(data.role)) {
       throw new BadRequestException(Errors.CANNOT_CREATE_SUPERADMIN_ACCOUNT);
     }
@@ -91,7 +91,9 @@ export class UserService {
       createdBy,
     });
   }
-  async createUserWithPasswordAuth(data: RegisterInputDto): Promise<User> {
+  async createUserWithPasswordAuth(
+    data: RegisterInputDto,
+  ): Promise<UserResponseDto> {
     const createdUser = this.userRepo.create({
       email: data?.email || '',
       phone: data.phone || '',
@@ -111,7 +113,7 @@ export class UserService {
       createdBy: data.username,
     });
     const insertedData = await this.userRepo.save(createdUser);
-    return insertedData;
+    return this.formatResponse(insertedData);
   }
 
   async updateUserRefreshToken(uuid: string, refreshToken: string) {

@@ -59,7 +59,27 @@ export class CategoryService {
     );
     return createdCategory;
   }
+  async getOne(categoryUuid: string): Promise<CategoryResponseDto> {
+    const category = await this.cateRepo.findOne({
+      where: { uuid: categoryUuid },
+    });
+    if (!category) {
+      throw new BadRequestException(`Invalid category UUID`);
+    }
 
+    return this.formatCategoryReponse(category);
+  }
+
+  async deleteOne(categoryUuid: string): Promise<CategoryResponseDto> {
+    const category = await this.cateRepo.findOne({
+      where: { uuid: categoryUuid },
+    });
+    if (!category) {
+      throw new BadRequestException(`Invalid category UUID`);
+    }
+    await this.cateRepo.delete({ uuid: categoryUuid });
+    return this.formatCategoryReponse(category);
+  }
   async createSubCategory(
     user: JwtPayload,
     categoryUuid: string,

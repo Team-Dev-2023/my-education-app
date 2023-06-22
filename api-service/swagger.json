@@ -226,6 +226,60 @@
         ]
       }
     },
+    "/api/education/category/{categoryUuid}": {
+      "get": {
+        "operationId": "CategoryController_getOne",
+        "parameters": [
+          {
+            "name": "categoryUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "CategoryController_deleteOne",
+        "parameters": [
+          {
+            "name": "categoryUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
     "/api/education/category/{categoryUuid}/sub-categories": {
       "post": {
         "operationId": "CategoryController_createSubcategory",
@@ -280,7 +334,14 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "Create Admin User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -299,7 +360,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Get user profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -335,7 +403,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Get user profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedReponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -473,6 +548,74 @@
           "username",
           "password",
           "role"
+        ]
+      },
+      "UserResponseDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "role": {
+            "type": "number",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      "PaginatedReponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          },
+          "page": {
+            "type": "number"
+          },
+          "perPage": {
+            "type": "number"
+          },
+          "totalItems": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "page",
+          "perPage",
+          "totalItems",
+          "totalPages"
         ]
       },
       "RegisterInputDto": {

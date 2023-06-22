@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -42,6 +43,20 @@ export class CategoryController {
     @Body() data: CreateCategoryInputDto,
   ): Promise<CategoryResponseDto> {
     return this.categoryService.create(user, data);
+  }
+
+  @Get('/:categoryUuid')
+  async getOne(
+    @Param('categoryUuid') categoryUuid: string,
+  ): Promise<CategoryResponseDto> {
+    return this.categoryService.getOne(categoryUuid);
+  }
+
+  @Delete('/:categoryUuid')
+  async deleteOne(
+    @Param('categoryUuid') categoryUuid: string,
+  ): Promise<CategoryResponseDto> {
+    return this.categoryService.deleteOne(categoryUuid);
   }
 
   @Post(':categoryUuid/sub-categories')
