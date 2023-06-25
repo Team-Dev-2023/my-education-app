@@ -9,7 +9,6 @@ const Categories = () => {
       children: item.subCategories,
     };
   });
-  console.log("render cate");
   const items = [
     {
       label: "Categories",

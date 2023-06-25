@@ -1,10 +1,10 @@
 export const ROUTES = {
-  USER: {
-    HOME_PAGE: "/",
-    REGISTER: "/register",
-    LOGIN: "/login",
-    DETAIL_PRODUCT: "/detail",
-    LIST_PRODUCT: "/list",
+  ADMIN: {
+    HOME_PAGE: "/admin",
+    REGISTER: "/admin/register",
+    LOGIN: "/admin/login",
+    DETAIL_PRODUCT: "/admin/detail",
+    LIST_PRODUCT: "/admin/list",
     CART: "/cart",
     CHECK_OUT: "/checkout",
   },

@@ -12,7 +12,7 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
   const renderItemSwiper = (arrayItemSwiper) => {
     return arrayItemSwiper.map((item, index) => {
       return (
-        <Fragment key={item.id}>
+        <Fragment key={item.title}>
           <SwiperSlide>
             {<ItemCarouseIlListProduct carouseProduct={item} />}
           </SwiperSlide>
