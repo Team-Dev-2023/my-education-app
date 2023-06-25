@@ -7,6 +7,7 @@ import CourseListPage from "./pages/CourseListPage";
 import { useEffect } from "react";
 import Header from "components/Header";
 import Footer from "components/Footer";
+import LoginPage from "pages/Login";
 
 function App() {
   const { pathname } = useLocation();
@@ -17,10 +18,11 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path={ROUTES.USER.HOME_PAGE} element={<HomePage />} />
-        <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
+        <Route path={ROUTES.ADMIN.LOGIN} element={<LoginPage />} />
+        <Route path={ROUTES.ADMIN.HOME_PAGE} element={<HomePage />} />
+        <Route path={ROUTES.ADMIN.LIST_PRODUCT} element={<CourseListPage />} />
         <Route
-          path={ROUTES.USER.DETAIL_PRODUCT}
+          path={ROUTES.ADMIN.DETAIL_PRODUCT}
           element={<CourseDetailPage />}
         />
         <Route path="*" element={<div>404</div>} />
