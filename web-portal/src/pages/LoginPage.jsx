@@ -4,16 +4,16 @@ import { getUserInfoAction, loginAction } from "redux/actions";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import { GoogleLogin } from "react-google-login";
+import { useGoogleLogin } from "@react-oauth/google";
 import refreshTokenSetup from "utils/hook/refreshTokenSetup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { ReactComponent as GoogleIcon } from "../asset/googleIcon.svg";
 
 import { ROUTES } from "constants/routes";
 
 function LoginPage() {
   const eye = <FontAwesomeIcon icon={faEye} />;
-  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const { loginData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,10 +33,10 @@ function LoginPage() {
           dispatch(
             getUserInfoAction({
               accessToken: accessToken,
-            }),
+            })
           );
         },
-      }),
+      })
     );
   };
   const [passwordShown, setPasswordShown] = useState(false);
@@ -44,13 +44,14 @@ function LoginPage() {
     setPasswordShown(passwordShown ? false : true);
   };
   //GOOGLE
-  const onSuccessGoogle = (res) => {
-    console.log("success", res);
-    refreshTokenSetup(res);
-  };
-  const onFailureGoogle = (res) => {
-    console.log("failure", res);
-  };
+  const login = useGoogleLogin({
+    onSuccess: (event) => {
+      localStorage.setItem("accessToken", event.access_token);
+      console.log("Login success");
+      navigate(ROUTES.USER.HOME_PAGE);
+    },
+    onError: (event) => console.log("Login fail.", event),
+  });
 
   return (
     <div className="my-[100px] xxs:px-[24px] w-full flex  justify-center items-center">
@@ -58,16 +59,14 @@ function LoginPage() {
         <div className="w-full font-[600] py-3 text-[20px]">
           Log in to your Udemy account
         </div>
-        <GoogleLogin
-          clientId={googleClientId}
-          onSuccess={onSuccessGoogle}
-          onFailure={onFailureGoogle}
-          cookiePolicy={"single_host_origin"}
-          isSignedIn={true}
-          buttonText="Continue with Google"
-          className="w-full !h-[48px] !font-[600] !text-[black] !border-[black] 
-          !shadow-none"
-        />
+        <button
+          className="w-full !h-[48px] !font-[600] !text-[black] border !border-[black] 
+          !shadow-none flex items-center justify-center"
+          onClick={login}
+        >
+          <GoogleIcon className="w-10 inline-block" />
+          Continue with google
+        </button>
         <div
           className={`bg-[#dc46a3] w-full  font-[600] ${
             loginData.error !== "" ? " py-3 px-2" : ""
@@ -80,7 +79,7 @@ function LoginPage() {
           className="flex flex-col gap-2 w-full"
         >
           <input
-            placeholder="User Name"
+            placeholder="Username"
             className="px-2 py-3 border-black border-[0.8px]  "
             {...register("username", {
               required: true,
@@ -88,7 +87,7 @@ function LoginPage() {
             })}
           />
           {errors?.username?.type === "required" && (
-            <p className="text-[#f00] ">User Name is required</p>
+            <p className="text-[#f00] ">Username is required</p>
           )}
           {errors?.username?.type === "pattern" && (
             <p className="text-[#f00] ">Invalid User Name format.</p>

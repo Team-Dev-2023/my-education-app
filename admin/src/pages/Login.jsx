@@ -43,7 +43,7 @@ function LoginPage() {
             navigate(ROUTES.ADMIN.HOME_PAGE);
             dispatch(getUserInfoAction({ accessToken: accessToken }));
           },
-        }),
+        })
       );
     } catch (error) {
       console.log(error);
@@ -69,7 +69,7 @@ function LoginPage() {
           className="flex flex-col gap-2 w-full"
         >
           <input
-            placeholder="User Name"
+            placeholder="Username"
             {...register("username", { required: true })}
             className="px-2 py-3 border-black border-[0.8px]"
           />
