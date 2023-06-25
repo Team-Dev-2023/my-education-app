@@ -5,10 +5,9 @@ import categoriesArray from "../asset/categoriesArray";
 function HorizontalMenuDropdown() {
   const menu = categoriesArray.map((category) => {
     return (
-      <div className="list-item list-none">
+      <div className="list-item list-none" key={category.categories}>
         <div className="relative block h-full w-full">
           <Dropdown
-            key={category.categories}
             menu={{ items: category.subCategories }}
             className="mx-3 h-14 relative inline-flex justify-center items-center align-middle"
             placement="bottom"

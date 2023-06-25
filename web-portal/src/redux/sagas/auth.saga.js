@@ -6,6 +6,26 @@ import { API_ENDPOINT } from "../../constants/api";
 
 const api = process.env.REACT_APP_API;
 
+function* registerSaga(action) {
+  try {
+    const { data, callback } = action.payload;
+    console.log(data);
+    const result = yield axios.post(`${api}${API_ENDPOINT.REGISTER}`, data);
+
+    yield localStorage.setItem("accessToken", result.data.accessToken);
+
+    yield callback(result.data.accessToken);
+  } catch (e) {
+    console.log(e);
+    yield put({
+      type: FAIL(REQUEST(AUTH_ACTION.REGISTER)),
+      payload: {
+        error: "Invalid register credentials",
+      },
+    });
+  }
+}
+
 function* loginSaga(action) {
   try {
     const { data, callBack } = action.payload;
@@ -30,14 +50,11 @@ function* loginSaga(action) {
 function* getUserInfoSaga(action) {
   try {
     const { accessToken } = action.payload;
-    const result = yield axios.get(
-      `http://127.0.0.1:3000/api/education/users/profile`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const result = yield axios.get(`${api}${API_ENDPOINT.GET_USER_INFO}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     yield put({
       type: SUCCESS(AUTH_ACTION.GET_USER_INFO),
       payload: {
@@ -55,5 +72,6 @@ function* getUserInfoSaga(action) {
 }
 export default function* authSaga() {
   yield takeEvery(REQUEST(AUTH_ACTION.LOGIN), loginSaga);
+  yield takeEvery(REQUEST(AUTH_ACTION.REGISTER), registerSaga);
   yield takeEvery(REQUEST(AUTH_ACTION.GET_USER_INFO), getUserInfoSaga);
 }
