@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -32,7 +32,7 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { error },
+    // formState: { error },
   } = useForm();
   const onSubmit = (data) => {
     try {
@@ -43,7 +43,7 @@ function LoginPage() {
             navigate(ROUTES.ADMIN.HOME_PAGE);
             dispatch(getUserInfoAction({ accessToken: accessToken }));
           },
-        })
+        }),
       );
     } catch (error) {
       console.log(error);
