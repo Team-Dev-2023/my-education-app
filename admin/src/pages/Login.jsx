@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -12,7 +12,6 @@ import { getUserInfoAction } from "redux/actions";
 import { ReactComponent as GoogleIcon } from "../asset/googleIcon.svg";
 
 function LoginPage() {
-  const eye = <FontAwesomeIcon icon={faEye} />;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -84,7 +83,7 @@ function LoginPage() {
               className="absolute right-4 top-[35%] hover:cursor-pointer"
               onClick={togglePasswordVisiblity}
             >
-              {eye}
+              <FontAwesomeIcon icon={faEye} />
             </i>
           </div>
           <button
