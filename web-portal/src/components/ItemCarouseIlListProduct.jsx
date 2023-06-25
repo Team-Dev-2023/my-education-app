@@ -104,10 +104,10 @@ function ItemCarouseIlListProduct({ carouseProduct }) {
       <div>
         {carouseProduct.mainContent.map((item, index) => {
           return (
-            <div key={index} className="flex gap-2">
-              <p>
+            <div key={item} className="flex gap-2">
+              <div>
                 <AiOutlineCheck className="text-[14px] mt-[2px]" />
-              </p>
+              </div>
               <div className="text-[12px]">{item}</div>
             </div>
           );

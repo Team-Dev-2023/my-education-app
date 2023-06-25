@@ -33,10 +33,10 @@ function LoginPage() {
           dispatch(
             getUserInfoAction({
               accessToken: accessToken,
-            })
+            }),
           );
         },
-      })
+      }),
     );
   };
   const [passwordShown, setPasswordShown] = useState(false);
