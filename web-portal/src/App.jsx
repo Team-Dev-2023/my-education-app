@@ -11,7 +11,7 @@ import RegisterWebportal from "./pages/RegisterWebportal ";
 import LoginPage from "pages/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfoAction, logoutAction } from "redux/actions";
-import PrivateRoute from "hoc/PrivateRoutes";
+import PrivateRoute from "./hoc/PrivateRoutes";
 import LearningPage from "pages/LearningPage";
 require("moment/locale/vi");
 
