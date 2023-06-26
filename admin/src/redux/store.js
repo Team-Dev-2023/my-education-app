@@ -12,7 +12,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
       thunk: false,
-      serializeableCheck: false,
+      serializableCheck: false,
     }),
     sagaMiddleware,
   ],

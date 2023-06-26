@@ -1,12 +1,11 @@
-import useTranslate from "utils/hook/useTranslate";
-import { generatePath, useLocation, useNavigate } from "react-router-dom";
 import qs from "qs";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { generatePath, useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "constants/routes";
-import CarouselListProduct from "components/CarouselListProduct";
-import carouselProducts from "asset/carouselProducts";
-import Slider from "components/Slider";
-import TopicRecommended from "components/TopicRecommended";
+import useTranslate from "utils/hook/useTranslate";
+import { useDispatch } from "react-redux";
+import { logoutAction } from "redux/actions";
 
 function Homepage() {
   const t = useTranslate();
@@ -16,17 +15,13 @@ function Homepage() {
   const { search } = useLocation();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
 
+  const dispatch = useDispatch();
+
+  console.log("render homepage");
   return (
-    <div className="flex justify-center items-center flex-wrap w-full xxs:px-[24px]">
-      <div className="max-w-[1200px] ">
-        <Slider />
-        <TopicRecommended />
-      </div>
-      <div className="my-[20px] xxs:max-w-full overflow-hidden lg:max-w-[1200px] flex justify-center ">
-        <CarouselListProduct
-          listProduct={carouselProducts}
-          nameCarousel={"recommend"}
-        />
+    <div className="flex justify-center items-center flex-wrap h-full w-full xxs:px-[24px]">
+      <div className="w-12 h-12 border">
+        <button onClick={() => dispatch(logoutAction())}>Logout</button>
       </div>
       <button
         className="bg-[#7a0fe411] rounded-md p-2 mx-2"
