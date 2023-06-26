@@ -12,39 +12,18 @@ import logo from "../asset/logo-udemy.png";
 import HorizontalMenuDropdown from "./HorizontalMenuDropdown";
 import Categories from "./Categories";
 import { ROUTES } from "constants/routes";
+import MenuProfile from "./MenuProfile";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { logoutAction } from "redux/actions";
+
 import qs from "qs";
 
 function Header() {
-  const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const { search } = useLocation();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
-  const items = [
-    {
-      key: "1111",
-      label: (
-        <div
-          target="_blank"
-          onClick={() => {
-            dispatch(logoutAction());
-          }}
-        >
-          LOG OUT
-        </div>
-      ),
-    },
-
-    {
-      key: "4444",
-      danger: true,
-      label: "a danger item",
-    },
-  ];
 
   return (
     <>
@@ -59,12 +38,12 @@ function Header() {
         </div>
         <Categories className="mx-2 text-base" />
         <div className="flex-auto grid w-64 py-2 mx-2">
-          <div className="inline-flex items-center rounded-full border-2 border-black">
-            <AiOutlineSearch className="ml-1 opacity-80" />
+          <div className="inline-flex p-2 items-center rounded-full border-2 border-[#666163]">
+            <AiOutlineSearch className="ml-1 opacity-80 text-[30px]" />
             <input
               type="text"
               placeholder="Search for anything"
-              className="pl-1 w-full rounded-full border-none focus:outline-none"
+              className="pl-1  w-full rounded-full border-none focus:outline-none"
             />
           </div>
         </div>
@@ -110,7 +89,7 @@ function Header() {
             </div>
           </div>
         ) : (
-          <div className="flex items-center">
+          <div className="h-[100%] flex items-center">
             <div className="mx-2 w-auto hidden md:block">
               <AiOutlineHeart size={25} />
             </div>
@@ -120,28 +99,21 @@ function Header() {
             <div className="mx-2 w-auto">
               <AiOutlineBell size={25} />
             </div>
-            <div className="mx-2  aspect-square h-1/3 flex items-center justify-center">
+            <div className="h-[100%] mx-2 group relative flex items-center justify-center">
               {userInfo?.data?.avatar ? (
-                <>
-                  <img
-                    className="w-[32px] "
-                    src="userInfo.data.avatar"
-                    alt="avatar"
-                  />
-                </>
+                <img
+                  className="w-[32px] "
+                  src="userInfo.data.avatar"
+                  alt="avatar"
+                />
               ) : (
-                <div>
-                  <Dropdown
-                    menu={{
-                      items,
-                    }}
-                  >
-                    <div className="w-[32px] h-[32px] text-white text-center leading-[24px] text-[20px] font-bold  rounded-full bg-black hover:cursor-pointer ">
-                      {userInfo?.data?.firstName?.charAt(0)}
-                    </div>
-                  </Dropdown>
+                <div className="w-[32px]  h-[32px] text-white flex items-center justify-center leading-[24px] text-[20px] font-bold  rounded-full bg-black hover:cursor-pointer ">
+                  {userInfo?.data?.firstName?.charAt(0)}
                 </div>
               )}
+              <div className="group-hover:!block hidden group-hover:!opacity-100 !opacity-0 mt-[0.8px]  transition duration-800 ease-in-out absolute top-[100%]  right-[0%]  bg-white z-10 ">
+                <MenuProfile />
+              </div>
             </div>
           </div>
         )}
