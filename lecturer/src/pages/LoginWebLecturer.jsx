@@ -12,7 +12,7 @@ import { ReactComponent as GoogleIcon } from "../asset/googleIcon.svg";
 
 import { ROUTES } from "constants/routes";
 
-function LoginPage() {
+function LoginWebLecturer() {
   const eye = <FontAwesomeIcon icon={faEye} />;
   const { loginData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function LoginPage() {
       loginAction({
         data: { ...data },
         callBack: (accessToken) => {
-          navigate(ROUTES.USER.HOME_PAGE);
+          navigate(ROUTES.LECTURE.HOME_PAGE);
           dispatch(
             getUserInfoAction({
               accessToken: accessToken,
@@ -125,4 +125,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default LoginWebLecturer;
