@@ -76,7 +76,7 @@ function TopicRecommended() {
     ));
   return (
     <>
-      <div className="container mx-auto my-2">
+      <div className="container mx-auto my-2 relative sm:w-[calc(100%-40px)] xxs:w-full ">
         <Swiper
           loop={false}
           pagination={{
@@ -89,7 +89,10 @@ function TopicRecommended() {
           slidesPerView={1}
           spaceBetween={10}
           modules={[Grid, Navigation]}
-          navigation={true}
+          navigation={{
+            prevEl: `.swiper-button-prev-unique-recommend`,
+            nextEl: `.swiper-button-next-unique-recommend`,
+          }}
           breakpoints={{
             1185: {
               slidesPerView: 5,
@@ -117,6 +120,34 @@ function TopicRecommended() {
         >
           {renderTopics(topicArray)}
         </Swiper>
+        <div
+          className={`swiper-button-next-unique-recommend absolute xxs:hidden sm:block top-[30px] z-10 sm:right-[-20px] `}
+        >
+          <button
+            className=" !text-white rounded-[999px] border-[0.8px]
+          border-[#696f74] hover:bg-[#5b5959]  bg-black"
+          >
+            <img
+              className="w-[40px]"
+              src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/icon-next-danhmuc.svg"
+              alt=""
+            />
+          </button>
+        </div>
+        <div
+          className={`swiper-button-prev-unique-recommend absolute  xxs:hidden sm:block top-[30px] z-10 sm:left-[-20px] `}
+        >
+          <button
+            className="  !text-white rounded-[999px] border-[0.8px]
+          border-[#696f74] hover:bg-[#5b5959]  bg-black"
+          >
+            <img
+              className="w-[40px] rounded-[999px]  "
+              src="https://bizweb.dktcdn.net/100/438/408/themes/904142/assets/icon-prev-danhmuc.svg"
+              alt=""
+            />
+          </button>
+        </div>
       </div>
     </>
   );

@@ -16,7 +16,6 @@ import MenuProfile from "./MenuProfile";
 
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import qs from "qs";
 
 function Header() {
@@ -31,7 +30,7 @@ function Header() {
         <div
           className="w-24 mx-4 hover:cursor-pointer"
           onClick={() => {
-            navigate(ROUTES.USER.HOME_PAGE);
+            navigate(ROUTES.LECTURE.HOME_PAGE);
           }}
         >
           <img src={logo} alt="logo" className="object-contain" />
@@ -63,7 +62,7 @@ function Header() {
             <div
               className="p-3 border-[0.8px] border-black font-[700] hover:cursor-pointer"
               onClick={() => {
-                navigate(ROUTES.USER.LOGIN);
+                navigate(ROUTES.LECTURE.LOGIN);
               }}
             >
               Log in
@@ -71,7 +70,7 @@ function Header() {
             <div
               className="p-3 bg-black text-white font-[700] hover:cursor-pointer"
               onClick={() => {
-                navigate(ROUTES.USER.REGISTER);
+                navigate(ROUTES.LECTURE.REGISTER);
               }}
             >
               Sign up
@@ -89,7 +88,7 @@ function Header() {
             </div>
           </div>
         ) : (
-          <div className="h-[100%] flex items-center">
+          <div className="flex items-center">
             <div className="mx-2 w-auto hidden md:block">
               <AiOutlineHeart size={25} />
             </div>
@@ -99,7 +98,7 @@ function Header() {
             <div className="mx-2 w-auto">
               <AiOutlineBell size={25} />
             </div>
-            <div className="h-[100%] mx-2 group relative flex items-center justify-center">
+            <div className="h-[100%] group mx-2  relative flex items-center justify-center">
               {userInfo?.data?.avatar ? (
                 <img
                   className="w-[32px] "
@@ -107,11 +106,11 @@ function Header() {
                   alt="avatar"
                 />
               ) : (
-                <div className="w-[32px]  h-[32px] text-white flex items-center justify-center leading-[24px] text-[20px] font-bold  rounded-full bg-black hover:cursor-pointer ">
+                <div className="w-[32px] h-[32px]  text-white flex items-center justify-center leading-[24px] text-[20px] font-bold  rounded-full bg-black hover:cursor-pointer ">
                   {userInfo?.data?.firstName?.charAt(0)}
                 </div>
               )}
-              <div className="group-hover:!block hidden group-hover:!opacity-100 !opacity-0 mt-[0.8px]  transition duration-800 ease-in-out absolute top-[100%]  right-[0%]  bg-white z-10 ">
+              <div className="group-hover:!block hidden group-hover:!opacity-100 !opacity-0 mt-[0.8px] ease-in-out absolute top-[100%]  right-[0%]  bg-white z-10 ">
                 <MenuProfile />
               </div>
             </div>
