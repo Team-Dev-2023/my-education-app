@@ -27,7 +27,7 @@ function ItemCarouseIlListProduct({ carouseProduct }) {
   const renderListImpression = (listImpression) => {
     return listImpression.map((item, index) => {
       return (
-        <div key={index}>
+        <div key={item}>
           {item === 1 ? (
             <div className="px-[6px] py-[4px] w-fit font-[600] text-[12px] bg-[#eceb98]">
               {t.product.bestseller}
@@ -104,10 +104,10 @@ function ItemCarouseIlListProduct({ carouseProduct }) {
       <div>
         {carouseProduct.mainContent.map((item, index) => {
           return (
-            <div key={index} className="flex gap-2">
-              <p>
+            <div key={item} className="flex gap-2">
+              <div>
                 <AiOutlineCheck className="text-[14px] mt-[2px]" />
-              </p>
+              </div>
               <div className="text-[12px]">{item}</div>
             </div>
           );

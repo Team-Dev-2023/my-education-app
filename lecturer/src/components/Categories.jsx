@@ -9,14 +9,13 @@ const Categories = () => {
       children: item.subCategories,
     };
   });
-  console.log("render cate");
   const items = [
     {
-      label: "Categories",
-      key: "Categories",
+      label: <a href="/#">Categories</a>,
+      key: "categories",
       children: categories,
     },
   ];
-  return <Menu mode="horizontal" items={items} />;
+  return <Menu items={items} />;
 };
 export default Categories;

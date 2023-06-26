@@ -109,6 +109,7 @@ function Footer() {
               query.locale === "vi"
                 ? navigate({ search: "" })
                 : navigate({ search: "?locale=vi" });
+              window.location.reload();
             }}
           >
             <TfiWorld />
