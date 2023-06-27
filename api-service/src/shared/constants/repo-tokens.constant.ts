@@ -5,13 +5,21 @@ export const repoTokens = {
   rolePermission: 'ROLE_PERMISSION_REPOSITORY',
   subCategory: 'SUB_CATEGORY_REPOSITORY',
   topic: 'TOPIC_REPOSITORY',
+  course: 'COURSE_REPOSITORY',
+  courseKnowledge: 'COURSE_KNOWLEDGE_REPOSITORY',
+  section: 'SECTION_REPOSITORY',
+  lecture: 'LECTURE_REPOSITORY',
 };
 
 export const aliases = {
-  category: 'c',
-  user: 'u',
-  loginMethod: 'lm',
-  rolePermission: 'rp',
-  subCategory: 'sc',
-  topic: 't',
+  category: 'cate',
+  user: 'user',
+  loginMethod: 'loginMethod',
+  rolePermission: 'rolePerm',
+  subCategory: 'subCate',
+  topic: 'topic',
+  course: 'course',
+  courseKnowledge: 'courseKnowledge',
+  section: 'section',
+  lecture: 'lecture',
 };

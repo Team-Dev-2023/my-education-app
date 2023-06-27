@@ -5,3 +5,7 @@ export * from './role-permission.entity';
 export * from './sub-category.entity';
 export * from './topic.entity';
 export * from './user.entity';
+export * from './course.entity';
+export * from './course-knowledge.entity';
+export * from './section.entity';
+export * from './lecture.entity';

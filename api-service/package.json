@@ -30,7 +30,7 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --dataSource ./src/migration.config.ts",
     "typeorm:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create",
     "typeorm:generate": "npm run typeorm -- migration:generate -p true",
-    "typeorm:run": "npm run typeorm migration:run",
+    "typeorm:run": "nest build && npm run typeorm migration:run",
     "typeorm:revert": "npm run typeorm migration:revert",
     "typeorm:restart": "npm run typeorm migration:revert && npm run typeorm migration:run"
   },

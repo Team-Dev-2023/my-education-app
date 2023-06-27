@@ -52,4 +52,9 @@ export const Errors = {
     statusCode: HttpStatus.BAD_REQUEST,
     errorCode: ErrorCodes.INVALID_TOPIC_UUID,
   },
+  INVALID_COURSE_UUID: {
+    message: 'Course UUID is invalid',
+    statusCode: HttpStatus.BAD_REQUEST,
+    errorCode: ErrorCodes.INVALID_COURSE_UUID,
+  },
 };

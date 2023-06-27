@@ -53,3 +53,14 @@ export type TOrderBy = 'DESC' | 'ASC';
 
 export const DEFAULT_PAGINATION_PAGE = 20;
 export const DEFAULT_PAGINATION_PER_PAGE = 0;
+
+export enum ELectureType {
+  video = 0,
+  assignment = 1,
+  quiz = 2,
+}
+
+export enum ECourseStatus {
+  pending = 0,
+  publish = 1,
+}

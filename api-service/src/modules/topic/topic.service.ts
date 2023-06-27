@@ -1,6 +1,7 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Topic } from 'src/entities';
 import { IPagination, JwtPayload } from 'src/shared/constants/common.contants';
+import { Errors } from 'src/shared/constants/errors.constant';
 import { aliases, repoTokens } from 'src/shared/constants/repo-tokens.constant';
 import {
   IPaginatedReponse,
@@ -68,14 +69,14 @@ export class TopicService {
   }
 
   async getOne(topicUuid: string): Promise<TopicResponseDto> {
-    const category = await this.topicRepo.findOne({
+    const topic = await this.topicRepo.findOne({
       where: { uuid: topicUuid },
     });
-    if (!category) {
-      throw new BadRequestException(`Invalid subcategory UUID`);
+    if (!topic) {
+      throw new BadRequestException(Errors.INVALID_TOPIC_UUID);
     }
 
-    return this.formatCategoryReponse(category);
+    return this.formatCategoryReponse(topic);
   }
 
   async deleteOne(topicUuid: string): Promise<TopicResponseDto> {
@@ -83,7 +84,7 @@ export class TopicService {
       where: { uuid: topicUuid },
     });
     if (!category) {
-      throw new BadRequestException(`Invalid Topic UUID`);
+      throw new BadRequestException(Errors.INVALID_TOPIC_UUID);
     }
     await this.topicRepo.delete({ uuid: topicUuid });
     return this.formatCategoryReponse(category);

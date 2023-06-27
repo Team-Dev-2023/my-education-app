@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 import { UserMiddleware } from './middlewares/user.middleware';
 import { AuthModule } from './modules/auth/auth.module';
 import { CategoryModule } from './modules/category/category.module';
+import { CourseModule } from './modules/course/course.module';
 import { DatabaseModule } from './modules/database/database.module';
 import { FileUploaderModule } from './modules/file-uploader/file-uploader.module';
 import { HealthModule } from './modules/health/health.module';
@@ -41,6 +42,7 @@ import {
     TopicModule,
     FileUploaderModule,
     SeederModule,
+    CourseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
