@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { EUserRole } from 'src/shared/constants/common.contants';
+import { BaseAuditReponseDto } from 'src/shared/dtos/base-audit-response.dto';
 
-export class UserResponseDto {
+export class UserResponseDto extends BaseAuditReponseDto {
   @ApiProperty({ type: String, required: false })
   uuid: string;
 

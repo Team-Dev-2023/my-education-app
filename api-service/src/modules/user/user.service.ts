@@ -4,8 +4,6 @@ import {
   Injectable,
   Logger,
 } from '@nestjs/common';
-import { LoginMethod } from 'src/entities/login-method.entity';
-import { User } from 'src/entities/user.entity';
 import {
   ELoginMethod,
   EUserRole,
@@ -22,6 +20,7 @@ import { RegisterInputDto } from '../auth/dtos/auth-input.dto';
 import { CreateAdminUserInputDto } from './dtos/user-input.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
 import * as bcrypt from 'bcryptjs';
+import { LoginMethod, User } from 'src/entities';
 @Injectable()
 export class UserService {
   private readonly logger = new Logger(UserService.name);
@@ -59,7 +58,9 @@ export class UserService {
       avatar: user?.avatar,
       country: user.country,
       role: user.role,
-    };
+      createdAt: user.createdAt,
+      createdBy: user.createdBy,
+    } as UserResponseDto;
   }
 
   async checkUsernameHasBeenUsedLoggedIn(
@@ -79,7 +80,7 @@ export class UserService {
   async createAdminUser(
     data: CreateAdminUserInputDto,
     createdBy: string,
-  ): Promise<User> {
+  ): Promise<UserResponseDto> {
     if ([EUserRole.superadmin].includes(data.role)) {
       throw new BadRequestException(Errors.CANNOT_CREATE_SUPERADMIN_ACCOUNT);
     }
@@ -92,7 +93,9 @@ export class UserService {
       createdBy,
     });
   }
-  async createUserWithPasswordAuth(data: RegisterInputDto): Promise<User> {
+  async createUserWithPasswordAuth(
+    data: RegisterInputDto,
+  ): Promise<UserResponseDto> {
     const createdUser = this.userRepo.create({
       email: data?.email || '',
       phone: data.phone || '',
@@ -112,7 +115,7 @@ export class UserService {
       createdBy: data.username,
     });
     const insertedData = await this.userRepo.save(createdUser);
-    return insertedData;
+    return this.formatResponse(insertedData);
   }
 
   async updateUserRefreshToken(uuid: string, refreshToken: string) {
@@ -153,7 +156,7 @@ export class UserService {
       },
     });
     if (!user) {
-      throw new BadRequestException(Errors.INVALID_USERNAME);
+      throw new BadRequestException(Errors.INVALID_UUID);
     }
 
     return this.formatResponse(user);
