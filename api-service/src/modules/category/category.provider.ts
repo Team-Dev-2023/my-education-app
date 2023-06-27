@@ -1,4 +1,4 @@
-import { Category } from 'src/entities/category.entity';
+import { Category } from 'src/entities';
 import { repoTokens } from 'src/shared/constants/repo-tokens.constant';
 import { DataSource } from 'typeorm';
 import { DBConnectionToken } from '../database/database.provider';

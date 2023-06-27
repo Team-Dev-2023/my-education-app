@@ -32,7 +32,7 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
-    // formState: { error },
+    formState: { error },
   } = useForm();
   const onSubmit = (data) => {
     try {

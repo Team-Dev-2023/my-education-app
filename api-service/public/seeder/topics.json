@@ -1,0 +1,412 @@
+[
+  {
+    "uuid": 1,
+    "name": "AWS Certified Solutions Architect",
+    "subCategoryUuid": 1
+  },
+  {
+    "uuid": 2,
+    "name": "AWS Certified Cloud Practitioner Courses",
+    "subCategoryUuid": 1
+  },
+  {
+    "uuid": 3,
+    "name": "Amazon AWS Courses",
+    "subCategoryUuid": 1
+  },
+  {
+    "uuid": 4,
+    "name": "Ethical Hacking",
+    "subCategoryUuid": 2
+  },
+  {
+    "uuid": 5,
+    "name": "Cyber Security",
+    "subCategoryUuid": 2
+  },
+  {
+    "uuid": 6,
+    "name": "Network Security",
+    "subCategoryUuid": 2
+  },
+  {
+    "uuid": 7,
+    "name": "PLC",
+    "subCategoryUuid": 3
+  },
+  {
+    "uuid": 8,
+    "name": "Arduino",
+    "subCategoryUuid": 3
+  },
+  {
+    "uuid": 9,
+    "name": "Electornics",
+    "subCategoryUuid": 3
+  },
+  {
+    "uuid": 10,
+    "name": "Excel",
+    "subCategoryUuid": 4
+  },
+  {
+    "uuid": 11,
+    "name": "Microsoft Office",
+    "subCategoryUuid": 4
+  },
+  {
+    "uuid": 12,
+    "name": "Power Point",
+    "subCategoryUuid": 4
+  },
+  {
+    "uuid": 13,
+    "name": "Mac Basics",
+    "subCategoryUuid": 5
+  },
+  {
+    "uuid": 14,
+    "name": "iMovie",
+    "subCategoryUuid": 5
+  },
+  {
+    "uuid": 15,
+    "name": "Apple Keynote",
+    "subCategoryUuid": 5
+  },
+  {
+    "uuid": 16,
+    "name": "Google Sheets",
+    "subCategoryUuid": 6
+  },
+  {
+    "uuid": 17,
+    "name": "Google Workspace(G-suite)",
+    "subCategoryUuid": 6
+  },
+  {
+    "uuid": 18,
+    "name": "Google Data Studio",
+    "subCategoryUuid": 6
+  },
+  {
+    "uuid": 19,
+    "name": "Life Coach Training",
+    "subCategoryUuid": 7
+  },
+  {
+    "uuid": 20,
+    "name": "Personal Development",
+    "subCategoryUuid": 7
+  },
+  {
+    "uuid": 21,
+    "name": "Neuro-Linguistic Programming",
+    "subCategoryUuid": 7
+  },
+  {
+    "uuid": 22,
+    "name": "ChatGPT",
+    "subCategoryUuid": 8
+  },
+  {
+    "uuid": 23,
+    "name": "Time Management",
+    "subCategoryUuid": 8
+  },
+  {
+    "uuid": 24,
+    "name": "Notion Workspace",
+    "subCategoryUuid": 8
+  },
+  {
+    "uuid": 25,
+    "name": "Management Skills",
+    "subCategoryUuid": 9
+  },
+  {
+    "uuid": 26,
+    "name": "Management Training",
+    "subCategoryUuid": 9
+  },
+  {
+    "uuid": 27,
+    "name": "Coaching",
+    "subCategoryUuid": 9
+  },
+  { "uuid": 28, "name": "Pilates", "subCategoryUuid": 10 },
+  { "uuid": 29, "name": "Teacher Training", "subCategoryUuid": 10 },
+  { "uuid": 30, "name": "Muscle Building", "subCategoryUuid": 10 },
+  { "uuid": 31, "name": "Home Workout", "subCategoryUuid": 10 },
+  { "uuid": 32, "name": "Strength Training", "subCategoryUuid": 10 },
+  { "uuid": 33, "name": "Massage", "subCategoryUuid": 11 },
+  { "uuid": 34, "name": "Herbalism", "subCategoryUuid": 11 },
+  { "uuid": 35, "name": "Holistic Medicine", "subCategoryUuid": 11 },
+  { "uuid": 36, "name": "Reflexology", "subCategoryUuid": 11 },
+  { "uuid": 37, "name": "Facial Massage", "subCategoryUuid": 11 },
+  { "uuid": 38, "name": "Soccer", "subCategoryUuid": 12 },
+  { "uuid": 39, "name": "Sports Psychology", "subCategoryUuid": 12 },
+  { "uuid": 40, "name": "Sports Coaching", "subCategoryUuid": 12 },
+  { "uuid": 41, "name": "Swimming", "subCategoryUuid": 12 },
+  { "uuid": 42, "name": "Tennis", "subCategoryUuid": 12 },
+  { "uuid": 43, "name": "Nutrition", "subCategoryUuid": 13 },
+  { "uuid": 44, "name": "Dieting", "subCategoryUuid": 13 },
+  { "uuid": 45, "name": "Weight Loss", "subCategoryUuid": 13 },
+  { "uuid": 46, "name": "Sports Nutrition", "subCategoryUuid": 13 },
+  { "uuid": 47, "name": "Gut Health", "subCategoryUuid": 13 },
+  { "uuid": 48, "name": "Pranayama", "subCategoryUuid": 14 },
+  { "uuid": 49, "name": "Yoga for Kids", "subCategoryUuid": 14 },
+  { "uuid": 50, "name": "Breathing Techniques", "subCategoryUuid": 14 },
+  { "uuid": 51, "name": "Face Yoga", "subCategoryUuid": 14 },
+  { "uuid": 52, "name": "Chair Yoga", "subCategoryUuid": 14 },
+  { "uuid": 53, "name": "Guitar", "subCategoryUuid": 15 },
+  { "uuid": 54, "name": "Piano", "subCategoryUuid": 15 },
+  { "uuid": 55, "name": "Keyboard Instrument", "subCategoryUuid": 15 },
+  { "uuid": 56, "name": "Bass Guitar", "subCategoryUuid": 15 },
+  { "uuid": 57, "name": "Ukulele", "subCategoryUuid": 15 },
+  { "uuid": 58, "name": "Music Mixing", "subCategoryUuid": 16 },
+  { "uuid": 59, "name": "Logic Pro", "subCategoryUuid": 16 },
+  { "uuid": 60, "name": "Ableton Live", "subCategoryUuid": 16 },
+  { "uuid": 61, "name": "FL Studio", "subCategoryUuid": 16 },
+  { "uuid": 62, "name": "Music Composition", "subCategoryUuid": 16 },
+  { "uuid": 63, "name": "Music Theory", "subCategoryUuid": 17 },
+  { "uuid": 64, "name": "Songwriting", "subCategoryUuid": 17 },
+  { "uuid": 65, "name": "Electron Music", "subCategoryUuid": 17 },
+  { "uuid": 66, "name": "Reading Music", "subCategoryUuid": 17 },
+  { "uuid": 67, "name": "Music History", "subCategoryUuid": 17 },
+  { "uuid": 68, "name": "Sining", "subCategoryUuid": 18 },
+  { "uuid": 69, "name": "Voice Training", "subCategoryUuid": 18 },
+  { "uuid": 70, "name": "Voice Acting", "subCategoryUuid": 18 },
+  { "uuid": 71, "name": "Raga Music", "subCategoryUuid": 18 },
+  { "uuid": 72, "name": "Meditation", "subCategoryUuid": 18 },
+  { "uuid": 73, "name": "DJ", "subCategoryUuid": 19 },
+  { "uuid": 74, "name": "Blues Guitar", "subCategoryUuid": 19 },
+  { "uuid": 75, "name": "Acoustic Guitar", "subCategoryUuid": 19 },
+  { "uuid": 76, "name": "Voice-over", "subCategoryUuid": 19 },
+  { "uuid": 77, "name": "Rapping", "subCategoryUuid": 19 },
+  {
+    "uuid": 78,
+    "name": "JavaScript",
+    "subCategoryUuid": 20
+  },
+  {
+    "uuid": 79,
+    "name": "React JS",
+    "subCategoryUuid": 20
+  },
+  {
+    "uuid": 80,
+    "name": "Angular",
+    "subCategoryUuid": 20
+  },
+  {
+    "uuid": 81,
+    "name": "CSS",
+    "subCategoryUuid": 20
+  },
+  {
+    "uuid": 82,
+    "name": "Node.Js",
+    "subCategoryUuid": 20
+  },
+  {
+    "uuid": 83,
+    "name": "Python",
+    "subCategoryUuid": 21
+  },
+  {
+    "uuid": 84,
+    "name": "Machine Learning",
+    "subCategoryUuid": 21
+  },
+  {
+    "uuid": 85,
+    "name": "ChatGPT",
+    "subCategoryUuid": 21
+  },
+  {
+    "uuid": 86,
+    "name": "Deep Learning",
+    "subCategoryUuid": 21
+  },
+  {
+    "uuid": 87,
+    "name": "Artificial Intelligence",
+    "subCategoryUuid": 21
+  },
+  {
+    "uuid": 88,
+    "name": "Google Flutter",
+    "subCategoryUuid": 22
+  },
+  {
+    "uuid": 89,
+    "name": "iOS Development",
+    "subCategoryUuid": 22
+  },
+  {
+    "uuid": 90,
+    "name": "Android Development",
+    "subCategoryUuid": 22
+  },
+  {
+    "uuid": 91,
+    "name": "Dart (programming language)",
+    "subCategoryUuid": 22
+  },
+  {
+    "uuid": 92,
+    "name": "React Native",
+    "subCategoryUuid": 22
+  },
+  {
+    "uuid": 93,
+    "name": "Business Fundamentals",
+    "subCategoryUuid": 23
+  },
+  {
+    "uuid": 94,
+    "name": "ChatGPT",
+    "subCategoryUuid": 23
+  },
+  {
+    "uuid": 95,
+    "name": "Entrepreneurship Fundamentals",
+    "subCategoryUuid": 23
+  },
+  {
+    "uuid": 96,
+    "name": "Freelancing",
+    "subCategoryUuid": 23
+  },
+  {
+    "uuid": 97,
+    "name": "Business Strategy",
+    "subCategoryUuid": 23
+  },
+  {
+    "uuid": 98,
+    "name": "Communication Skills",
+    "subCategoryUuid": 24
+  },
+  {
+    "uuid": 99,
+    "name": "Presentation Skills",
+    "subCategoryUuid": 24
+  },
+  {
+    "uuid": 100,
+    "name": "Public Speaking",
+    "subCategoryUuid": 24
+  },
+  {
+    "uuid": 101,
+    "name": "Writing",
+    "subCategoryUuid": 24
+  },
+  {
+    "uuid": 102,
+    "name": "Fiction Writing",
+    "subCategoryUuid": 24
+  },
+  {
+    "uuid": 103,
+    "name": "Product Management",
+    "subCategoryUuid": 25
+  },
+  {
+    "uuid": 104,
+    "name": "Leadership",
+    "subCategoryUuid": 25
+  },
+  {
+    "uuid": 105,
+    "name": "Management Skills",
+    "subCategoryUuid": 25
+  },
+  {
+    "uuid": 106,
+    "name": "ISO 9001",
+    "subCategoryUuid": 25
+  },
+  {
+    "uuid": 107,
+    "name": "Business Strategy",
+    "subCategoryUuid": 25
+  },
+  {
+    "uuid": 108,
+    "name": "Accounting",
+    "subCategoryUuid": 26
+  },
+  {
+    "uuid": 109,
+    "name": "Bookkeeping",
+    "subCategoryUuid": 26
+  },
+  {
+    "uuid": 110,
+    "name": "Financial Accounting",
+    "subCategoryUuid": 26
+  },
+  {
+    "uuid": 111,
+    "name": "Finance Fundamentals",
+    "subCategoryUuid": 26
+  },
+  {
+    "uuid": 112,
+    "name": "QuickBooks Online",
+    "subCategoryUuid": 26
+  },
+  {
+    "uuid": 113,
+    "name": "Anti-Money Laundering",
+    "subCategoryUuid": 27
+  },
+  {
+    "uuid": 114,
+    "name": "Criminology",
+    "subCategoryUuid": 27
+  },
+  {
+    "uuid": 115,
+    "name": "Sarbanes-Oxley (SOX)",
+    "subCategoryUuid": 27
+  },
+  {
+    "uuid": 116,
+    "name": "Fraud Analytics",
+    "subCategoryUuid": 27
+  },
+  {
+    "uuid": 117,
+    "name": "Internal Controls",
+    "subCategoryUuid": 27
+  },
+  {
+    "uuid": 118,
+    "name": "Cryptocurrency",
+    "subCategoryUuid": 28
+  },
+  {
+    "uuid": 119,
+    "name": "Blockchain",
+    "subCategoryUuid": 28
+  },
+  {
+    "uuid": 120,
+    "name": "Binance",
+    "subCategoryUuid": 28
+  },
+  {
+    "uuid": 121,
+    "name": "Bitcoin",
+    "subCategoryUuid": 28
+  },
+  {
+    "uuid": 122,
+    "name": "NFT (Non-Fungible Tokens)",
+    "subCategoryUuid": 28
+  }
+]
