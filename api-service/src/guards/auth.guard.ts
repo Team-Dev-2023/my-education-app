@@ -30,13 +30,21 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException('Unauthorized access');
     }
 
+    if (new Date(user.exp * 1000) < new Date()) {
+      throw new UnauthorizedException('Token is expired');
+    }
+
     const requiredRoles = this.getRouteRoles(context);
     if (!requiredRoles) {
       return true;
     }
 
-    const currentUser = await this.userService.getUserByUuid(user.uuid);
-    return requiredRoles.includes(currentUser.role);
+    try {
+      const currentUser = await this.userService.getUserByUuid(user.uuid);
+      return requiredRoles.includes(currentUser.role);
+    } catch (error) {
+      throw new UnauthorizedException('Unauthorized');
+    }
   }
 
   private getRouteRoles(context: ExecutionContext): EUserRole[] | void {

@@ -4,7 +4,6 @@ import { PaginationParamDecorator } from 'src/decorators/pagination.decorator';
 import { Roles } from 'src/decorators/role.decorator';
 import { UserParamDecorator } from 'src/decorators/user.decorator';
 import { AuthGuard } from 'src/guards/auth.guard';
-import { JwtGuard } from 'src/guards/jwt.guard';
 import {
   EUserRole,
   IPagination,
@@ -39,7 +38,7 @@ export class UserController {
   }
 
   @Get('/profile')
-  @UseGuards(JwtGuard)
+  @UseGuards(AuthGuard)
   @ApiResponse({
     type: UserResponseDto,
     description: 'Get user profile',
@@ -52,7 +51,7 @@ export class UserController {
   }
 
   @Get('/')
-  @UseGuards(JwtGuard)
+  @UseGuards(AuthGuard)
   @ApiResponse({
     type: () => PaginatedReponse<UserResponseDto>,
     description: 'Get user profile',

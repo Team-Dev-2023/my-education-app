@@ -21,21 +21,15 @@ import {
 import { PaginationQueryDto } from 'src/shared/dtos/pagination-input.dto';
 import { IPaginatedReponse } from 'src/shared/helpers/paginate.helper';
 import { CategoryService } from './category.service';
-import {
-  CreateCategoryInputDto,
-  CreateSubCategoryInputDto,
-} from './dtos/category-input.dto';
-import {
-  CategoryResponseDto,
-  SubCategoryResponseDto,
-} from './dtos/category-response.dto';
+import { CreateCategoryInputDto } from './dtos/category-input.dto';
+import { CategoryResponseDto } from './dtos/category-response.dto';
 
 @ApiTags('Category')
 @Controller({ path: 'category' })
-@ApiBearerAuth('Authorization')
 export class CategoryController {
   constructor(private categoryService: CategoryService) {}
   @Post('/')
+  @ApiBearerAuth('Authorization')
   @Roles([EUserRole.superadmin, EUserRole.admin])
   @UseGuards(AuthGuard)
   async createOne(
@@ -53,26 +47,14 @@ export class CategoryController {
   }
 
   @Delete('/:categoryUuid')
+  @ApiBearerAuth('Authorization')
   async deleteOne(
     @Param('categoryUuid') categoryUuid: string,
   ): Promise<CategoryResponseDto> {
     return this.categoryService.deleteOne(categoryUuid);
   }
 
-  @Post(':categoryUuid/sub-categories')
-  @Roles([EUserRole.superadmin, EUserRole.admin])
-  @UseGuards(AuthGuard)
-  async createSubcategory(
-    @UserParamDecorator() user: JwtPayload,
-    @Param('categoryUuid') categoryUuid: string,
-    @Body() data: CreateSubCategoryInputDto,
-  ): Promise<SubCategoryResponseDto> {
-    return this.categoryService.createSubCategory(user, categoryUuid, data);
-  }
-
   @Get('/')
-  @Roles([EUserRole.superadmin, EUserRole.admin])
-  @UseGuards(AuthGuard)
   async getAll(
     @Query() query: PaginationQueryDto,
     @PaginationParamDecorator() pagination: IPagination,

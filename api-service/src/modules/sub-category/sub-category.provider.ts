@@ -1,12 +1,13 @@
-import { Category } from 'src/entities';
+import { SubCategory } from 'src/entities';
 import { repoTokens } from 'src/shared/constants/repo-tokens.constant';
 import { DataSource } from 'typeorm';
 import { DBConnectionToken } from '../database/database.provider';
 
-export const categoryProvider = [
+export const subCategoryProvider = [
   {
-    provide: repoTokens.category,
-    useFactory: (dataSource: DataSource) => dataSource.getRepository(Category),
+    provide: repoTokens.subCategory,
+    useFactory: (dataSource: DataSource) =>
+      dataSource.getRepository(SubCategory),
     inject: [DBConnectionToken],
   },
 ];

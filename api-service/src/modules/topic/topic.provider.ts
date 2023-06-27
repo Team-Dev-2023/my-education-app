@@ -1,12 +1,12 @@
-import { Category } from 'src/entities';
+import { Topic } from 'src/entities';
 import { repoTokens } from 'src/shared/constants/repo-tokens.constant';
 import { DataSource } from 'typeorm';
 import { DBConnectionToken } from '../database/database.provider';
 
-export const categoryProvider = [
+export const topicProvider = [
   {
-    provide: repoTokens.category,
-    useFactory: (dataSource: DataSource) => dataSource.getRepository(Category),
+    provide: repoTokens.topic,
+    useFactory: (dataSource: DataSource) => dataSource.getRepository(Topic),
     inject: [DBConnectionToken],
   },
 ];

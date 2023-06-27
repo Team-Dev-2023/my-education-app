@@ -40,6 +40,8 @@ export interface JwtPayload {
   uuid: string;
   username: string;
   role: EUserRole;
+  iat?: number;
+  exp?: number;
 }
 
 export interface IPagination {

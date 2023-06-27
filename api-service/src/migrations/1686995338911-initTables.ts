@@ -6,8 +6,8 @@ export class InitTables1686995338911 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
             CREATE TABLE \`users\` (
-                \`createdAt\` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                \`lastUpdatedAt\` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                \`createdAt\` datetime NOT NULL,
+                \`lastUpdatedAt\` datetime NOT NULL,
                 \`createdBy\` varchar(500) NOT NULL,
                 \`lastUpdatedBy\` varchar(500) NULL,
                 \`uuid\` varchar(36) NOT NULL,
@@ -45,8 +45,8 @@ export class InitTables1686995338911 implements MigrationInterface {
         `);
     await queryRunner.query(`
             CREATE TABLE \`categories\` (
-                \`createdAt\` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                \`lastUpdatedAt\` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                \`createdAt\` datetime NOT NULL,
+                \`lastUpdatedAt\` datetime NOT NULL,
                 \`createdBy\` varchar(500) NOT NULL,
                 \`lastUpdatedBy\` varchar(500) NULL,
                 \`uuid\` varchar(36) NOT NULL,

@@ -58,7 +58,9 @@ export class UserService {
       avatar: user?.avatar,
       country: user.country,
       role: user.role,
-    };
+      createdAt: user.createdAt,
+      createdBy: user.createdBy,
+    } as UserResponseDto;
   }
 
   async checkUsernameHasBeenUsedLoggedIn(
@@ -154,7 +156,7 @@ export class UserService {
       },
     });
     if (!user) {
-      throw new BadRequestException(Errors.INVALID_USERNAME);
+      throw new BadRequestException(Errors.INVALID_UUID);
     }
 
     return this.formatResponse(user);

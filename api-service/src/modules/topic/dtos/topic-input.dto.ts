@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { PaginationQueryDto } from 'src/shared/dtos/pagination-input.dto';
 
-export class CreateCategoryInputDto {
+export class CreateTopicInputDto {
   @ApiProperty({ type: String, required: true })
   @IsString()
   @IsNotEmpty()
@@ -11,4 +12,11 @@ export class CreateCategoryInputDto {
   @IsString()
   @IsOptional()
   imageUrl: string;
+}
+
+export class GetAllTopicQueryDto extends PaginationQueryDto {
+  @ApiProperty({ type: String, required: false })
+  @IsString()
+  @IsOptional()
+  subCategoryUuid: string;
 }

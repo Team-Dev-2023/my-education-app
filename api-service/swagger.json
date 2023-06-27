@@ -218,11 +218,6 @@
         },
         "tags": [
           "Category"
-        ],
-        "security": [
-          {
-            "Authorization": []
-          }
         ]
       }
     },
@@ -246,11 +241,6 @@
         },
         "tags": [
           "Category"
-        ],
-        "security": [
-          {
-            "Authorization": []
-          }
         ]
       },
       "delete": {
@@ -267,44 +257,6 @@
         ],
         "responses": {
           "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "Category"
-        ],
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      }
-    },
-    "/api/education/category/{categoryUuid}/sub-categories": {
-      "post": {
-        "operationId": "CategoryController_createSubcategory",
-        "parameters": [
-          {
-            "name": "categoryUuid",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSubCategoryInputDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
             "description": ""
           }
         },
@@ -470,6 +422,278 @@
           "Auth"
         ]
       }
+    },
+    "/api/education/sub-categories": {
+      "post": {
+        "operationId": "SubCategoryController_create",
+        "parameters": [
+          {
+            "name": "categoryUuid",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSubCategoryInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sub Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "SubCategoryController_getAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "categoryUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sub Category"
+        ]
+      }
+    },
+    "/api/education/sub-categories/{subCategoryUuid}": {
+      "get": {
+        "operationId": "SubCategoryController_getOne",
+        "parameters": [
+          {
+            "name": "subCategoryUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sub Category"
+        ]
+      },
+      "delete": {
+        "operationId": "SubCategoryController_deleteOne",
+        "parameters": [
+          {
+            "name": "subCategoryUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sub Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/education/topics": {
+      "post": {
+        "operationId": "TopicController_create",
+        "parameters": [
+          {
+            "name": "subCategoryUuid",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTopicInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Topics"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "TopicController_getAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "subCategoryUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Topics"
+        ]
+      }
+    },
+    "/api/education/topics/{topicUuid}": {
+      "get": {
+        "operationId": "TopicController_getOne",
+        "parameters": [
+          {
+            "name": "topicUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Topics"
+        ]
+      },
+      "delete": {
+        "operationId": "TopicController_deleteOne",
+        "parameters": [
+          {
+            "name": "topicUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Topics"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/education/file-uploader/image": {
+      "post": {
+        "operationId": "FileUploaderController_uploadImage",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "File Uploader"
+        ]
+      }
     }
   },
   "info": {
@@ -497,20 +721,6 @@
     },
     "schemas": {
       "CreateCategoryInputDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "imageUrl": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "name"
-        ]
-      },
-      "CreateSubCategoryInputDto": {
         "type": "object",
         "properties": {
           "name": {
@@ -553,6 +763,20 @@
       "UserResponseDto": {
         "type": "object",
         "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "lastUpdatedBy": {
+            "type": "string"
+          },
           "uuid": {
             "type": "string"
           },
@@ -589,7 +813,13 @@
               3
             ]
           }
-        }
+        },
+        "required": [
+          "createdAt",
+          "lastUpdatedAt",
+          "createdBy",
+          "lastUpdatedBy"
+        ]
       },
       "PaginatedReponse": {
         "type": "object",
@@ -673,6 +903,46 @@
         "required": [
           "username",
           "password"
+        ]
+      },
+      "CreateSubCategoryInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CreateTopicInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ImageUploadInputDto": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary"
+          }
+        },
+        "required": [
+          "file"
         ]
       }
     }

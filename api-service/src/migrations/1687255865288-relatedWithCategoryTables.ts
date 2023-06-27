@@ -16,8 +16,8 @@ export class RelatedWithCategoryTables1687255865288
             \`name\` varchar(200) NOT NULL,
             \`imageUrl\` varchar(200) NULL,
             \`categoryUuid\` varchar(36) NULL,
-            \`createdAt\` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            \`lastUpdatedAt\` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            \`createdAt\` datetime NOT NULL,
+            \`lastUpdatedAt\` datetime NOT NULL,
             \`createdBy\` varchar(500) NOT NULL,
             \`lastUpdatedBy\` varchar(500) NULL,
             PRIMARY KEY (\`uuid\`)

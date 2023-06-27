@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseAuditReponseDto } from 'src/shared/dtos/base-audit-response.dto';
 
-export class CategoryResponseDto extends BaseAuditReponseDto {
+export class SubCategoryResponseDto extends BaseAuditReponseDto {
   @ApiProperty({
     type: String,
   })

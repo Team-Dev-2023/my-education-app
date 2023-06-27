@@ -1,25 +1,20 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { Category, SubCategory, Topic } from 'src/entities';
+import { Category } from 'src/entities';
 import { IPagination, JwtPayload } from 'src/shared/constants/common.contants';
+import { Errors } from 'src/shared/constants/errors.constant';
 import { aliases, repoTokens } from 'src/shared/constants/repo-tokens.constant';
 import {
   IPaginatedReponse,
   paginate,
 } from 'src/shared/helpers/paginate.helper';
 import { Repository, SelectQueryBuilder } from 'typeorm';
-import {
-  CreateCategoryInputDto,
-  CreateSubCategoryInputDto,
-} from './dtos/category-input.dto';
+import { CreateCategoryInputDto } from './dtos/category-input.dto';
 import { CategoryResponseDto } from './dtos/category-response.dto';
 
 @Injectable()
 export class CategoryService {
   constructor(
     @Inject(repoTokens.category) private cateRepo: Repository<Category>,
-    @Inject(repoTokens.subCategory)
-    private subCateRepo: Repository<SubCategory>,
-    @Inject(repoTokens.topic) private topicRepo: Repository<Topic>,
   ) {}
   private getFields() {
     return [
@@ -57,14 +52,14 @@ export class CategoryService {
         createdBy: user.username,
       }),
     );
-    return createdCategory;
+    return this.formatCategoryReponse(createdCategory);
   }
   async getOne(categoryUuid: string): Promise<CategoryResponseDto> {
     const category = await this.cateRepo.findOne({
       where: { uuid: categoryUuid },
     });
     if (!category) {
-      throw new BadRequestException(`Invalid category UUID`);
+      throw new BadRequestException(Errors.INVALID_CATEGORY_UUID);
     }
 
     return this.formatCategoryReponse(category);
@@ -75,32 +70,10 @@ export class CategoryService {
       where: { uuid: categoryUuid },
     });
     if (!category) {
-      throw new BadRequestException(`Invalid category UUID`);
+      throw new BadRequestException(Errors.INVALID_CATEGORY_UUID);
     }
     await this.cateRepo.delete({ uuid: categoryUuid });
     return this.formatCategoryReponse(category);
-  }
-  async createSubCategory(
-    user: JwtPayload,
-    categoryUuid: string,
-    data: CreateSubCategoryInputDto,
-  ): Promise<CategoryResponseDto> {
-    const category = await this.cateRepo.findOne({
-      where: { uuid: categoryUuid },
-    });
-    if (!category) {
-      throw new BadRequestException(`Invalid category UUID`);
-    }
-    const createdSubCategory = await this.subCateRepo.save(
-      this.subCateRepo.create({
-        ...data,
-        createdBy: user.username,
-        category: {
-          uuid: categoryUuid,
-        },
-      }),
-    );
-    return createdSubCategory;
   }
   async getAll(
     pagination: IPagination,
