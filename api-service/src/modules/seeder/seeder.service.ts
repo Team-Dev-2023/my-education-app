@@ -17,6 +17,10 @@ export class SeederService implements OnModuleInit {
     private topicRepo: Repository<Topic>,
   ) {}
   async onModuleInit() {
+    const isSeeded = await this.cateRepo.count();
+    if (isSeeded) {
+      return;
+    }
     const newCategories = Categories.map((c) =>
       this.cateRepo.create({
         name: c.name,
