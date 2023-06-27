@@ -9,13 +9,16 @@ import Header from "components/Header";
 import Footer from "components/Footer";
 import RegisterWebportal from "./pages/RegisterWebportal ";
 import LoginPage from "pages/LoginPage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserInfoAction, logoutAction } from "redux/actions";
+import PrivateRoute from "./hoc/PrivateRoutes";
+import LearningPage from "pages/LearningPage";
 require("moment/locale/vi");
 
 function App() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const { userInfo } = useSelector((state) => state.auth);
   //SCROLL ON TOP WHEN CHANGE PAGE
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,7 +31,7 @@ function App() {
       dispatch(
         getUserInfoAction({
           accessToken: accessToken,
-        })
+        }),
       );
   }, []);
   return (
@@ -43,6 +46,13 @@ function App() {
           path={ROUTES.USER.DETAIL_PRODUCT}
           element={<CourseDetailPage />}
         />
+        <Route
+          element={
+            <PrivateRoute user={userInfo} redirectPath={ROUTES.USER.LOGIN} />
+          }
+        >
+          <Route path={ROUTES.USER.LEARNING} element={<LearningPage />} />
+        </Route>
         <Route path="*" element={<div>404</div>} />
       </Routes>
       <Footer></Footer>
