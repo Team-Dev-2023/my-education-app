@@ -3,13 +3,13 @@ import { BeforeInsert, Column } from 'typeorm';
 export class BaseEntityAudit {
   @Column({
     type: 'timestamp',
-    default: () => new Date(),
+    default: new Date(),
   })
   createdAt: Date;
 
   @Column({
     type: 'timestamp',
-    default: () => new Date(),
+    default: new Date(),
   })
   lastUpdatedAt: Date;
 
