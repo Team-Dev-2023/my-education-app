@@ -9,6 +9,8 @@ import {
 } from 'typeorm';
 import { BaseEntityAudit } from './base-entity-audit';
 import { CourseKnowledge } from './course-knowledge.entity';
+import { CoursePrerequisite } from './course-prerequisite.entity';
+import { CourseRecommendation } from './course-recommendation.entity';
 import { Section } from './section.entity';
 import { Topic } from './topic.entity';
 
@@ -26,12 +28,6 @@ export class Course extends BaseEntityAudit {
   @Column({ type: 'varchar', length: 5000, nullable: true })
   description: string;
 
-  @Column({ type: 'varchar', length: 2000, nullable: true })
-  prerequisites: string;
-
-  @Column({ type: 'varchar', length: 2000, nullable: true })
-  recommendation: string;
-
   @Column({ type: 'varchar', length: 500, nullable: true })
   imageUrl: string;
 
@@ -47,4 +43,10 @@ export class Course extends BaseEntityAudit {
 
   @OneToMany(() => Section, (section) => section.course, { cascade: true })
   sections: Section[];
+
+  @OneToMany(() => CoursePrerequisite, (cp) => cp.course, { cascade: true })
+  coursePrerequisiteList: CourseKnowledge[];
+
+  @OneToMany(() => CourseRecommendation, (cr) => cr.course, { cascade: true })
+  courseRecommendationList: CourseRecommendation[];
 }

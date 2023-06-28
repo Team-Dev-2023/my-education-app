@@ -1,10 +1,28 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
+import { CategoryResponseDto } from 'src/modules/category/dtos/category-response.dto';
+import { SubCategoryResponseDto } from 'src/modules/sub-category/dtos/sub-category-response.dto';
 import { TopicResponseDto } from 'src/modules/topic/dtos/topic-response.dto';
 import { ELectureType } from 'src/shared/constants/common.contants';
 import { BaseAuditReponseDto } from 'src/shared/dtos/base-audit-response.dto';
 
 export class CourseKnowledgeResponseDto {
+  @ApiProperty({ type: String, required: false })
+  uuid: string;
+
+  @ApiProperty({ type: String, required: false })
+  description: string;
+}
+
+export class CoursePrerequisiteResponseDto {
+  @ApiProperty({ type: String, required: false })
+  uuid: string;
+
+  @ApiProperty({ type: String, required: false })
+  description: string;
+}
+
+export class CourseRecommendationResponseDto {
   @ApiProperty({ type: String, required: false })
   uuid: string;
 
@@ -67,20 +85,36 @@ export class CourseReponseDto extends BaseAuditReponseDto {
   description: string;
 
   @ApiProperty({ type: String, required: false })
-  prerequisites: string;
-
-  @ApiProperty({ type: String, required: false })
-  recommendation: string;
-
-  @ApiProperty({ type: String, required: false })
   imageUrl: string;
 
   @ApiProperty({ type: () => TopicResponseDto, required: false })
   topic: TopicResponseDto;
 
+  @ApiProperty({
+    type: () => SubCategoryResponseDto,
+  })
+  subCategory?: SubCategoryResponseDto;
+
+  @ApiProperty({
+    type: () => CategoryResponseDto,
+  })
+  category?: CategoryResponseDto;
+
   @ApiProperty({ type: () => [CourseKnowledgeResponseDto], required: false })
-  courseKnowledge: CourseKnowledgeResponseDto[];
+  courseKnowledgeList: CourseKnowledgeResponseDto[];
 
   @ApiProperty({ type: () => [SectionResponseDto], required: false })
   sections: SectionResponseDto[];
+
+  @ApiProperty({
+    type: () => [CourseRecommendationResponseDto],
+    required: false,
+  })
+  courseRecommendationList: CourseRecommendationResponseDto[];
+
+  @ApiProperty({
+    type: () => [CoursePrerequisiteResponseDto],
+    required: false,
+  })
+  coursePrerequisiteList: CoursePrerequisiteResponseDto[];
 }

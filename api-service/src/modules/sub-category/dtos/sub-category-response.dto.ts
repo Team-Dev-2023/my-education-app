@@ -15,5 +15,5 @@ export class SubCategoryResponseDto extends BaseAuditReponseDto {
   @ApiProperty({
     type: String,
   })
-  imageUrl: string;
+  imageUrl?: string;
 }

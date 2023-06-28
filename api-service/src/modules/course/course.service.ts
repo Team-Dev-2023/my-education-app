@@ -29,8 +29,6 @@ export class CourseService {
       `${aliases.course}.title`,
       `${aliases.course}.subTitle`,
       `${aliases.course}.description`,
-      `${aliases.course}.prerequisites`,
-      `${aliases.course}.recommendation`,
       `${aliases.course}.imageUrl`,
       `${aliases.course}.createdAt`,
       `${aliases.course}.createdBy`,
@@ -38,11 +36,10 @@ export class CourseService {
       `${aliases.course}.lastUpdatedBy`,
       `${aliases.topic}.uuid`,
       `${aliases.topic}.name`,
-      `${aliases.topic}.imageUrl`,
-      `${aliases.topic}.createdAt`,
-      `${aliases.topic}.createdBy`,
-      `${aliases.topic}.lastUpdatedAt`,
-      `${aliases.topic}.lastUpdatedBy`,
+      `${aliases.subCategory}.uuid`,
+      `${aliases.subCategory}.name`,
+      `${aliases.category}.uuid`,
+      `${aliases.category}.name`,
       `${aliases.courseKnowledge}.uuid`,
       `${aliases.courseKnowledge}.description`,
       `${aliases.section}.uuid`,
@@ -56,6 +53,10 @@ export class CourseService {
       `${aliases.lecture}.preview`,
       `${aliases.lecture}.type`,
       `${aliases.lecture}.videoDuration`,
+      `${aliases.coursePrerequisite}.uuid`,
+      `${aliases.coursePrerequisite}.description`,
+      `${aliases.courseRecommendation}.uuid`,
+      `${aliases.courseRecommendation}.description`,
     ];
   }
   private getQuery(): SelectQueryBuilder<Course> {
@@ -63,9 +64,19 @@ export class CourseService {
       .createQueryBuilder(aliases.course)
       .select(this.getFields())
       .leftJoin(`${aliases.course}.topic`, aliases.topic)
+      .leftJoin(`${aliases.topic}.subCategory`, aliases.subCategory)
+      .leftJoin(`${aliases.subCategory}.category`, aliases.category)
       .leftJoin(
         `${aliases.course}.courseKnowledgeList`,
         aliases.courseKnowledge,
+      )
+      .leftJoin(
+        `${aliases.course}.coursePrerequisiteList`,
+        aliases.coursePrerequisite,
+      )
+      .leftJoin(
+        `${aliases.course}.courseRecommendationList`,
+        aliases.courseRecommendation,
       )
       .leftJoin(`${aliases.course}.sections`, aliases.section)
       .leftJoin(`${aliases.section}.lectures`, aliases.lecture);
@@ -78,19 +89,21 @@ export class CourseService {
       title: course.title,
       subTitle: course.subTitle,
       description: course?.description,
-      prerequisites: course?.prerequisites,
-      recommendation: course?.recommendation,
       imageUrl: course?.imageUrl,
       topic: {
         uuid: course?.topic?.uuid,
         name: course?.topic?.name,
         imageUrl: course?.topic?.imageUrl,
-        createdAt: course?.topic?.createdAt,
-        lastUpdatedAt: course?.topic?.lastUpdatedAt,
-        createdBy: course?.topic?.createdBy,
-        lastUpdatedBy: course?.topic?.lastUpdatedBy,
       },
-      courseKnowledge: course?.courseKnowledgeList?.map((knowledge) => ({
+      category: {
+        uuid: course?.topic?.subCategory?.category?.uuid,
+        name: course?.topic?.subCategory?.category?.name,
+      },
+      subCategory: {
+        uuid: course?.topic?.subCategory?.uuid,
+        name: course?.topic?.subCategory?.name,
+      },
+      courseKnowledgeList: course?.courseKnowledgeList?.map((knowledge) => ({
         uuid: knowledge.uuid,
         description: knowledge.description,
       })),
@@ -113,6 +126,18 @@ export class CourseService {
       lastUpdatedAt: course.lastUpdatedAt,
       createdBy: course.createdBy,
       lastUpdatedBy: course.lastUpdatedBy,
+      coursePrerequisiteList: course?.coursePrerequisiteList?.map(
+        (knowledge) => ({
+          uuid: knowledge.uuid,
+          description: knowledge.description,
+        }),
+      ),
+      courseRecommendationList: course?.courseRecommendationList?.map(
+        (knowledge) => ({
+          uuid: knowledge.uuid,
+          description: knowledge.description,
+        }),
+      ),
     };
   }
   async createOne(
@@ -142,8 +167,18 @@ export class CourseService {
               position: sectionIndex,
             } as Section),
         ),
-        ...(data.courseKnowledge && {
-          courseKnowledgeList: data.courseKnowledge.map(
+        ...(data.courseKnowledgeList && {
+          courseKnowledgeList: data.courseKnowledgeList.map(
+            (knowledge) => knowledge,
+          ),
+        }),
+        ...(data.coursePrerequisiteList && {
+          coursePrerequisiteList: data.coursePrerequisiteList.map(
+            (knowledge) => knowledge,
+          ),
+        }),
+        ...(data.courseRecommendationList && {
+          courseRecommendationList: data.courseRecommendationList.map(
             (knowledge) => knowledge,
           ),
         }),
@@ -156,16 +191,10 @@ export class CourseService {
   }
 
   async getOne(courseUuid: string): Promise<CourseReponseDto> {
-    const course = await this.courseRepo.findOne({
-      relations: {
-        sections: {
-          lectures: true,
-        },
-        courseKnowledgeList: true,
-        topic: true,
-      },
-      where: { uuid: courseUuid },
-    });
+    const course = await this.getQuery()
+      .where(`${aliases.course}.uuid = :courseUuid`, { courseUuid })
+      .getOne();
+
     if (!course) {
       throw new BadRequestException(Errors.INVALID_COURSE_UUID);
     }
@@ -229,9 +258,19 @@ export class CourseService {
               position: sectionIndex,
             } as Section),
         ),
-        ...(data.courseKnowledge && {
-          courseKnowledgeList: data.courseKnowledge.map(
+        ...(data.courseKnowledgeList && {
+          courseKnowledgeList: data.courseKnowledgeList.map(
             (knowledge) => knowledge,
+          ),
+        }),
+        ...(data.coursePrerequisiteList && {
+          coursePrerequisiteList: data.coursePrerequisiteList.map(
+            (prerequisite) => prerequisite,
+          ),
+        }),
+        ...(data.courseRecommendationList && {
+          courseRecommendationList: data.courseRecommendationList.map(
+            (recommendation) => recommendation,
           ),
         }),
       }),
