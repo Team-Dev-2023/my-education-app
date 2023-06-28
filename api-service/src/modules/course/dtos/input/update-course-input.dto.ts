@@ -24,6 +24,30 @@ export class UpdateCourseKnowledgeInputDto {
   description: string;
 }
 
+export class UpdateCoursePrerequisiteInputDto {
+  @ApiProperty({ type: String, required: false })
+  @IsOptional()
+  @IsString()
+  uuid?: string;
+
+  @ApiProperty({ type: String, required: true })
+  @IsNotEmpty()
+  @IsString()
+  description: string;
+}
+
+export class UpdateCourseRecommendationInputDto {
+  @ApiProperty({ type: String, required: false })
+  @IsOptional()
+  @IsString()
+  uuid?: string;
+
+  @ApiProperty({ type: String, required: true })
+  @IsNotEmpty()
+  @IsString()
+  description: string;
+}
+
 export class UpdateLectureInputDto extends BaseAuditInputDto {
   @ApiProperty({ type: String, required: false })
   @IsOptional()
@@ -98,16 +122,6 @@ export class UpdateCourseInputDto extends BaseAuditInputDto {
   @ApiProperty({ type: String, required: false })
   @IsOptional()
   @IsString()
-  prerequisites: string;
-
-  @ApiProperty({ type: String, required: false })
-  @IsOptional()
-  @IsString()
-  recommendation: string;
-
-  @ApiProperty({ type: String, required: false })
-  @IsOptional()
-  @IsString()
   imageUrl: string;
 
   @ApiProperty({ type: String, required: true })
@@ -119,11 +133,29 @@ export class UpdateCourseInputDto extends BaseAuditInputDto {
   @IsOptional()
   @Type(() => UpdateCourseKnowledgeInputDto)
   @ValidateNested()
-  courseKnowledge: UpdateCourseKnowledgeInputDto[];
+  courseKnowledgeList: UpdateCourseKnowledgeInputDto[];
 
   @ApiProperty({ type: () => [UpdateSectionInputDto], required: false })
   @IsOptional()
   @Type(() => UpdateSectionInputDto)
   @ValidateNested()
   sections: UpdateSectionInputDto[];
+
+  @ApiProperty({
+    type: () => [UpdateCoursePrerequisiteInputDto],
+    required: false,
+  })
+  @IsOptional()
+  @Type(() => UpdateCoursePrerequisiteInputDto)
+  @ValidateNested()
+  coursePrerequisiteList: UpdateCoursePrerequisiteInputDto[];
+
+  @ApiProperty({
+    type: () => [UpdateCoursePrerequisiteInputDto],
+    required: false,
+  })
+  @IsOptional()
+  @Type(() => UpdateCourseRecommendationInputDto)
+  @ValidateNested()
+  courseRecommendationList: UpdateCourseRecommendationInputDto[];
 }

@@ -11,6 +11,20 @@ import {
 } from 'class-validator';
 import { ELectureType } from 'src/shared/constants/common.contants';
 
+export class CreateCoursePrerequisiteInputDto {
+  @ApiProperty({ type: String, required: true })
+  @IsNotEmpty()
+  @IsString()
+  description: string;
+}
+
+export class CreateCourseRecommendationInputDto {
+  @ApiProperty({ type: String, required: true })
+  @IsNotEmpty()
+  @IsString()
+  description: string;
+}
+
 export class CreateCourseKnowledgeInputDto {
   @ApiProperty({ type: String, required: true })
   @IsNotEmpty()
@@ -82,16 +96,6 @@ export class CreateCourseInputDto {
   @ApiProperty({ type: String, required: false })
   @IsOptional()
   @IsString()
-  prerequisites: string;
-
-  @ApiProperty({ type: String, required: false })
-  @IsOptional()
-  @IsString()
-  recommendation: string;
-
-  @ApiProperty({ type: String, required: false })
-  @IsOptional()
-  @IsString()
   imageUrl: string;
 
   @ApiProperty({ type: String, required: true })
@@ -103,11 +107,29 @@ export class CreateCourseInputDto {
   @IsOptional()
   @Type(() => CreateCourseKnowledgeInputDto)
   @ValidateNested()
-  courseKnowledge: CreateCourseKnowledgeInputDto[];
+  courseKnowledgeList: CreateCourseKnowledgeInputDto[];
 
   @ApiProperty({ type: () => [CreateSectionInputDto], required: false })
   @IsOptional()
   @Type(() => CreateSectionInputDto)
   @ValidateNested()
   sections: CreateSectionInputDto[];
+
+  @ApiProperty({
+    type: () => [CreateCoursePrerequisiteInputDto],
+    required: false,
+  })
+  @IsOptional()
+  @Type(() => CreateCoursePrerequisiteInputDto)
+  @ValidateNested()
+  coursePrerequisiteList: CreateCoursePrerequisiteInputDto[];
+
+  @ApiProperty({
+    type: () => [CreateCourseRecommendationInputDto],
+    required: false,
+  })
+  @IsOptional()
+  @Type(() => CreateCourseRecommendationInputDto)
+  @ValidateNested()
+  courseRecommendationList: CreateCourseRecommendationInputDto[];
 }

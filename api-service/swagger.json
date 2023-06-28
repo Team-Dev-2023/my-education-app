@@ -1163,6 +1163,28 @@
           "name"
         ]
       },
+      "CreateCoursePrerequisiteInputDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "CreateCourseRecommendationInputDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
       "CreateCourseInputDto": {
         "type": "object",
         "properties": {
@@ -1175,19 +1197,13 @@
           "description": {
             "type": "string"
           },
-          "prerequisites": {
-            "type": "string"
-          },
-          "recommendation": {
-            "type": "string"
-          },
           "imageUrl": {
             "type": "string"
           },
           "topicUuid": {
             "type": "string"
           },
-          "courseKnowledge": {
+          "courseKnowledgeList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreateCourseKnowledgeInputDto"
@@ -1198,6 +1214,18 @@
             "items": {
               "$ref": "#/components/schemas/CreateSectionInputDto"
             }
+          },
+          "coursePrerequisiteList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateCoursePrerequisiteInputDto"
+            }
+          },
+          "courseRecommendationList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateCourseRecommendationInputDto"
+            }
           }
         },
         "required": [
@@ -1206,6 +1234,80 @@
         ]
       },
       "TopicResponseDto": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "lastUpdatedBy": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "createdAt",
+          "lastUpdatedAt",
+          "createdBy",
+          "lastUpdatedBy",
+          "uuid",
+          "name",
+          "imageUrl"
+        ]
+      },
+      "SubCategoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "lastUpdatedBy": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "createdAt",
+          "lastUpdatedAt",
+          "createdBy",
+          "lastUpdatedBy",
+          "uuid",
+          "name",
+          "imageUrl"
+        ]
+      },
+      "CategoryResponseDto": {
         "type": "object",
         "properties": {
           "createdAt": {
@@ -1307,6 +1409,28 @@
           }
         }
       },
+      "CourseRecommendationResponseDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "CoursePrerequisiteResponseDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
       "CourseReponseDto": {
         "type": "object",
         "properties": {
@@ -1336,19 +1460,19 @@
           "description": {
             "type": "string"
           },
-          "prerequisites": {
-            "type": "string"
-          },
-          "recommendation": {
-            "type": "string"
-          },
           "imageUrl": {
             "type": "string"
           },
           "topic": {
             "$ref": "#/components/schemas/TopicResponseDto"
           },
-          "courseKnowledge": {
+          "subCategory": {
+            "$ref": "#/components/schemas/SubCategoryResponseDto"
+          },
+          "category": {
+            "$ref": "#/components/schemas/CategoryResponseDto"
+          },
+          "courseKnowledgeList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CourseKnowledgeResponseDto"
@@ -1359,13 +1483,27 @@
             "items": {
               "$ref": "#/components/schemas/SectionResponseDto"
             }
+          },
+          "courseRecommendationList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CourseRecommendationResponseDto"
+            }
+          },
+          "coursePrerequisiteList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CoursePrerequisiteResponseDto"
+            }
           }
         },
         "required": [
           "createdAt",
           "lastUpdatedAt",
           "createdBy",
-          "lastUpdatedBy"
+          "lastUpdatedBy",
+          "subCategory",
+          "category"
         ]
       },
       "UpdateCourseKnowledgeInputDto": {
@@ -1438,6 +1576,20 @@
           "name"
         ]
       },
+      "UpdateCoursePrerequisiteInputDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
       "UpdateCourseInputDto": {
         "type": "object",
         "properties": {
@@ -1450,19 +1602,13 @@
           "description": {
             "type": "string"
           },
-          "prerequisites": {
-            "type": "string"
-          },
-          "recommendation": {
-            "type": "string"
-          },
           "imageUrl": {
             "type": "string"
           },
           "topicUuid": {
             "type": "string"
           },
-          "courseKnowledge": {
+          "courseKnowledgeList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UpdateCourseKnowledgeInputDto"
@@ -1472,6 +1618,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UpdateSectionInputDto"
+            }
+          },
+          "coursePrerequisiteList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateCoursePrerequisiteInputDto"
+            }
+          },
+          "courseRecommendationList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateCoursePrerequisiteInputDto"
             }
           }
         },

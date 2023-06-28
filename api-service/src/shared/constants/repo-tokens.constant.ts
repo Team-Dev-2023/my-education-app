@@ -9,6 +9,8 @@ export const repoTokens = {
   courseKnowledge: 'COURSE_KNOWLEDGE_REPOSITORY',
   section: 'SECTION_REPOSITORY',
   lecture: 'LECTURE_REPOSITORY',
+  coursePrerequisite: 'COURSE_PREREQUISITE_REPOSITORY',
+  courseRecommendation: 'COURSE_RECOMMENDATION_REPOSITORY',
 };
 
 export const aliases = {
@@ -22,4 +24,6 @@ export const aliases = {
   courseKnowledge: 'courseKnowledge',
   section: 'section',
   lecture: 'lecture',
+  coursePrerequisite: 'coursePrerequisite',
+  courseRecommendation: 'courseRecommendation',
 };

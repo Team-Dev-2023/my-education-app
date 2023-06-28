@@ -4,20 +4,20 @@ export abstract class BaseAuditReponseDto {
   @ApiProperty({
     type: Date,
   })
-  createdAt: Date;
+  createdAt?: Date;
 
   @ApiProperty({
     type: Date,
   })
-  lastUpdatedAt: Date;
+  lastUpdatedAt?: Date;
 
   @ApiProperty({
     type: String,
   })
-  createdBy: string;
+  createdBy?: string;
 
   @ApiProperty({
     type: String,
   })
-  lastUpdatedBy: string;
+  lastUpdatedBy?: string;
 }
