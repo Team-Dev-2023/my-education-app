@@ -695,6 +695,30 @@
         ]
       }
     },
+    "/api/education/file-uploader/video": {
+      "post": {
+        "operationId": "FileUploaderController_uploadVideo",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "File Uploader"
+        ]
+      }
+    },
     "/api/education/courses": {
       "post": {
         "operationId": "CourseController_createOne",

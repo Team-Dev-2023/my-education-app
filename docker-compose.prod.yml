@@ -16,7 +16,7 @@ services:
         networks:
             - education-network
         volumes:
-            - /tmp/education-prod:/var/lib/mysql
+            - /tmp/api-education-prod/mysql:/var/lib/mysql
     api-education-prod:
         platform: linux/amd64
         image: strider2598/strider:latest
@@ -32,6 +32,8 @@ services:
             - education-network
         depends_on:
             - mysql-prod
+        volumes:
+            - /tmp/api-education-prod/public/upload:/app/public/upload
 networks:
     education-network:
 volumes:
