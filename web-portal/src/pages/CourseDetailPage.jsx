@@ -1,4 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import InfoIcon from "@mui/icons-material/Info";
@@ -6,14 +8,14 @@ import CheckIcon from "@mui/icons-material/Check";
 import LanguageIcon from "@mui/icons-material/Language";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { yellow, blueGrey } from "@mui/material/colors";
 import { ROUTES } from "constants/routes";
 import qs from "qs";
 import useTranslate from "utils/hook/useTranslate";
-import axios from "axios";
 import { API_ENDPOINT } from "./../constants/api";
-import { useEffect, useState } from "react";
 
+const api = process.env.REACT_APP_API;
 function CourseDetailPage() {
   const { search } = useLocation();
   const [data, setData] = useState({});
@@ -21,66 +23,23 @@ function CourseDetailPage() {
   const t = useTranslate();
   const navigate = useNavigate();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
-  const api = process.env.REACT_APP_API;
 
   useEffect(() => {
+    console.log("use effect");
     axios
       .get(
         `${api}${
           API_ENDPOINT.COURSE_DETAIL
-        }${"/6c89f06d-a4da-43aa-b227-08f95a3120d7"}`,
+        }${"/d6639065-d890-4fe4-af0f-a04eb2856fb9"}`,
       )
-      .then((res) => {
-        setData((prevData) => ({ ...prevData, ...res.data }));
-      });
+      .then((response) => {
+        setData((prevData) => ({ ...prevData, ...response.data }));
+        console.log(response.data);
+      })
+      .catch((e) => console.log("error: ", e));
   }, []);
-  const prerequisitesSample = [
-    {
-      uuid: "wrsdfsdcxc",
-      name: "All core features and concepts you need to know in modern JavaScript development",
-    },
-    {
-      uuid: "wrsd123dcxc",
-      name: "Project-driven learning with plenty of examples",
-    },
-    {
-      uuid: "wr123fsdcxc",
-      name: "All about variables, functions, objects and arrays",
-    },
-    {
-      uuid: "wr1wercs312xc",
-      name: "Everything you need to become a JavaScript expert and apply for JavaScript jobs",
-    },
-    {
-      uuid: "wr123fs3tyuc",
-      name: "Manipulating web pages (= the DOM) with JavaScript",
-    },
-    {
-      uuid: "wuty23fs312xc",
-      name: "Meta-programming, performance optimization, memory leak busting",
-    },
-    {
-      uuid: "wr12yut12xc",
-      name: "Event handling, asynchronous coding and Http requests",
-    },
-    {
-      uuid: "wr1567dcxc",
-      name: "Learn JavaScript from scratch and in great detail - from beginner to advanced",
-    },
-    {
-      uuid: "w56723dcxc",
-      name: "Learn JavaScript from scratch and in great detail - from beginner to advanced",
-    },
-    {
-      uuid: "wr1123d345c",
-      name: "Learn JavaScript from scratch and in great detail - from beginner to advanced",
-    },
-    {
-      uuid: "wr1123cvbq1c",
-      name: "Learn JavaScript from scratch and in great detail - from beginner to advanced",
-    },
-  ];
-  const listPrerequisites = prerequisitesSample.map((item) => (
+
+  const listPrerequisites = data?.courseKnowledgeList?.map((item) => (
     <li key={item.uuid}>
       <div className="text-[14px] font-[400] my-[4px] flex items-center text-left">
         <CheckIcon
@@ -88,12 +47,17 @@ function CourseDetailPage() {
           fontSize="14px"
           className="mr-[16px]"
         />
-        <span className="text-sm">{item.name}</span>
+        <span className="text-sm">{item.description}</span>
       </div>
     </li>
   ));
 
-  console.log(data);
+  const numberOfLectures = data?.sections?.reduce((acu, cur) => {
+    acu += cur.lectures.length;
+    return acu;
+  }, 0);
+
+  console.log("data", data);
 
   return (
     <div className="flex flex-col justify-center">
@@ -102,7 +66,7 @@ function CourseDetailPage() {
           <div
             className={`bg-yellow-600 bg-[url(${
               data?.imageUrl ? data.imageUrl : "/"
-            })] text-white sticky`}
+            })] text-white sticky h-40`}
           >
             SIDE BAR
           </div>
@@ -111,14 +75,28 @@ function CourseDetailPage() {
           <div className="container box-border block">
             <div className="max-w-[70rem] mx-[4.8rem] text-white">
               <div className="flex flex-nowrap overflow-y-hidden pb-[24px]">
-                {data?.topic?.name}
+                <span className="text-[#cec0fc] font-[700] text-[14px]">
+                  {data?.category?.name}{" "}
+                  <KeyboardArrowRightIcon
+                    style={{ color: "#cec0fc" }}
+                    fontSize="inherit"
+                  />{" "}
+                  {data?.subCategory?.name}{" "}
+                  <KeyboardArrowRightIcon
+                    style={{ color: "#cec0fc" }}
+                    fontSize="inherit"
+                  />{" "}
+                  {data?.topic?.name}
+                </span>
               </div>
-              <h2 className="text-[32px] font-bold mb-[8px]">{data.title}</h2>
-              <p className="text-[19px] mb-[16px] font-[400]">
-                {data.description}
+              <h2 className="text-[32px] leading-[1.2] font-bold mb-[8px]">
+                {data?.title}
+              </h2>
+              <p className="text-[19px] leading-[1.4] mb-[16px] font-[400]">
+                {data?.subTitle}
               </p>
               <div className="flex flex-col text-[14px]">
-                <a href="/" className="mr-[8px] box-border">
+                <a href="/" className="mr-[8px] flex box-border">
                   <span className="inline-flex items-center">
                     <span className=" text-yellow-600 font-bold mr-[8px]">
                       4.7
@@ -137,12 +115,12 @@ function CourseDetailPage() {
                       className="mr-[8px]"
                     />
                   </span>
+                  <span className="text-[#cec0fc] underline">{`(12213 ratings)`}</span>
                 </a>
-                <span>{`12213 ratings`}</span>
                 <div className="mr-[8px]">
                   <span>
                     Created by{" "}
-                    <a href="/" className="text-[#cec0fc]">
+                    <a href="/" className="text-[#cec0fc] underline">
                       {data?.createdBy}
                     </a>
                   </span>
@@ -213,6 +191,14 @@ function CourseDetailPage() {
           <h2 className="mx-[24px] mb-[16px] font-[700] text-[24px]">
             Course content
           </h2>
+          <div className="container mx-[24px] py-[24px]">
+            <span>
+              {data?.sections.length}
+              {" sections - "}
+              {numberOfLectures}
+              {" lectures."}
+            </span>
+          </div>
           <div className="container mx-[24px] py-[24px]">lectu</div>
         </div>
         <p className="h-20">body</p>
