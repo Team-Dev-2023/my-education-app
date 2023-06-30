@@ -276,6 +276,7 @@ export class CourseService {
       }),
       lastUpdatedBy: user.username,
       lastUpdatedAt: new Date(),
+      ...(data?.topicUuid && { topic: { uuid: data.topicUuid } }),
     };
     await this.courseRepo.save(updatedData);
     return this.formatResponse(updatedData as any);
