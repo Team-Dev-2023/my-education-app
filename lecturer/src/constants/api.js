@@ -5,6 +5,5 @@ export const API_ENDPOINT = {
   CATEGORIES: "/category",
   SUB_CATEGORIES: "/sub-categories",
   TOPICS: "/topics",
-
   COURSES: "/courses",
 };

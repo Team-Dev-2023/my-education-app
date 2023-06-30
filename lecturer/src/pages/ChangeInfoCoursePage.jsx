@@ -191,8 +191,11 @@ function ChangeInfoCoursePage() {
     imgWindow?.document.write(image.outerHTML);
   };
   return (
-    <div className="flex flex-col justify-center items-center ">
-      <div className="header w-full h-[56px] px-4 bg-[#1c1d1f] text-white flex justify-between items-center">
+    <div className="flex flex-col justify-center items-center max-w-[1400px] w-full ">
+      <div
+        className="header w-full h-[56px] px-4 bg-[#1c1d1f] text-white flex justify-between items-center 
+      fixed top-0 z-40"
+      >
         <div className="flex gap-4 items-center">
           <button
             onClick={() => {
@@ -213,17 +216,30 @@ function ChangeInfoCoursePage() {
           <button className="px-4 py-2 bg-[#e65e35]">Delete</button>
         </div>
       </div>
-      <div className="max-w-[1340px] flex my-2 gap-2">
-        <div className="slide-bar w-[240px]">
+      <div className="max-w-[1340px] w-full flex  my-2 gap-2 p-[24px] mt-[44px] ">
+        <div className="slide-bar w-[240px] fixed left-[24px]">
           <h4 className="font-[700] mb-2">Publish your course</h4>
           <div className="flex flex-col gap-3">
-            <div className="bg-[#c0c5c1] p-2">1. Course landing page</div>
-            <div>2. Intended learners</div>
-            <div>3. Curriculum</div>
-            <div>4. Pricing and Promotions</div>
+            <div className="bg-[#c0c5c1] p-2 cursor-pointer">
+              1. Course landing page
+            </div>
+            <div
+              className=" p-2 cursor-pointer"
+              onClick={() => {
+                navigate(
+                  generatePath(ROUTES.LECTURE.CHANGE_GOALS_COURSE, {
+                    courseUuid: courseUuid,
+                  })
+                );
+              }}
+            >
+              2. Intended learners
+            </div>
+            <div className="p-2">3. Curriculum</div>
+            <div className=" p-2">4. Pricing and Promotions</div>
           </div>
         </div>
-        <div className="content w-[1027px] shadow-md ">
+        <div className="content w-[1027px] shadow-md ml-[240px] ">
           <div className="border-b-[0.8px] px-[48px] py-[24px] font-[700] text-[24px]">
             Course landing page
           </div>

@@ -50,7 +50,7 @@ function Header() {
           <div
             className="text-base hover:cursor-pointer"
             onClick={() => {
-              navigate(ROUTES.LECTURE.CREATE_COURSE);
+              navigate(ROUTES.LECTURE.COURSES);
             }}
           >
             Instructor

@@ -3,6 +3,10 @@ import { createReducer } from "@reduxjs/toolkit";
 import { COURSE_ACTION, REQUEST, SUCCESS, FAIL } from "../constants";
 
 const initialState = {
+  listCourse: {
+    data: {},
+    error: "",
+  },
   dataCourse: {
     data: {},
     error: "",
@@ -89,6 +93,31 @@ const courseReducer = createReducer(initialState, {
   [FAIL(COURSE_ACTION.PUT_COURSE)]: (state, action) => ({
     ...state,
     putCourse: {
+      load: false,
+      error: action.payload.error,
+    },
+  }),
+  // GET LIST COURSE
+  [REQUEST(COURSE_ACTION.GET_LIST_COURSE)]: (state, action) => ({
+    ...state,
+    listCourse: {
+      load: true,
+      error: "",
+    },
+  }),
+
+  [SUCCESS(COURSE_ACTION.GET_LIST_COURSE)]: (state, action) => ({
+    ...state,
+    listCourse: {
+      ...state.listCourse,
+      data: action.payload.data,
+      load: false,
+      error: "",
+    },
+  }),
+  [FAIL(COURSE_ACTION.GET_LIST_COURSE)]: (state, action) => ({
+    ...state,
+    listCourse: {
       load: false,
       error: action.payload.error,
     },
