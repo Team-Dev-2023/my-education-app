@@ -9,14 +9,13 @@ const api = process.env.REACT_APP_API;
 function* registerSaga(action) {
   try {
     const { data, callback } = action.payload;
-    console.log(data);
+
     const result = yield axios.post(`${api}${API_ENDPOINT.REGISTER}`, data);
 
     yield localStorage.setItem("accessToken", result.data.accessToken);
 
     yield callback(result.data.accessToken);
   } catch (e) {
-    console.log(e);
     yield put({
       type: FAIL(REQUEST(AUTH_ACTION.REGISTER)),
       payload: {

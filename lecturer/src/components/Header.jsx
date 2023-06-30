@@ -47,9 +47,14 @@ function Header() {
           </div>
         </div>
         <div className="mx-2 text-sm hidden lg:block">
-          <a href="/" className="text-base">
-            Become a Teacher
-          </a>
+          <div
+            className="text-base hover:cursor-pointer"
+            onClick={() => {
+              navigate(ROUTES.LECTURE.CREATE_COURSE);
+            }}
+          >
+            Instructor
+          </div>
         </div>
         <div className="mx-2 text-sm hidden lg:block">
           <a href="/" className="text-base">

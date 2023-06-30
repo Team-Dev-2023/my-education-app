@@ -2,15 +2,17 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import { ROUTES } from "./constants/routes";
 import HomePage from "./pages/HomePage";
-import CourseDetailPage from "./pages/CourseDetailPage";
-import CourseListPage from "./pages/CourseListPage";
 import { useEffect } from "react";
-import Header from "components/Header";
-import Footer from "components/Footer";
 import RegisterWebLecturer from "pages/RegisterWebLecturer ";
 import LoginWebLecturer from "pages/LoginWebLecturer";
 import { useDispatch } from "react-redux";
-import { getUserInfoAction, logoutAction } from "redux/actions";
+import { getUserInfoAction } from "redux/actions";
+import MainLayout from "layout/MainLayout";
+import NoHeaderLayout from "layout/NoHeaderLayout";
+import ChangeGoalsCoursePage from "pages/ChangeGoalsCoursePage";
+import ChangeInfoCoursePage from "pages/ChangeInfoCoursePage";
+import Courses from "pages/Courses";
+import CreateCoursePage from "pages/CreateCoursePage";
 require("moment/locale/vi");
 
 function App() {
@@ -31,26 +33,34 @@ function App() {
   }, []);
   return (
     <>
-      <Header />
       <Routes>
-        <Route path={ROUTES.LECTURE.HOME_PAGE} element={<HomePage />} />
-        <Route
-          path={ROUTES.LECTURE.REGISTER}
-          element={<RegisterWebLecturer />}
-        />
-        <Route path={ROUTES.LECTURE.LOGIN} element={<LoginWebLecturer />} />
+        <Route element={<MainLayout />}>
+          <Route path={ROUTES.LECTURE.HOME_PAGE} element={<HomePage />} />
+          <Route
+            path={ROUTES.LECTURE.REGISTER}
+            element={<RegisterWebLecturer />}
+          />
+          <Route path={ROUTES.LECTURE.LOGIN} element={<LoginWebLecturer />} />
 
-        <Route
-          path={ROUTES.LECTURE.LIST_PRODUCT}
-          element={<CourseListPage />}
-        />
-        <Route
-          path={ROUTES.LECTURE.DETAIL_PRODUCT}
-          element={<CourseDetailPage />}
-        />
-        <Route path="*" element={<div>404</div>} />
+          <Route path="*" element={<div>404</div>} />
+        </Route>
+        <Route element={<NoHeaderLayout />}>
+          <Route path={ROUTES.LECTURE.COURSES} element={<Courses />} />
+          <Route
+            path={ROUTES.LECTURE.CREATE_COURSE}
+            element={<CreateCoursePage />}
+          />
+
+          <Route
+            path={ROUTES.LECTURE.CHANGE_INFO_COURSE}
+            element={<ChangeInfoCoursePage />}
+          />
+          <Route
+            path={ROUTES.LECTURE.CHANGE_GOALS_COURSE}
+            element={<ChangeGoalsCoursePage />}
+          />
+        </Route>
       </Routes>
-      <Footer></Footer>
     </>
   );
 }

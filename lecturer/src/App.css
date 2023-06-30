@@ -45,3 +45,10 @@
 .textShowDetailHome {
   color: green !important;
 }
+
+.ant-form-item {
+  margin-bottom: 0px;
+}
+.selectCreateCoursePage .ant-select-selector {
+  border-radius: none !important;
+}
