@@ -32,7 +32,7 @@ function CourseIntro(props) {
           {data?.subTitle}
         </p>
         <div className="flex flex-col text-[14px]">
-          <a href="/" className="mr-[8px] flex box-border">
+          <a href="/" className="mr-[8px] mb-[8px] flex box-border">
             <span className="inline-flex items-center">
               <span className=" text-yellow-600 font-bold mr-[8px]">4.7</span>
               <Rating
@@ -48,7 +48,7 @@ function CourseIntro(props) {
             </span>
             <span className="text-[#cec0fc] underline">{`(12213 ratings)`}</span>
           </a>
-          <div className="mr-[8px]">
+          <div className="mr-[8px] mb-[8px]">
             <span>
               Created by{" "}
               <a href="/" className="text-[#cec0fc] underline">

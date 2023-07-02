@@ -43,10 +43,10 @@ function CourseDetailPage() {
     <Fragment>
       {data ? (
         <div className="w-full">
-          <div className="absolute container mx-auto box-border flex justify-center h-0">
+          <div className="sticky top-0 container mx-auto box-border flex justify-center h-0">
             <div className="w-[70%]"></div>
             <div className="w-[30%]">
-              <div className="sticky top-0 h-auto ">
+              <div className="h-auto ">
                 <Sidebar data={data} />
               </div>
             </div>
