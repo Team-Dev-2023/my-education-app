@@ -112,7 +112,11 @@ function ChangeGoalsCoursePage() {
         courseUuid: courseUuid,
         data: infoCourse,
         callback: (courseUuid) => {
-          navigate(generatePath(ROUTES.LECTURE.HOME_PAGE));
+          navigate(
+            generatePath(ROUTES.LECTURE.CHANGE_CURRICULUM_COURSE, {
+              courseUuid: courseUuid,
+            })
+          );
         },
       })
     );

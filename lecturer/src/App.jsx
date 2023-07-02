@@ -13,6 +13,8 @@ import ChangeGoalsCoursePage from "pages/ChangeGoalsCoursePage";
 import ChangeInfoCoursePage from "pages/ChangeInfoCoursePage";
 import Courses from "pages/Courses";
 import CreateCoursePage from "pages/CreateCoursePage";
+import ChangeCurriculumCoursePage from "pages/ChangeCurriculumCoursePage";
+
 require("moment/locale/vi");
 
 function App() {
@@ -58,6 +60,10 @@ function App() {
           <Route
             path={ROUTES.LECTURE.CHANGE_GOALS_COURSE}
             element={<ChangeGoalsCoursePage />}
+          />
+          <Route
+            path={ROUTES.LECTURE.CHANGE_CURRICULUM_COURSE}
+            element={<ChangeCurriculumCoursePage />}
           />
         </Route>
       </Routes>

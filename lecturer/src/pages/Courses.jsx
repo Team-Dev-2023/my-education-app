@@ -23,7 +23,7 @@ function Courses() {
       console.log(item);
       return (
         <div
-          key={item.id}
+          key={item.uuid}
           className="flex gap-2 overflow-hidden  h-[118px] border-[0.8px]"
         >
           <div className="w-[118px] h-[118px]">
