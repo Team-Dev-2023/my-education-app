@@ -4,7 +4,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import { lecturesCalculator } from "utils/helpers/calculateLecturesOfCourse.helper";
 import { lecturersTotalLength } from "utils/helpers/totalLengthCalculator.helper";
 
 function SectionsList(props) {
@@ -36,11 +35,7 @@ function SectionsList(props) {
             <span className="w-full inline-block"> </span>
             <span className="text-[#1c1d1f] text-[14px] font-[400] leading-[1.4]">
               {item.lectures?.length} lectures -{" "}
-              {`${Math.floor(
-                lecturersTotalLength(item.lectures) / 3600,
-              )}hr ${Math.floor(
-                (lecturersTotalLength(item.lectures) % 3600) / 60,
-              )}min`}
+              {lecturersTotalLength(item.lectures)}
             </span>
           </AccordionSummary>
           <AccordionDetails>

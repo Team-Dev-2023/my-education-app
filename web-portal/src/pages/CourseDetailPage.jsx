@@ -10,6 +10,10 @@ import { API_ENDPOINT } from "./../constants/api";
 import CourseKnowledgeList from "components/productDetails/CourseKnowledgeList";
 import CourseIntro from "components/productDetails/CourseIntro";
 import CourseContent from "components/productDetails/CourseContent";
+import Requirements from "components/productDetails/Requirements";
+import Description from "components/productDetails/Description";
+import Recommendation from "components/productDetails/Recommendation";
+import Sidebar from "components/productDetails/Sidebar";
 
 const api = process.env.REACT_APP_API;
 function CourseDetailPage() {
@@ -21,13 +25,7 @@ function CourseDetailPage() {
   const navigate = useNavigate();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
 
-  console.log(
-    `${api}${
-      API_ENDPOINT.COURSE_DETAIL
-    }${"/504bc76c-85dc-4ea1-b3e2-6ac5ceca4085"}`,
-  );
   useEffect(() => {
-    console.log("effect");
     axios
       .get(
         `${api}${
@@ -36,38 +34,48 @@ function CourseDetailPage() {
       )
       .then((response) => {
         setData((prevData) => ({ ...prevData, ...response.data }));
-        console.log(response.data);
+        console.log("data", response.data);
       })
       .catch((e) => console.log("error: ", e));
   }, []);
 
-  console.log("data", data);
-
   return (
     <Fragment>
       {data ? (
-        <div className="flex flex-col justify-center">
-          <div className="font-normal leading-[1.6rem]">
-            <div className="sticky float-right w-[320px] mr-[4.8rem] mt-[32px] box-border block">
-              <div
-                className={`bg-yellow-600 bg-[url(${
-                  data?.imageUrl ? data.imageUrl : "/"
-                })] text-white sticky h-40`}
-              >
-                SIDE BAR
+        <div className="w-full">
+          <div className="absolute container mx-auto box-border flex justify-center h-0">
+            <div className="w-[70%]"></div>
+            <div className="w-[30%]">
+              <div className="sticky top-0 h-auto ">
+                <Sidebar data={data} />
               </div>
             </div>
-            <CourseIntro data={data} />
           </div>
-          <div className="container mt-[24px] self-center">
-            <CourseKnowledgeList
-              courseKnowledgeList={data?.courseKnowledgeList}
-            />
-            <CourseContent data={data} />
+          <div className=" bg-[#1c1d1f] mb-[32px]">
+            <div className="container mx-auto flex justify-center items-center">
+              <div className="w-[70%]">
+                <CourseIntro data={data} />
+              </div>
+              <div className="w-[30%]"></div>
+            </div>
+          </div>
+          <div className="container mx-auto flex justify-center">
+            <div className="w-70%">
+              <CourseKnowledgeList
+                courseKnowledgeList={data.courseKnowledgeList}
+              />
+              <CourseContent data={data} />
+              <Requirements data={data} />
+              <Description data={data} />
+              <Recommendation data={data} />
+            </div>
+            <div className="w-[30%]"></div>
           </div>
         </div>
       ) : (
-        <CircularProgress />
+        <div className="container mx-auto h-screen">
+          <CircularProgress />
+        </div>
       )}
     </Fragment>
   );
