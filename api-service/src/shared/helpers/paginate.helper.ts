@@ -1,3 +1,4 @@
+import { User } from 'src/entities';
 import { SelectQueryBuilder } from 'typeorm';
 import {
   DEFAULT_PAGINATION_PAGE,
@@ -5,6 +6,11 @@ import {
   IPagination,
   TOrderBy,
 } from '../constants/common.contants';
+import { aliases } from '../constants/repo-tokens.constant';
+import * as _ from 'lodash';
+
+export type BaseAuditEntity = { createdBy?: string; lastUpdatedBy?: string };
+
 export type DesctructureOrderBy<T> = {
   [K1 in keyof T]: K1 extends object
     ? {
@@ -48,11 +54,13 @@ export function calcPageLimitAndOffset({ page, perPage }: IPagination): {
     offset: (page - 1) * perPage,
   };
 }
+
 export async function paginate<T, FormatedT>(
   query: SelectQueryBuilder<T>,
   options: {
     pagination?: IPagination;
     orderBy?: DesctructureOrderBy<T>;
+    selectCreatedBy?: boolean;
   },
   mappingFn?: MappingFn<FormatedT>,
 ) {
@@ -62,16 +70,34 @@ export async function paginate<T, FormatedT>(
       perPage = DEFAULT_PAGINATION_PER_PAGE,
     },
     orderBy,
+    selectCreatedBy = false,
   } = options;
-  const totalItems = await query.clone().getCount();
+
+  const clonedQuery = query.clone();
+  const totalItems = await clonedQuery.getCount();
+
   if (!totalItems) {
     return formatPaginatedResponse<FormatedT>([], page, perPage, totalItems);
   }
+
   if (orderBy) {
     // implement later
   }
+
   const { limit, offset } = calcPageLimitAndOffset({ page, perPage });
   const data = await query.take(limit).skip(offset).getMany();
+  if (selectCreatedBy) {
+    const listCreatedByUser = await getCreatedByUser(
+      clonedQuery as SelectQueryBuilder<T & BaseAuditEntity>,
+      (data as [T & BaseAuditEntity]).map((u) => u.createdBy),
+    );
+    for (let i = 0; i < data.length; i++) {
+      const createdBy = (data[i] as T & BaseAuditEntity)?.createdBy;
+      data[i]['createdByUser'] =
+        createdBy && _.find(listCreatedByUser, ['createdBy', createdBy]);
+    }
+  }
+
   if (mappingFn) {
     const formatedData = data.map((element) => mappingFn(element));
     return formatPaginatedResponse<FormatedT>(
@@ -82,4 +108,37 @@ export async function paginate<T, FormatedT>(
     );
   }
   return formatPaginatedResponse<T>(data, page, perPage, totalItems);
+}
+
+export async function getCreatedByUser<T>(
+  query: SelectQueryBuilder<T & { createdBy?: string }>,
+  usernameList: string[],
+): Promise<User[]> {
+  let listCreatedByUser = [];
+
+  if (!usernameList.length) {
+    return listCreatedByUser;
+  }
+
+  const clonedQuery = query.clone();
+  const uniqUsernameList = _.uniq(usernameList);
+  try {
+    listCreatedByUser = await clonedQuery
+      .createQueryBuilder()
+      .select([
+        `${aliases.user}.uuid as uuid`,
+        `${aliases.user}.firstName as firstName`,
+        `${aliases.user}.lastName as lastName`,
+        `${aliases.loginMethod}.username as createdBy`,
+      ])
+      .from(User, aliases.user)
+      .leftJoin(`${aliases.user}.loginMethods`, aliases.loginMethod)
+      .where(`${aliases.loginMethod}.username IN (:...usernameList)`, {
+        usernameList: uniqUsernameList,
+      })
+      .getRawMany();
+  } catch (err) {
+    console.error(err);
+  }
+  return listCreatedByUser;
 }

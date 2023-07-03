@@ -772,6 +772,30 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "name": "categoryUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subCategoryUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "topicUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1215,6 +1239,9 @@
           "title": {
             "type": "string"
           },
+          "price": {
+            "type": "number"
+          },
           "subTitle": {
             "type": "string"
           },
@@ -1478,6 +1505,12 @@
           "title": {
             "type": "string"
           },
+          "price": {
+            "type": "number"
+          },
+          "priceAfterDiscount": {
+            "type": "number"
+          },
           "subTitle": {
             "type": "string"
           },
@@ -1519,6 +1552,9 @@
             "items": {
               "$ref": "#/components/schemas/CoursePrerequisiteResponseDto"
             }
+          },
+          "lecturer": {
+            "$ref": "#/components/schemas/UserResponseDto"
           }
         },
         "required": [
@@ -1539,10 +1575,7 @@
           "description": {
             "type": "string"
           }
-        },
-        "required": [
-          "description"
-        ]
+        }
       },
       "UpdateLectureInputDto": {
         "type": "object",
@@ -1609,16 +1642,16 @@
           "description": {
             "type": "string"
           }
-        },
-        "required": [
-          "description"
-        ]
+        }
       },
       "UpdateCourseInputDto": {
         "type": "object",
         "properties": {
           "title": {
             "type": "string"
+          },
+          "price": {
+            "type": "number"
           },
           "subTitle": {
             "type": "string"

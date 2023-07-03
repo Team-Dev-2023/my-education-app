@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import { CategoryResponseDto } from 'src/modules/category/dtos/category-response.dto';
 import { SubCategoryResponseDto } from 'src/modules/sub-category/dtos/sub-category-response.dto';
 import { TopicResponseDto } from 'src/modules/topic/dtos/topic-response.dto';
+import { UserResponseDto } from 'src/modules/user/dtos/user-response.dto';
 import { ELectureType } from 'src/shared/constants/common.contants';
 import { BaseAuditReponseDto } from 'src/shared/dtos/base-audit-response.dto';
 
@@ -78,6 +79,12 @@ export class CourseReponseDto extends BaseAuditReponseDto {
   @ApiProperty({ type: String, required: false })
   title: string;
 
+  @ApiProperty({ type: Number, required: false })
+  price: number;
+
+  @ApiProperty({ type: Number, required: false })
+  priceAfterDiscount: number;
+
   @ApiProperty({ type: String, required: false })
   subTitle: string;
 
@@ -117,4 +124,42 @@ export class CourseReponseDto extends BaseAuditReponseDto {
     required: false,
   })
   coursePrerequisiteList: CoursePrerequisiteResponseDto[];
+
+  @ApiProperty({ type: () => UserResponseDto, required: false })
+  lecturer?: UserResponseDto;
+}
+
+export class CourseMinimizeResponseDto extends BaseAuditReponseDto {
+  @ApiProperty({ type: String, required: false })
+  uuid: string;
+
+  @ApiProperty({ type: String, required: false })
+  title: string;
+
+  @ApiProperty({ type: Number, required: false })
+  price: number;
+
+  @ApiProperty({ type: Number, required: false })
+  priceAfterDiscount: number;
+
+  @ApiProperty({ type: String, required: false })
+  subTitle: string;
+
+  @ApiProperty({ type: String, required: false })
+  imageUrl: string;
+
+  @ApiProperty({ type: () => TopicResponseDto, required: false })
+  topic: TopicResponseDto;
+
+  @ApiProperty({ type: () => [CourseKnowledgeResponseDto], required: false })
+  courseKnowledgeList: CourseKnowledgeResponseDto[];
+
+  @ApiProperty({ type: () => UserResponseDto, required: false })
+  lecturer?: UserResponseDto;
+
+  @ApiProperty({ type: Number, required: false })
+  totalLecture?: number;
+
+  @ApiProperty({ type: Number, required: false })
+  totalVideoDuration?: number;
 }

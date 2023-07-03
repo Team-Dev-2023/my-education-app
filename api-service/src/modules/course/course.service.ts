@@ -1,18 +1,24 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { Course, CourseKnowledge, Lecture, Section } from 'src/entities';
+import { Course, CourseKnowledge, Lecture, Section, User } from 'src/entities';
 import { IPagination, JwtPayload } from 'src/shared/constants/common.contants';
 import { Errors } from 'src/shared/constants/errors.constant';
 import { aliases, repoTokens } from 'src/shared/constants/repo-tokens.constant';
 import {
+  getCreatedByUser,
   IPaginatedReponse,
   paginate,
 } from 'src/shared/helpers/paginate.helper';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 import { TopicService } from '../topic/topic.service';
 import { CreateCourseInputDto } from './dtos/input/create-course-input.dto';
+import { GetAllCourseInputDto } from './dtos/input/query-course-input.dto';
 import { UpdateCourseInputDto } from './dtos/input/update-course-input.dto';
-import { CourseReponseDto } from './dtos/response/course-response.dto';
+import {
+  CourseMinimizeResponseDto,
+  CourseReponseDto,
+} from './dtos/response/course-response.dto';
 
+export type CourseAdditionInfo = { createdByUser?: User };
 @Injectable()
 export class CourseService {
   constructor(
@@ -27,6 +33,7 @@ export class CourseService {
     return [
       `${aliases.course}.uuid`,
       `${aliases.course}.title`,
+      `${aliases.course}.price`,
       `${aliases.course}.subTitle`,
       `${aliases.course}.description`,
       `${aliases.course}.imageUrl`,
@@ -59,7 +66,7 @@ export class CourseService {
       `${aliases.courseRecommendation}.description`,
     ];
   }
-  private getQuery(): SelectQueryBuilder<Course> {
+  private getQuery(): SelectQueryBuilder<Course & CourseAdditionInfo> {
     const query = this.courseRepo
       .createQueryBuilder(aliases.course)
       .select(this.getFields())
@@ -83,13 +90,17 @@ export class CourseService {
     return query;
   }
 
-  private formatResponse(course: Course): CourseReponseDto {
+  private formatResponse(
+    course: Course & CourseAdditionInfo,
+  ): CourseReponseDto {
     return {
       uuid: course.uuid,
       title: course.title,
       subTitle: course.subTitle,
       description: course?.description,
       imageUrl: course?.imageUrl,
+      price: course?.price,
+      priceAfterDiscount: course?.price,
       topic: {
         uuid: course?.topic?.uuid,
         name: course?.topic?.name,
@@ -138,8 +149,49 @@ export class CourseService {
           description: knowledge.description,
         }),
       ),
+      ...(course?.createdByUser && {
+        lecturer: {
+          uuid: course.createdByUser?.uuid,
+          firstName: course.createdByUser?.firstName,
+          lastName: course.createdByUser?.lastName,
+        },
+      }),
     };
   }
+
+  private formatMinimizeResponse(
+    course: Course & CourseAdditionInfo,
+  ): CourseMinimizeResponseDto {
+    return {
+      uuid: course.uuid,
+      title: course.title,
+      subTitle: course.subTitle,
+      imageUrl: course?.imageUrl,
+      price: course?.price,
+      priceAfterDiscount: course?.price,
+      topic: {
+        uuid: course?.topic?.uuid,
+        name: course?.topic?.name,
+        imageUrl: course?.topic?.imageUrl,
+      },
+      courseKnowledgeList: course?.courseKnowledgeList?.map((knowledge) => ({
+        uuid: knowledge.uuid,
+        description: knowledge.description,
+      })),
+      createdAt: course.createdAt,
+      lastUpdatedAt: course.lastUpdatedAt,
+      createdBy: course.createdBy,
+      lastUpdatedBy: course.lastUpdatedBy,
+      ...(course?.createdByUser && {
+        lecturer: {
+          uuid: course.createdByUser?.uuid,
+          firstName: course.createdByUser?.firstName,
+          lastName: course.createdByUser?.lastName,
+        },
+      }),
+    };
+  }
+
   async createOne(
     user: JwtPayload,
     data: CreateCourseInputDto,
@@ -199,6 +251,11 @@ export class CourseService {
       throw new BadRequestException(Errors.INVALID_COURSE_UUID);
     }
 
+    const [createdByUser] = await getCreatedByUser(this.getQuery(), [
+      course.createdBy,
+    ]);
+    course.createdByUser = createdByUser;
+
     return this.formatResponse(course);
   }
 
@@ -219,11 +276,18 @@ export class CourseService {
     data: UpdateCourseInputDto,
   ): Promise<CourseReponseDto> {
     const course = await this.courseRepo.findOne({
-      where: { uuid: courseUuid },
+      relations: {
+        courseKnowledgeList: true,
+        coursePrerequisiteList: true,
+        courseRecommendationList: true,
+      },
+      where: { uuid: courseUuid, createdBy: user.username },
     });
     if (!course) {
       throw new BadRequestException(Errors.INVALID_COURSE_UUID);
     }
+    const topic = await this.topicService.getOne(data.topicUuid);
+
     const updatedData = {
       ...course,
       ...data,
@@ -276,21 +340,37 @@ export class CourseService {
       }),
       lastUpdatedBy: user.username,
       lastUpdatedAt: new Date(),
-      ...(data?.topicUuid && { topic: { uuid: data.topicUuid } }),
+      ...(topic && { topic }),
     };
     await this.courseRepo.save(updatedData);
     return this.formatResponse(updatedData as any);
   }
 
   async getAll(
+    filters: GetAllCourseInputDto,
     pagination: IPagination,
-  ): Promise<IPaginatedReponse<CourseReponseDto>> {
+  ): Promise<IPaginatedReponse<CourseMinimizeResponseDto>> {
     const query = this.getQuery();
+    if (filters?.categoryUuid) {
+      query.andWhere(`${aliases.category}.uuid = :categoryUuid`, {
+        categoryUuid: filters.categoryUuid,
+      });
+    }
+    if (filters?.subCategoryUuid) {
+      query.andWhere(`${aliases.subCategory}.uuid = :subCategoryUuid`, {
+        subCategoryUuid: filters.subCategoryUuid,
+      });
+    }
+    if (filters?.topicUuid) {
+      query.andWhere(`${aliases.topic}.uuid = :topicUuid`, {
+        topicUuid: filters.topicUuid,
+      });
+    }
     const paginatedData = await paginate(
       query,
-      { pagination },
-      this.formatResponse,
+      { pagination, selectCreatedBy: true },
+      this.formatMinimizeResponse,
     );
-    return paginatedData as IPaginatedReponse<CourseReponseDto>;
+    return paginatedData as IPaginatedReponse<CourseMinimizeResponseDto>;
   }
 }

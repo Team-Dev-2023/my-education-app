@@ -8,11 +8,11 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { diskStorage } from 'multer';
+import { getFileSettings } from 'src/shared/constants/config.constant';
 import { fileMimetypeFilter } from 'src/shared/helpers/file-mime-type-filter.helper';
 import { ImageUploadInputDto } from './dtos/file-uploader-input.dto';
 import { ImageUploadReponseDto } from './dtos/file-uploader-response.dto';
 
-const MAX_FILE_SIZE = 20480;
 @Controller({ path: 'file-uploader' })
 @ApiTags('File Uploader')
 export class FileUploaderController {
@@ -48,7 +48,7 @@ export class FileUploaderController {
         '3gp',
       ]),
       limits: {
-        fileSize: MAX_FILE_SIZE,
+        fileSize: getFileSettings().maxFileSize,
       },
       storage: diskStorage({
         destination: './public/upload',

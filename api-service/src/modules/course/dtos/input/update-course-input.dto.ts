@@ -18,8 +18,8 @@ export class UpdateCourseKnowledgeInputDto {
   @IsString()
   uuid?: string;
 
-  @ApiProperty({ type: String, required: true })
-  @IsNotEmpty()
+  @ApiProperty({ type: String, required: false })
+  @IsOptional()
   @IsString()
   description: string;
 }
@@ -30,8 +30,8 @@ export class UpdateCoursePrerequisiteInputDto {
   @IsString()
   uuid?: string;
 
-  @ApiProperty({ type: String, required: true })
-  @IsNotEmpty()
+  @ApiProperty({ type: String, required: false })
+  @IsOptional()
   @IsString()
   description: string;
 }
@@ -42,8 +42,8 @@ export class UpdateCourseRecommendationInputDto {
   @IsString()
   uuid?: string;
 
-  @ApiProperty({ type: String, required: true })
-  @IsNotEmpty()
+  @ApiProperty({ type: String, required: false })
+  @IsOptional()
   @IsString()
   description: string;
 }
@@ -108,6 +108,11 @@ export class UpdateCourseInputDto extends BaseAuditInputDto {
   @IsNotEmpty()
   @IsString()
   title: string;
+
+  @ApiProperty({ type: Number, required: false })
+  @IsOptional()
+  @IsNumber()
+  price: number;
 
   @ApiProperty({ type: String, required: false })
   @IsOptional()
