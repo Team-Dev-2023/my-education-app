@@ -14,16 +14,34 @@ import Requirements from "components/productDetails/Requirements";
 import Description from "components/productDetails/Description";
 import Recommendation from "components/productDetails/Recommendation";
 import Sidebar from "components/productDetails/Sidebar";
+import BuyerAction from "components/productDetails/BuyerAction";
 
 const api = process.env.REACT_APP_API;
 function CourseDetailPage() {
   const { search } = useLocation();
   const [data, setData] = useState(undefined);
+  const [isDivVisible, setDivVisible] = useState(true);
   const dispatch = useDispatch();
   const [togglePrerequisites, setTogglePrerequisites] = useState(false);
   const t = useTranslate();
   const navigate = useNavigate();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      if (windowWidth > 1080) {
+        setDivVisible(true);
+      } else {
+        setDivVisible(false);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     axios
@@ -43,20 +61,23 @@ function CourseDetailPage() {
     <Fragment>
       {data ? (
         <div className="w-full">
-          <div className="sticky top-0 container mx-auto box-border flex justify-center h-0">
-            <div className="w-[70%]"></div>
-            <div className="w-[30%]">
-              <div className="h-auto ">
-                <Sidebar data={data} />
+          {isDivVisible && (
+            <div className="sticky top-0 container mx-auto box-border flex justify-center h-0">
+              <div className="w-[70%]"></div>
+              <div className="w-[30%]">
+                <div className="h-auto ">
+                  <Sidebar data={data} />
+                </div>
               </div>
             </div>
-          </div>
+          )}
           <div className=" bg-[#1c1d1f] mb-[32px]">
             <div className="container mx-auto flex justify-center items-center">
-              <div className="w-[70%]">
+              <div className={`${isDivVisible && `w-[70%]`}`}>
                 <CourseIntro data={data} />
+                {!isDivVisible && <BuyerAction themeColor="white" />}
               </div>
-              <div className="w-[30%]"></div>
+              {isDivVisible && <div className="w-[30%]"></div>}
             </div>
           </div>
           <div className="container mx-auto flex justify-center">
@@ -69,7 +90,7 @@ function CourseDetailPage() {
               <Description data={data} />
               <Recommendation data={data} />
             </div>
-            <div className="w-[30%]"></div>
+            {isDivVisible && <div className="w-[30%]"></div>}
           </div>
         </div>
       ) : (

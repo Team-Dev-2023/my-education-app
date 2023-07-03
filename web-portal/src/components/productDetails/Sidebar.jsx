@@ -1,6 +1,5 @@
 import React from "react";
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import CodeIcon from "@mui/icons-material/Code";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -8,6 +7,7 @@ import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import AllInclusiveIcon from "@mui/icons-material/AllInclusive";
 import { sectionTotalLength } from "utils/helpers/totalLengthCalculator.helper";
+import BuyerAction from "./BuyerAction";
 
 function Sidebar(props) {
   const { data } = props;
@@ -36,32 +36,8 @@ function Sidebar(props) {
         </div>
       </div>
       <div className="w-full p-[24px] block box-border">
-        <div className="text-start">
-          <span className="text-[32px] text-black font-bold leading-[1]">
-            {itemPrice}
-          </span>
-        </div>
-        <div className="w-full h-auto mt-[16px]">
-          <div className="flex gap-[8px] h-[48px]">
-            <button className="bg-[#a435f0] text-white text-[16px] leading-[1.2] font-bold h-full w-full">
-              Add to cart
-            </button>
-            <div className="border border-black h-full w-[52px] flex justify-center items-center">
-              <FavoriteBorderIcon style={{ color: "#000000" }} />
-            </div>
-          </div>
-          <div className="h-[48px] mt-[8px] border border-black">
-            <button className="text-black text-[16px] leading-[1.2] font-bold h-full w-full">
-              Buy now
-            </button>
-          </div>
-        </div>
-        <div className="mt-[16px] px-auto text-black">
-          <p className="text-[12px] font-[400] leading-[1.2] text-center">
-            30-Day Money-Back Guarantee
-          </p>
-        </div>
-        <div className="mt-[16px] px-auto text-black">
+        <BuyerAction />
+        <div className="px-auto text-black">
           <h2 className="text-[16px] font-bold leading-[1.2] mb-[8px]">
             This course includes:
           </h2>
@@ -142,7 +118,6 @@ function Sidebar(props) {
           </button>
         </div>
       </div>
-      {/* SIDE BAR */}
     </div>
   );
 }
