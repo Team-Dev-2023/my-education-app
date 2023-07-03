@@ -52,3 +52,6 @@
 .selectCreateCoursePage .ant-select-selector {
   border-radius: none !important;
 }
+.ant-form-item-label > label {
+  font-size: 20px !important;
+}

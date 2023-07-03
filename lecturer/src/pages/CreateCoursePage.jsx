@@ -20,6 +20,7 @@ const CreateCoursePage = () => {
   const [formNoSubmit] = Form.useForm();
 
   const accessToken = localStorage.getItem("accessToken");
+  console.log(accessToken);
   const { categories } = useSelector((store) => store.cate_subCate_topic);
   const { subCategories } = useSelector((store) => store.cate_subCate_topic);
   const { topics } = useSelector((store) => store.cate_subCate_topic);
@@ -34,11 +35,7 @@ const CreateCoursePage = () => {
     description: "",
     imageUrl: "",
     topicUuid: "",
-    courseKnowledgeList: [
-      {
-        description: "string",
-      },
-    ],
+    courseKnowledgeList: [],
     sections: [
       {
         name: "string",
@@ -47,23 +44,15 @@ const CreateCoursePage = () => {
             name: "string",
             url: "",
             description: "string",
-            preview: true,
+            preview: false,
             type: 0,
             videoDuration: 0,
           },
         ],
       },
     ],
-    coursePrerequisiteList: [
-      {
-        description: "string",
-      },
-    ],
-    courseRecommendationList: [
-      {
-        description: "string",
-      },
-    ],
+    coursePrerequisiteList: [],
+    courseRecommendationList: [],
   });
 
   //POST COURSE

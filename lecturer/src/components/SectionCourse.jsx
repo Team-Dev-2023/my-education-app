@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import LectureCourse from "./LectureCourse";
+import {
+  AiFillCheckCircle,
+  AiFillDelete,
+  AiFillEdit,
+  AiOutlineClose,
+} from "react-icons/ai";
 
 const uuid = require("uuid");
 
@@ -60,7 +66,6 @@ function SectionCourse({
   //add 1 lecture
   const addNewLecture = (e) => {
     e.preventDefault();
-    console.log(e.target.name.value);
     setSectionEdit({
       ...listSectionPut[indexSectionEdit],
       lectures: [
@@ -68,12 +73,12 @@ function SectionCourse({
         {
           uuid: generateUUID(),
           name: e.target.name.value,
-          description: "",
-          position: sectionEdit.lectures.length,
-          preview: true,
-          type: "0",
-          videoDuration: "",
           url: "",
+          description: "",
+          preview: true,
+          type: 0,
+          videoDuration: 0,
+          position: sectionEdit.lectures.length,
         },
       ],
     });
@@ -105,31 +110,42 @@ function SectionCourse({
   return (
     <div
       key={section.uuid}
-      className="w-full flex flex-col gap-4 p-4 border-[0.8px] border-black"
+      className="w-full flex flex-col my-4 gap-4 p-4
+       border-[0.8px]
+      bg-[#f7f9fa]
+       border-black"
     >
       {isEditTitleSection ? (
         <div className="Edit title">
-          <div>Section: {position}</div>
           <div>
             <div>
               <form
                 form={"editSectionForm"}
                 onSubmit={(e, value) => saveEditSection(e, value)}
                 action=""
-                className="flex flex-col gap-4"
+                className="flex flex-col gap-4 w-full"
               >
-                <input
-                  type="text"
-                  id="name"
-                  required
-                  value={sectionEdit.name}
-                  onChange={(e) => updateNameSectionInListSection(e)}
-                  placeholder="Enter a Title"
-                  className="p-2 w-[400px] border-[0.8px] border-black"
-                />
-                <h4>
-                  What will students be able to do at the end of this section?
-                </h4>
+                <div className="flex gap-2">
+                  <div className="mt-2 flex gap-2 ">
+                    <AiFillCheckCircle />
+                    Section: {position}
+                  </div>
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      id="name"
+                      required
+                      value={sectionEdit.name}
+                      onChange={(e) => updateNameSectionInListSection(e)}
+                      placeholder="Enter a Title"
+                      className="p-2 w-full border-[0.8px] border-black"
+                    />
+                    <h4 className="mt-4">
+                      What will students be able to do at the end of this
+                      section?
+                    </h4>
+                  </div>
+                </div>
 
                 <div className="flex justify-end gap-4">
                   <button
@@ -153,43 +169,47 @@ function SectionCourse({
           </div>
         </div>
       ) : (
-        <div className="flex gap-4 item-center">
+        <div className="flex w-full group gap-4 item-center">
           <div className="text-[20px] font-[700]">{position}</div>
           <div className="text-[20px] font-[700]">Unpublished Section:</div>
-          <div> {section.name}</div>
-          <button
-            onClick={() => {
-              setIsEditTitleSection(true);
-            }}
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => {
-              deleteSection(section.uuid);
-            }}
-          >
-            Delete
-          </button>
+          <div className="leading-none flex items-center text-center text-[20px]">
+            {section.name}
+          </div>
+          <div className="hidden gap-4 group-hover:flex">
+            <button
+              onClick={() => {
+                setIsEditTitleSection(true);
+              }}
+            >
+              <AiFillEdit />
+            </button>
+            <button
+              onClick={() => {
+                deleteSection(section.uuid);
+              }}
+            >
+              <AiFillDelete />
+            </button>
+          </div>
         </div>
       )}
       <div>{renderListLecture()}</div>
       {isAddTitleLecture && (
         <div className="flex gap-4">
-          <div>New Lecture</div>
-          <div>
+          <div className="mt-2">New Lecture</div>
+          <div className="flex-1">
             <form
               form={"addNewLectureForm"}
               onSubmit={(e, value) => addNewLecture(e, value)}
               action=""
-              className="flex flex-col gap-4"
+              className="w-full flex flex-col gap-4"
             >
               <input
                 type="text"
                 id="name"
                 required
                 placeholder="Enter a Title"
-                className="p-2 w-[400px] border-[0.8px] border-black"
+                className="p-2 w-full border-[0.8px] border-black"
               />
 
               <div className="flex justify-end gap-4">
@@ -203,7 +223,7 @@ function SectionCourse({
                   Cancel
                 </button>
                 <button
-                  className="p-2 w-fit border-[0.8px] border-black"
+                  className="p-2 w-fit border-[0.8px] border-black bg-black text-white"
                   type="submit"
                 >
                   Add Lecture
@@ -215,8 +235,9 @@ function SectionCourse({
       )}
       {isAddCurriculumItem ? (
         <div
-          className="border-dotted border-black border-[0.8px] p-4 w-fit flex gap-6 text-[#5624d0] font-[700] 
-            relative mt-[24px] ml-[24px]"
+          className="border-dashed  border-black border-[0.8px] 
+          p-4 w-[95%] flex justify-between gap-6 text-[#5624d0] font-[700] 
+            relative mt-[24px] ml-[24px] bg-white"
         >
           <button
             className="absolute top-[-20px] left-[-15px]"
@@ -224,7 +245,7 @@ function SectionCourse({
               setIsAddCurriculumItem(false);
             }}
           >
-            X
+            <AiOutlineClose className="font-[700]" />
           </button>
           <button
             onClick={() => {
@@ -234,14 +255,14 @@ function SectionCourse({
           >
             + Lecture
           </button>
-          <button>+ Quiz</button>
+          <button disabled>+ Quiz</button>
           <button>+ Coding Exercise</button>
           <button>+ Coding Exercise</button>
           <button>+ Assignment</button>
         </div>
       ) : (
         <div
-          className="w-fit p-2 border-[0.8px] border-black"
+          className="w-fit p-2 border-[0.8px] bg-white border-black cursor-pointer"
           onClick={() => setIsAddCurriculumItem(true)}
         >
           + Curriculum item

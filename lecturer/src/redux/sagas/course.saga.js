@@ -32,7 +32,7 @@ function* getCourseSaga(action) {
 function* postCourseSaga(action) {
   try {
     const { accessToken, data, callback } = action.payload;
-
+    console.log("data post", data);
     const result = yield axios.post(`${api}${API_ENDPOINT.COURSES}`, data, {
       headers: {
         Authorization: `Bearer ${accessToken}`,

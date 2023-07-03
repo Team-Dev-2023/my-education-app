@@ -11,7 +11,7 @@ import MainLayout from "layout/MainLayout";
 import NoHeaderLayout from "layout/NoHeaderLayout";
 import ChangeGoalsCoursePage from "pages/ChangeGoalsCoursePage";
 import ChangeInfoCoursePage from "pages/ChangeInfoCoursePage";
-import Courses from "pages/Courses";
+import ListCoursePage from "pages/ListCoursePage";
 import CreateCoursePage from "pages/CreateCoursePage";
 import ChangeCurriculumCoursePage from "pages/ChangeCurriculumCoursePage";
 
@@ -47,7 +47,10 @@ function App() {
           <Route path="*" element={<div>404</div>} />
         </Route>
         <Route element={<NoHeaderLayout />}>
-          <Route path={ROUTES.LECTURE.COURSES} element={<Courses />} />
+          <Route
+            path={ROUTES.LECTURE.LIST_COURSE}
+            element={<ListCoursePage />}
+          />
           <Route
             path={ROUTES.LECTURE.CREATE_COURSE}
             element={<CreateCoursePage />}

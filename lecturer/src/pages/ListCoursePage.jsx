@@ -6,7 +6,7 @@ import { useNavigate, useParams, generatePath } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
 import { getListCourseAction } from "redux/actions";
 const api = process.env.REACT_APP_API;
-function Courses() {
+function ListCoursePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("accessToken");
@@ -17,7 +17,6 @@ function Courses() {
   }, []);
 
   const { listCourse } = useSelector((store) => store.course);
-  console.log("listCourse", listCourse);
   const renderCourses = (courses) => {
     return courses?.map((item, index) => {
       console.log(item);
@@ -59,9 +58,9 @@ function Courses() {
     });
   };
   return (
-    <div className="w-full flex flex-col justify-center my-2 p-[24px]">
+    <div className="w-full flex flex-col justify-center my-2 gap-4 p-[44px]">
       <h3 className="font-[700] text-[44px]">Courses</h3>
-      <div className="max-w-[1200px] w-full  flex flex-col gap-4">
+      <div className="w-full  flex flex-col gap-4">
         <div className="flex w-full justify-between items-center">
           <Form
             name="basic"
@@ -124,4 +123,4 @@ function Courses() {
   );
 }
 
-export default Courses;
+export default ListCoursePage;
