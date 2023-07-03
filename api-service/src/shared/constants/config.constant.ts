@@ -73,3 +73,13 @@ export const getPinoLoggerOptions = () => ({
     level: isProduction ? 'info' : 'debug',
   },
 });
+
+export type FileSettings = {
+  maxFileSize: number;
+};
+export const getFileSettings = (): FileSettings => {
+  const fileConfig = config.get('jwt');
+  return {
+    maxFileSize: fileConfig.maxFileSize,
+  };
+};

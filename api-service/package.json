@@ -52,6 +52,7 @@
     "cross-env": "^7.0.3",
     "express-http-context": "^1.2.4",
     "lightship": "^6.7.2",
+    "lodash": "^4.17.21",
     "mysql2": "^3.3.5",
     "nestjs-pino": "^3.2.0",
     "passport": "^0.6.0",

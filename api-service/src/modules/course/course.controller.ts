@@ -19,12 +19,15 @@ import {
   IPagination,
   JwtPayload,
 } from 'src/shared/constants/common.contants';
-import { PaginationQueryDto } from 'src/shared/dtos/pagination-input.dto';
 import { IPaginatedReponse } from 'src/shared/helpers/paginate.helper';
 import { CourseService } from './course.service';
 import { CreateCourseInputDto } from './dtos/input/create-course-input.dto';
+import { GetAllCourseInputDto } from './dtos/input/query-course-input.dto';
 import { UpdateCourseInputDto } from './dtos/input/update-course-input.dto';
-import { CourseReponseDto } from './dtos/response/course-response.dto';
+import {
+  CourseMinimizeResponseDto,
+  CourseReponseDto,
+} from './dtos/response/course-response.dto';
 
 @Controller({ path: 'courses' })
 @ApiTags('Course')
@@ -84,9 +87,9 @@ export class CourseController {
 
   @Get('/')
   async getAll(
-    @Query() query: PaginationQueryDto,
+    @Query() filters: GetAllCourseInputDto,
     @PaginationParamDecorator() pagination: IPagination,
-  ): Promise<IPaginatedReponse<CourseReponseDto>> {
-    return this.courseService.getAll(pagination);
+  ): Promise<IPaginatedReponse<CourseMinimizeResponseDto>> {
+    return this.courseService.getAll(filters, pagination);
   }
 }

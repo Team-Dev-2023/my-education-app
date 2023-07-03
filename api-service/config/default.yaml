@@ -31,7 +31,7 @@ jwt:
   secret: eda9)#k#Poks
 
 fileSettings:
-  maxFileSize: 20000
+  maxFileSize: 20480000
 
 allowedOrigins: '*'
 

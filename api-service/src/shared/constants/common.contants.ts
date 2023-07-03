@@ -51,8 +51,8 @@ export interface IPagination {
 
 export type TOrderBy = 'DESC' | 'ASC';
 
-export const DEFAULT_PAGINATION_PAGE = 20;
-export const DEFAULT_PAGINATION_PER_PAGE = 0;
+export const DEFAULT_PAGINATION_PAGE = 1;
+export const DEFAULT_PAGINATION_PER_PAGE = 20;
 
 export enum ELectureType {
   video = 0,

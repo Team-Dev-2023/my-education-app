@@ -13,7 +13,7 @@ export class UserResponseDto extends BaseAuditReponseDto {
   password?: string;
 
   @ApiProperty({ type: String, required: false })
-  email: string;
+  email?: string;
 
   @ApiProperty({ type: String, required: false })
   avatar?: string;
@@ -25,11 +25,11 @@ export class UserResponseDto extends BaseAuditReponseDto {
   lastName: string;
 
   @ApiProperty({ type: String, required: false })
-  phone: string;
+  phone?: string;
 
   @ApiProperty({ type: String, required: false })
-  country: string;
+  country?: string;
 
   @ApiProperty({ type: EUserRole, enum: EUserRole, required: false })
-  role: EUserRole;
+  role?: EUserRole;
 }

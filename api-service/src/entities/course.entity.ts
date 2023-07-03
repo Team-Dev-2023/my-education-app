@@ -28,6 +28,9 @@ export class Course extends BaseEntityAudit {
   @Column({ type: 'varchar', length: 5000, nullable: true })
   description: string;
 
+  @Column({ type: 'double', nullable: true, default: 0 })
+  price: number;
+
   @Column({ type: 'varchar', length: 500, nullable: true })
   imageUrl: string;
 

@@ -83,6 +83,11 @@ export class CreateCourseInputDto {
   @IsString()
   title: string;
 
+  @ApiProperty({ type: Number, required: false })
+  @IsOptional()
+  @IsNumber()
+  price: number;
+
   @ApiProperty({ type: String, required: false })
   @IsOptional()
   @IsString()
