@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import LectureCourse from "./LectureCourse";
 import AddNewLecture from "./AddNewLecture";
 import TitleSection from "./TitleSection";
+import DescriptionLecture from "./DescriptionLecture";
 
 function SectionCourse({
   section,
   listSectionPut,
-  position,
   setListSectionPut,
-  infoCourse,
-  setInfoCourse,
+  // infoCourse,
+  // setInfoCourse,
 }) {
   const [listSectionEdit, setListSectionEdit] = useState(listSectionPut); //1 list
-  const [sectionEdit, setSectionEdit] = useState(section);
+  const [sectionEdit, setSectionEdit] = useState(section); //section onshow
   const [indexSectionEdit, setIndexSectionEdit] = useState();
 
   useEffect(() => {
@@ -41,13 +41,10 @@ function SectionCourse({
           key={item.uuid}
           lectureUuid={item.uuid}
           section={sectionEdit}
-          indexSectionEdit={indexSectionEdit}
           lecture={item}
-          position={index}
+          indexSectionEdit={indexSectionEdit}
           listSectionPut={listSectionPut}
           setListSectionPut={setListSectionPut}
-          infoCourse={infoCourse}
-          setInfoCourse={setInfoCourse}
         ></LectureCourse>
       );
     });
@@ -61,20 +58,16 @@ function SectionCourse({
        border-black"
     >
       <TitleSection
-        position={position}
         section={section}
-        sectionEdit={sectionEdit}
-        setSectionEdit={setSectionEdit}
-        listSectionEdit={listSectionEdit}
-        setListSectionEdit={setListSectionEdit}
+        indexSectionEdit={indexSectionEdit}
         listSectionPut={listSectionPut}
         setListSectionPut={setListSectionPut}
       />
 
       <div>{renderListLecture()}</div>
       <AddNewLecture
-        setSectionEdit={setSectionEdit}
         listSectionPut={listSectionPut}
+        setListSectionPut={setListSectionPut}
         indexSectionEdit={indexSectionEdit}
       />
     </div>

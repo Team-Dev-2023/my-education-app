@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 const uuid = require("uuid");
 
-function AddNewLecture({ setSectionEdit, listSectionPut, indexSectionEdit }) {
+function AddNewLecture({
+  listSectionPut,
+  setListSectionPut,
+  indexSectionEdit,
+}) {
   function generateUUID() {
     return uuid.v4();
   }
@@ -11,8 +15,9 @@ function AddNewLecture({ setSectionEdit, listSectionPut, indexSectionEdit }) {
 
   const addNewLecture = (e) => {
     e.preventDefault();
-    setSectionEdit({
-      ...listSectionPut[indexSectionEdit],
+    let listSectionPutClone = JSON.parse(JSON.stringify(listSectionPut));
+    listSectionPutClone[indexSectionEdit] = {
+      ...listSectionPutClone[indexSectionEdit],
       lectures: [
         ...listSectionPut[indexSectionEdit].lectures,
         {
@@ -26,7 +31,8 @@ function AddNewLecture({ setSectionEdit, listSectionPut, indexSectionEdit }) {
           position: listSectionPut[indexSectionEdit].lectures.length,
         },
       ],
-    });
+    };
+    setListSectionPut(listSectionPutClone);
 
     setIsAddNewLecture(false);
   };

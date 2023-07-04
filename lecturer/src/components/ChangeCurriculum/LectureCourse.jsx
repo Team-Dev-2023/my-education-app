@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   AiFillCaretDown,
   AiFillCaretUp,
@@ -7,40 +7,22 @@ import {
   AiFillEdit,
 } from "react-icons/ai";
 import ShowMoreLecture from "./ShowMoreLecture";
+import DescriptionLecture from "./DescriptionLecture";
 
 function LectureCourse({
   lectureUuid,
   section,
-  indexSectionEdit,
   lecture,
-  position,
+  indexSectionEdit,
   listSectionPut,
   setListSectionPut,
-  infoCourse,
-  setInfoCourse,
 }) {
   const [isEditLecture, setIsEditLecture] = useState(false);
   const [isShowMoreContent, setIsShowMoreContent] = useState(false);
-
-  const [listSectionEdit, setListSectionEdit] = useState(listSectionPut);
   const [lectureEdit, setLectureEdit] = useState(lecture);
-  const [indexLectureEdit, setIndexLectureEdit] = useState();
-  // const [urlVideo, setUrlVideo] = useState("");
-
-  useEffect(() => {
-    setListSectionEdit(listSectionPut);
-  }, [listSectionPut]);
-
-  //find index lecture in sections
-  useEffect(() => {
-    let indexLecture = listSectionEdit[indexSectionEdit]?.lectures?.findIndex(
-      (itemLecture) => itemLecture.uuid === lecture.uuid
-    );
-    setIndexLectureEdit(indexLecture);
-  }, [listSectionEdit]);
 
   const deleteLecture = () => {
-    let newArrayDeletedLecture = listSectionEdit[
+    let newArrayDeletedLecture = listSectionPut[
       indexSectionEdit
     ].lectures.filter((item) => item.uuid !== lecture.uuid);
     let newListSectionEdit = [...listSectionPut];
@@ -48,38 +30,27 @@ function LectureCourse({
       ...section,
       lectures: newArrayDeletedLecture,
     };
-    setListSectionEdit(newListSectionEdit);
     setListSectionPut(newListSectionEdit);
   };
 
   //change name lecture
-  const updateLecture = (e) => {
+  const onChangeInputUpdateNameLecture = (e) => {
     setLectureEdit({ ...lectureEdit, name: e.target.value });
-    let a = changeLectureNameByUUID(infoCourse, e.target.value);
-    console.log("changeLectureNameByUUID", a);
-    setInfoCourse(a);
   };
 
-  const saveUpdateLecture = (e) => {
+  const saveUpdateNameLecture = (e) => {
     e.preventDefault();
-    let newListLecture = [...listSectionEdit[indexSectionEdit].lectures];
-    newListLecture[indexLectureEdit] = lectureEdit;
-    let newListSectionEdit = [...listSectionPut];
-    newListSectionEdit[indexSectionEdit] = {
-      ...section,
-      lectures: newListLecture,
-    };
-    setListSectionEdit(newListSectionEdit);
-    setListSectionPut(newListSectionEdit);
+    let a = changeLectureNameByUUID(lectureEdit.name);
+    console.log("changeLectureNameByUUID", a);
+    setListSectionPut(a);
     setIsEditLecture(false);
   };
-  // console.log("setListSectionPut", listSectionPut);
-  console.log("aaaaaaaaaaaaaaaaaaa", infoCourse);
-  function changeLectureNameByUUID(infoCourse, newName) {
-    const courseData = JSON.parse(JSON.stringify(infoCourse));
 
-    if (courseData && courseData.sections) {
-      for (const section of courseData.sections) {
+  function changeLectureNameByUUID(newName) {
+    let listSectionPutClone = JSON.parse(JSON.stringify(listSectionPut));
+    console.log("listSectionPutClone", listSectionPutClone);
+    if (listSectionPutClone) {
+      for (const section of listSectionPutClone) {
         if (section.lectures) {
           const lecture = section.lectures.find((l) => l.uuid === lectureUuid);
           console.log("cccccccccccccc", lecture);
@@ -91,7 +62,7 @@ function LectureCourse({
       }
     }
 
-    return courseData;
+    return listSectionPutClone;
   }
   return (
     <div
@@ -102,20 +73,20 @@ function LectureCourse({
         <div className="p-4 border-[0.8px] border-black">
           <form
             form={"editLectureForm"}
-            onSubmit={(e) => saveUpdateLecture(e)}
+            onSubmit={(e, value) => saveUpdateNameLecture(e)}
             action=""
             className="flex flex-col gap-4"
           >
             <div className="flex gap-4">
               <div className="mt-2 flex gap-2">
-                <AiFillCheckCircle /> Lecture {position}:
+                <AiFillCheckCircle /> Lecture {lecture.position}:
               </div>
               <input
                 type="text"
                 id="name"
                 required
                 value={lectureEdit.name}
-                onChange={(e) => updateLecture(e)}
+                onChange={(e) => onChangeInputUpdateNameLecture(e)}
                 placeholder="Enter a Title"
                 className="p-2 flex-1 border-[0.8px] border-black"
               />
@@ -125,6 +96,7 @@ function LectureCourse({
               <button
                 className="p-2 w-fit border-[0.8px] border-black"
                 onClick={() => {
+                  setLectureEdit(lecture);
                   setIsEditLecture(false);
                 }}
               >
@@ -147,7 +119,7 @@ function LectureCourse({
           >
             <div className="flex gap-4 w-full group">
               <div className="flex gap-2">
-                <AiFillCheckCircle /> Lecture {position}:
+                <AiFillCheckCircle /> Lecture {lecture.position}:
               </div>
               <div>{lecture.name}</div>
               <div className="group-hover:flex gap-4 hidden">
@@ -168,11 +140,10 @@ function LectureCourse({
             </div>
           </div>
           <ShowMoreLecture
-            lectureEdit={lectureEdit}
-            setLectureEdit={setLectureEdit}
             isShowMoreContent={isShowMoreContent}
             lecture={lecture}
-            // saveUpdateLecture={saveUpdateLecture}
+            listSectionPut={listSectionPut}
+            setListSectionPut={setListSectionPut}
           />
         </div>
       )}

@@ -43,11 +43,10 @@ function ChangeCurriculumCoursePage() {
         <SectionCourse
           key={item.uuid}
           section={item}
-          position={index}
           listSectionPut={listSectionPut}
           setListSectionPut={setListSectionPut}
-          infoCourse={infoCourse}
-          setInfoCourse={setInfoCourse}
+          // infoCourse={infoCourse}
+          // setInfoCourse={setInfoCourse}
         ></SectionCourse>
       );
     });

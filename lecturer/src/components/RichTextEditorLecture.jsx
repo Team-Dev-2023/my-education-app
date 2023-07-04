@@ -10,7 +10,7 @@ import "../components/styles/RichTextEditorCss.css";
 //https://jpuri.github.io/react-draft-wysiwyg/#/docs
 //https://blog.logrocket.com/build-rich-text-editors-react-draft-js-react-draft-wysiwyg/
 
-function RichTextEditor({ description, setDescription }) {
+function RichTextEditorLecture({ description, setDescription }) {
   //RENDER RICH TEXT EDITOR VS VALUE FROM API
   let [blocks, setBlocks] = useState(convertFromHTML(description || ""));
   let [editorState, setEditorState] = useState(() =>
@@ -69,12 +69,12 @@ function RichTextEditor({ description, setDescription }) {
           },
         }}
       />
-      {/* <div
+      <div
         className="preview"
         dangerouslySetInnerHTML={createMarkup(description)}
-      ></div> */}
+      ></div>
     </div>
   );
 }
 
-export default RichTextEditor;
+export default RichTextEditorLecture;
