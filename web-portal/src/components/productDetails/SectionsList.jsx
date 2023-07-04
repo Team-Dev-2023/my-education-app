@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Accordion from "@mui/material/Accordion";
+import Modal from "@mui/material/Modal";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -9,6 +10,10 @@ import { lecturersTotalLength } from "utils/helpers/totalLengthCalculator.helper
 function SectionsList(props) {
   const { sections } = props;
   const [expanded, setExpanded] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleOpenModal = () => setOpen(true);
+  const handleCloseModal = () => setOpen(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -44,12 +49,12 @@ function SectionsList(props) {
                 <span className="whitespace-nowrap">
                   <OndemandVideoIcon fontSize="14px" className="mr-[8px]" />{" "}
                   {item.preview === true ? (
-                    <a
-                      href={item.url}
-                      className="text-[#5624d0] text-[14px] leading-[1.4] font-[400] underline whitespace-nowrap"
+                    <span
+                      onClick={handleOpenModal}
+                      className="text-[#5624d0] text-[14px] leading-[1.4] font-[400] underline whitespace-nowrap cursor-pointer"
                     >
                       {item.name}
-                    </a>
+                    </span>
                   ) : (
                     <span className="text-[#1c1d1f] text-[14px] leading-[1.4] font-[400] whitespace-nowrap">
                       {item.name}
@@ -59,7 +64,10 @@ function SectionsList(props) {
                 <span className="w-full inline-block"> </span>
                 <span className="text-[#6a6f73] text-[14px] leading-[1.4] font-[400] inline-flex items-center gap-[32px]">
                   {item.preview && (
-                    <span className="text-[#5624d0] text-[14px] leading-[1.4] font-[400] underline">
+                    <span
+                      onClick={handleOpenModal}
+                      className="text-[#5624d0] text-[14px] leading-[1.4] font-[400] underline cursor-pointer"
+                    >
                       Preview
                     </span>
                   )}
@@ -72,6 +80,11 @@ function SectionsList(props) {
           </AccordionDetails>
         </Accordion>
       ))}
+      <Modal open={open} onClose={handleCloseModal}>
+        <div className="absolute top-1/2 left-1/2 text-white">
+          this is modal
+        </div>
+      </Modal>
     </div>
   );
 }

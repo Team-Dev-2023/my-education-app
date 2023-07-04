@@ -3,6 +3,8 @@ import CircleIcon from "@mui/icons-material/Circle";
 
 function TargetLearners(props) {
   const { data } = props;
+  data.targetLearners = [];
+
   return (
     <div className="mb-[32px] color-[#1c1d1f] max-w-[700px]">
       <h2 className="mb-[16px] font-[700] text-[24px]">
@@ -10,7 +12,7 @@ function TargetLearners(props) {
       </h2>
       <div className="container">
         <ul className="">
-          {data.courseRecommendationList.map((item) => (
+          {data?.targetLearners?.map((item) => (
             <div
               key={item.uuid}
               className="flex items-center py-1 w-full h-auto text-left"

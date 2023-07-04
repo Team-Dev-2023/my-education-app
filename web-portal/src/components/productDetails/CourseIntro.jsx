@@ -52,7 +52,7 @@ function CourseIntro(props) {
             <span>
               Created by{" "}
               <a href="/" className="text-[#cec0fc] underline">
-                {data?.createdBy}
+                {data?.lecturer?.firstName + " " + data?.lecturer?.lastName}
               </a>
             </span>
           </div>
