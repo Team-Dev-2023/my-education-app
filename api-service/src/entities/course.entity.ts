@@ -51,5 +51,5 @@ export class Course extends BaseEntityAudit {
   coursePrerequisiteList: CourseKnowledge[];
 
   @OneToMany(() => CourseRecommendation, (cr) => cr.course, { cascade: true })
-  courseRecommendationList: CourseRecommendation[];
+  targetLearners: CourseRecommendation[];
 }

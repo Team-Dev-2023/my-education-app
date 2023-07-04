@@ -117,7 +117,7 @@ export class CourseReponseDto extends BaseAuditReponseDto {
     type: () => [CourseRecommendationResponseDto],
     required: false,
   })
-  courseRecommendationList: CourseRecommendationResponseDto[];
+  targetLearners: CourseRecommendationResponseDto[];
 
   @ApiProperty({
     type: () => [CoursePrerequisiteResponseDto],

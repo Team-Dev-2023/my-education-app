@@ -162,5 +162,5 @@ export class UpdateCourseInputDto extends BaseAuditInputDto {
   @IsOptional()
   @Type(() => UpdateCourseRecommendationInputDto)
   @ValidateNested()
-  courseRecommendationList: UpdateCourseRecommendationInputDto[];
+  targetLearners: UpdateCourseRecommendationInputDto[];
 }

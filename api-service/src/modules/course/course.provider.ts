@@ -19,7 +19,7 @@ export const courseProviders = [
     inject: [DBConnectionToken],
   },
   {
-    provide: repoTokens.courseRecommendation,
+    provide: repoTokens.courseTargetLearners,
     useFactory: (dataSource: DataSource) =>
       dataSource.getRepository(CourseRecommendation),
     inject: [DBConnectionToken],

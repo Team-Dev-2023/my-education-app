@@ -62,8 +62,8 @@ export class CourseService {
       `${aliases.lecture}.videoDuration`,
       `${aliases.coursePrerequisite}.uuid`,
       `${aliases.coursePrerequisite}.description`,
-      `${aliases.courseRecommendation}.uuid`,
-      `${aliases.courseRecommendation}.description`,
+      `${aliases.courseTargetLearners}.uuid`,
+      `${aliases.courseTargetLearners}.description`,
     ];
   }
   private getQuery(): SelectQueryBuilder<Course & CourseAdditionInfo> {
@@ -82,8 +82,8 @@ export class CourseService {
         aliases.coursePrerequisite,
       )
       .leftJoin(
-        `${aliases.course}.courseRecommendationList`,
-        aliases.courseRecommendation,
+        `${aliases.course}.targetLearners`,
+        aliases.courseTargetLearners,
       )
       .leftJoin(`${aliases.course}.sections`, aliases.section)
       .leftJoin(`${aliases.section}.lectures`, aliases.lecture);
@@ -143,12 +143,10 @@ export class CourseService {
           description: knowledge.description,
         }),
       ),
-      courseRecommendationList: course?.courseRecommendationList?.map(
-        (knowledge) => ({
-          uuid: knowledge.uuid,
-          description: knowledge.description,
-        }),
-      ),
+      targetLearners: course?.targetLearners?.map((knowledge) => ({
+        uuid: knowledge.uuid,
+        description: knowledge.description,
+      })),
       ...(course?.createdByUser && {
         lecturer: {
           uuid: course.createdByUser?.uuid,
@@ -229,10 +227,8 @@ export class CourseService {
             (knowledge) => knowledge,
           ),
         }),
-        ...(data.courseRecommendationList && {
-          courseRecommendationList: data.courseRecommendationList.map(
-            (knowledge) => knowledge,
-          ),
+        ...(data.targetLearners && {
+          targetLearners: data.targetLearners.map((knowledge) => knowledge),
         }),
       }),
       createdBy: user.username,
@@ -279,7 +275,7 @@ export class CourseService {
       relations: {
         courseKnowledgeList: true,
         coursePrerequisiteList: true,
-        courseRecommendationList: true,
+        targetLearners: true,
       },
       where: { uuid: courseUuid, createdBy: user.username },
     });
@@ -287,63 +283,91 @@ export class CourseService {
       throw new BadRequestException(Errors.INVALID_COURSE_UUID);
     }
     const topic = await this.topicService.getOne(data.topicUuid);
-
-    const updatedData = {
-      ...course,
-      ...data,
-      ...(data.sections && {
-        sections: data.sections.map(
-          (section, sectionIndex) =>
-            ({
-              ...section,
-              ...(section.lectures && {
-                lectures: section.lectures.map(
-                  (lecture, lectureIndex) =>
-                    ({
-                      ...lecture,
-                      ...(!lecture?.createdAt && { createdAt: new Date() }),
-                      ...(!lecture?.lastUpdatedAt && {
-                        lastUpdatedAt: new Date(),
-                      }),
-                      ...(!lecture?.createdBy && {
-                        createdBy: user.username,
-                      }),
-                      lastUpdatedBy: user.username,
-                      position: lectureIndex,
-                    } as Lecture),
-                ),
-              }),
-              ...(!section?.createdAt && { createdAt: new Date() }),
-              ...(!section?.lastUpdatedAt && { lastUpdatedAt: new Date() }),
-              ...(!section?.createdBy && {
-                createdBy: user.username,
-              }),
-              lastUpdatedBy: user.username,
-              position: sectionIndex,
-            } as Section),
-        ),
-        ...(data.courseKnowledgeList && {
-          courseKnowledgeList: data.courseKnowledgeList.map(
-            (knowledge) => knowledge,
+    const queryRunner =
+      await this.courseRepo.manager.connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      await queryRunner.manager
+        .getRepository(Lecture)
+        .createQueryBuilder(aliases.lecture)
+        .leftJoin(`${aliases.lecture}.section`, aliases.section)
+        .delete()
+        .where((qb) => {
+          const subQuery = qb
+            .createQueryBuilder()
+            .select(`s.uuid`)
+            .from(Section, 's')
+            .leftJoin(Course, 'c', 's.courseUuid = c.uuid')
+            .where(`c.uuid = :courseUuid`)
+            .getQuery();
+          return `${aliases.section}.uuid IN (${subQuery})`;
+        })
+        .setParameters({ courseUuid })
+        .execute();
+      const updatedData = {
+        ...course,
+        ...data,
+        ...(data.sections && {
+          sections: data.sections.map(
+            (section, sectionIndex) =>
+              ({
+                ...section,
+                ...(section.lectures && {
+                  lectures: section.lectures.map(
+                    (lecture, lectureIndex) =>
+                      ({
+                        ...lecture,
+                        ...(!lecture?.createdAt && { createdAt: new Date() }),
+                        ...(!lecture?.lastUpdatedAt && {
+                          lastUpdatedAt: new Date(),
+                        }),
+                        ...(!lecture?.createdBy && {
+                          createdBy: user.username,
+                        }),
+                        lastUpdatedBy: user.username,
+                        position: lectureIndex,
+                      } as Lecture),
+                  ),
+                }),
+                ...(!section?.createdAt && { createdAt: new Date() }),
+                ...(!section?.lastUpdatedAt && { lastUpdatedAt: new Date() }),
+                ...(!section?.createdBy && {
+                  createdBy: user.username,
+                }),
+                lastUpdatedBy: user.username,
+                position: sectionIndex,
+              } as Section),
           ),
+          ...(data.courseKnowledgeList && {
+            courseKnowledgeList: data.courseKnowledgeList.map(
+              (knowledge) => knowledge,
+            ),
+          }),
+          ...(data.coursePrerequisiteList && {
+            coursePrerequisiteList: data.coursePrerequisiteList.map(
+              (prerequisite) => prerequisite,
+            ),
+          }),
+          ...(data.targetLearners && {
+            targetLearners: data.targetLearners.map(
+              (recommendation) => recommendation,
+            ),
+          }),
         }),
-        ...(data.coursePrerequisiteList && {
-          coursePrerequisiteList: data.coursePrerequisiteList.map(
-            (prerequisite) => prerequisite,
-          ),
-        }),
-        ...(data.courseRecommendationList && {
-          courseRecommendationList: data.courseRecommendationList.map(
-            (recommendation) => recommendation,
-          ),
-        }),
-      }),
-      lastUpdatedBy: user.username,
-      lastUpdatedAt: new Date(),
-      ...(topic && { topic }),
-    };
-    await this.courseRepo.save(updatedData);
-    return this.formatResponse(updatedData as any);
+        lastUpdatedBy: user.username,
+        lastUpdatedAt: new Date(),
+        ...(topic && { topic }),
+      };
+      await queryRunner.manager.getRepository(Course).save(updatedData);
+      await queryRunner.commitTransaction();
+      return this.formatResponse(updatedData as any);
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw error;
+    } finally {
+      await queryRunner.release();
+    }
   }
 
   async getAll(

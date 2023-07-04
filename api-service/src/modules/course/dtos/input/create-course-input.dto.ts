@@ -136,5 +136,5 @@ export class CreateCourseInputDto {
   @IsOptional()
   @Type(() => CreateCourseRecommendationInputDto)
   @ValidateNested()
-  courseRecommendationList: CreateCourseRecommendationInputDto[];
+  targetLearners: CreateCourseRecommendationInputDto[];
 }

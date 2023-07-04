@@ -1272,7 +1272,7 @@
               "$ref": "#/components/schemas/CreateCoursePrerequisiteInputDto"
             }
           },
-          "courseRecommendationList": {
+          "targetLearners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreateCourseRecommendationInputDto"
@@ -1541,7 +1541,7 @@
               "$ref": "#/components/schemas/SectionResponseDto"
             }
           },
-          "courseRecommendationList": {
+          "targetLearners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CourseRecommendationResponseDto"
@@ -1683,7 +1683,7 @@
               "$ref": "#/components/schemas/UpdateCoursePrerequisiteInputDto"
             }
           },
-          "courseRecommendationList": {
+          "targetLearners": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UpdateCoursePrerequisiteInputDto"
