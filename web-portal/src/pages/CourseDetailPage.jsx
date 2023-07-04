@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ROUTES } from "constants/routes";
@@ -19,6 +19,7 @@ import TargetLearners from "components/productDetails/TargetLearners";
 const api = process.env.REACT_APP_API;
 function CourseDetailPage() {
   const { search } = useLocation();
+  const { uuid } = useParams();
   const [data, setData] = useState(undefined);
   const [isDivVisible, setDivVisible] = useState(true);
   const dispatch = useDispatch();
@@ -44,14 +45,10 @@ function CourseDetailPage() {
 
   useEffect(() => {
     axios
-      .get(
-        `${api}${
-          API_ENDPOINT.COURSE_DETAIL
-        }${"/504bc76c-85dc-4ea1-b3e2-6ac5ceca4085"}`,
-      )
+      .get(`${api}${API_ENDPOINT.COURSE_DETAIL}/${uuid}`)
       .then((response) => {
         setData((prevData) => ({ ...prevData, ...response.data }));
-        console.log("data res", response.data);
+        // console.log("data res", response.data);
       })
       .catch((e) => console.log("error: ", e));
   }, []);
@@ -95,7 +92,7 @@ function CourseDetailPage() {
           </div>
         </div>
       ) : (
-        <div className="container mx-auto  flex justify-center items-center">
+        <div className="container mx-auto h-32 flex justify-center items-center">
           <CircularProgress />
         </div>
       )}
