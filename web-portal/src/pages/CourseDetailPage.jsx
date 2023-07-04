@@ -48,7 +48,7 @@ function CourseDetailPage() {
       .get(`${api}${API_ENDPOINT.COURSE_DETAIL}/${uuid}`)
       .then((response) => {
         setData((prevData) => ({ ...prevData, ...response.data }));
-        // console.log("data res", response.data);
+        console.log("data res", response.data);
       })
       .catch((e) => console.log("error: ", e));
   }, []);

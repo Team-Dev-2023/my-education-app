@@ -9,20 +9,25 @@ function BuyerAction(props) {
     style: "currency",
     currency: "USD",
   });
-  // const coursePrice = formatPrice.format(Number(data.price));
-  // console.log(typeof data.price);
   const coursePrice =
     data.price === 0 ? "Free" : formatPrice.format(data.price);
+  const discountPrice = formatPrice.format(data.priceAfterDiscount);
+
   return (
     <>
-      <div className="text-start">
+      <div className="flex justify-start items-center">
         <span
           className={`text-[32px] text-${
             themeColor || "black"
-          } font-bold leading-[1]`}
+          } font-bold leading-[1] mr-[8px]`}
         >
-          {coursePrice}
+          {data.priceAfterDiscount !== 0 ? discountPrice : coursePrice}
         </span>
+        {data.priceAfterDiscount !== 0 && (
+          <span className="text-[#6a6f73] text-[16px] font-[400] line-through whitespace-nowrap">
+            {coursePrice}
+          </span>
+        )}
       </div>
       <div className="w-full h-auto mt-[16px]">
         <div className="flex gap-[8px] h-[48px]">
