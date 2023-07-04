@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, Upload } from "antd";
 import {
   AiFillCaretDown,
   AiFillCaretUp,
@@ -8,27 +6,18 @@ import {
   AiFillDelete,
   AiFillEdit,
 } from "react-icons/ai";
-const props = {
-  action: "http://127.0.0.1:10005/api/education/file-uploader/video",
-  listType: "picture",
-  previewFile(file) {
-    console.log("Your upload file:", file);
-    // Your process logic. Here we just mock to the same file
-    return fetch("https://next.json-generator.com/api/json/get/4ytyBoLK8", {
-      method: "POST",
-      body: file,
-    })
-      .then((res) => res.json())
-      .then(({ thumbnail }) => thumbnail);
-  },
-};
+import ShowMoreLecture from "./ShowMoreLecture";
+
 function LectureCourse({
+  lectureUuid,
   section,
   indexSectionEdit,
   lecture,
   position,
   listSectionPut,
   setListSectionPut,
+  infoCourse,
+  setInfoCourse,
 }) {
   const [isEditLecture, setIsEditLecture] = useState(false);
   const [isShowMoreContent, setIsShowMoreContent] = useState(false);
@@ -36,6 +25,7 @@ function LectureCourse({
   const [listSectionEdit, setListSectionEdit] = useState(listSectionPut);
   const [lectureEdit, setLectureEdit] = useState(lecture);
   const [indexLectureEdit, setIndexLectureEdit] = useState();
+  // const [urlVideo, setUrlVideo] = useState("");
 
   useEffect(() => {
     setListSectionEdit(listSectionPut);
@@ -65,6 +55,9 @@ function LectureCourse({
   //change name lecture
   const updateLecture = (e) => {
     setLectureEdit({ ...lectureEdit, name: e.target.value });
+    let a = changeLectureNameByUUID(infoCourse, e.target.value);
+    console.log("changeLectureNameByUUID", a);
+    setInfoCourse(a);
   };
 
   const saveUpdateLecture = (e) => {
@@ -80,6 +73,26 @@ function LectureCourse({
     setListSectionPut(newListSectionEdit);
     setIsEditLecture(false);
   };
+  // console.log("setListSectionPut", listSectionPut);
+  console.log("aaaaaaaaaaaaaaaaaaa", infoCourse);
+  function changeLectureNameByUUID(infoCourse, newName) {
+    const courseData = JSON.parse(JSON.stringify(infoCourse));
+
+    if (courseData && courseData.sections) {
+      for (const section of courseData.sections) {
+        if (section.lectures) {
+          const lecture = section.lectures.find((l) => l.uuid === lectureUuid);
+          console.log("cccccccccccccc", lecture);
+          if (lecture) {
+            lecture.name = newName;
+            break;
+          }
+        }
+      }
+    }
+
+    return courseData;
+  }
   return (
     <div
       key={lecture.uuid}
@@ -128,7 +141,10 @@ function LectureCourse({
         </div>
       ) : (
         <div className="border-[0.8px] border-black ">
-          <div className="flex justify-between p-4">
+          <div
+            className="flex justify-between p-4"
+            onClick={() => setIsShowMoreContent(!isShowMoreContent)}
+          >
             <div className="flex gap-4 w-full group">
               <div className="flex gap-2">
                 <AiFillCheckCircle /> Lecture {position}:
@@ -147,38 +163,17 @@ function LectureCourse({
                 </button>
               </div>
             </div>
-            <div onClick={() => setIsShowMoreContent(!isShowMoreContent)}>
+            <div>
               {isShowMoreContent ? <AiFillCaretUp /> : <AiFillCaretDown />}
             </div>
           </div>
-          {isShowMoreContent ? (
-            <div className="p-4 border-t-[0.8px] border-black">
-              {lecture.video ? (
-                <div className="flex justify-between p-4 text-[#2239e8]">
-                  <p>video</p> <AiFillDelete />
-                </div>
-              ) : (
-                <div className="w-fit p-2 border-[0.8px] border-black mt-4">
-                  + Upload video{" "}
-                  <Upload {...props}>
-                    <Button icon={<UploadOutlined />}>Upload</Button>
-                  </Upload>
-                </div>
-              )}
-              {lecture.description ? (
-                <div className="mt-4 flex gap-2">
-                  <p className="font-[700]">Description:</p>{" "}
-                  {lecture.description}
-                </div>
-              ) : (
-                <div className="w-fit p-2 border-[0.8px] border-black my-2">
-                  + Description lecture
-                </div>
-              )}
-            </div>
-          ) : (
-            <div></div>
-          )}
+          <ShowMoreLecture
+            lectureEdit={lectureEdit}
+            setLectureEdit={setLectureEdit}
+            isShowMoreContent={isShowMoreContent}
+            lecture={lecture}
+            // saveUpdateLecture={saveUpdateLecture}
+          />
         </div>
       )}
     </div>
