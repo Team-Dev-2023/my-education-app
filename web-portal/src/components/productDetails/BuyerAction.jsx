@@ -3,7 +3,16 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 function BuyerAction(props) {
   const { themeColor } = props;
-  const itemPrice = "đ 1.299.000";
+  const { data } = props;
+  //format price
+  const formatPrice = Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  // const coursePrice = formatPrice.format(Number(data.price));
+  // console.log(typeof data.price);
+  const coursePrice =
+    data.price === 0 ? "Free" : formatPrice.format(data.price);
   return (
     <>
       <div className="text-start">
@@ -12,7 +21,7 @@ function BuyerAction(props) {
             themeColor || "black"
           } font-bold leading-[1]`}
         >
-          {itemPrice}
+          {coursePrice}
         </span>
       </div>
       <div className="w-full h-auto mt-[16px]">

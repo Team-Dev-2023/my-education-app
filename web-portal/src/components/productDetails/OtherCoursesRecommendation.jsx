@@ -4,7 +4,7 @@ import { CircularProgress } from "@mui/material";
 import { ROUTES } from "constants/routes";
 import { API_ENDPOINT } from "constants/api";
 
-function Recommendation(props) {
+function OtherCoursesRecommendation(props) {
   const { data } = props;
   const imgUrl = "https://img-c.udemycdn.com/course/50x50/2508942_11d3_3.jpg";
   const totalHours = 22;
@@ -73,4 +73,4 @@ function Recommendation(props) {
   );
 }
 
-export default Recommendation;
+export default OtherCoursesRecommendation;

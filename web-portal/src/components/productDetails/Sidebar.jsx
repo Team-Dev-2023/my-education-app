@@ -36,7 +36,7 @@ function Sidebar(props) {
         </div>
       </div>
       <div className="w-full p-[24px] block box-border">
-        <BuyerAction />
+        <BuyerAction data={data} />
         <div className="px-auto text-black">
           <h2 className="text-[16px] font-bold leading-[1.2] mb-[8px]">
             This course includes:

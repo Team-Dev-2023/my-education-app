@@ -12,9 +12,9 @@ import CourseIntro from "components/productDetails/CourseIntro";
 import CourseContent from "components/productDetails/CourseContent";
 import Requirements from "components/productDetails/Requirements";
 import Description from "components/productDetails/Description";
-import Recommendation from "components/productDetails/Recommendation";
 import Sidebar from "components/productDetails/Sidebar";
 import BuyerAction from "components/productDetails/BuyerAction";
+import TargetLearners from "components/productDetails/TargetLearners";
 
 const api = process.env.REACT_APP_API;
 function CourseDetailPage() {
@@ -22,7 +22,6 @@ function CourseDetailPage() {
   const [data, setData] = useState(undefined);
   const [isDivVisible, setDivVisible] = useState(true);
   const dispatch = useDispatch();
-  const [togglePrerequisites, setTogglePrerequisites] = useState(false);
   const t = useTranslate();
   const navigate = useNavigate();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
@@ -52,7 +51,7 @@ function CourseDetailPage() {
       )
       .then((response) => {
         setData((prevData) => ({ ...prevData, ...response.data }));
-        console.log("data", response.data);
+        console.log("data res", response.data);
       })
       .catch((e) => console.log("error: ", e));
   }, []);
@@ -75,7 +74,9 @@ function CourseDetailPage() {
             <div className="container mx-auto flex justify-center items-center">
               <div className={`${isDivVisible && `w-[70%]`}`}>
                 <CourseIntro data={data} />
-                {!isDivVisible && <BuyerAction themeColor="white" />}
+                {!isDivVisible && (
+                  <BuyerAction data={data} themeColor="white" />
+                )}
               </div>
               {isDivVisible && <div className="w-[30%]"></div>}
             </div>
@@ -88,13 +89,13 @@ function CourseDetailPage() {
               <CourseContent data={data} />
               <Requirements data={data} />
               <Description data={data} />
-              <Recommendation data={data} />
+              <TargetLearners data={data} />
             </div>
             {isDivVisible && <div className="w-[30%]"></div>}
           </div>
         </div>
       ) : (
-        <div className="container mx-auto h-screen">
+        <div className="container mx-auto  flex justify-center items-center">
           <CircularProgress />
         </div>
       )}
