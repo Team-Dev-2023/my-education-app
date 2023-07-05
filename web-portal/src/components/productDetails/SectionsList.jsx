@@ -26,7 +26,7 @@ function SectionsList(props) {
     setExpanded(isExpanded ? panel : false);
   };
   const handleVideoPlay = (event) => {
-    const url = event.currentTarget.getAttribute("videoUrl");
+    const url = event.currentTarget.getAttribute("url");
     setUrlForPlayer(url);
   };
 
@@ -119,7 +119,7 @@ function SectionsList(props) {
               previewList.map((item) => (
                 <button
                   onClick={handleVideoPlay}
-                  videoUrl={item.url}
+                  url={item.url}
                   key={item.uuid}
                   className="f-full flex flex-row justify-start items-center gap-2 text-white cursor-pointer px-[24px] h-[69px] bg-transparent focus:bg-[#3e4143]"
                 >
