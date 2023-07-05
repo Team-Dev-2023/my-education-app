@@ -35,8 +35,6 @@ function SectionsList(props) {
     setPreviewList([...filterList]);
   }, []);
 
-  console.log("previewList", previewList);
-
   return (
     <div>
       {sections.map((item) => (

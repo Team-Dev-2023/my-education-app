@@ -3,15 +3,15 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 function BuyerAction(props) {
   const { themeColor } = props;
-  const { data } = props;
+  const { courseData } = props;
   //format price
   const formatPrice = Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
   const coursePrice =
-    data.price === 0 ? "Free" : formatPrice.format(data.price);
-  const discountPrice = formatPrice.format(data.priceAfterDiscount);
+    courseData.price === 0 ? "Free" : formatPrice.format(courseData.price);
+  const discountPrice = formatPrice.format(courseData.priceAfterDiscount);
 
   return (
     <>
@@ -21,9 +21,9 @@ function BuyerAction(props) {
             themeColor || "black"
           } font-bold leading-[1] mr-[8px]`}
         >
-          {data.priceAfterDiscount !== 0 ? discountPrice : coursePrice}
+          {courseData.priceAfterDiscount !== 0 ? discountPrice : coursePrice}
         </span>
-        {data.priceAfterDiscount !== 0 && (
+        {courseData.priceAfterDiscount !== 0 && (
           <span className="text-[#6a6f73] text-[16px] font-[400] line-through whitespace-nowrap">
             {coursePrice}
           </span>

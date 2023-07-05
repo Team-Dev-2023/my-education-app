@@ -3,7 +3,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 function Description(props) {
-  const { data } = props;
+  const { courseData } = props;
   const divRef = useRef(null);
   const divLength = divRef?.current?.clientHeight;
   const [expanded, setExpanded] = useState(false);
@@ -21,7 +21,7 @@ function Description(props) {
           ref={divRef}
         >
           <span className="text-[#1c1d1f] text-[14px] font-[400]">
-            {data.description}
+            {courseData.description}
           </span>
         </div>
         {divLength >= 221 && (

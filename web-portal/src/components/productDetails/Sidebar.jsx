@@ -10,10 +10,8 @@ import { sectionTotalLength } from "utils/helpers/totalLengthCalculator.helper";
 import BuyerAction from "./BuyerAction";
 
 function Sidebar(props) {
-  const { data } = props;
-  const imgUrl =
-    "https://img-c.udemycdn.com/course/240x135/1501104_967d_13.jpg";
-  const itemPrice = "đ 1.299.000";
+  const { courseData } = props;
+  const imgUrl = courseData.imageUrl;
 
   return (
     <div className="text-white bg-white flex items-center flex-col w-[340px] mt-[32px] border border-[#d1d7dc] box-border shadow-md">
@@ -36,7 +34,7 @@ function Sidebar(props) {
         </div>
       </div>
       <div className="w-full p-[24px] block box-border">
-        <BuyerAction data={data} />
+        <BuyerAction courseData={courseData} />
         <div className="px-auto text-black">
           <h2 className="text-[16px] font-bold leading-[1.2] mb-[8px]">
             This course includes:
@@ -49,7 +47,7 @@ function Sidebar(props) {
                   className="!text-[14px] mr-[16px]"
                 />
                 <span>{`${sectionTotalLength(
-                  data.sections,
+                  courseData.sections,
                 )} on-demand video.`}</span>
               </span>
             </li>

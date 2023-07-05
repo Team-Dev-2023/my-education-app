@@ -2,13 +2,13 @@ import React from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 
 function Requirements(props) {
-  const { data } = props;
+  const { courseData } = props;
   return (
     <div className="mb-[32px] color-[#1c1d1f] max-w-[700px]">
       <h2 className="mb-[16px] font-[700] text-[24px]">Requirements</h2>
       <div className="container">
         <ul className="">
-          {data.coursePrerequisiteList.map((item) => (
+          {courseData.coursePrerequisiteList.map((item) => (
             <div
               key={item.uuid}
               className="flex items-center py-1 w-full h-auto text-left"

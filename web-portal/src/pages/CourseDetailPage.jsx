@@ -1,9 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-import { ROUTES } from "constants/routes";
 import qs from "qs";
 import useTranslate from "utils/hook/useTranslate";
 import { API_ENDPOINT } from "./../constants/api";
@@ -18,14 +16,10 @@ import TargetLearners from "components/productDetails/TargetLearners";
 
 const api = process.env.REACT_APP_API;
 function CourseDetailPage() {
-  const { search } = useLocation();
   const { uuid } = useParams();
   const [data, setData] = useState(undefined);
   const [isDivVisible, setDivVisible] = useState(true);
-  const dispatch = useDispatch();
   const t = useTranslate();
-  const navigate = useNavigate();
-  const query = qs.parse(search, { ignoreQueryPrefix: true });
 
   useEffect(() => {
     const handleResize = () => {
@@ -62,7 +56,7 @@ function CourseDetailPage() {
               <div className="w-[70%]"></div>
               <div className="w-[30%]">
                 <div className="h-auto ">
-                  <Sidebar data={data} />
+                  <Sidebar courseData={data} />
                 </div>
               </div>
             </div>
@@ -70,9 +64,9 @@ function CourseDetailPage() {
           <div className=" bg-[#1c1d1f] mb-[32px]">
             <div className="container mx-auto flex justify-center items-center">
               <div className={`${isDivVisible && `w-[70%]`}`}>
-                <CourseIntro data={data} />
+                <CourseIntro courseData={data} />
                 {!isDivVisible && (
-                  <BuyerAction data={data} themeColor="white" />
+                  <BuyerAction courseData={data} themeColor="white" />
                 )}
               </div>
               {isDivVisible && <div className="w-[30%]"></div>}
@@ -83,10 +77,10 @@ function CourseDetailPage() {
               <CourseKnowledgeList
                 courseKnowledgeList={data.courseKnowledgeList}
               />
-              <CourseContent data={data} />
-              <Requirements data={data} />
-              <Description data={data} />
-              <TargetLearners data={data} />
+              <CourseContent courseData={data} />
+              <Requirements courseData={data} />
+              <Description courseData={data} />
+              <TargetLearners courseData={data} />
             </div>
             {isDivVisible && <div className="w-[30%]"></div>}
           </div>
