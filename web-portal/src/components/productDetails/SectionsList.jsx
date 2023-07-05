@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import ReactPlayer from "react-player";
 import Accordion from "@mui/material/Accordion";
 import Modal from "@mui/material/Modal";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
+import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
 import { lecturersTotalLength } from "utils/helpers/totalLengthCalculator.helper";
+import { filterPreviewLectures } from "utils/helpers/filterPreviewLectures.helper";
 
 function SectionsList(props) {
-  const { sections } = props;
+  const { sections, title, image } = props;
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
+  const [previewList, setPreviewList] = useState([]);
+  const [urlForPlayer, setUrlForPlayer] = useState(
+    "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+  );
 
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
@@ -18,6 +25,17 @@ function SectionsList(props) {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  const handleVideoPlay = (event) => {
+    const url = event.currentTarget.getAttribute("videoUrl");
+    setUrlForPlayer(url);
+  };
+
+  useEffect(() => {
+    const filterList = filterPreviewLectures(sections);
+    setPreviewList([...filterList]);
+  }, []);
+
+  console.log("previewList", previewList);
 
   return (
     <div>
@@ -81,8 +99,42 @@ function SectionsList(props) {
         </Accordion>
       ))}
       <Modal open={open} onClose={handleCloseModal}>
-        <div className="absolute top-1/2 left-1/2 text-white">
-          this is modal
+        <div className="flex flex-col justify-center my-[10vh] max-w-[600px] mx-auto">
+          <div className="w-full px-[24px] pt-[36px] bg-[#1c1d1f] text-white block ">
+            <div className="h-full block pb-[8px] text-[14px] font-[700] leading-[1.2]">
+              <p className="block pb-[8px] text-[14px] font-[700] leading-[1.2]">
+                Course Preview
+              </p>
+              <p className="text-[19px]">{title}</p>
+            </div>
+            <div className="w-full h-full">
+              <ReactPlayer url={urlForPlayer} width="552px" />
+            </div>
+            <div className="w-full text-[19px] font-[700] leading-[1.2] py-[16px]">
+              <span>Free Sample Videos:</span>
+            </div>
+          </div>
+          <div className="flex flex-col pb-[36px] bg-[#1c1d1f] text-white w-full">
+            {previewList &&
+              previewList.map((item) => (
+                <button
+                  onClick={handleVideoPlay}
+                  videoUrl={item.url}
+                  key={item.uuid}
+                  className="f-full flex flex-row justify-start items-center gap-2 text-white cursor-pointer px-[24px] h-[69px] bg-transparent focus:bg-[#3e4143]"
+                >
+                  <img src={image} alt="videoThumbnail" className="h-[36px]" />
+                  <PlayCircleFilledWhiteIcon
+                    className="w-[64px] h-[64px] !text-[20px]"
+                    fontSize="inherit"
+                  />
+                  <p className="h-full w-full text-left flex items-center justify-between text-[14px] font-[700] leading-[1.2]">
+                    <span className="whitespace-nowrap mr-2">{item.name}</span>
+                    <span className="text-[12px]">{item.duration}</span>
+                  </p>
+                </button>
+              ))}
+          </div>
         </div>
       </Modal>
     </div>

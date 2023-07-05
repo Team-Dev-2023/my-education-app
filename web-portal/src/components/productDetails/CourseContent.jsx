@@ -18,7 +18,11 @@ function CourseContent(props) {
         </span>
       </div>
       <div className="container">
-        <SectionsList sections={data.sections} />
+        <SectionsList
+          sections={data.sections}
+          title={data.title}
+          image={data.imageUrl}
+        />
       </div>
     </div>
   );
