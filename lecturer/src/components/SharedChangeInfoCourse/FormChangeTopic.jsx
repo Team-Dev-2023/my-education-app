@@ -5,7 +5,7 @@ import {
   getCategory,
   getSubCategories,
   getTopics,
-} from "../utils/helpers/workWithAPI";
+} from "../../utils/helpers/workWithAPI";
 function FormChangeTopic({
   formInfoCourse,
   infoCourse,

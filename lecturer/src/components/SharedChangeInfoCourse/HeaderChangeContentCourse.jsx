@@ -1,10 +1,11 @@
 import React from "react";
 import { AiFillSetting } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { generatePath, useNavigate } from "react-router-dom";
 import { ROUTES } from "constants/routes";
-import AlertSaveInfoCourseSuccess from "./AlertSaveInfoCourseSuccess";
+import AlertSaveInfoCourseSuccess from "../AlertSaveInfoCourseSuccess";
 
 function HeaderChangeContentCourse({
+  courseUuid,
   formInfoCourse,
   handleSubmitForm,
   isAlertSaveInfoCourseSuccess,
@@ -50,6 +51,19 @@ function HeaderChangeContentCourse({
             }}
           >
             Save
+          </button>
+          <button
+            className={`px-4 py-1 bg-[#a435f0]
+        `}
+            onClick={() => {
+              navigate(
+                generatePath(ROUTES.LECTURE.PREVIEW_DETAIL_PRODUCT, {
+                  uuid: courseUuid,
+                })
+              );
+            }}
+          >
+            PREVIEW
           </button>
           <button className="px-4 py-2 ">
             <AiFillSetting className="text-[28px]" />

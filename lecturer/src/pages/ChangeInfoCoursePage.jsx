@@ -5,10 +5,10 @@ import { useParams } from "react-router-dom";
 import RichTextEditor from "components/RichTextEditor";
 import UploadImage from "components/ChangeInfoCourse/UploadImage";
 import NameLecturer from "components/ChangeInfoCourse/NameLecturer";
-import FormChangeTopic from "components/FormChangeTopic";
+import FormChangeTopic from "components/SharedChangeInfoCourse/FormChangeTopic";
 import FormChangeTitleAndSubTitle from "components/ChangeInfoCourse/FormChangeTitleAndSubTitle";
 import SliderBarCreateCourse from "components/SliderBarCreateCourse";
-import HeaderChangeContentCourse from "components/HeaderChangeContentCourse";
+import HeaderChangeContentCourse from "components/SharedChangeInfoCourse/HeaderChangeContentCourse";
 import { getCourse, putCourse } from "utils/helpers/workWithAPI";
 
 function ChangeInfoCoursePage() {
@@ -81,6 +81,7 @@ function ChangeInfoCoursePage() {
   return (
     <div className="flex flex-col justify-center items-center max-w-[1400px] w-full ">
       <HeaderChangeContentCourse
+        courseUuid={courseUuid}
         formInfoCourse={formInfoCourse}
         infoCourse={infoCourse}
         isAlertSaveInfoCourseSuccess={isAlertSaveInfoCourseSuccess}

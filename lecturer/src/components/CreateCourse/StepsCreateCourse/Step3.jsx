@@ -1,4 +1,4 @@
-import FormChangeTopic from "components/FormChangeTopic";
+import FormChangeTopic from "components/SharedChangeInfoCourse/FormChangeTopic";
 import React from "react";
 
 function Step3({

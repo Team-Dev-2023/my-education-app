@@ -11,5 +11,6 @@ export const ROUTES = {
       "/lecturer/course/:courseUuid/change-curriculum-course/",
     CHANGE_PRICING_AND_PROMOTIONS_COURSE:
       "/lecturer/course/:courseUuid/change-PricingAndPromotions-course/",
+    PREVIEW_DETAIL_PRODUCT: "/lecturer/course/preview/detail/:uuid",
   },
 };

@@ -15,6 +15,7 @@ import ListCoursePage from "pages/ListCoursePage";
 import CreateCoursePage from "pages/CreateCoursePage";
 import ChangeCurriculumCoursePage from "pages/ChangeCurriculumCoursePage";
 import ChangePricingAndPromotionsPage from "pages/ChangePricingAndPromotionsPage";
+import CoursePreviewDetailPage from "./pages/CoursePreviewDetailPage";
 
 require("moment/locale/vi");
 
@@ -44,7 +45,10 @@ function App() {
             element={<RegisterWebLecturer />}
           />
           <Route path={ROUTES.LECTURE.LOGIN} element={<LoginWebLecturer />} />
-
+          <Route
+            path={ROUTES.LECTURE.PREVIEW_DETAIL_PRODUCT}
+            element={<CoursePreviewDetailPage />}
+          />
           <Route path="*" element={<div>404</div>} />
         </Route>
         <Route element={<NoHeaderLayout />}>

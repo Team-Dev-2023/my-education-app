@@ -31,7 +31,7 @@ function App() {
       dispatch(
         getUserInfoAction({
           accessToken: accessToken,
-        }),
+        })
       );
   }, []);
   return (

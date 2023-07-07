@@ -5,7 +5,7 @@ import { getCourse, putCourse } from "utils/helpers/workWithAPI";
 
 import SectionCourse from "components/ChangeCurriculum/SectionCourse";
 import SliderBarCreateCourse from "components/SliderBarCreateCourse";
-import HeaderChangeContentCourse from "components/HeaderChangeContentCourse";
+import HeaderChangeContentCourse from "components/SharedChangeInfoCourse/HeaderChangeContentCourse";
 import AddNewSection from "components/ChangeCurriculum/AddNewSection";
 
 function ChangeCurriculumCoursePage() {
@@ -77,6 +77,7 @@ function ChangeCurriculumCoursePage() {
   return (
     <div className="flex flex-col justify-center items-center max-w-[1400px] w-full ">
       <HeaderChangeContentCourse
+        courseUuid={courseUuid}
         handleSubmitForm={submitEditCurriculum}
         isAlertSaveInfoCourseSuccess={isAlertSaveInfoCourseSuccess}
         setIsAlertSaveInfoCourseSuccess={setIsAlertSaveInfoCourseSuccess}

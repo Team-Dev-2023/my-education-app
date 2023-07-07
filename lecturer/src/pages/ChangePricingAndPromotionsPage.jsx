@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import SliderBarCreateCourse from "components/SliderBarCreateCourse";
-import HeaderChangeContentCourse from "components/HeaderChangeContentCourse";
+import HeaderChangeContentCourse from "components/SharedChangeInfoCourse/HeaderChangeContentCourse";
 import { useEffect, useState } from "react";
 import { getCourse, putCourse } from "utils/helpers/workWithAPI";
 
@@ -61,6 +61,7 @@ function ChangePricingAndPromotionsPage() {
   return (
     <div className="flex flex-col justify-center items-center max-w-[1400px] w-full ">
       <HeaderChangeContentCourse
+        courseUuid={courseUuid}
         handleSubmitForm={handleSubmitForm}
         isAlertSaveInfoCourseSuccess={isAlertSaveInfoCourseSuccess}
         setIsAlertSaveInfoCourseSuccess={setIsAlertSaveInfoCourseSuccess}
