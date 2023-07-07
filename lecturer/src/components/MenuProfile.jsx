@@ -4,14 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { TfiWorld } from "react-icons/tfi";
 
 import { logoutAction } from "redux/actions";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
 function MenuProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { userInfo } = useSelector((store) => store.auth);
-  console.log("userInfo", userInfo);
 
   return (
     <div className="min-w-[264px] border-[0.8px] shadow-md mt-[0.8px]">

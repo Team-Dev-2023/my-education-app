@@ -45,3 +45,22 @@
 .textShowDetailHome {
   color: green !important;
 }
+
+.ant-form-item {
+  margin-bottom: 0px;
+}
+.selectCreateCoursePage .ant-select-selector {
+  border-radius: none !important;
+}
+.ant-form-item-label > label {
+  font-size: 20px !important;
+}
+
+/* :where(.css-dev-only-do-not-override-12jzuas).ant-switch:hover:not(
+    .ant-switch-disabled
+  ) {
+  background-color: #aba8a4 !important;
+}
+:where(.css-dev-only-do-not-override-12jzuas).ant-switch.ant-switch-checked {
+  background-color: #ae3be3 !important;
+} */

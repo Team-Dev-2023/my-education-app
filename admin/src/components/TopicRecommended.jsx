@@ -8,7 +8,6 @@ import "swiper/css/pagination";
 import { Grid, Navigation } from "swiper";
 
 function TopicRecommended() {
-  console.log("render  topic");
   const topicArray = [
     {
       topic: "Node.Js",

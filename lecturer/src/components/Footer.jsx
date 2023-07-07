@@ -44,7 +44,7 @@ function Footer() {
   const query = qs.parse(search, { ignoreQueryPrefix: true });
 
   return (
-    <div className="Footer px-[24px] bg-[#1c1d1f] py-2">
+    <div className="Footer px-[24px] bg-[#1c1d1f] py-2 relative z-[999]">
       <div className="w-full md:flex xxs:inline mt-2 py-4 justify-between ">
         <div className="xxs:w-full flex flex-wrap gap-3">
           <h4 className="text-[20px] w-full text-white">{t.topFooter.title}</h4>

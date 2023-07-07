@@ -3,5 +3,14 @@ export const ROUTES = {
     HOME_PAGE: "/lecturer",
     REGISTER: "/lecturer/register",
     LOGIN: "/lecturer/login",
+    LIST_COURSE: "/lecturer/courses",
+    CREATE_COURSE: "/lecturer/course/create",
+    CHANGE_INFO_COURSE: "/lecturer/course/:courseUuid/change-info-course/",
+    CHANGE_GOALS_COURSE: `/lecturer/course/:courseUuid/change-goals-course/`,
+    CHANGE_CURRICULUM_COURSE:
+      "/lecturer/course/:courseUuid/change-curriculum-course/",
+    CHANGE_PRICING_AND_PROMOTIONS_COURSE:
+      "/lecturer/course/:courseUuid/change-PricingAndPromotions-course/",
+    PREVIEW_DETAIL_PRODUCT: "/lecturer/course/preview/detail/:uuid",
   },
 };
