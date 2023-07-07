@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillCheckCircle, AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 function TitleSection({
@@ -8,7 +8,11 @@ function TitleSection({
   indexSectionEdit,
 }) {
   const [isEditTitleSection, setIsEditTitleSection] = useState(false);
-  const [listSectionShow, setListSectionShow] = useState(listSectionPut);
+  const [listSectionEdit, setListSectionEdit] = useState();
+
+  useEffect(() => {
+    setListSectionEdit(listSectionPut);
+  }, [listSectionPut]);
 
   function onChangeTitleSection(e) {
     let listSectionPutClone = JSON.parse(JSON.stringify(listSectionPut));
@@ -19,10 +23,11 @@ function TitleSection({
       return item;
     });
 
-    setListSectionPut(updatedArray);
+    setListSectionEdit(updatedArray);
   }
-  const saveEditSection = (e) => {
+  const saveEditNameSection = (e) => {
     e.preventDefault();
+    setListSectionPut(listSectionEdit);
     setIsEditTitleSection(false);
   };
 
@@ -40,7 +45,7 @@ function TitleSection({
             <div>
               <form
                 form={"editSectionForm"}
-                onSubmit={(e) => saveEditSection(e)}
+                onSubmit={(e) => saveEditNameSection(e)}
                 action=""
                 className="flex flex-col gap-4 w-full"
               >
@@ -54,7 +59,7 @@ function TitleSection({
                       type="text"
                       id="name"
                       required
-                      value={listSectionPut[indexSectionEdit].name}
+                      value={listSectionEdit[indexSectionEdit].name}
                       onChange={(e) => onChangeTitleSection(e)}
                       placeholder="Enter a Title"
                       className="p-2 w-full border-[0.8px] border-black"
@@ -70,8 +75,7 @@ function TitleSection({
                   <button
                     className="p-2 w-fit border-[0.8px] border-black"
                     onClick={() => {
-                      // setSectionEdit(section);
-                      setListSectionPut(listSectionShow);
+                      setListSectionEdit(listSectionPut);
                       setIsEditTitleSection(false);
                     }}
                   >

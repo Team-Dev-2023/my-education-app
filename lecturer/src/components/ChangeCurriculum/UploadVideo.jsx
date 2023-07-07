@@ -1,36 +1,25 @@
+import React, { useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Space, Upload } from "antd";
-import { useState } from "react";
-import React from "react";
+import createNewListSectionPut from "../../utils/helpers/createNewListSectionPut";
+
 const api = process.env.REACT_APP_API;
 
 function UploadVideo({ lecture, listSectionPut, setListSectionPut }) {
   let uuidLecture = lecture.uuid;
 
   const updateUrlVideoLecture = (urlVideo) => {
-    let newListSectionPut = createNewListSectionPut(urlVideo);
+    let urlVideoClone;
+    urlVideo === undefined ? (urlVideoClone = "") : (urlVideoClone = urlVideo);
+    let newListSectionPut = createNewListSectionPut(
+      listSectionPut,
+      uuidLecture,
+      "url",
+      urlVideoClone
+    );
     setListSectionPut(newListSectionPut);
   };
 
-  function createNewListSectionPut(urlVideo) {
-    let urlVideoClone;
-    urlVideo === undefined ? (urlVideoClone = "") : (urlVideoClone = urlVideo);
-    let listSectionPutClone = JSON.parse(JSON.stringify(listSectionPut));
-    if (listSectionPutClone) {
-      for (const section of listSectionPutClone) {
-        if (section.lectures) {
-          const lecture = section.lectures.find((l) => l.uuid === uuidLecture);
-          if (lecture) {
-            lecture.url = urlVideoClone;
-            break;
-          }
-        }
-      }
-    }
-
-    return listSectionPutClone;
-  }
-  console.log("lecture", lecture);
   const [fileList, setFileList] = useState(
     lecture.url === ""
       ? []
@@ -44,7 +33,6 @@ function UploadVideo({ lecture, listSectionPut, setListSectionPut }) {
         ]
   );
   const onChange = ({ fileList: newFileList }) => {
-    console.log("aaaaaaaaaaaaa", newFileList.slice(-1)[0]?.response?.url);
     setFileList(newFileList);
     updateUrlVideoLecture(newFileList.slice(-1)[0]?.response?.url);
   };

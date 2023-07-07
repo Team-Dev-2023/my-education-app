@@ -2,37 +2,17 @@ import React, { useEffect, useState } from "react";
 import LectureCourse from "./LectureCourse";
 import AddNewLecture from "./AddNewLecture";
 import TitleSection from "./TitleSection";
-import DescriptionLecture from "./DescriptionLecture";
 
-function SectionCourse({
-  section,
-  listSectionPut,
-  setListSectionPut,
-  // infoCourse,
-  // setInfoCourse,
-}) {
-  const [listSectionEdit, setListSectionEdit] = useState(listSectionPut); //1 list
-  const [sectionEdit, setSectionEdit] = useState(section); //section onshow
+function SectionCourse({ section, listSectionPut, setListSectionPut }) {
   const [indexSectionEdit, setIndexSectionEdit] = useState();
-
-  useEffect(() => {
-    setListSectionEdit(listSectionPut);
-  }, [listSectionPut]);
 
   //find index section in listSection
   useEffect(() => {
-    let indexSection = listSectionEdit?.findIndex(
+    let indexSection = listSectionPut?.findIndex(
       (itemSection) => itemSection.uuid === section.uuid
     );
     setIndexSectionEdit(indexSection);
-  }, [listSectionEdit]);
-
-  useEffect(() => {
-    let newListSectionEdit = [...listSectionEdit];
-    newListSectionEdit[indexSectionEdit] = sectionEdit;
-    setListSectionEdit(newListSectionEdit);
-    setListSectionPut(newListSectionEdit);
-  }, [sectionEdit]);
+  }, [listSectionPut]);
 
   const renderListLecture = () => {
     return listSectionPut[indexSectionEdit]?.lectures.map((item, index) => {
@@ -40,7 +20,7 @@ function SectionCourse({
         <LectureCourse
           key={item.uuid}
           lectureUuid={item.uuid}
-          section={sectionEdit}
+          section={section}
           lecture={item}
           indexSectionEdit={indexSectionEdit}
           listSectionPut={listSectionPut}

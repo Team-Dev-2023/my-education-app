@@ -3,7 +3,12 @@ import { AiFillDelete } from "react-icons/ai";
 
 const uuid = require("uuid");
 
-function FormIntendedLearners({ submitForm, arrayContent, setArrayContent }) {
+function FormIntendedLearners({
+  handleSubmitForm,
+  arrayContent,
+  setArrayContent,
+  setIsAllowSaveInfoCourse,
+}) {
   function generateUUID() {
     return uuid.v4();
   }
@@ -12,39 +17,32 @@ function FormIntendedLearners({ submitForm, arrayContent, setArrayContent }) {
       item.uuid === uuid ? { ...item, description: value } : item
     );
     setArrayChange(updatedData);
+    setIsAllowSaveInfoCourse(true);
   };
   const handleDeleteItem = (arrayChange, setArrayChange, index) => {
     const updatedData = [...arrayChange];
     updatedData.splice(index, 1);
     setArrayChange(updatedData);
+    setIsAllowSaveInfoCourse(true);
   };
   return (
     <>
-      <form onSubmit={submitForm} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmitForm} className="flex flex-col gap-4">
         {arrayContent?.map((item, index) => (
           <div key={item.uuid} className="flex items-center gap-4">
             <input
               type="text"
               maxLength="120"
               className="border-[0.8px] border-black p-2 w-[600px]"
-              uuid={item.uuid}
+              id={item.uuid}
               value={item.description}
-              onChange={
-                (e) =>
-                  handleInputChange(
-                    arrayContent,
-                    setArrayContent,
-                    item.uuid,
-                    e.target.value
-                  )
-                // {
-                //   const updatedData = arrayContent.map((item) =>
-                //     item.uuid === uuid
-                //       ? { ...item, description: e.target.value }
-                //       : item
-                //   );
-                //   setArrayContent(updatedData);
-                // }
+              onChange={(e) =>
+                handleInputChange(
+                  arrayContent,
+                  setArrayContent,
+                  item.uuid,
+                  e.target.value
+                )
               }
             />
             <button

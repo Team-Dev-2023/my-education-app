@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input } from "antd";
 
-function Step2({ createCourseForm, setDataCourse, next }) {
+function Step2({ createCourseForm, setInfoCourse, next }) {
   return (
     <div className="flex flex-col gap-4 justify-center items-center">
       <h2 className="font-[700] text-[24px]">How about a working title?</h2>
@@ -11,7 +11,7 @@ function Step2({ createCourseForm, setDataCourse, next }) {
       <Form
         form={createCourseForm}
         onFinish={(value) => {
-          setDataCourse((prevFormData) => ({
+          setInfoCourse((prevFormData) => ({
             ...prevFormData,
             ...value,
           }));

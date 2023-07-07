@@ -28,12 +28,11 @@ function AddNewLecture({
           preview: true,
           type: 0,
           videoDuration: 0,
-          position: listSectionPut[indexSectionEdit].lectures.length,
+          position: "",
         },
       ],
     };
     setListSectionPut(listSectionPutClone);
-
     setIsAddNewLecture(false);
   };
   return (

@@ -3,6 +3,7 @@ const uuid = require("uuid");
 
 function AddNewSection({ listSectionPut, setListSectionPut }) {
   const [isAddNewSection, setIsAddNewSection] = useState(false);
+
   function generateUUID() {
     return uuid.v4();
   }
@@ -13,7 +14,7 @@ function AddNewSection({ listSectionPut, setListSectionPut }) {
       {
         uuid: generateUUID(),
         name: e.target.name.value,
-        position: listSectionPut.length,
+        position: "",
         lectures: [],
       },
     ]);

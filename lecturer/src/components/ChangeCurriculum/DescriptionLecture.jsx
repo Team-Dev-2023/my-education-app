@@ -1,36 +1,27 @@
 import RichTextEditor from "components/RichTextEditor";
-import RichTextEditorLecture from "components/RichTextEditorLecture";
-import React, { useEffect, useState } from "react";
-import DOMPurify from "dompurify";
-import "../../components/styles/RichTextEditorCss.css";
+import React, { useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
+import DOMPurify from "dompurify";
+import createNewListSectionPut from "../../utils/helpers/createNewListSectionPut";
+
+import "../../components/styles/RichTextEditorCss.css";
 
 function DescriptionLecture({ lecture, listSectionPut, setListSectionPut }) {
   const [description, setDescription] = useState("");
   const [isShowDescription, setIsShowDescription] = useState(false);
+
   let uuidLecture = lecture.uuid;
 
-  const saveDescription = (value) => {
-    let newListSectionPut = createNewListSectionPut(value);
+  const saveDescription = (description) => {
+    let newListSectionPut = createNewListSectionPut(
+      listSectionPut,
+      uuidLecture,
+      "description",
+      description
+    );
     setListSectionPut(newListSectionPut);
   };
 
-  function createNewListSectionPut(value) {
-    let listSectionPutClone = JSON.parse(JSON.stringify(listSectionPut));
-    if (listSectionPutClone) {
-      for (const section of listSectionPutClone) {
-        if (section.lectures) {
-          const lecture = section.lectures.find((l) => l.uuid === uuidLecture);
-          if (lecture) {
-            lecture.description = value;
-            break;
-          }
-        }
-      }
-    }
-
-    return listSectionPutClone;
-  }
   function createMarkup(html) {
     return {
       __html: DOMPurify.sanitize(html),

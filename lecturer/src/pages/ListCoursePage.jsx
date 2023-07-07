@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, Input, Select, Upload } from "antd";
+import { Form, Input, Select } from "antd";
 
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams, generatePath } from "react-router-dom";
+import { useNavigate, generatePath } from "react-router-dom";
 import { ROUTES } from "../constants/routes";
-import { getListCourseAction } from "redux/actions";
-const api = process.env.REACT_APP_API;
+
+import { getListCourse } from "../utils/helpers/workWithAPI";
+
 function ListCoursePage() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const accessToken = localStorage.getItem("accessToken");
-  useEffect(() => {
-    dispatch(
-      getListCourseAction({ accessToken: accessToken, page: 1, perPage: 10 })
-    );
-  }, []);
+  const [listCourse, setListCourse] = useState([]);
 
-  const { listCourse } = useSelector((store) => store.course);
+  useEffect(() => {
+    getListCourse(accessToken, setListCourse);
+  }, []);
+  function deleteCourse() {}
+
   const renderCourses = (courses) => {
-    return courses?.map((item, index) => {
-      console.log(item);
+    return courses?.map((item) => {
       return (
         <div
           key={item.uuid}
@@ -30,7 +28,7 @@ function ListCoursePage() {
               src={
                 item.imageUrl === "string" || item.imageUrl === ""
                   ? "https://s.udemycdn.com/course/200_H/placeholder.jpg"
-                  : `${api}/${item.imageUrl}`
+                  : `${item.imageUrl}`
               }
               alt="img"
               className=""
@@ -50,8 +48,19 @@ function ListCoursePage() {
                 );
               }}
             >
-              Edit / manage course
+              Edit / Manage course
             </h4>
+            <button
+              className="hidden group-hover:block 
+            absolute top-[35%] right-[20%] text-[20px]
+            font-[700] text-[#ffffff]
+            bg-[#ec5126ea] py-3 px-4"
+              onClick={() => {
+                deleteCourse(item.uuid);
+              }}
+            >
+              Delete
+            </button>
           </div>
         </div>
       );
@@ -115,9 +124,7 @@ function ListCoursePage() {
             New course
           </button>
         </div>
-        <div className="flex flex-col gap-4  ">
-          {renderCourses(listCourse?.data?.data)}
-        </div>
+        <div className="flex flex-col gap-4  ">{renderCourses(listCourse)}</div>
       </div>
     </div>
   );

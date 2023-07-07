@@ -1,80 +1,79 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams, generatePath } from "react-router-dom";
-import { ROUTES } from "../constants/routes";
-import { getCourseAction, putCourseAction } from "redux/actions";
 import SliderBarCreateCourse from "components/SliderBarCreateCourse";
-import HeadChangeContentCourse from "components/HeadChangeContentCourse";
+import HeaderChangeContentCourse from "components/HeaderChangeContentCourse";
 import FormIntendedLearners from "components/FormIntendedLearners";
+import { getCourse, putCourse } from "utils/helpers/workWithAPI";
 
 function ChangeGoalsCoursePage() {
+  const { courseUuid } = useParams();
   const accessToken = localStorage.getItem("accessToken");
 
-  const { courseUuid } = useParams();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { dataCourse } = useSelector((store) => store.course);
-  const [infoCourse, setInfoCourse] = useState({});
+  const [dataCourse, setDataCourse] = useState();
 
+  const [infoCourse, setInfoCourse] = useState({});
   const [courseKnowledgeList, setCourseKnowledgeList] = useState([]);
   const [coursePrerequisiteList, setCoursePrerequisiteList] = useState([]);
-  const [courseRecommendationList, setCourseRecommendationList] = useState([]);
+  const [targetLearners, setTargetLearners] = useState([]);
+  const [isAlertSaveInfoCourseSuccess, setIsAlertSaveInfoCourseSuccess] =
+    useState(false);
+  const [isAllowSaveInfoCourse, setIsAllowSaveInfoCourse] = useState(false);
 
   useEffect(() => {
-    dispatch(getCourseAction({ courseUuid: courseUuid }));
+    getCourse(courseUuid, setDataCourse);
   }, []);
   useEffect(() => {
-    const {
-      createdAt,
-      createdBy,
-      lastUpdatedAt,
-      lastUpdatedBy,
-      uuid,
-      category,
-      subCategory,
-      topic,
-      ...dataSplitted
-    } = dataCourse.data;
-    setInfoCourse(dataSplitted);
+    if (dataCourse) {
+      const {
+        createdAt,
+        createdBy,
+        lastUpdatedAt,
+        lastUpdatedBy,
+        uuid,
+        category,
+        subCategory,
+        topic,
+        ...dataSplitted
+      } = dataCourse.data;
+      setInfoCourse(dataSplitted);
+    }
   }, [dataCourse]);
+
   useEffect(() => {
     setCourseKnowledgeList(infoCourse.courseKnowledgeList);
     setCoursePrerequisiteList(infoCourse.coursePrerequisiteList);
-    setCourseRecommendationList(infoCourse.courseRecommendationList);
+    setTargetLearners(infoCourse.targetLearners);
   }, [infoCourse]);
 
   // PUT COURSE
-  const submitForm = () => {
-    dispatch(
-      putCourseAction({
-        accessToken: accessToken,
-        courseUuid: courseUuid,
-        data: {
-          ...infoCourse,
-          topicUuid: dataCourse.data.topic.uuid,
-          courseKnowledgeList: courseKnowledgeList,
-          coursePrerequisiteList: coursePrerequisiteList,
-          courseRecommendationList: courseRecommendationList,
-        },
-        callback: (courseUuid) => {
-          navigate(
-            generatePath(ROUTES.LECTURE.CHANGE_CURRICULUM_COURSE, {
-              courseUuid: courseUuid,
-            })
-          );
-        },
-      })
-    );
+  const handleSubmitForm = () => {
+    let dataCoursePut = {
+      ...infoCourse,
+      topicUuid: dataCourse.data.topic.uuid,
+      courseKnowledgeList: courseKnowledgeList,
+      coursePrerequisiteList: coursePrerequisiteList,
+      targetLearners: targetLearners,
+    };
+    let callback = () => {
+      setIsAlertSaveInfoCourseSuccess(true);
+      setIsAllowSaveInfoCourse(false);
+    };
+    putCourse(accessToken, courseUuid, dataCoursePut, callback);
   };
 
   return (
     <div className="flex flex-col justify-center items-center max-w-[1400px] w-full ">
-      <HeadChangeContentCourse submitForm={submitForm} />
+      <HeaderChangeContentCourse
+        handleSubmitForm={handleSubmitForm}
+        isAlertSaveInfoCourseSuccess={isAlertSaveInfoCourseSuccess}
+        setIsAlertSaveInfoCourseSuccess={setIsAlertSaveInfoCourseSuccess}
+        isAllowSaveInfoCourse={isAllowSaveInfoCourse}
+      />
       <div className="max-w-[1340px] w-full flex  my-2 gap-2 p-[32px] mt-[44px] ">
         <SliderBarCreateCourse number={2} />
         <div className="content w-[1027px] shadow-md  ml-[240px]">
-          <div className="border-b-[0.8px] px-[48px] py-[24px] font-[700] text-[24px] ">
+          <div className="border-b-[0.8px] px-8 py-[24px] font-[700] text-[24px] ">
             Intended learners
           </div>
           <div className="p-8">
@@ -98,9 +97,10 @@ function ChangeGoalsCoursePage() {
               </div>
 
               <FormIntendedLearners
-                submitForm={submitForm}
+                handleSubmitForm={handleSubmitForm}
                 arrayContent={courseKnowledgeList}
                 setArrayContent={setCourseKnowledgeList}
+                setIsAllowSaveInfoCourse={setIsAllowSaveInfoCourse}
               />
             </div>
 
@@ -121,9 +121,10 @@ function ChangeGoalsCoursePage() {
               </div>
 
               <FormIntendedLearners
-                submitForm={submitForm}
+                handleSubmitForm={handleSubmitForm}
                 arrayContent={coursePrerequisiteList}
                 setArrayContent={setCoursePrerequisiteList}
+                setIsAllowSaveInfoCourse={setIsAllowSaveInfoCourse}
               />
             </div>
 
@@ -141,9 +142,10 @@ function ChangeGoalsCoursePage() {
                 </p>
               </div>
               <FormIntendedLearners
-                submitForm={submitForm}
-                arrayContent={courseRecommendationList}
-                setArrayContent={setCourseRecommendationList}
+                handleSubmitForm={handleSubmitForm}
+                arrayContent={targetLearners}
+                setArrayContent={setTargetLearners}
+                setIsAllowSaveInfoCourse={setIsAllowSaveInfoCourse}
               />
             </div>
           </div>

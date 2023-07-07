@@ -1,88 +1,62 @@
 import React, { useEffect, useState } from "react";
-
 import { Form, Select } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import {
-  getCategoriesAction,
-  getSubCategoriesAction,
-  getTopicsAction,
-} from "redux/actions";
 
+import {
+  getCategory,
+  getSubCategories,
+  getTopics,
+} from "../utils/helpers/workWithAPI";
 function FormChangeTopic({
   formInfoCourse,
   infoCourse,
   setInfoCourse,
   handleSubmitInfoCourse,
+  setIsAllowSaveInfoCourse,
 }) {
-  const dispatch = useDispatch();
-  const { categories } = useSelector((store) => store.cate_subCate_topic);
-  const { subCategories } = useSelector((store) => store.cate_subCate_topic);
-  const { topics } = useSelector((store) => store.cate_subCate_topic);
   const [categoriesForOptions, setCategoriesForOptions] = useState([]);
   const [subCategoriesForOptions, setSubCategoriesForOptions] = useState([]);
   const [topicsForOptions, setTopicsForOptions] = useState([]);
+
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [topics, setTopics] = useState([]);
+
   //get categories when render cpn
   useEffect(() => {
-    dispatch(
-      getCategoriesAction({
-        page: 1,
-        perPage: 10,
-      })
-    );
+    getCategory(setCategories);
   }, []);
 
   //get subCate, topic when infoCourseClone changed
   useEffect(() => {
-    getSubCategories(infoCourse?.category);
-    getTopics(infoCourse?.subCategory);
+    getSubCategories(infoCourse?.categoryUuid, setSubCategories);
+    getTopics(infoCourse?.subCategoryUuid, setTopics);
   }, [infoCourse]);
 
-  //function get  subCate, topic
-  const getSubCategories = (value) => {
-    setSubCategoriesForOptions([]);
-    dispatch(
-      getSubCategoriesAction({
-        page: 1,
-        perPage: 10,
-        categoryUuid: value,
-      })
-    );
-  };
-  const getTopics = (value) => {
-    setTopicsForOptions([]);
-    dispatch(
-      getTopicsAction({
-        page: 1,
-        perPage: 10,
-        subCategoryUuid: value,
-      })
-    );
-  };
   //COVERT DATA FROM API TO DATA USED FOR OPTION ANT
   useEffect(() => {
     setCategoriesForOptions([]);
-    categories?.data?.map((item) => {
-      setCategoriesForOptions((prevFormData) => [
-        ...prevFormData,
+    categories?.map((item) => {
+      setCategoriesForOptions((prevCategoriesForOptions) => [
+        ...prevCategoriesForOptions,
         { label: item.name, value: item.uuid },
       ]);
     });
   }, [categories]);
+
   useEffect(() => {
     setSubCategoriesForOptions([]);
-    subCategories?.data?.map((item) => {
-      setSubCategoriesForOptions((prevFormData) => [
-        ...prevFormData,
+    subCategories?.map((item) => {
+      setSubCategoriesForOptions((prevSubCategoriesForOptions) => [
+        ...prevSubCategoriesForOptions,
         { label: item.name, value: item.uuid },
       ]);
     });
   }, [subCategories]);
   useEffect(() => {
     setTopicsForOptions([]);
-    topics?.data?.map((item) => {
-      setTopicsForOptions((prevFormData) => [
-        ...prevFormData,
+    topics?.map((item) => {
+      setTopicsForOptions((prevTopicsForOptions) => [
+        ...prevTopicsForOptions,
         { label: item.name, value: item.uuid },
       ]);
     });
@@ -95,23 +69,26 @@ function FormChangeTopic({
       onFinish={handleSubmitInfoCourse}
       fields={[
         {
-          name: "category",
-          value: infoCourse?.category,
+          name: "categoryUuid",
+          value: infoCourse?.categoryUuid,
         },
         {
-          name: "subCategory",
-          value: infoCourse?.subCategory,
+          name: "subCategoryUuid",
+          value: infoCourse?.subCategoryUuid,
         },
         {
-          name: "topic",
-          value: infoCourse?.topic,
+          name: "topicUuid",
+          value: infoCourse?.topicUuid,
         },
       ]}
-      className="flex flex-col gap-4 "
+      className="flex flex-col gap-4 ml-4"
+      labelCol={{
+        span: 10,
+      }}
     >
       <Form.Item
         label="Category"
-        name="category"
+        name="categoryUuid"
         rules={[
           {
             required: true,
@@ -129,9 +106,9 @@ function FormChangeTopic({
           onChange={(value) => {
             setInfoCourse({
               ...infoCourse,
-              category: value,
-              topic: undefined,
-              subCategory: undefined,
+              categoryUuid: value,
+              topicUuid: undefined,
+              subCategoryUuid: undefined,
             });
 
             formInfoCourse.setFieldsValue({
@@ -143,17 +120,13 @@ function FormChangeTopic({
       </Form.Item>
       <Form.Item
         label="subCategory"
-        name="subCategory"
+        name="subCategoryUuid"
         rules={[
           {
             required: true,
             message: "Please select your subCategory of course!",
           },
         ]}
-        style={{
-          display: "flex",
-          // flexDirection: "column",
-        }}
       >
         <Select
           showSearch
@@ -165,8 +138,8 @@ function FormChangeTopic({
           onChange={(value) => {
             setInfoCourse({
               ...infoCourse,
-              subCategory: value,
-              topic: undefined,
+              subCategoryUuid: value,
+              topicUuid: undefined,
             });
 
             formInfoCourse.setFieldsValue({
@@ -177,7 +150,7 @@ function FormChangeTopic({
       </Form.Item>
       <Form.Item
         label="Topic"
-        name="topic"
+        name="topicUuid"
         rules={[
           {
             required: true,
@@ -192,12 +165,13 @@ function FormChangeTopic({
           }}
           placeholder="Select topic"
           options={topicsForOptions}
-          disabled={!formInfoCourse.getFieldValue("subCategory")}
+          disabled={!formInfoCourse.getFieldValue("subCategoryUuid")}
           onChange={(value) => {
             setInfoCourse({
               ...infoCourse,
-              topic: value,
+              topicUuid: value,
             });
+            setIsAllowSaveInfoCourse && setIsAllowSaveInfoCourse(true);
           }}
         />
       </Form.Item>

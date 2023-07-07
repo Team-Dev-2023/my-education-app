@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiFillCaretDown,
   AiFillCaretUp,
@@ -7,7 +7,8 @@ import {
   AiFillEdit,
 } from "react-icons/ai";
 import ShowMoreLecture from "./ShowMoreLecture";
-import DescriptionLecture from "./DescriptionLecture";
+import { Switch } from "antd";
+import createNewListSectionPut from "../../utils/helpers/createNewListSectionPut";
 
 function LectureCourse({
   lectureUuid,
@@ -19,7 +20,10 @@ function LectureCourse({
 }) {
   const [isEditLecture, setIsEditLecture] = useState(false);
   const [isShowMoreContent, setIsShowMoreContent] = useState(false);
-  const [lectureEdit, setLectureEdit] = useState(lecture);
+  const [lectureEdit, setLectureEdit] = useState();
+  useEffect(() => {
+    setLectureEdit(lecture);
+  }, [lecture]);
 
   const deleteLecture = () => {
     let newArrayDeletedLecture = listSectionPut[
@@ -33,6 +37,18 @@ function LectureCourse({
     setListSectionPut(newListSectionEdit);
   };
 
+  const onChangePreview = (checked) => {
+    setLectureEdit({ ...lectureEdit, preview: checked });
+
+    let newListSectionPut = createNewListSectionPut(
+      listSectionPut,
+      lectureUuid,
+      "preview",
+      checked
+    );
+    setListSectionPut(newListSectionPut);
+  };
+
   //change name lecture
   const onChangeInputUpdateNameLecture = (e) => {
     setLectureEdit({ ...lectureEdit, name: e.target.value });
@@ -40,30 +56,16 @@ function LectureCourse({
 
   const saveUpdateNameLecture = (e) => {
     e.preventDefault();
-    let a = changeLectureNameByUUID(lectureEdit.name);
-    console.log("changeLectureNameByUUID", a);
-    setListSectionPut(a);
+    let newListSectionPut = createNewListSectionPut(
+      listSectionPut,
+      lectureUuid,
+      "name",
+      lectureEdit.name
+    );
+    setListSectionPut(newListSectionPut);
     setIsEditLecture(false);
   };
 
-  function changeLectureNameByUUID(newName) {
-    let listSectionPutClone = JSON.parse(JSON.stringify(listSectionPut));
-    console.log("listSectionPutClone", listSectionPutClone);
-    if (listSectionPutClone) {
-      for (const section of listSectionPutClone) {
-        if (section.lectures) {
-          const lecture = section.lectures.find((l) => l.uuid === lectureUuid);
-          console.log("cccccccccccccc", lecture);
-          if (lecture) {
-            lecture.name = newName;
-            break;
-          }
-        }
-      }
-    }
-
-    return listSectionPutClone;
-  }
   return (
     <div
       key={lecture.uuid}
@@ -73,7 +75,7 @@ function LectureCourse({
         <div className="p-4 border-[0.8px] border-black">
           <form
             form={"editLectureForm"}
-            onSubmit={(e, value) => saveUpdateNameLecture(e)}
+            onSubmit={(e) => saveUpdateNameLecture(e)}
             action=""
             className="flex flex-col gap-4"
           >
@@ -113,10 +115,7 @@ function LectureCourse({
         </div>
       ) : (
         <div className="border-[0.8px] border-black ">
-          <div
-            className="flex justify-between p-4"
-            onClick={() => setIsShowMoreContent(!isShowMoreContent)}
-          >
+          <div className="flex justify-between p-4">
             <div className="flex gap-4 w-full group">
               <div className="flex gap-2">
                 <AiFillCheckCircle /> Lecture {lecture.position}:
@@ -135,7 +134,18 @@ function LectureCourse({
                 </button>
               </div>
             </div>
-            <div>
+            <div className="flex">
+              Preview:
+              <Switch
+                style={{
+                  backgroundColor: lecture.preview ? "#ae3be3" : "#b3aeb5",
+                }}
+                checked={lecture.preview}
+                onChange={onChangePreview}
+                className="mx-4 "
+              />
+            </div>
+            <div onClick={() => setIsShowMoreContent(!isShowMoreContent)}>
               {isShowMoreContent ? <AiFillCaretUp /> : <AiFillCaretDown />}
             </div>
           </div>

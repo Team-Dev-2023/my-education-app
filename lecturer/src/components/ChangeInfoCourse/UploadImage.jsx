@@ -9,6 +9,7 @@ function UploadImage({
   setInfoCourse,
   formInfoCourse,
   handleSubmitInfoCourse,
+  setIsAllowSaveInfoCourse,
 }) {
   const [fileList, setFileList] = useState([]);
   useEffect(() => {
@@ -20,20 +21,24 @@ function UploadImage({
               uid: "-1",
               name: "image.png",
               status: "done",
-              url: `${api}/${dataCourse?.data?.imageUrl}`,
+              url: `${dataCourse?.data?.imageUrl}`,
             },
           ]
     );
   }, [dataCourse]);
+
   //upload file img
   const [imageUrl, setImageUrl] = useState("");
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList.slice(-1));
-    setImageUrl((prevImageUrl) => newFileList.slice(-1)[0]?.response?.url);
+    setImageUrl(
+      (prevImageUrl) => `${api}/${newFileList.slice(-1)[0]?.response?.url}`
+    );
     setInfoCourse((prevInfoCourse) => ({
       ...prevInfoCourse,
-      imageUrl: newFileList.slice(-1)[0]?.response?.url,
+      imageUrl: `${api}/${newFileList.slice(-1)[0]?.response?.url}`,
     }));
+    setIsAllowSaveInfoCourse(true);
   };
   const onPreview = async (file) => {
     let src = file.url;
@@ -55,9 +60,9 @@ function UploadImage({
       form={formInfoCourse}
       name="uploadFile"
       onFinish={handleSubmitInfoCourse}
-      className="my-6"
+      className="ml-4 mt-4"
     >
-      <Form.Item label={"Course image"} name={"imageUrl"}>
+      <Form.Item name={"imageUrl"}>
         <ImgCrop rotationSlider>
           <Upload
             action={`${api}/file-uploader/image`}

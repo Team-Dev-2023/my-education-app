@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { EditorState, ContentState, convertFromHTML } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { convertToHTML } from "draft-convert";
-import DOMPurify from "dompurify";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../components/styles/RichTextEditorCss.css";
@@ -40,15 +39,8 @@ function RichTextEditor({ description, setDescription }) {
     setDescription(html);
   }, [editorState]);
 
-  //RENDER HTML FROM RICH TEXT EDITOR
-  function createMarkup(html) {
-    return {
-      __html: DOMPurify.sanitize(html),
-    };
-  }
-
   return (
-    <div>
+    <div className="px-4">
       <Editor
         editorState={editorState}
         onEditorStateChange={setEditorState}
@@ -69,10 +61,6 @@ function RichTextEditor({ description, setDescription }) {
           },
         }}
       />
-      {/* <div
-        className="preview"
-        dangerouslySetInnerHTML={createMarkup(description)}
-      ></div> */}
     </div>
   );
 }

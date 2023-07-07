@@ -1,5 +1,4 @@
 import React from "react";
-import { AiFillDelete } from "react-icons/ai";
 
 import UploadVideo from "./UploadVideo";
 import DescriptionLecture from "./DescriptionLecture";
@@ -10,7 +9,6 @@ function ShowMoreLecture({
   listSectionPut,
   setListSectionPut,
 }) {
-  console.log("saaaaaaaaaaaaaaaa");
   return (
     <>
       {isShowMoreContent ? (

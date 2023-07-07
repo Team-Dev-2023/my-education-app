@@ -9,5 +9,7 @@ export const ROUTES = {
     CHANGE_GOALS_COURSE: `/lecturer/course/:courseUuid/change-goals-course/`,
     CHANGE_CURRICULUM_COURSE:
       "/lecturer/course/:courseUuid/change-curriculum-course/",
+    CHANGE_PRICING_AND_PROMOTIONS_COURSE:
+      "/lecturer/course/:courseUuid/change-PricingAndPromotions-course/",
   },
 };

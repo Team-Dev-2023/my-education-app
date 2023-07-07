@@ -1,4 +1,4 @@
-import { Button, Steps, Form } from "antd";
+import { Button, Steps } from "antd";
 
 import { useState } from "react";
 
@@ -6,8 +6,12 @@ import Step1 from "./StepsCreateCourse/Step1";
 import Step2 from "./StepsCreateCourse/Step2";
 import Step3 from "./StepsCreateCourse/Step3";
 
-function StepCreateCourse({ setDataCourse, onFinishCreateCourse }) {
-  const [createCourseForm] = Form.useForm();
+function StepCreateCourse({
+  infoCourse,
+  setInfoCourse,
+  createCourseForm,
+  handleSubmitInfoCourse,
+}) {
   // FORM STEP
   const [current, setCurrent] = useState(0);
   const next = () => {
@@ -27,7 +31,7 @@ function StepCreateCourse({ setDataCourse, onFinishCreateCourse }) {
       content: (
         <Step2
           createCourseForm={createCourseForm}
-          setDataCourse={setDataCourse}
+          setInfoCourse={setInfoCourse}
           next={next}
         />
       ),
@@ -37,8 +41,9 @@ function StepCreateCourse({ setDataCourse, onFinishCreateCourse }) {
       content: (
         <Step3
           createCourseForm={createCourseForm}
-          setDataCourse={setDataCourse}
-          onFinishCreateCourse={onFinishCreateCourse}
+          infoCourse={infoCourse}
+          setInfoCourse={setInfoCourse}
+          handleSubmitInfoCourse={handleSubmitInfoCourse}
           next={next}
         />
       ),

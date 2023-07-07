@@ -14,6 +14,7 @@ import ChangeInfoCoursePage from "pages/ChangeInfoCoursePage";
 import ListCoursePage from "pages/ListCoursePage";
 import CreateCoursePage from "pages/CreateCoursePage";
 import ChangeCurriculumCoursePage from "pages/ChangeCurriculumCoursePage";
+import ChangePricingAndPromotionsPage from "pages/ChangePricingAndPromotionsPage";
 
 require("moment/locale/vi");
 
@@ -67,6 +68,10 @@ function App() {
           <Route
             path={ROUTES.LECTURE.CHANGE_CURRICULUM_COURSE}
             element={<ChangeCurriculumCoursePage />}
+          />
+          <Route
+            path={ROUTES.LECTURE.CHANGE_PRICING_AND_PROMOTIONS_COURSE}
+            element={<ChangePricingAndPromotionsPage />}
           />
         </Route>
       </Routes>

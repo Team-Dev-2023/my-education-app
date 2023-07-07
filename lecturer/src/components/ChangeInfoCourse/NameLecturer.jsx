@@ -1,5 +1,4 @@
 import React from "react";
-import { Form } from "antd";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes";
@@ -13,7 +12,7 @@ function NameLecturer() {
       <h5 className="text-[20px]">Instructor profile(s):</h5>
       <div
         className="flex items-center gap-2 py-6 !pl-2
-                  border-b-[0.8px]  hover:text-[#5624d0] cursor-pointer"
+                   hover:text-[#5624d0] cursor-pointer"
         onClick={() => {
           navigate(ROUTES.LECTURE.HOME_PAGE);
         }}
@@ -21,7 +20,10 @@ function NameLecturer() {
         {userInfo?.data?.avatar ? (
           <img className="w-[32px] " src="userInfo.data.avatar" alt="avatar" />
         ) : (
-          <div className="w-[64px] h-[64px] !text-white text-[30px] flex items-center justify-center leading-[24px] font-bold  rounded-full bg-black hover:cursor-pointer ">
+          <div
+            className="w-[64px] h-[64px] !text-white text-[30px] flex items-center justify-center 
+          leading-[24px] font-bold  rounded-full bg-black hover:cursor-pointer "
+          >
             {userInfo?.data?.firstName?.charAt(0)}
           </div>
         )}

@@ -1,40 +1,44 @@
 import React, { useState, useEffect } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCourseAction, putCourseAction } from "redux/actions";
+
+import { getCourse, putCourse } from "utils/helpers/workWithAPI";
+
 import SectionCourse from "components/ChangeCurriculum/SectionCourse";
 import SliderBarCreateCourse from "components/SliderBarCreateCourse";
-import HeadChangeContentCourse from "components/HeadChangeContentCourse";
+import HeaderChangeContentCourse from "components/HeaderChangeContentCourse";
 import AddNewSection from "components/ChangeCurriculum/AddNewSection";
 
 function ChangeCurriculumCoursePage() {
-  const dispatch = useDispatch();
-  const accessToken = localStorage.getItem("accessToken");
   const { courseUuid } = useParams();
-  const { dataCourse } = useSelector((store) => store.course);
-  console.log("dataCourse", dataCourse);
+
+  const accessToken = localStorage.getItem("accessToken");
   const [infoCourse, setInfoCourse] = useState({});
   const [listSectionPut, setListSectionPut] = useState();
+  const [isAlertSaveInfoCourseSuccess, setIsAlertSaveInfoCourseSuccess] =
+    useState(false);
+  const [dataCourse, setDataCourse] = useState();
+  const [isAllowSaveInfoCourse, setIsAllowSaveInfoCourse] = useState(false);
 
   useEffect(() => {
-    dispatch(getCourseAction({ courseUuid: courseUuid }));
+    getCourse(courseUuid, setDataCourse);
   }, []);
 
   useEffect(() => {
-    const {
-      createdAt,
-      createdBy,
-      lastUpdatedAt,
-      lastUpdatedBy,
-      uuid,
-      category,
-      subCategory,
-      topic,
-      ...dataSplitted
-    } = dataCourse.data;
-    setInfoCourse(dataSplitted);
-    setListSectionPut(dataCourse.data.sections);
+    if (dataCourse) {
+      const {
+        createdAt,
+        createdBy,
+        lastUpdatedAt,
+        lastUpdatedBy,
+        uuid,
+        category,
+        subCategory,
+        topic,
+        ...dataSplitted
+      } = dataCourse.data;
+      setInfoCourse(dataSplitted);
+      setListSectionPut(dataCourse.data.sections);
+    }
   }, [dataCourse]);
 
   const renderListSectionPut = (listSectionPut) => {
@@ -45,33 +49,40 @@ function ChangeCurriculumCoursePage() {
           section={item}
           listSectionPut={listSectionPut}
           setListSectionPut={setListSectionPut}
-          // infoCourse={infoCourse}
-          // setInfoCourse={setInfoCourse}
         ></SectionCourse>
       );
     });
   };
 
+  useEffect(() => {
+    listSectionPut === infoCourse.sections
+      ? setIsAllowSaveInfoCourse(false)
+      : setIsAllowSaveInfoCourse(true);
+  }, [listSectionPut]);
+
   // PUT COURSE
   const submitEditCurriculum = () => {
-    dispatch(
-      putCourseAction({
-        accessToken: accessToken,
-        courseUuid: courseUuid,
-        data: {
-          ...infoCourse,
-          topicUuid: dataCourse.data.topic.uuid,
-          sections: listSectionPut,
-        },
-        callback: (courseUuid) => {
-          // navigate(generatePath(ROUTES.LECTURE.LIST_COURSE));
-        },
-      })
-    );
+    let dataCoursePut = {
+      ...infoCourse,
+      topicUuid: dataCourse.data.topic.uuid,
+      sections: listSectionPut,
+    };
+    let callback = () => {
+      setIsAlertSaveInfoCourseSuccess(true);
+      setIsAllowSaveInfoCourse(false);
+    };
+    putCourse(accessToken, courseUuid, dataCoursePut, callback);
   };
+
   return (
     <div className="flex flex-col justify-center items-center max-w-[1400px] w-full ">
-      <HeadChangeContentCourse submitForm={submitEditCurriculum} />
+      <HeaderChangeContentCourse
+        handleSubmitForm={submitEditCurriculum}
+        isAlertSaveInfoCourseSuccess={isAlertSaveInfoCourseSuccess}
+        setIsAlertSaveInfoCourseSuccess={setIsAlertSaveInfoCourseSuccess}
+        isAllowSaveInfoCourse={isAllowSaveInfoCourse}
+      />
+
       <div className="max-w-[1340px] w-full flex  my-2 gap-2 p-[32px] mt-[44px] ">
         <SliderBarCreateCourse number={3} />
         <div className="content w-[1027px] shadow-md  ml-[240px]">

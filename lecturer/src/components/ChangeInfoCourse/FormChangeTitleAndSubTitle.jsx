@@ -6,11 +6,13 @@ function FormChangeTitleAndSubTitle({
   infoCourse,
   setInfoCourse,
   handleSubmitInfoCourse,
+  setIsAllowSaveInfoCourse,
 }) {
   return (
     <Form
       form={formInfoCourse}
       onFinish={handleSubmitInfoCourse}
+      onChange={() => setIsAllowSaveInfoCourse(true)}
       name="changeTitleAndSubTitle"
       layout={"vertical"}
       style={{
@@ -42,6 +44,7 @@ function FormChangeTitleAndSubTitle({
         <Input
           placeholder="Insert your course title"
           showCount
+          className="ml-4"
           onChange={(e) => {
             setInfoCourse({
               ...infoCourse,
@@ -51,7 +54,7 @@ function FormChangeTitleAndSubTitle({
           maxLength={60}
         />
       </Form.Item>
-      <p className="text-[14px] ml-2 mt-2 mb-4">
+      <p className="text-[12px] ml-4 mt-2 mb-4 font-[400] text-[#6a6f73]">
         Your title should be a mix of attention-grabbing, informative, and
         optimized for search
       </p>
@@ -68,6 +71,7 @@ function FormChangeTitleAndSubTitle({
         <Input
           placeholder="Insert your course subtitle"
           showCount
+          className="ml-4"
           onChange={(e) => {
             setInfoCourse({
               ...infoCourse,
@@ -77,6 +81,10 @@ function FormChangeTitleAndSubTitle({
           maxLength={120}
         />
       </Form.Item>
+      <p className="text-[12px] ml-4 mt-2 mb-4 font-[400] text-[#6a6f73]">
+        Use 1 or 2 related keywords, and mention 3-4 of the most important areas
+        that you've covered during your course.
+      </p>
     </Form>
   );
 }
