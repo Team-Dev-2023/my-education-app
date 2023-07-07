@@ -48,12 +48,11 @@ function SectionsList(props) {
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
-            className="!bg-[#f7f9fa] whitespace-nowrap"
+            className="!bg-[#f7f9fa] overflow-hidden whitespace-nowrap text-ellipsis"
           >
-            <span className="leading-[1.2] text-[16px] font-[700]">
+            <span className="mr-auto w-[400px] leading-[1.2] text-[16px] font-[700] overflow-hidden whitespace-nowrap text-ellipsis">
               {item.name}
             </span>
-            <span className="w-full inline-block"> </span>
             <span className="text-[#1c1d1f] text-[14px] font-[400] leading-[1.4]">
               {item.lectures?.length} lectures -{" "}
               {lecturersTotalLength(item.lectures)}
