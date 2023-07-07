@@ -1,0 +1,142 @@
+[
+  {
+    "uuid": 1,
+    "name": "IT Certifications",
+    "categoryUuid": 1
+  },
+  {
+    "uuid": 2,
+    "name": "Network & security",
+    "categoryUuid": 1
+  },
+  {
+    "uuid": 3,
+    "name": "Hardware",
+    "categoryUuid": 1
+  },
+  {
+    "uuid": 4,
+    "name": "Microsoft",
+    "categoryUuid": 2
+  },
+  {
+    "uuid": 5,
+    "name": "Apple",
+    "categoryUuid": 2
+  },
+  {
+    "uuid": 6,
+    "name": "Google",
+    "categoryUuid": 2
+  },
+  {
+    "uuid": 7,
+    "name": "Personal Transformation",
+    "categoryUuid": 3
+  },
+  {
+    "uuid": 8,
+    "name": "Personal Productivity",
+    "categoryUuid": 3
+  },
+  {
+    "uuid": 9,
+    "name": "Leadership",
+    "categoryUuid": 3
+  },
+  {
+    "uuid": 10,
+    "name": "Fitness",
+    "categoryUuid": 4
+  },
+  {
+    "uuid": 11,
+    "name": "General Health",
+    "categoryUuid": 4
+  },
+  {
+    "uuid": 12,
+    "name": "Sports",
+    "categoryUuid": 4
+  },
+  {
+    "uuid": 13,
+    "name": "Nutrition & Diet",
+    "categoryUuid": 4
+  },
+  {
+    "uuid": 14,
+    "name": "Yoga",
+    "categoryUuid": 4
+  },
+  {
+    "uuid": 15,
+    "name": "Instruments",
+    "categoryUuid": 5
+  },
+  {
+    "uuid": 16,
+    "name": "Music Production",
+    "categoryUuid": 5
+  },
+  {
+    "uuid": 17,
+    "name": "Music Fundamentals",
+    "categoryUuid": 5
+  },
+  {
+    "uuid": 18,
+    "name": "Vocal",
+    "categoryUuid": 5
+  },
+  {
+    "uuid": 19,
+    "name": "Music Techniques",
+    "categoryUuid": 5
+  },
+  {
+    "uuid": 20,
+    "name": "Web Development",
+    "categoryUuid": 6
+  },
+  {
+    "uuid": 21,
+    "name": "Data Science",
+    "categoryUuid": 6
+  },
+  {
+    "uuid": 22,
+    "name": "Mobile Development",
+    "categoryUuid": 6
+  },
+  {
+    "uuid": 23,
+    "name": "Entrepreneurship",
+    "categoryUuid": 7
+  },
+  {
+    "uuid": 24,
+    "name": "Communication",
+    "categoryUuid": 7
+  },
+  {
+    "uuid": 25,
+    "name": "Management",
+    "categoryUuid": 7
+  },
+  {
+    "uuid": 26,
+    "name": "Accounting & Bookkeeping",
+    "categoryUuid": 8
+  },
+  {
+    "uuid": 27,
+    "name": "Compliance",
+    "categoryUuid": 8
+  },
+  {
+    "uuid": 28,
+    "name": "Cryptocurrency & Blockchain",
+    "categoryUuid": 8
+  }
+]

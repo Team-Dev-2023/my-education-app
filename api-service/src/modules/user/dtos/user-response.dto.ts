@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { EUserRole } from 'src/shared/constants/common.contants';
+import { BaseAuditReponseDto } from 'src/shared/dtos/base-audit-response.dto';
 
-export class UserResponseDto {
+export class UserResponseDto extends BaseAuditReponseDto {
   @ApiProperty({ type: String, required: false })
   uuid: string;
 
@@ -12,7 +13,7 @@ export class UserResponseDto {
   password?: string;
 
   @ApiProperty({ type: String, required: false })
-  email: string;
+  email?: string;
 
   @ApiProperty({ type: String, required: false })
   avatar?: string;
@@ -24,11 +25,11 @@ export class UserResponseDto {
   lastName: string;
 
   @ApiProperty({ type: String, required: false })
-  phone: string;
+  phone?: string;
 
   @ApiProperty({ type: String, required: false })
-  country: string;
+  country?: string;
 
   @ApiProperty({ type: EUserRole, enum: EUserRole, required: false })
-  role: EUserRole;
+  role?: EUserRole;
 }

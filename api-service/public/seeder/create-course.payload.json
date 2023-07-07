@@ -1,0 +1,33 @@
+{
+  "title": "string",
+  "subTitle": "string",
+  "description": "richHtml string",
+  "prerequisites": "string",
+  "recommendation": "string",
+  "imageUrl": "string",
+  "topicUuid": "string",
+  "courseKnowledge": [
+    {
+      "description": "string"
+    },
+    {
+      "description": "string"
+    }
+  ],
+  "sections": [
+    {
+      "name": "string",
+      "order": "number",
+      "lectures": [
+        {
+          "name": "string",
+          "description": "string",
+          "preview": "boolean",
+          "type": "enum //0: video, 1: assignment, 2: quiz",
+          "videoDuration": "number",
+          "order": "number"
+        }
+      ]
+    }
+  ]
+}

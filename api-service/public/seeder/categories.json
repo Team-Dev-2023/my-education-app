@@ -1,0 +1,34 @@
+[
+  {
+    "uuid": 1,
+    "name": "IT & Software"
+  },
+  {
+    "uuid": 2,
+    "name": "Office Productivity"
+  },
+  {
+    "uuid": 3,
+    "name": "Personal Development"
+  },
+  {
+    "uuid": 4,
+    "name": "Health & Fitness"
+  },
+  {
+    "uuid": 5,
+    "name": "Music"
+  },
+  {
+    "uuid": 6,
+    "name": "Development"
+  },
+  {
+    "uuid": 7,
+    "name": "Business"
+  },
+  {
+    "uuid": 8,
+    "name": "Finance & Accounting"
+  }
+]

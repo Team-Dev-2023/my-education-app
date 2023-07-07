@@ -43,7 +43,7 @@ function LoginPage() {
             navigate(ROUTES.ADMIN.HOME_PAGE);
             dispatch(getUserInfoAction({ accessToken: accessToken }));
           },
-        })
+        }),
       );
     } catch (error) {
       console.log(error);
@@ -78,6 +78,7 @@ function LoginPage() {
               placeholder="Password"
               {...register("password", { required: true })}
               type={passwordShown ? "text" : "password"}
+              className="w-full"
             />
             <i
               className="absolute right-4 top-[35%] hover:cursor-pointer"

@@ -2,6 +2,7 @@ import { ELoginMethod } from 'src/shared/constants/common.contants';
 import {
   Column,
   Entity,
+  Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -13,6 +14,7 @@ export class LoginMethod {
   @PrimaryGeneratedColumn('uuid')
   uuid: string;
 
+  @Index('idx_login_methods_username')
   @Column({ type: 'varchar', length: 256, nullable: false })
   username: string;
 

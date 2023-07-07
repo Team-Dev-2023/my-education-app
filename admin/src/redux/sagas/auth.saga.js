@@ -28,6 +28,31 @@ function* LoginSaga(action) {
   }
 }
 
+function* getUserInfoSaga(action) {
+  try {
+    const { accessToken } = action.payload;
+    const result = yield axios.get(`${api}${API_ENDPOINT.GET_USER_INFO}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    yield put({
+      type: SUCCESS(AUTH_ACTION.GET_USER_INFO),
+      payload: {
+        data: result.data,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: FAIL(AUTH_ACTION.GET_USER_INFO),
+      payload: {
+        error: " get profile user is error",
+      },
+    });
+  }
+}
+
 export default function* authSaga() {
   yield takeEvery(REQUEST(AUTH_ACTION.LOGIN), LoginSaga);
+  yield takeEvery(REQUEST(AUTH_ACTION.GET_USER_INFO), getUserInfoSaga);
 }

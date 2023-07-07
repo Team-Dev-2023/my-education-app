@@ -11,6 +11,7 @@ import { correlationIdMiddleware } from './middlewares/correlationid.middleware'
 import { initSwaggerDocs } from './shared/swagger';
 import { ResponseInterceptor } from './interceptors/response.interceptors';
 import { SERVICE_CONFIG } from './shared/constants/common.contants';
+import { HttpExceptionFilter } from './filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -29,6 +30,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.setGlobalPrefix(config.get('service.baseUrl'));
   await initSwaggerDocs(app);

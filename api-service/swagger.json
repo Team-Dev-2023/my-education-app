@@ -167,6 +167,16 @@
       "post": {
         "operationId": "CategoryController_createOne",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryInputDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": ""
@@ -174,6 +184,89 @@
         },
         "tags": [
           "Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "CategoryController_getAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/api/education/category/{categoryUuid}": {
+      "get": {
+        "operationId": "CategoryController_getOne",
+        "parameters": [
+          {
+            "name": "categoryUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Category"
+        ]
+      },
+      "delete": {
+        "operationId": "CategoryController_deleteOne",
+        "parameters": [
+          {
+            "name": "categoryUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
         ]
       }
     },
@@ -193,7 +286,14 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "Create Admin User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -212,7 +312,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Get user profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -248,7 +355,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Get user profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedReponse"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -308,6 +422,483 @@
           "Auth"
         ]
       }
+    },
+    "/api/education/sub-categories": {
+      "post": {
+        "operationId": "SubCategoryController_create",
+        "parameters": [
+          {
+            "name": "categoryUuid",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSubCategoryInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sub Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "SubCategoryController_getAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "categoryUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sub Category"
+        ]
+      }
+    },
+    "/api/education/sub-categories/{subCategoryUuid}": {
+      "get": {
+        "operationId": "SubCategoryController_getOne",
+        "parameters": [
+          {
+            "name": "subCategoryUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sub Category"
+        ]
+      },
+      "delete": {
+        "operationId": "SubCategoryController_deleteOne",
+        "parameters": [
+          {
+            "name": "subCategoryUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Sub Category"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/education/topics": {
+      "post": {
+        "operationId": "TopicController_create",
+        "parameters": [
+          {
+            "name": "subCategoryUuid",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTopicInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Topics"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "TopicController_getAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "subCategoryUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Topics"
+        ]
+      }
+    },
+    "/api/education/topics/{topicUuid}": {
+      "get": {
+        "operationId": "TopicController_getOne",
+        "parameters": [
+          {
+            "name": "topicUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Topics"
+        ]
+      },
+      "delete": {
+        "operationId": "TopicController_deleteOne",
+        "parameters": [
+          {
+            "name": "topicUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Topics"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/education/file-uploader/image": {
+      "post": {
+        "operationId": "FileUploaderController_uploadImage",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "File Uploader"
+        ]
+      }
+    },
+    "/api/education/file-uploader/video": {
+      "post": {
+        "operationId": "FileUploaderController_uploadVideo",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageUploadInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "File Uploader"
+        ]
+      }
+    },
+    "/api/education/courses": {
+      "post": {
+        "operationId": "CourseController_createOne",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCourseInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create course successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseReponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Course"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "CourseController_getAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "categoryUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subCategoryUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "topicUuid",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Course"
+        ]
+      }
+    },
+    "/api/education/courses/{courseUuid}": {
+      "get": {
+        "operationId": "CourseController_getOne",
+        "parameters": [
+          {
+            "name": "courseUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create course successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseReponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Course"
+        ]
+      },
+      "delete": {
+        "operationId": "CourseController_deleteOne",
+        "parameters": [
+          {
+            "name": "courseUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Course"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "CourseController_update",
+        "parameters": [
+          {
+            "name": "courseUuid",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCourseInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Course"
+        ],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
     }
   },
   "info": {
@@ -334,6 +925,20 @@
       }
     },
     "schemas": {
+      "CreateCategoryInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
       "CreateAdminUserInputDto": {
         "type": "object",
         "properties": {
@@ -358,6 +963,94 @@
           "username",
           "password",
           "role"
+        ]
+      },
+      "UserResponseDto": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "lastUpdatedBy": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "role": {
+            "type": "number",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "required": [
+          "createdAt",
+          "lastUpdatedAt",
+          "createdBy",
+          "lastUpdatedBy"
+        ]
+      },
+      "PaginatedReponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          },
+          "page": {
+            "type": "number"
+          },
+          "perPage": {
+            "type": "number"
+          },
+          "totalItems": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data",
+          "page",
+          "perPage",
+          "totalItems",
+          "totalPages"
         ]
       },
       "RegisterInputDto": {
@@ -415,6 +1108,591 @@
         "required": [
           "username",
           "password"
+        ]
+      },
+      "CreateSubCategoryInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CreateTopicInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ImageUploadInputDto": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary"
+          }
+        },
+        "required": [
+          "file"
+        ]
+      },
+      "CreateCourseKnowledgeInputDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "CreateLectureInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "preview": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "number",
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          },
+          "videoDuration": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "preview",
+          "type"
+        ]
+      },
+      "CreateSectionInputDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "lectures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateLectureInputDto"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CreateCoursePrerequisiteInputDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "CreateCourseRecommendationInputDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "CreateCourseInputDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "subTitle": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "topicUuid": {
+            "type": "string"
+          },
+          "courseKnowledgeList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateCourseKnowledgeInputDto"
+            }
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateSectionInputDto"
+            }
+          },
+          "coursePrerequisiteList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateCoursePrerequisiteInputDto"
+            }
+          },
+          "targetLearners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateCourseRecommendationInputDto"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "topicUuid"
+        ]
+      },
+      "TopicResponseDto": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "lastUpdatedBy": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "createdAt",
+          "lastUpdatedAt",
+          "createdBy",
+          "lastUpdatedBy",
+          "uuid",
+          "name",
+          "imageUrl"
+        ]
+      },
+      "SubCategoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "lastUpdatedBy": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "createdAt",
+          "lastUpdatedAt",
+          "createdBy",
+          "lastUpdatedBy",
+          "uuid",
+          "name",
+          "imageUrl"
+        ]
+      },
+      "CategoryResponseDto": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "lastUpdatedBy": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "createdAt",
+          "lastUpdatedAt",
+          "createdBy",
+          "lastUpdatedBy",
+          "uuid",
+          "name",
+          "imageUrl"
+        ]
+      },
+      "CourseKnowledgeResponseDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "LectureResponseDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "preview": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "number",
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          },
+          "videoDuration": {
+            "type": "number"
+          },
+          "position": {
+            "type": "number"
+          }
+        }
+      },
+      "SectionResponseDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "number"
+          },
+          "lectures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LectureResponseDto"
+            }
+          }
+        }
+      },
+      "CourseRecommendationResponseDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "CoursePrerequisiteResponseDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "CourseReponseDto": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "lastUpdatedBy": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "priceAfterDiscount": {
+            "type": "number"
+          },
+          "subTitle": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "topic": {
+            "$ref": "#/components/schemas/TopicResponseDto"
+          },
+          "subCategory": {
+            "$ref": "#/components/schemas/SubCategoryResponseDto"
+          },
+          "category": {
+            "$ref": "#/components/schemas/CategoryResponseDto"
+          },
+          "courseKnowledgeList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CourseKnowledgeResponseDto"
+            }
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectionResponseDto"
+            }
+          },
+          "targetLearners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CourseRecommendationResponseDto"
+            }
+          },
+          "coursePrerequisiteList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CoursePrerequisiteResponseDto"
+            }
+          },
+          "lecturer": {
+            "$ref": "#/components/schemas/UserResponseDto"
+          }
+        },
+        "required": [
+          "createdAt",
+          "lastUpdatedAt",
+          "createdBy",
+          "lastUpdatedBy",
+          "subCategory",
+          "category"
+        ]
+      },
+      "UpdateCourseKnowledgeInputDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateLectureInputDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "preview": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "number",
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          },
+          "videoDuration": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "preview",
+          "type"
+        ]
+      },
+      "UpdateSectionInputDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "lectures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateLectureInputDto"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateCoursePrerequisiteInputDto": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateCourseInputDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "subTitle": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "topicUuid": {
+            "type": "string"
+          },
+          "courseKnowledgeList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateCourseKnowledgeInputDto"
+            }
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateSectionInputDto"
+            }
+          },
+          "coursePrerequisiteList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateCoursePrerequisiteInputDto"
+            }
+          },
+          "targetLearners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateCoursePrerequisiteInputDto"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "topicUuid"
         ]
       }
     }
