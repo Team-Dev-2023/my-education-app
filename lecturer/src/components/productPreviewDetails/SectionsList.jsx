@@ -16,7 +16,7 @@ function SectionsList(props) {
   const [open, setOpen] = useState(false);
   const [previewList, setPreviewList] = useState([]);
   const [urlForPlayer, setUrlForPlayer] = useState(
-    "http://127.0.0.1:10005/api/education/public/upload/1688732877074_323640098_897375404946551_1941599010428821970_n.mp4"
+    "http://127.0.0.1:10005/api/education/public/upload/1688732877074_323640098_897375404946551_1941599010428821970_n.mp4",
   );
 
   const handleOpenModal = () => setOpen(true);
@@ -48,12 +48,11 @@ function SectionsList(props) {
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
-            className="!bg-[#f7f9fa] whitespace-nowrap"
+            className="!bg-[#f7f9fa] overflow-hidden whitespace-nowrap text-ellipsis"
           >
-            <span className="leading-[1.2] text-[16px] font-[700]">
+            <span className="mr-auto w-[400px] leading-[1.2] text-[16px] font-[700] overflow-hidden whitespace-nowrap text-ellipsis">
               {item.name}
             </span>
-            <span className="w-full inline-block"> </span>
             <span className="text-[#1c1d1f] text-[14px] font-[400] leading-[1.4]">
               {item.lectures?.length} lectures -{" "}
               {lecturersTotalLength(item.lectures)}
@@ -88,7 +87,7 @@ function SectionsList(props) {
                     </span>
                   )}
                   {`${Math.floor(item.videoDuration / 60)}:${String(
-                    item.videoDuration % 60
+                    item.videoDuration % 60,
                   ).padStart(2, "0")}`}
                 </span>
               </div>

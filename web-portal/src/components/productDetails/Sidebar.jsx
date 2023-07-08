@@ -16,7 +16,7 @@ function Sidebar(props) {
   return (
     <div className="text-white bg-white flex items-center flex-col w-[340px] mt-[32px] border border-[#d1d7dc] box-border shadow-md">
       <div className="w-full h-full">
-        <button className="cursor-pointer block w-full">
+        <button className="cursor-pointer block w-full h-[190px] overflow-hidden">
           <span>
             <img src={imgUrl} alt="preview" className="w-full" />
           </span>
