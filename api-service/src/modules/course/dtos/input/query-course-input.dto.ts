@@ -17,4 +17,19 @@ export class GetAllCourseInputDto extends PaginationQueryDto {
   @IsOptional()
   @IsString()
   topicUuid: string;
+
+  @ApiProperty({ type: String, required: false })
+  @IsOptional()
+  @IsString()
+  categoryName: string;
+
+  @ApiProperty({ type: String, required: false })
+  @IsOptional()
+  @IsString()
+  subCategoryName: string;
+
+  @ApiProperty({ type: String, required: false })
+  @IsOptional()
+  @IsString()
+  topicName: string;
 }
