@@ -95,7 +95,7 @@ function SectionsList(props) {
           </AccordionDetails>
         </Accordion>
       ))}
-      <Modal open={open} onClose={handleCloseModal}>
+      <Modal open={open} onClose={handleCloseModal} className="overflow-scroll">
         <div className="flex flex-col justify-center my-[10vh] max-w-[600px] mx-auto">
           <div className="w-full px-[24px] pt-[36px] bg-[#1c1d1f] text-white block ">
             <div className="h-full block pb-[8px] text-[14px] font-[700] leading-[1.2]">
@@ -120,13 +120,17 @@ function SectionsList(props) {
                   key={item.uuid}
                   className="f-full flex flex-row justify-start items-center gap-2 text-white cursor-pointer px-[24px] h-[69px] bg-transparent focus:bg-[#3e4143]"
                 >
-                  <img src={image} alt="videoThumbnail" className="h-[36px]" />
+                  <div className="h-[36px] w-[64px]">
+                    <img src={image} alt="videoThumbnail" />
+                  </div>
                   <PlayCircleFilledWhiteIcon
                     className="w-[64px] h-[64px] !text-[20px]"
                     fontSize="inherit"
                   />
                   <p className="h-full w-full text-left flex items-center justify-between text-[14px] font-[700] leading-[1.2]">
-                    <span className="whitespace-nowrap mr-2">{item.name}</span>
+                    <span className="whitespace-nowrap mr-auto max-w-[400px] overflow-hidden text-ellipsis">
+                      {item.name}
+                    </span>
                     <span className="text-[12px]">{item.duration}</span>
                   </p>
                 </button>
