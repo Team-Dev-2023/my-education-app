@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserInfoAction, logoutAction } from "redux/actions";
 import PrivateRoute from "./hoc/PrivateRoutes";
 import LearningPage from "pages/LearningPage";
+import FilteredCourses from "pages/FilteredCourses";
 require("moment/locale/vi");
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
       dispatch(
         getUserInfoAction({
           accessToken: accessToken,
-        })
+        }),
       );
   }, []);
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path={ROUTES.USER.REGISTER} element={<RegisterWebportal />} />
         <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
+        <Route path={ROUTES.USER.COURSES} element={<FilteredCourses />} />
         <Route
           path={ROUTES.USER.DETAIL_PRODUCT}
           element={<CourseDetailPage />}

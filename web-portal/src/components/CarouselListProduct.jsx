@@ -10,11 +10,11 @@ import ItemCarouseIlListProduct from "./ItemCarouseIlListProduct";
 
 function CarouselListProduct({ listProduct, nameCarousel }) {
   const renderItemSwiper = (arrayItemSwiper) => {
-    return arrayItemSwiper.map((item, index) => {
+    return arrayItemSwiper.map((item) => {
       return (
         <Fragment key={item.title}>
           <SwiperSlide>
-            {<ItemCarouseIlListProduct carouseProduct={item} />}
+            <ItemCarouseIlListProduct carouseProduct={item} />
           </SwiperSlide>
         </Fragment>
       );
