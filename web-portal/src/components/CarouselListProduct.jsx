@@ -12,11 +12,9 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
   const renderItemSwiper = (arrayItemSwiper) => {
     return arrayItemSwiper.map((item) => {
       return (
-        <Fragment key={item.title}>
-          <SwiperSlide>
-            <ItemCarouseIlListProduct carouseProduct={item} />
-          </SwiperSlide>
-        </Fragment>
+        <SwiperSlide key={item.title}>
+          <ItemCarouseIlListProduct carouseProduct={item} />
+        </SwiperSlide>
       );
     });
   };

@@ -7,69 +7,18 @@ import "swiper/css/pagination";
 
 import { Grid, Navigation } from "swiper";
 
-function TopicRecommended() {
-  const topicArray = [
-    {
-      topic: "Node.Js",
-      url: "/",
-    },
-    {
-      topic: "xxx.Js",
-      url: "/",
-    },
-    {
-      topic: "ccc.Js",
-      url: "/",
-    },
-    {
-      topic: "vvv.Js",
-      url: "/",
-    },
-    {
-      topic: "bbb.Js",
-      url: "/",
-    },
-    {
-      topic: "nnn.Js",
-      url: "/",
-    },
-    {
-      topic: "mmm.Js",
-      url: "/",
-    },
-    {
-      topic: "aaa.Js",
-      url: "/",
-    },
-    {
-      topic: "sss.Js",
-      url: "/",
-    },
-    {
-      topic: "fff.Js",
-      url: "/",
-    },
-    {
-      topic: "ggg.Js",
-      url: "/",
-    },
-    {
-      topic: "hhh.Js",
-      url: "/",
-    },
-    {
-      topic: "jjj.Js",
-      url: "/",
-    },
-  ];
+function TopicRecommended({ topic }) {
   const renderTopics = (array) =>
     array.map((item) => (
       <SwiperSlide
-        key={item.topic}
+        key={item.uuid}
         className=" !h-[50px] border-gray-400 border"
       >
-        <a href={item.url} className="h-full flex justify-center items-center">
-          <strong>{item.topic}</strong>
+        <a
+          href={item.imageUrl}
+          className="h-full flex justify-center items-center text-center"
+        >
+          <strong>{item.name}</strong>
         </a>
       </SwiperSlide>
     ));
@@ -117,7 +66,7 @@ function TopicRecommended() {
           }}
           className="!h-[110px]"
         >
-          {renderTopics(topicArray)}
+          {renderTopics(topic)}
         </Swiper>
         <div
           className={`swiper-button-next-unique-recommend absolute xxs:hidden sm:block top-[30px] z-10 sm:right-[-20px] `}
