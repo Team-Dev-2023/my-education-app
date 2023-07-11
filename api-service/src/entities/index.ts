@@ -1,4 +1,5 @@
 export * from './base-entity-audit';
+export * from './cart.entity';
 export * from './category.entity';
 export * from './login-method.entity';
 export * from './role-permission.entity';

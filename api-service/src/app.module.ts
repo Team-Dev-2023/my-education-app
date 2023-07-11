@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserMiddleware } from './middlewares/user.middleware';
 import { AuthModule } from './modules/auth/auth.module';
+import { CartModule } from './modules/cart/cart.module';
 import { CategoryModule } from './modules/category/category.module';
 import { CourseModule } from './modules/course/course.module';
 import { DatabaseModule } from './modules/database/database.module';
@@ -43,6 +44,7 @@ import {
     FileUploaderModule,
     SeederModule,
     CourseModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService],
