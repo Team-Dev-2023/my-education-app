@@ -4325,6 +4325,11 @@ domhandler@^4.0.0, domhandler@^4.2.0, domhandler@^4.3.1:
   dependencies:
     domelementtype "^2.2.0"
 
+dompurify@^2.4.6:
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.4.6.tgz#38c003e4ed45bf25d2744f899cb509791d0684ab"
+  integrity sha512-RQ9Ue979JnMiQ3a5E9KT3DLbUj9NCeulCZvVqnFRy+lj8j8sL9fmsUaGJTkhRts/74IM5HxPal5jaPjrTpH8zQ==
+
 domutils@^1.7.0:
   version "1.7.0"
   resolved "https://registry.npmjs.org/domutils/-/domutils-1.7.0.tgz"

@@ -390,6 +390,21 @@ export class CourseService {
         topicUuid: filters.topicUuid,
       });
     }
+    if (filters?.categoryName) {
+      query.andWhere(`LOWER(${aliases.category}.name) = :categoryName`, {
+        categoryName: filters.categoryName.toLowerCase(),
+      });
+    }
+    if (filters?.subCategoryName) {
+      query.andWhere(`LOWER(${aliases.subCategory}.name) = :subCategoryName`, {
+        subCategoryName: filters.subCategoryName.toLowerCase(),
+      });
+    }
+    if (filters?.topicName) {
+      query.andWhere(`LOWER(${aliases.topic}.name) = :topicName`, {
+        topicName: filters.topicName.toLowerCase(),
+      });
+    }
     const paginatedData = await paginate(
       query,
       { pagination, selectCreatedBy: true },

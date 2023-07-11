@@ -1,20 +1,22 @@
 import { Fragment } from "react";
-
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "./styles/carouselListProduct.css";
-import { Navigation } from "swiper";
 
 import ItemCarouseIlListProduct from "./ItemCarouseIlListProduct";
 
-function CarouselListProduct({ listProduct, nameCarousel }) {
+function CarouselListProduct({ listProduct, namecarousel }) {
   const renderItemSwiper = (arrayItemSwiper) => {
-    return arrayItemSwiper.map((item) => {
+    return arrayItemSwiper?.map((item) => {
       return (
-        <SwiperSlide key={item.title}>
-          <ItemCarouseIlListProduct carouseProduct={item} />
-        </SwiperSlide>
+        <Fragment key={item.uuid}>
+          <SwiperSlide key={item.uuid}>
+            {<ItemCarouseIlListProduct carouseProduct={item} />}
+          </SwiperSlide>
+        </Fragment>
       );
     });
   };
@@ -25,15 +27,15 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
         <Swiper
           // navigation={true}
           modules={[Navigation]}
-          nameCarousel={"carouselProducts"}
+          namecarousel={"carouselProducts"}
           // centeredSlides={true}
           grabCursor={true}
           keyboard={{
             enabled: true,
           }}
           navigation={{
-            prevEl: `.swiper-button-prev-unique-${nameCarousel}`,
-            nextEl: `.swiper-button-next-unique-${nameCarousel}`,
+            prevEl: `.swiper-button-prev-unique-${namecarousel}`,
+            nextEl: `.swiper-button-next-unique-${namecarousel}`,
           }}
           breakpoints={{
             1200: {
@@ -71,7 +73,8 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
           {renderItemSwiper(listProduct)}
         </Swiper>
         <div
-          className={`swiper-button-next-unique-${nameCarousel}  absolute xxs:hidden sm:block top-[30px] z-10 sm:right-[-20px] `}
+          className={`swiper-button-next-unique-${namecarousel}  absolute 
+          xxs:hidden sm:block top-[45px] z-10 sm:right-[-20px] `}
         >
           <button
             className=" !text-white rounded-[999px] border-[0.8px]
@@ -85,7 +88,8 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
           </button>
         </div>
         <div
-          className={`swiper-button-prev-unique-${nameCarousel} absolute  xxs:hidden sm:block top-[30px] z-10 sm:left-[-20px] `}
+          className={`swiper-button-prev-unique-${namecarousel} absolute 
+           xxs:hidden sm:block top-[45px] z-10 sm:left-[-20px] `}
         >
           <button
             className="  !text-white rounded-[999px] border-[0.8px]
