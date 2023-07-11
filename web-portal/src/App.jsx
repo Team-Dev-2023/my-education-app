@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserInfoAction, logoutAction } from "redux/actions";
 import PrivateRoute from "./hoc/PrivateRoutes";
 import LearningPage from "pages/LearningPage";
+import Cart from "pages/Cart";
 require("moment/locale/vi");
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           path={ROUTES.USER.DETAIL_PRODUCT}
           element={<CourseDetailPage />}
         />
+        <Route path={ROUTES.USER.CART} element={<Cart />} />
         <Route
           element={
             <PrivateRoute user={userInfo} redirectPath={ROUTES.USER.LOGIN} />
