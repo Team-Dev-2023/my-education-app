@@ -1,12 +1,21 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import DOMPurify from "dompurify";
 
 function Description(props) {
+  function createMarkup(html) {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  }
   const { courseData } = props;
   const divRef = useRef(null);
-  const divLength = divRef?.current?.clientHeight;
   const [expanded, setExpanded] = useState(false);
+  const [divLength, setDivLength] = useState(divRef?.current?.clientHeight);
+  useEffect(() => {
+    setDivLength(divRef?.current?.clientHeight);
+  }, []);
 
   return (
     <div className="mb-[32px] color-[#1c1d1f] max-w-[700px]">
@@ -20,9 +29,10 @@ function Description(props) {
           }`}
           ref={divRef}
         >
-          <span className="text-[#1c1d1f] text-[14px] font-[400]">
-            {courseData.description}
-          </span>
+          <span
+            className="text-[#1c1d1f] text-[14px] font-[400] leading-6"
+            dangerouslySetInnerHTML={createMarkup(courseData.description)}
+          ></span>
         </div>
         {divLength >= 221 && (
           <button

@@ -39,7 +39,7 @@ function CourseDetailPage() {
 
   useEffect(() => {
     axios
-      .get(`${api}${API_ENDPOINT.COURSE_DETAIL}/${uuid}`)
+      .get(`${api}${API_ENDPOINT.COURSES}/${uuid}`)
       .then((response) => {
         setData((prevData) => ({ ...prevData, ...response.data }));
         console.log("data res", response.data);
