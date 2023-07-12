@@ -110,28 +110,22 @@ export async function deleteItemCart(accessToken, courseUuid, callback) {
     console.error(error);
     return;
   }
-  // let data = qs.stringify({
-  //   courseUuid: courseUuid,
-  // });
+}
+export async function putProfile(accessToken, dataProfilePut, callback) {
+  try {
+    const response = await axios.put(
+      `${api}${API_ENDPOINT.PROFILE}`,
+      dataProfilePut,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
-  // let config = {
-  //   method: "delete",
-  //   maxBodyLength: Infinity,
-  //   url: "http://127.0.0.1:10005/api/education/cart",
-  //   headers: {
-  //     "Content-Type": "application/x-www-form-urlencoded",
-  //     Authorization:
-  //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBob25nMTIzIiwidXVpZCI6ImNjNWJjNmUyLTlmYTItNDdiNS1hYmZlLWI1ZmEwNzc0MzQxMiIsInJvbGUiOjMsImlhdCI6MTY4OTEzMTU2MSwiZXhwIjoxNjg5MTc0NzYxfQ.pyePiB9bsjWvS63Kcl7UHhu6w7ZGv5HQV9yEZJwUVMY",
-  //   },
-  //   data: data,
-  // };
-
-  // axios
-  //   .request(config)
-  //   .then((response) => {
-  //     console.log(JSON.stringify(response.data));
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+    return callback(true);
+  } catch (error) {
+    console.error(error);
+    return;
+  }
 }

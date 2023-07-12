@@ -17,7 +17,6 @@ import TargetLearners from "components/productPreviewDetails/TargetLearners";
 const api = process.env.REACT_APP_API;
 function CoursePreviewDetailPage() {
   const { uuid } = useParams();
-  console.log("uuid", uuid);
   const [data, setData] = useState(undefined);
   const [isDivVisible, setDivVisible] = useState(true);
   const t = useTranslate();

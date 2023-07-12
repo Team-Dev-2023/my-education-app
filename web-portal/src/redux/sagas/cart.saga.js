@@ -9,7 +9,6 @@ const api = process.env.REACT_APP_API;
 function* getListCartSaga(action) {
   try {
     const { accessToken } = action.payload;
-    console.log("ác", accessToken);
     const result = yield axios.get(`${api}${API_ENDPOINT.LIST_CART}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -22,7 +21,6 @@ function* getListCartSaga(action) {
       },
     });
   } catch (e) {
-    console.log("e", e);
     yield put({
       type: FAIL(CART_ACTION.GET_LIST_CART),
       payload: {

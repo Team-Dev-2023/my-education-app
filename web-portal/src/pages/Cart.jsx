@@ -24,8 +24,6 @@ function Cart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemDelete, setItemDelete] = useState("");
 
-  console.log("cartData", cartData);
-
   const removeItemCart = (courseUuid) => {
     const getCartData = () => {
       dispatch(
