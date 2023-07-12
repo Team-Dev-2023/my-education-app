@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import { Grid, Navigation } from "swiper";
 
 function TopicRecommended({ topic }) {
+  
   const renderTopics = (array) =>
     array.map((item) => (
       <SwiperSlide

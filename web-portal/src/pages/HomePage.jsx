@@ -14,7 +14,7 @@ function Homepage() {
     <div className="flex justify-center items-center flex-wrap w-full xxs:px-[24px]">
       <div className="max-w-[1200px] ">
         <Slider />
-        <TopicRecommended />
+        {/* <TopicRecommended topic={}/> */}
       </div>
       <div className="my-[20px] w-full xxs:max-w-full overflow-hidden lg:max-w-[1200px] flex justify-center ">
         <CarouselListProduct
