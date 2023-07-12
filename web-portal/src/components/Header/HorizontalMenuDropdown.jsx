@@ -1,6 +1,6 @@
 import { Dropdown } from "antd";
 import React from "react";
-import categoriesArray from "../asset/categoriesArray";
+import categoriesArray from "../../asset/categoriesArray";
 
 function HorizontalMenuDropdown() {
   const menu = categoriesArray.map((category) => {

@@ -4,7 +4,7 @@ import { Navigation } from "swiper";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import "./styles/carouselListProduct.css";
+import "../styles/carouselListProduct.css";
 
 import ItemCarouseIlListProduct from "./ItemCarouseIlListProduct";
 

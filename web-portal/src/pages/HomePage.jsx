@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CarouselListProduct from "components/CarouselListProduct";
+import CarouselListProduct from "components/CarouselListProduct/CarouselListProduct";
 import Slider from "components/Slider";
 import TopicRecommended from "components/TopicRecommended";
 import { getListCourse } from "utils/helpers/workWithApi";

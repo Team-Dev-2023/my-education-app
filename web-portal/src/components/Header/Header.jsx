@@ -1,29 +1,37 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import qs from "qs";
+
 import {
   AiOutlineSearch,
   AiOutlineHeart,
   AiOutlineShoppingCart,
   AiOutlineBell,
 } from "react-icons/ai";
+import { Badge } from "antd";
 import { TfiWorld } from "react-icons/tfi";
-import { Dropdown, Space } from "antd";
 
-import logo from "../asset/logo-udemy.png";
-import HorizontalMenuDropdown from "./HorizontalMenuDropdown";
-import Categories from "./Categories";
+import logo from "../../asset/logo-udemy.png";
+import Categories from "../Categories";
 import { ROUTES } from "constants/routes";
+import HorizontalMenuDropdown from "./HorizontalMenuDropdown";
 import MenuProfile from "./MenuProfile";
-
-import { useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
-
-import qs from "qs";
+import ListCartMini from "./ListCartMini";
 
 function Header() {
   const { userInfo } = useSelector((state) => state.auth);
+  const { cartData } = useSelector((state) => state.cart);
+
   const navigate = useNavigate();
   const { search } = useLocation();
   const query = qs.parse(search, { ignoreQueryPrefix: true });
+  const [countItemCart, setCountItemCart] = useState();
+
+  useEffect(() => {
+    setCountItemCart(cartData.data.length);
+  }, [cartData]);
 
   return (
     <>
@@ -93,9 +101,25 @@ function Header() {
             <div className="mx-2 w-auto hidden md:block">
               <AiOutlineHeart size={25} />
             </div>
-            <div className="mx-2 w-auto hidden sm:block">
-              <AiOutlineShoppingCart size={25} />
+            <div className="mx-2 h-full  items-center group relative w-auto hidden sm:flex hover:cursor-pointer">
+              <Badge
+                count={countItemCart}
+                onClick={() => {
+                  navigate(ROUTES.USER.CART);
+                }}
+              >
+                <AiOutlineShoppingCart size={25} />
+              </Badge>
+              <div
+                className="group-hover:!block hidden  w-[300px]
+              group-hover:!opacity-100 !opacity-0 mt-[0.8px]
+              transition duration-800 ease-in-out absolute top-[100%]
+              right-[-100%]  bg-white z-10 "
+              >
+                <ListCartMini />
+              </div>
             </div>
+
             <div className="mx-2 w-auto">
               <AiOutlineBell size={25} />
             </div>
@@ -111,8 +135,13 @@ function Header() {
                   {userInfo?.data?.firstName?.charAt(0)}
                 </div>
               )}
-              <div className="group-hover:!block hidden group-hover:!opacity-100 !opacity-0 mt-[0.8px]  transition duration-800 ease-in-out absolute top-[100%]  right-[0%]  bg-white z-10 ">
-                <MenuProfile />
+              <div
+                className="group-hover:!block hidden 
+              group-hover:!opacity-100 !opacity-0 mt-[0.8px]
+              transition duration-800 ease-in-out absolute top-[100%]
+              right-[0%]  bg-white z-10 "
+              >
+                <MenuProfile countItemCart={countItemCart} />
               </div>
             </div>
           </div>
