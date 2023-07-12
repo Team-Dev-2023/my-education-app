@@ -13,14 +13,12 @@ function ListCartMini() {
   const { cartData } = useSelector((state) => state.cart);
 
   function renderListCourseInCart() {
-    console.log("cartData.data", cartData.data);
     return cartData?.data?.map((item) => {
       return (
         <div
           key={item.course.uuid}
           className="w-full flex gap-3 p-[1rem] border-b-[0.8px] border-[#798495a5]"
           onClick={() => {
-            console.log("aaaa", item.course.uuid);
             navigate(
               generatePath(ROUTES.USER.DETAIL_PRODUCT, {
                 uuid: item.course.uuid,

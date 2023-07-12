@@ -15,6 +15,7 @@ import PrivateRoute from "./hoc/PrivateRoutes";
 import LearningPage from "pages/LearningPage";
 import Cart from "pages/Cart";
 import { getListCartAction } from "redux/actions/cart.action";
+import EditProfile from "pages/EditProfile";
 require("moment/locale/vi");
 
 function App() {
@@ -55,6 +56,8 @@ function App() {
           element={<CourseDetailPage />}
         />
         <Route path={ROUTES.USER.CART} element={<Cart />} />
+        <Route path={ROUTES.USER.EDIT_PROFILE} element={<EditProfile />} />
+
         <Route
           element={
             <PrivateRoute user={userInfo} redirectPath={ROUTES.USER.LOGIN} />

@@ -17,7 +17,6 @@ function Homepage() {
 
   const dispatch = useDispatch();
 
-  console.log("render homepage");
   return (
     <div className="flex justify-center items-center flex-wrap h-full w-full xxs:px-[24px]">
       <div className="w-12 h-12 border">

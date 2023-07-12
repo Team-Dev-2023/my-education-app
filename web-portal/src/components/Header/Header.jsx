@@ -30,7 +30,7 @@ function Header() {
   const [countItemCart, setCountItemCart] = useState();
 
   useEffect(() => {
-    setCountItemCart(cartData.data.length);
+    setCountItemCart(cartData.data?.length);
   }, [cartData]);
 
   return (
@@ -127,7 +127,7 @@ function Header() {
               {userInfo?.data?.avatar ? (
                 <img
                   className="w-[32px] "
-                  src="userInfo.data.avatar"
+                  src={userInfo.data.avatar}
                   alt="avatar"
                 />
               ) : (

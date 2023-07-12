@@ -9,7 +9,6 @@ function Homepage() {
   useEffect(() => {
     getListCourse(setListCourse);
   }, []);
-  console.log(listCourse);
   return (
     <div className="flex justify-center items-center flex-wrap w-full xxs:px-[24px]">
       <div className="max-w-[1200px] ">
