@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -7,8 +7,7 @@ import "swiper/css/pagination";
 
 import { Grid, Navigation } from "swiper";
 
-function TopicRecommended({ topic }) {
-  
+function TopicRecommended({ topics }) {
   const renderTopics = (array) =>
     array.map((item) => (
       <SwiperSlide
@@ -67,7 +66,7 @@ function TopicRecommended({ topic }) {
           }}
           className="!h-[110px]"
         >
-          {renderTopics(topic)}
+          {renderTopics(topics)}
         </Swiper>
         <div
           className={`swiper-button-next-unique-recommend absolute xxs:hidden sm:block top-[30px] z-10 sm:right-[-20px] `}

@@ -15,7 +15,7 @@ function Homepage() {
         <Slider />
         {/* <TopicRecommended topic={}/> */}
       </div>
-      <div className="my-[20px] w-full xxs:max-w-full overflow-hidden lg:max-w-[1200px] flex justify-center ">
+      <div className="my-[20px] w-full xxs:max-w-full lg:max-w-[1200px] flex justify-center ">
         <CarouselListProduct
           listProduct={listCourse}
           namecarousel={"highCourses"}

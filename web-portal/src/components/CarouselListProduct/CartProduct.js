@@ -75,9 +75,9 @@ function CartProduct(carouseProduct) {
           <div>
             <span className="mr-2 flex items-center font-[700] md:text-[16px] xxs:text-[14px]">
               ₫
-              <p className=" text-start  md:text-[16px] xxs:text-[14px]">
+              <span className=" text-start  md:text-[16px] xxs:text-[14px]">
                 {carouseProduct.priceAfterDiscount.toLocaleString()}
-              </p>
+              </span>
             </span>
           </div>
           <div>

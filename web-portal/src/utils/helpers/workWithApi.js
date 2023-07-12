@@ -6,11 +6,14 @@ const qs = require("qs");
 
 export async function getCategory(setCategories) {
   let page = 1;
-  let perPage = 10;
+  let perPage = 20;
   try {
-    const response = await axios.get(
-      `${api}${API_ENDPOINT.CATEGORIES}?page=${page}&perPage=${perPage}`
-    );
+    const response = await axios.get(`${api}${API_ENDPOINT.CATEGORY}`, {
+      params: {
+        page: page,
+        perPage: perPage,
+      },
+    });
     const categories = response.data.data;
     return setCategories(categories);
   } catch (error) {
@@ -21,11 +24,15 @@ export async function getCategory(setCategories) {
 
 export async function getSubCategories(categoryUuid, setSubCategories) {
   let page = 1;
-  let perPage = 10;
+  let perPage = 20;
   try {
-    const response = await axios.get(
-      `${api}${API_ENDPOINT.SUB_CATEGORIES}?page=${page}&perPage=${perPage}&categoryUuid=${categoryUuid}`
-    );
+    const response = await axios.get(`${api}${API_ENDPOINT.SUB_CATEGORY}`, {
+      params: {
+        page: page,
+        perPage: perPage,
+        categoryUuid: categoryUuid,
+      },
+    });
     const subCategories = response.data.data;
     return setSubCategories(subCategories);
   } catch (error) {
@@ -35,11 +42,15 @@ export async function getSubCategories(categoryUuid, setSubCategories) {
 }
 export async function getTopics(subCategoryUuid, setTopics) {
   let page = 1;
-  let perPage = 10;
+  let perPage = 20;
   try {
-    const response = await axios.get(
-      `${api}${API_ENDPOINT.TOPICS}?page=${page}&perPage=${perPage}&subCategoryUuid=${subCategoryUuid}`
-    );
+    const response = await axios.get(`${api}${API_ENDPOINT.TOPIC}`, {
+      params: {
+        page: page,
+        perPage: perPage,
+        subCategoryUuid: subCategoryUuid,
+      },
+    });
     const topics = response.data.data;
     return setTopics(topics);
   } catch (error) {
@@ -48,13 +59,24 @@ export async function getTopics(subCategoryUuid, setTopics) {
   }
 }
 //COURSE
-export async function getListCourse(setListCourse) {
-  let page = 1;
-  let perPage = 10;
+export async function getListCourse(
+  setListCourse,
+  page = 1,
+  perPage = 20,
+  category,
+  subcategory,
+  topic
+) {
   try {
-    const response = await axios.get(
-      `${api}${API_ENDPOINT.COURSES}?page=${page}&perPage=${perPage}`
-    );
+    const response = await axios.get(`${api}${API_ENDPOINT.COURSES}`, {
+      params: {
+        page: page,
+        perPage: perPage,
+        categoryName: category,
+        subCategoryName: subcategory,
+        topicName: topic,
+      },
+    });
     const listCourse = response.data.data;
     return setListCourse(listCourse);
   } catch (error) {
