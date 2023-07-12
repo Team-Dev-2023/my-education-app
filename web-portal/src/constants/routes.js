@@ -7,6 +7,7 @@ export const ROUTES = {
     DETAIL_PRODUCT: "/detail/:uuid",
     LIST_PRODUCT: "/list",
     CART: "/cart",
+    EDIT_PROFILE: "/edit-profile",
     CHECK_OUT: "/checkout",
     LEARNING: "/learn",
   },

@@ -49,6 +49,7 @@ const vi = {
     beginnerLevel: "Sơ cấp",
     subtitle: "Phụ đề",
     add_to_cart: "Thêm vào giỏ hàng",
+    goto_to_cart: "Đi đến giỏ hàng",
   },
 };
 export default vi;

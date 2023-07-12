@@ -17,7 +17,10 @@ import {
 } from 'src/shared/helpers/paginate.helper';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 import { RegisterInputDto } from '../auth/dtos/auth-input.dto';
-import { CreateAdminUserInputDto } from './dtos/user-input.dto';
+import {
+  CreateAdminUserInputDto,
+  UpdateProfileInputDto,
+} from './dtos/user-input.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
 import * as bcrypt from 'bcryptjs';
 import { LoginMethod, User } from 'src/entities';
@@ -160,6 +163,13 @@ export class UserService {
     }
 
     return this.formatResponse(user);
+  }
+
+  async updateProfile(userUuid: string, data: UpdateProfileInputDto) {
+    const user = await this.getUserByUuid(userUuid);
+    const updatedData = { ...user, ...data };
+    await this.userRepo.save(updatedData);
+    return this.formatResponse(updatedData as User);
   }
 
   async getAll(

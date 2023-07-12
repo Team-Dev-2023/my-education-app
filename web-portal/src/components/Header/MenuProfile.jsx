@@ -1,25 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { logoutAction } from "redux/actions";
+import { useNavigate } from "react-router-dom";
 
 import { TfiWorld } from "react-icons/tfi";
-
-import { logoutAction } from "redux/actions";
-import { Navigate, useNavigate } from "react-router-dom";
-import { ROUTES } from "../constants/routes";
-function MenuProfile() {
+import { ROUTES } from "../../constants/routes";
+function MenuProfile({ countItemCart }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { userInfo } = useSelector((store) => store.auth);
-
   return (
     <div className="min-w-[264px] border-[0.8px] shadow-md mt-[0.8px]">
-      <div
-        className="flex items-center gap-2 p-4 border-b-[0.8px]  hover:text-[#5624d0] cursor-pointer"
-        onClick={() => {
-          navigate(ROUTES.USER.HOME_PAGE);
-        }}
-      >
+      <div className="flex items-center gap-2 p-4 border-b-[0.8px]  hover:text-[#5624d0] cursor-pointer">
         {userInfo?.data?.avatar ? (
           <img className="w-[32px] " src="userInfo.data.avatar" alt="avatar" />
         ) : (
@@ -40,34 +32,22 @@ function MenuProfile() {
         </div>
       </div>
       <div className="flex flex-col  gap-4 p-4 border-b-[0.8px] ">
-        <div
-          className="hover:text-[#5624d0] cursor-pointer "
-          onClick={() => {
-            navigate(ROUTES.USER.HOME_PAGE);
-          }}
-        >
-          My learning
-        </div>
+        <div className="hover:text-[#5624d0] cursor-pointer ">My learning</div>
         <div
           className=" hover:text-[#5624d0] cursor-pointer flex justify-between items-center"
           onClick={() => {
-            navigate(ROUTES.USER.HOME_PAGE);
+            navigate(ROUTES.USER.CART);
           }}
         >
           <p>My cart</p>
           <p className="rounded-full flex justify-center items-center text-white font-[700] w-[25px] h-[25px] bg-[#a435f0]">
-            2
+            {countItemCart}
           </p>
         </div>
         <div className="hover:text-[#5624d0] cursor-pointer ">Wishlist</div>
       </div>
       <div className="flex flex-col  gap-4 p-4 border-b-[0.8px] ">
-        <div
-          className="hover:text-[#5624d0] cursor-pointer  flex justify-between items-center"
-          onClick={() => {
-            navigate(ROUTES.USER.HOME_PAGE);
-          }}
-        >
+        <div className="hover:text-[#5624d0] cursor-pointer  flex justify-between items-center">
           <p>Language</p>
           <p className=" flex gap-2 justify-center items-center ">
             English <TfiWorld />
@@ -76,7 +56,7 @@ function MenuProfile() {
         <div
           className="hover:text-[#5624d0] cursor-pointer "
           onClick={() => {
-            navigate(ROUTES.USER.HOME_PAGE);
+            navigate(ROUTES.USER.EDIT_PROFILE);
           }}
         >
           Edit profile

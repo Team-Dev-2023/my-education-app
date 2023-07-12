@@ -6,4 +6,7 @@ export const API_ENDPOINT = {
   SUB_CATEGORY: "/sub-categories",
   TOPIC: "/topics",
   COURSES: "/courses",
+  PROFILE: "/users/profile",
+  CART: "/cart",
+  LIST_CART: "/cart/me",
 };

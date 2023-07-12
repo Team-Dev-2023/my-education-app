@@ -48,6 +48,7 @@ const en = {
     beginnerLevel: "Beginner Level",
     subtitle: "Subtitle",
     add_to_cart: "Add to cart",
+    goto_to_cart: "Go to cart",
   },
 };
 export default en;

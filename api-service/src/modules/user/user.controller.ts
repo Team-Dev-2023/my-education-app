@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Put,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PaginationParamDecorator } from 'src/decorators/pagination.decorator';
 import { Roles } from 'src/decorators/role.decorator';
@@ -12,7 +20,10 @@ import {
 import { PaginatedReponse } from 'src/shared/dtos/paginatino-response.dto';
 import { PaginationQueryDto } from 'src/shared/dtos/pagination-input.dto';
 import { IPaginatedReponse } from 'src/shared/helpers/paginate.helper';
-import { CreateAdminUserInputDto } from './dtos/user-input.dto';
+import {
+  CreateAdminUserInputDto,
+  UpdateProfileInputDto,
+} from './dtos/user-input.dto';
 import { UserResponseDto } from './dtos/user-response.dto';
 import { UserService } from './user.service';
 
@@ -48,6 +59,20 @@ export class UserController {
     @UserParamDecorator() user: JwtPayload,
   ): Promise<UserResponseDto> {
     return this.userService.getUserByUuid(user.uuid);
+  }
+
+  @Put('/profile')
+  @UseGuards(AuthGuard)
+  @ApiResponse({
+    type: UserResponseDto,
+    description: 'Get user profile',
+    status: 200,
+  })
+  async updateProfile(
+    @UserParamDecorator() user: JwtPayload,
+    @Body() data: UpdateProfileInputDto,
+  ): Promise<UserResponseDto> {
+    return this.userService.updateProfile(user.uuid, data);
   }
 
   @Get('/')

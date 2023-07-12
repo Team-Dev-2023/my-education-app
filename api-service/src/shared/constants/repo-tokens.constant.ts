@@ -11,6 +11,7 @@ export const repoTokens = {
   lecture: 'LECTURE_REPOSITORY',
   coursePrerequisite: 'COURSE_PREREQUISITE_REPOSITORY',
   courseTargetLearners: 'COURSE_TARGET_LEARNERS_REPOSITORY',
+  cart: 'CART_REPOSITORY',
 };
 
 export const aliases = {
@@ -26,4 +27,5 @@ export const aliases = {
   lecture: 'lecture',
   coursePrerequisite: 'coursePrerequisite',
   courseTargetLearners: 'courseTargetLearners',
+  cart: 'cart',
 };
