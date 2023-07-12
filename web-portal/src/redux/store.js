@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga"; //add Library saga
 
 import authReducer from "../redux/reducers/auth.reducer";
+import cartReducer from "../redux/reducers/cart.reducer";
 
 import rootSaga from "../redux/sagas"; //import yield fork for choice saga file
 const sagaMiddleware = createSagaMiddleware();
@@ -9,6 +10,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    cart: cartReducer,
   },
   //saga
   middleware: (getDefaultMiddleware) => [

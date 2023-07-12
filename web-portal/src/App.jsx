@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import CourseDetailPage from "./pages/CourseDetailPage";
 import CourseListPage from "./pages/CourseListPage";
 import { useEffect } from "react";
-import Header from "components/Header";
+import Header from "components/Header/Header";
 import Footer from "components/Footer";
 import RegisterWebportal from "./pages/RegisterWebportal ";
 import LoginPage from "pages/LoginPage";
@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserInfoAction, logoutAction } from "redux/actions";
 import PrivateRoute from "./hoc/PrivateRoutes";
 import LearningPage from "pages/LearningPage";
+import Cart from "pages/Cart";
+import { getListCartAction } from "redux/actions/cart.action";
 require("moment/locale/vi");
 
 function App() {
@@ -33,7 +35,13 @@ function App() {
           accessToken: accessToken,
         })
       );
+    dispatch(
+      getListCartAction({
+        accessToken: accessToken,
+      })
+    );
   }, []);
+
   return (
     <>
       <Header />
@@ -46,6 +54,7 @@ function App() {
           path={ROUTES.USER.DETAIL_PRODUCT}
           element={<CourseDetailPage />}
         />
+        <Route path={ROUTES.USER.CART} element={<Cart />} />
         <Route
           element={
             <PrivateRoute user={userInfo} redirectPath={ROUTES.USER.LOGIN} />

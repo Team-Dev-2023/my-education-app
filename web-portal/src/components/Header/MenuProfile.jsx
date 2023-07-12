@@ -1,17 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { logoutAction } from "redux/actions";
+import { useNavigate } from "react-router-dom";
 
 import { TfiWorld } from "react-icons/tfi";
-
-import { logoutAction } from "redux/actions";
-import { Navigate, useNavigate } from "react-router-dom";
-import { ROUTES } from "../constants/routes";
-function MenuProfile() {
+import { ROUTES } from "../../constants/routes";
+function MenuProfile({ countItemCart }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { userInfo } = useSelector((store) => store.auth);
-
   return (
     <div className="min-w-[264px] border-[0.8px] shadow-md mt-[0.8px]">
       <div
@@ -51,12 +48,12 @@ function MenuProfile() {
         <div
           className=" hover:text-[#5624d0] cursor-pointer flex justify-between items-center"
           onClick={() => {
-            navigate(ROUTES.USER.HOME_PAGE);
+            navigate(ROUTES.USER.CART);
           }}
         >
           <p>My cart</p>
           <p className="rounded-full flex justify-center items-center text-white font-[700] w-[25px] h-[25px] bg-[#a435f0]">
-            2
+            {countItemCart}
           </p>
         </div>
         <div className="hover:text-[#5624d0] cursor-pointer ">Wishlist</div>

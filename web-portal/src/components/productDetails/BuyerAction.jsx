@@ -1,9 +1,28 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
+import { ROUTES } from "constants/routes";
+import { getListCartAction } from "redux/actions/cart.action";
+import { postItemCart } from "utils/helpers/workWithApi";
+import { checkCourseInCart } from "utils/helpers/cart.helper";
+
 function BuyerAction(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const accessToken = localStorage.getItem("accessToken");
   const { themeColor } = props;
   const { courseData } = props;
+  const { cartData } = useSelector((state) => state.cart);
+  const [existsInCart, setExistsInCart] = useState(false);
+
+  useEffect(() => {
+    cartData.data !== [] &&
+      setExistsInCart(checkCourseInCart(courseData.uuid, cartData.data));
+  }, [cartData]);
   //format price
   const formatPrice = Intl.NumberFormat("en-US", {
     style: "currency",
@@ -12,7 +31,16 @@ function BuyerAction(props) {
   const coursePrice =
     courseData.price === 0 ? "Free" : formatPrice.format(courseData.price);
   const discountPrice = formatPrice.format(courseData.priceAfterDiscount);
-
+  const addToCart = () => {
+    const getCartData = () => {
+      dispatch(
+        getListCartAction({
+          accessToken: accessToken,
+        })
+      );
+    };
+    postItemCart(accessToken, courseData.uuid, getCartData);
+  };
   return (
     <>
       <div className="flex justify-start items-center">
@@ -31,9 +59,26 @@ function BuyerAction(props) {
       </div>
       <div className="w-full h-auto mt-[16px]">
         <div className="flex gap-[8px] h-[48px]">
-          <button className="bg-[#a435f0] text-white text-[16px] leading-[1.2] font-bold h-full w-full">
-            Add to cart
-          </button>
+          {!existsInCart ? (
+            <button
+              className="bg-[#a435f0] text-white text-[16px] leading-[1.2] font-bold h-full w-full"
+              onClick={() => {
+                addToCart();
+              }}
+            >
+              Add to cart
+            </button>
+          ) : (
+            <button
+              className="bg-[#a435f0] text-white text-[16px] leading-[1.2] font-bold h-full w-full"
+              onClick={() => {
+                navigate(ROUTES.USER.CART);
+              }}
+            >
+              Go to cart
+            </button>
+          )}
+
           <div
             className={`border border-${
               themeColor || "black"
