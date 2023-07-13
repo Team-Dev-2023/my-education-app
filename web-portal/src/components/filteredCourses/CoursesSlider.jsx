@@ -1,15 +1,14 @@
 import { useNavigate } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import { Navigation, Autoplay } from "swiper";
 
 import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { yellow } from "@mui/material/colors";
 
-import { ROUTES } from "constants/routes";
-
 function CoursesSlider({ courses }) {
+  //   console.log("courses", courses);
   const navigate = useNavigate();
   //format price
   const formatPrice = Intl.NumberFormat("en-US", {
@@ -22,21 +21,22 @@ function CoursesSlider({ courses }) {
   const discountPrice = (course) =>
     formatPrice.format(course.priceAfterDiscount);
 
-  console.log("courses", courses);
-  console.log("detail", ROUTES.USER.DETAIL_PRODUCT);
   return (
-    <div className="container mx-auto my-2 relative sm:w-[calc(100%-40px)] xxs:w-full">
+    <div className="container mx-auto my-2 relative w-full">
       <Swiper
         loop={false}
         pagination={{
           clickable: true,
         }}
         slidesPerView={1}
-        // spaceBetween={0}
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
         navigation={{
           prevEl: `.swiper-button-prev-featured-course`,
           nextEl: `.swiper-button-next-featured-course`,
+        }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: true,
         }}
       >
         {courses.map((course) => (
@@ -53,7 +53,7 @@ function CoursesSlider({ courses }) {
                   className="w-full h-full"
                 />
               </div>
-              <div className="w-[50%] h-full flex flex-col justify-start">
+              <div className="w-[50%] flex-grow flex flex-col justify-start">
                 <p className="font-[700] text-[24px] leading-[1.2] mb-[4px]">
                   {course.title}
                 </p>
@@ -102,7 +102,7 @@ function CoursesSlider({ courses }) {
         ))}
       </Swiper>
       <div
-        className={`swiper-button-next-featured-course absolute xxs:hidden sm:block top-1/3 translate-y-1/3 z-10 sm:right-[-20px] `}
+        className={`swiper-button-next-featured-course absolute xxs:hidden sm:block top-1/2 translate-y-[-50%] z-10 sm:right-[-20px] `}
       >
         <button
           className=" !text-white rounded-[999px] border-[0.8px]

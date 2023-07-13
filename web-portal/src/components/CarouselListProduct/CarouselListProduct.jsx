@@ -14,7 +14,7 @@ function CarouselListProduct({ listProduct, namecarousel }) {
       return (
         <Fragment key={item.uuid}>
           <SwiperSlide key={item.uuid}>
-            {<ItemCarouseIlListProduct carouseProduct={item} />}
+            <ItemCarouseIlListProduct carouseProduct={item} />
           </SwiperSlide>
         </Fragment>
       );

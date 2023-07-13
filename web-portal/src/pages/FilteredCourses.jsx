@@ -1,8 +1,11 @@
 import { CircularProgress } from "@mui/material";
+import AllCourses from "components/filteredCourses/AllCourses";
 import FeaturedCourses from "components/filteredCourses/FeaturedCourses";
 import GetStartedCourses from "components/filteredCourses/GetStartedCourses";
 import PopularTopics from "components/filteredCourses/PopularTopics";
+import { getVisibleCourses } from "components/selectors/getVisibleCourses";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   getCategory,
@@ -13,11 +16,15 @@ import {
 
 function FilteredCourses() {
   const { category, subcategory, topic } = useParams();
+  const sourceName = (topic || subcategory || category).split("-").join(" ");
   // console.log("cate", category, "sub", subcategory, "to", topic);
 
   const [listCourses, setListCourses] = useState(undefined);
   const [subCategories, setSubCategories] = useState([]);
   const [allTopics, setAllTopics] = useState([]);
+
+  const filtersState = useSelector((state) => state.filter);
+  // const visibleCourses = getVisibleCourses(listCourses, filtersState);
 
   useEffect(() => {
     const allCategories = [];
@@ -58,11 +65,12 @@ function FilteredCourses() {
         <>
           <div className="mx-auto py-[48px] px-[24px] w-full max-w-[1340px]">
             <h1 className="mb-[48px] text-[32px] font-[700] leading-[1.25] capitalize">
-              {topic || subcategory || category} Courses
+              {sourceName} Courses
             </h1>
             <GetStartedCourses courses={listCourses} />
             <FeaturedCourses courses={listCourses} />
             <PopularTopics topics={allTopics} />
+            <AllCourses courses={listCourses} sourceName={sourceName} />
           </div>
         </>
       ) : (

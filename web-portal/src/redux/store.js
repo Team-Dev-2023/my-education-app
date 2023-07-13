@@ -5,12 +5,14 @@ import authReducer from "../redux/reducers/auth.reducer";
 import cartReducer from "../redux/reducers/cart.reducer";
 
 import rootSaga from "../redux/sagas"; //import yield fork for choice saga file
+import filterReducer from "./reducers/filterCourses.reducer";
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     cart: cartReducer,
+    filter: filterReducer,
   },
   //saga
   middleware: (getDefaultMiddleware) => [
