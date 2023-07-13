@@ -37,7 +37,7 @@ function FilteredCourses() {
   useEffect(() => {
     getListCourse(setListCourses, 1, 20, category, subcategory, topic);
   }, []);
-  // console.log("listCourses", listCourses);
+  console.log("listCourses", listCourses);
 
   useEffect(() => {
     const allTopics = [];
@@ -61,7 +61,7 @@ function FilteredCourses() {
               {topic || subcategory || category} Courses
             </h1>
             <GetStartedCourses courses={listCourses} />
-            <FeaturedCourses />
+            <FeaturedCourses courses={listCourses} />
             <PopularTopics topics={allTopics} />
           </div>
         </>

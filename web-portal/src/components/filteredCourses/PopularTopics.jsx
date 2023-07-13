@@ -9,7 +9,6 @@ function PopularTopics({ topics }) {
         Popular Topics
       </h2>
       <TopicRecommended topics={topics} />
-      {/* <div>courses slider</div> */}
     </div>
   );
 }
