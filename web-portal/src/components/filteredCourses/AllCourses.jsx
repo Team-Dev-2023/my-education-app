@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Filtering from "./Filtering";
 import CoursesVisible from "./CoursesVisible";
 
-function AllCourses({ courses, sourceName }) {
+function AllCourses({ courses, sourceName, topics, subCategories }) {
   const [viewableCourses, setViewableCourses] = useState([]);
   const handleSetViewingCourses = (courses) => {
     setViewableCourses(courses);
@@ -16,6 +16,8 @@ function AllCourses({ courses, sourceName }) {
         <Filtering
           handleSetViewingCourses={handleSetViewingCourses}
           inputCourses={courses}
+          topics={topics}
+          subCategories={subCategories}
         />
         <CoursesVisible viewableCourses={viewableCourses} />
       </div>

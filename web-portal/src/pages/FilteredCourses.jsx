@@ -70,7 +70,12 @@ function FilteredCourses() {
             <GetStartedCourses courses={listCourses} />
             <FeaturedCourses courses={listCourses} />
             <PopularTopics topics={allTopics} />
-            <AllCourses courses={listCourses} sourceName={sourceName} />
+            <AllCourses
+              courses={listCourses}
+              sourceName={sourceName}
+              topics={allTopics}
+              subCategories={subCategories}
+            />
           </div>
         </>
       ) : (
