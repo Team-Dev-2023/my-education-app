@@ -3,9 +3,7 @@ import AllCourses from "components/filteredCourses/AllCourses";
 import FeaturedCourses from "components/filteredCourses/FeaturedCourses";
 import GetStartedCourses from "components/filteredCourses/GetStartedCourses";
 import PopularTopics from "components/filteredCourses/PopularTopics";
-import { getVisibleCourses } from "components/selectors/getVisibleCourses";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   getCategory,
@@ -22,9 +20,6 @@ function FilteredCourses() {
   const [listCourses, setListCourses] = useState(undefined);
   const [subCategories, setSubCategories] = useState([]);
   const [allTopics, setAllTopics] = useState([]);
-
-  const filtersState = useSelector((state) => state.filter);
-  // const visibleCourses = getVisibleCourses(listCourses, filtersState);
 
   useEffect(() => {
     const allCategories = [];

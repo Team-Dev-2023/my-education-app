@@ -19,7 +19,7 @@ function Price() {
       },
     }));
   };
-  console.log("state", state);
+  // console.log("state", state);
 
   return (
     <div className="border-t border-t-[#d1d7dc] mb-[8px]">

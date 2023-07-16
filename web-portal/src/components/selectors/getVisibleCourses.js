@@ -1,6 +1,7 @@
 import axios from "axios";
 import { API_ENDPOINT } from "constants/api";
 import { sectionTotalLength } from "utils/helpers/totalLengthCalculator.helper";
+import { async } from "./../../utils/helpers/workWithApi";
 const api = process.env.REACT_APP_API;
 
 function convertToSeconds(timeString) {
@@ -14,7 +15,6 @@ function convertToSeconds(timeString) {
 }
 
 function checkMinAndMaxLength(courseLength, videoDurationFilter) {
-  let result = 0;
   let minValue = 0;
   let maxValue = Number.MAX_SAFE_INTEGER;
   for (let index = 0; index < videoDurationFilter.length; index++) {
@@ -26,59 +26,54 @@ function checkMinAndMaxLength(courseLength, videoDurationFilter) {
       maxValue = max;
     }
   }
-  if (courseLength >= minValue && courseLength <= maxValue) {
-    result++;
-  }
-  return result > 0;
+  return courseLength >= minValue && courseLength <= maxValue;
 }
 
-const getVisibleCourses = (
+const getVisibleCourses = async (
   courses,
   {
-    ratingsFilter,
+    // ratingsFilter,
     videoDurationFilter,
     topicFilter,
     subCategoryFilter,
     priceFilter,
-    sortBy,
+    // sortByFilter,
   }
 ) => {
-  return courses.filter((course) => {
-    axios
-      .get(`${api}${API_ENDPOINT.COURSES}/${course.uuid}`)
-      .then((response) => {
-        // check ratings to match
-        const ratingsMatch = course.rating >= ratingsFilter.data;
-        //check video duration to match
-        const courseLength = sectionTotalLength(response.data.sections);
-        const courseLengthInSecond = convertToSeconds(courseLength);
-        const videoDurationMatch = checkMinAndMaxLength(
-          courseLengthInSecond,
-          videoDurationFilter.data
-        );
-        // check topic to match
-        const topicMatch = topicFilter.data.includes(course.topic.name);
-        // check sub category match
-        const subCategoryMatch = subCategoryFilter.data.includes(
-          response?.data?.subCategory?.name
-        );
-        // check price to match
-        const coursePriceStatus = course.price > 0 ? "paid" : "free";
-        const priceMatch = priceFilter.data.includes(coursePriceStatus);
-        return (
-          ratingsMatch &&
-          videoDurationMatch &&
-          topicMatch &&
-          subCategoryMatch &&
-          priceMatch
-        );
-      })
-      .catch((err) => console.log(err));
+  const fullCoursesData = await Promise.all(
+    courses.map(async (course) => {
+      const courseData = await axios.get(
+        `${api}${API_ENDPOINT.COURSES}/${course.uuid}`
+      );
+      return courseData.data;
+    })
+  );
+  // console.log("ful", fullCoursesData);
+  return fullCoursesData.filter((course) => {
+    // check ratings to match
+    // const ratingsMatch = course?.rating >= ratingsFilter.data;
+    //check video duration to match
+    const courseLength = sectionTotalLength(course.sections);
+    const courseLengthInSecond = convertToSeconds(courseLength);
+    const videoDurationMatch = checkMinAndMaxLength(
+      courseLengthInSecond,
+      videoDurationFilter.data
+    );
+    // check topic to match
+    const topicMatch = topicFilter.data.includes(course.topic.name);
+    // check sub category match
+    const subCategoryMatch = subCategoryFilter.data.includes(
+      course?.subCategory?.name
+    );
+    // check price to match
+    const coursePriceStatus = course?.price > 0 ? "paid" : "free";
+    const priceMatch = priceFilter.data.includes(coursePriceStatus);
+    return (
+      // ratingsMatch &&
+      // videoDurationMatch &&
+      topicMatch && subCategoryMatch && priceMatch
+    );
   });
-  // .sort((a, b) => {
-  //   if (sortBy.data) {
-  //   }
-  // });
 };
 
 export { getVisibleCourses };

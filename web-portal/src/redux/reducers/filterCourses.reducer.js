@@ -4,7 +4,7 @@ const { REQUEST, FILTER_ACTION, SUCCESS, FAIL } = require("redux/constants");
 const initialState = {
   sortByFilter: {
     load: false,
-    data: "",
+    data: "Newest",
     error: "",
   },
   ratingsFilter: {
@@ -98,7 +98,7 @@ const filterReducer = createReducer(initialState, {
     videoDurationFilter: {
       ...state.videoDurationFilter,
       load: false,
-      data: [...state.videoDurationFilter.data, ...action.payload.data],
+      data: [...state.videoDurationFilter.data, action.payload.data],
       error: "",
     },
   }),

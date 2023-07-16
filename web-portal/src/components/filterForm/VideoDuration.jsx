@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { getFilterVideoDuration } from "redux/actions/filterCourses.action";
 
 function VideoDuration() {
+  const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
   const [state, setState] = useState({
     3600: { checked: false, min: 0, max: 3600 },
@@ -25,6 +28,11 @@ function VideoDuration() {
         checked: event.target.checked,
       },
     }));
+    dispatch(
+      getFilterVideoDuration({
+        data: state[event.target.name],
+      })
+    );
   };
 
   return (

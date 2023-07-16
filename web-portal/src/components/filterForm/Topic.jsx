@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { getFilterTopic } from "redux/actions/filterCourses.action";
 
 function Topic({ topics }) {
+  const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
   const [state, setState] = useState(
     topics.reduce((obj, item) => {
@@ -20,8 +23,13 @@ function Topic({ topics }) {
         checked: event.target.checked,
       },
     }));
+    dispatch(
+      getFilterTopic({
+        data: state[event.target.name].name,
+      })
+    );
   };
-  console.log("state", state);
+  // console.log("state", state);
 
   return (
     <div className="border-t border-t-[#d1d7dc] mb-[8px]">

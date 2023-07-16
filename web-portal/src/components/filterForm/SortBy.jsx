@@ -2,13 +2,26 @@ import { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useDispatch, useSelector } from "react-redux";
+import { getFilterSortBy } from "redux/actions/filterCourses.action";
 
 function SortBy() {
-  const [state, setState] = useState("");
+  const dispatch = useDispatch();
+  const sortByFilter = useSelector((state) => {
+    return state.filter.sortByFilter;
+  });
+  const [state, setState] = useState("Newest");
 
   const handleChange = (event) => {
     setState(event.target.value);
+    dispatch(
+      getFilterSortBy({
+        data: event.target.value,
+      })
+    );
   };
+
+  console.log("sort", sortByFilter);
 
   return (
     <div className="mb-[8px] flex flex-col py-[19px]">

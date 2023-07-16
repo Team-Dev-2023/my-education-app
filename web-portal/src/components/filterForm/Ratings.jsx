@@ -7,13 +7,21 @@ import { yellow } from "@mui/material/colors";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useDispatch } from "react-redux";
+import { getFilterRatings } from "redux/actions/filterCourses.action";
 
 function Ratings() {
+  const dispatch = useDispatch();
   const [selectedValue, setSelectedValue] = useState(0);
   const [isVisible, setVisible] = useState(false);
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    dispatch(
+      getFilterRatings({
+        data: event.target.value,
+      })
+    );
   };
   //   console.log(selectedValue);
 

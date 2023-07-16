@@ -19,7 +19,7 @@ function AllCourses({ courses, sourceName, topics, subCategories }) {
           topics={topics}
           subCategories={subCategories}
         />
-        <CoursesVisible viewableCourses={viewableCourses} />
+        <CoursesVisible viewableCourses={courses} />
       </div>
     </div>
   );
