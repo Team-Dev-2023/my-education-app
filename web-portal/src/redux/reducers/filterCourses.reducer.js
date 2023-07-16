@@ -123,7 +123,7 @@ const filterReducer = createReducer(initialState, {
     topicFilter: {
       ...state.topicFilter,
       load: false,
-      data: [...state.topicFilter.data, ...action.payload.data],
+      data: action.payload.data,
       error: "",
     },
   }),
@@ -148,7 +148,7 @@ const filterReducer = createReducer(initialState, {
     subCategoryFilter: {
       ...state.subCategoryFilter,
       load: false,
-      data: [...state.subCategoryFilter.data, ...action.payload.data],
+      data: action.payload.data,
       error: "",
     },
   }),
@@ -173,7 +173,7 @@ const filterReducer = createReducer(initialState, {
     priceFilter: {
       ...state.priceFilter,
       load: false,
-      data: [...state.priceFilter.data, ...action.payload.data],
+      data: action.payload.data,
       error: "",
     },
   }),

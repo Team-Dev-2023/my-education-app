@@ -39,7 +39,7 @@ function FilteredCourses() {
   useEffect(() => {
     getListCourse(setListCourses, 1, 20, category, subcategory, topic);
   }, []);
-  console.log("listCourses", listCourses);
+  // console.log("listCourses", listCourses);
 
   useEffect(() => {
     const allTopics = [];

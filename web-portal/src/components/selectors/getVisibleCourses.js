@@ -29,7 +29,7 @@ function checkMinAndMaxLength(courseLength, videoDurationFilter) {
   return courseLength >= minValue && courseLength <= maxValue;
 }
 
-const getVisibleCourses = async (
+const getVisibleCourses = (
   courses,
   {
     // ratingsFilter,
@@ -39,17 +39,8 @@ const getVisibleCourses = async (
     priceFilter,
     // sortByFilter,
   }
-) => {
-  const fullCoursesData = await Promise.all(
-    courses.map(async (course) => {
-      const courseData = await axios.get(
-        `${api}${API_ENDPOINT.COURSES}/${course.uuid}`
-      );
-      return courseData.data;
-    })
-  );
-  // console.log("ful", fullCoursesData);
-  return fullCoursesData.filter((course) => {
+) =>
+  courses.filter((course) => {
     // check ratings to match
     // const ratingsMatch = course?.rating >= ratingsFilter.data;
     //check video duration to match
@@ -60,20 +51,30 @@ const getVisibleCourses = async (
       videoDurationFilter.data
     );
     // check topic to match
-    const topicMatch = topicFilter.data.includes(course.topic.name);
+    const topicResult = topicFilter.data.map((item) => item.uuid);
+    const topicMatch =
+      topicResult.length === 0 ? true : topicResult.includes(course.topic.uuid);
     // check sub category match
-    const subCategoryMatch = subCategoryFilter.data.includes(
-      course?.subCategory?.name
-    );
+    const subCategoryResult = subCategoryFilter.data.map((item) => item.uuid);
+    const subCategoryMatch =
+      subCategoryResult.length === 0
+        ? true
+        : subCategoryResult.includes(course.subCategory.uuid);
     // check price to match
-    const coursePriceStatus = course?.price > 0 ? "paid" : "free";
-    const priceMatch = priceFilter.data.includes(coursePriceStatus);
+    const priceResult = priceFilter.data.map((item) => item.price);
+    const priceMatch =
+      priceResult.length === 0 || priceResult.length === 2
+        ? true
+        : priceResult.includes("Free")
+        ? course.price === 0
+        : priceResult.includes("Paid")
+        ? course.price > 0
+        : false;
     return (
       // ratingsMatch &&
       // videoDurationMatch &&
       topicMatch && subCategoryMatch && priceMatch
     );
   });
-};
 
 export { getVisibleCourses };

@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { flushSync } from "react-dom";
+import { getFilterPrice } from "redux/actions/filterCourses.action";
 
 function Price() {
+  const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
   const [state, setState] = useState({
     Free: { checked: false, price: "Free" },
@@ -11,14 +15,24 @@ function Price() {
   });
 
   const handleChange = (event) => {
-    setState((prevState) => ({
-      ...prevState,
-      [event.target.name]: {
-        ...prevState[event.target.name],
-        checked: event.target.checked,
-      },
-    }));
+    flushSync(() => {
+      setState((prevState) => ({
+        ...prevState,
+        [event.target.name]: {
+          ...prevState[event.target.name],
+          checked: event.target.checked,
+        },
+      }));
+    });
   };
+  console.log("price", [
+    ...Object.values(state).filter((item) => item.checked),
+  ]);
+  dispatch(
+    getFilterPrice({
+      data: [...Object.values(state).filter((item) => item.checked)],
+    })
+  );
   // console.log("state", state);
 
   return (

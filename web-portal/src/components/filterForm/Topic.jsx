@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { getFilterTopic } from "redux/actions/filterCourses.action";
+import { flushSync } from "react-dom";
 
 function Topic({ topics }) {
   const dispatch = useDispatch();
@@ -16,20 +17,24 @@ function Topic({ topics }) {
   );
 
   const handleChange = (event) => {
-    setState((prevState) => ({
-      ...prevState,
-      [event.target.name]: {
-        ...prevState[event.target.name],
-        checked: event.target.checked,
-      },
-    }));
-    dispatch(
-      getFilterTopic({
-        data: state[event.target.name].name,
-      })
-    );
+    flushSync(() => {
+      setState((prevState) => ({
+        ...prevState,
+        [event.target.name]: {
+          ...prevState[event.target.name],
+          checked: event.target.checked,
+        },
+      }));
+    });
   };
-  // console.log("state", state);
+  // console.log("topic", [
+  //   ...Object.values(state).filter((item) => item.checked),
+  // ]);
+  dispatch(
+    getFilterTopic({
+      data: [...Object.values(state).filter((item) => item.checked)],
+    })
+  );
 
   return (
     <div className="border-t border-t-[#d1d7dc] mb-[8px]">
@@ -50,7 +55,7 @@ function Topic({ topics }) {
           </span>
         </button>
       </div>
-      {isVisible && (
+      <div className={`${!isVisible && "hidden"}`}>
         <FormGroup>
           {Object.values(state).map((item) => (
             <FormControlLabel
@@ -66,7 +71,7 @@ function Topic({ topics }) {
             />
           ))}
         </FormGroup>
-      )}
+      </div>
     </div>
   );
 }
