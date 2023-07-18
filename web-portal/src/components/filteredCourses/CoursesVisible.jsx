@@ -28,8 +28,7 @@ function CoursesVisible({ viewableCourses }) {
     });
   }, []);
 
-  // console.log("view", viewableCourses);
-  console.log("cos", courses);
+  // console.log("cos", courses);
 
   const filters = useSelector((state) => state.filter);
 
@@ -45,15 +44,10 @@ function CoursesVisible({ viewableCourses }) {
     }
   }, [courses, filters]);
 
-  console.log("view", viewCourses);
+  // console.log("view", viewCourses);
 
   return (
-    <div className="flex flex-col py-[19px] mt-[-16px] w-full">
-      {/* {!visible && (
-        <div className="flex justify-center items-center">
-          <p>No courses found</p>
-        </div>
-      )} */}
+    <div className="flex flex-col py-[19px] w-full">
       {viewCourses.length > 0 ? (
         viewCourses.map((item) => <CourseItem key={item.uuid} item={item} />)
       ) : visible ? (

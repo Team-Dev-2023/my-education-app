@@ -14,7 +14,7 @@ function Filtering({
 }) {
   return (
     <div className="w-[280px] flex flex-col pr-[40px] mr-[8px] py-[19px]">
-      {/* <SortBy /> */}
+      <SortBy />
       <Ratings />
       <VideoDuration />
       <Topic topics={topics} />

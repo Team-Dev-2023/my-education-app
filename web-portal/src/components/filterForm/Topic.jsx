@@ -38,14 +38,14 @@ function Topic({ topics }) {
 
   return (
     <div className="border-t border-t-[#d1d7dc] mb-[8px]">
-      <div className="flex flex-row ">
+      <div
+        className="flex flex-row cursor-pointer"
+        onClick={() => setVisible((prevState) => !prevState)}
+      >
         <div className="text-[19px] text-[#1c1d1f] leading-[1.2] font-[700] py-[19px] whitespace-nowrap">
           Topic
         </div>
-        <button
-          className="ml-auto w-full flex justify-end items-center"
-          onClick={() => setVisible((prevState) => !prevState)}
-        >
+        <button className="ml-auto w-full flex justify-end items-center">
           <span>
             {isVisible ? (
               <KeyboardArrowUpIcon fontSize="small" color="#5624d0" />
