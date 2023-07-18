@@ -25,15 +25,15 @@ function Price() {
       }));
     });
   };
-  console.log("price", [
-    ...Object.values(state).filter((item) => item.checked),
-  ]);
+  // console.log("price", [
+  //   ...Object.values(state).filter((item) => item.checked),
+  // ]);
   dispatch(
     getFilterPrice({
       data: [...Object.values(state).filter((item) => item.checked)],
     })
   );
-  // console.log("state", state);
+  // console.log("state", state.priceFilter);
 
   return (
     <div className="border-t border-t-[#d1d7dc] mb-[8px]">

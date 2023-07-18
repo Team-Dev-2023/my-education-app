@@ -1,8 +1,4 @@
-import axios from "axios";
-import { API_ENDPOINT } from "constants/api";
 import { sectionTotalLength } from "utils/helpers/totalLengthCalculator.helper";
-import { async } from "./../../utils/helpers/workWithApi";
-const api = process.env.REACT_APP_API;
 
 function convertToSeconds(timeString) {
   var timeArray = timeString.split(" ");
@@ -14,20 +10,25 @@ function convertToSeconds(timeString) {
   return totalSeconds;
 }
 
-function checkMinAndMaxLength(courseLength, videoDurationFilter) {
-  let minValue = 0;
-  let maxValue = Number.MAX_SAFE_INTEGER;
-  for (let index = 0; index < videoDurationFilter.length; index++) {
-    const { min, max } = videoDurationFilter[index];
-    if (min >= minValue) {
-      minValue = min;
-    }
-    if (max <= maxValue) {
-      maxValue = max;
-    }
+const checkMinAndMaxLength = (courseLength, videoDurationFilterData) => {
+  const minValue = [];
+  const maxValue = [];
+  for (let index = 0; index < videoDurationFilterData.length; index++) {
+    const { min, max } = videoDurationFilterData[index];
+    minValue.push(min);
+    maxValue.push(max);
   }
-  return courseLength >= minValue && courseLength <= maxValue;
-}
+  return (
+    courseLength >=
+      minValue.reduce((min, cur) => {
+        return cur <= min ? cur : min;
+      }, minValue[0]) &&
+    courseLength <=
+      maxValue.reduce((max, cur) => {
+        return cur >= max ? cur : max;
+      }, maxValue[0])
+  );
+};
 
 const getVisibleCourses = (
   courses,
@@ -46,10 +47,10 @@ const getVisibleCourses = (
     //check video duration to match
     const courseLength = sectionTotalLength(course.sections);
     const courseLengthInSecond = convertToSeconds(courseLength);
-    const videoDurationMatch = checkMinAndMaxLength(
-      courseLengthInSecond,
-      videoDurationFilter.data
-    );
+    const videoDurationMatch =
+      videoDurationFilter.data.length === 0
+        ? true
+        : checkMinAndMaxLength(courseLengthInSecond, videoDurationFilter.data);
     // check topic to match
     const topicResult = topicFilter.data.map((item) => item.uuid);
     const topicMatch =
@@ -62,7 +63,7 @@ const getVisibleCourses = (
         : subCategoryResult.includes(course.subCategory.uuid);
     // check price to match
     const priceResult = priceFilter.data.map((item) => item.price);
-    const priceMatch =
+    let priceMatch =
       priceResult.length === 0 || priceResult.length === 2
         ? true
         : priceResult.includes("Free")
@@ -72,8 +73,7 @@ const getVisibleCourses = (
         : false;
     return (
       // ratingsMatch &&
-      // videoDurationMatch &&
-      topicMatch && subCategoryMatch && priceMatch
+      videoDurationMatch && topicMatch && subCategoryMatch && priceMatch
     );
   });
 

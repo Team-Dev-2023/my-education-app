@@ -4,6 +4,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { getFilterVideoDuration } from "redux/actions/filterCourses.action";
+import { flushSync } from "react-dom";
 
 function VideoDuration() {
   const dispatch = useDispatch();
@@ -21,19 +22,21 @@ function VideoDuration() {
   });
 
   const handleChange = (event) => {
-    setState((prevState) => ({
-      ...prevState,
-      [event.target.name]: {
-        ...prevState[event.target.name],
-        checked: event.target.checked,
-      },
-    }));
-    dispatch(
-      getFilterVideoDuration({
-        data: state[event.target.name],
-      })
-    );
+    flushSync(() => {
+      setState((prevState) => ({
+        ...prevState,
+        [event.target.name]: {
+          ...prevState[event.target.name],
+          checked: event.target.checked,
+        },
+      }));
+    });
   };
+  dispatch(
+    getFilterVideoDuration({
+      data: [...Object.values(state).filter((item) => item.checked)],
+    })
+  );
 
   return (
     <div className="border-t border-t-[#d1d7dc] mb-[8px]">

@@ -38,12 +38,8 @@ function CoursesVisible({ viewableCourses }) {
       const finalResult = async () => await getVisibleCourses(courses, filters);
       finalResult()
         .then((result) => {
-          if (result.length > 0) {
-            setViewCourses(result);
-            setVisible(true);
-          } else {
-            setVisible(false);
-          }
+          setViewCourses(result);
+          setVisible(false);
         })
         .catch((e) => console.log(e));
     }

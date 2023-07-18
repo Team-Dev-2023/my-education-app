@@ -98,7 +98,7 @@ const filterReducer = createReducer(initialState, {
     videoDurationFilter: {
       ...state.videoDurationFilter,
       load: false,
-      data: [...state.videoDurationFilter.data, action.payload.data],
+      data: action.payload.data,
       error: "",
     },
   }),
