@@ -1,12 +1,7 @@
-import React, { useState } from "react";
 import Filtering from "./Filtering";
 import CoursesVisible from "./CoursesVisible";
 
 function AllCourses({ courses, sourceName, topics, subCategories }) {
-  const [viewableCourses, setViewableCourses] = useState([]);
-  const handleSetViewingCourses = (courses) => {
-    setViewableCourses(courses);
-  };
   return (
     <div className="mb-[48px]">
       <h2 className="font-[700] text-[24px] leading-[1.2] mb-[16px]">
@@ -14,7 +9,6 @@ function AllCourses({ courses, sourceName, topics, subCategories }) {
       </h2>
       <div className="flex flex-row">
         <Filtering
-          handleSetViewingCourses={handleSetViewingCourses}
           inputCourses={courses}
           topics={topics}
           subCategories={subCategories}

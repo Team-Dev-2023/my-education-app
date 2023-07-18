@@ -48,7 +48,11 @@ function CoursesVisible({ viewableCourses }) {
 
   return (
     <div className="flex flex-col py-[19px] w-full">
-      {viewCourses.length > 0 ? (
+      {courses.length === 0 ? (
+        <div className="container mx-auto h-32 flex justify-center items-center">
+          <CircularProgress />
+        </div>
+      ) : viewCourses.length > 0 ? (
         viewCourses.map((item) => <CourseItem key={item.uuid} item={item} />)
       ) : visible ? (
         courses.map((item) => <CourseItem key={item.uuid} item={item} />)

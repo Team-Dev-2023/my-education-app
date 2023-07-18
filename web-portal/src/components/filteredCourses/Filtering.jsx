@@ -4,14 +4,8 @@ import SortBy from "components/filterForm/SortBy";
 import SubCategory from "components/filterForm/SubCategory";
 import Topic from "components/filterForm/Topic";
 import VideoDuration from "components/filterForm/VideoDuration";
-import React, { useEffect, useState } from "react";
 
-function Filtering({
-  handleSetViewingCourses,
-  inputCourses,
-  topics,
-  subCategories,
-}) {
+function Filtering({ topics, subCategories }) {
   return (
     <div className="w-[280px] flex flex-col pr-[40px] mr-[8px] py-[19px]">
       <SortBy />
