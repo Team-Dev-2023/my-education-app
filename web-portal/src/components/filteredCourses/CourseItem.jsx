@@ -3,6 +3,8 @@ import React from "react";
 
 import StarIcon from "@mui/icons-material/Star";
 import { yellow } from "@mui/material/colors";
+import { sectionTotalLength } from "utils/helpers/totalLengthCalculator.helper";
+import { lecturesCalculator } from "utils/helpers/calculateLecturesOfCourse.helper";
 
 function CourseItem({ item }) {
   //format price
@@ -46,7 +48,8 @@ function CourseItem({ item }) {
           />
         </span>
         <span className="mb-[4px] text-[12px] text-[#6a6f73] leading-[1.2] font-[400]">
-          {"des"}
+          {sectionTotalLength(item.sections)} -{" "}
+          {lecturesCalculator(item.sections)} lectures
         </span>
       </a>
       <div className="text-[16px] text-[#1c1d1f] leading-[1.2] font-[700] whitespace-nowrap flex-grow-0">
