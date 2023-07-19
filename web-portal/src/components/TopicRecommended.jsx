@@ -6,8 +6,10 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 
 import { Grid, Navigation } from "swiper";
+import { CircularProgress } from "@mui/material";
 
 function TopicRecommended({ topics }) {
+  // console.log("topic", topics);
   const renderTopics = (array) =>
     array.map((item) => (
       <SwiperSlide
@@ -15,7 +17,7 @@ function TopicRecommended({ topics }) {
         className=" !h-[50px] border-gray-400 border"
       >
         <a
-          href={item.imageUrl}
+          href={`/topic/${item.name.toLowerCase().split(" ").join("-")}`}
           className="h-full flex justify-center items-center text-center"
         >
           <strong>{item.name}</strong>
@@ -66,7 +68,13 @@ function TopicRecommended({ topics }) {
           }}
           className="!h-[110px]"
         >
-          {renderTopics(topics)}
+          {topics.length > 0 ? (
+            renderTopics(topics)
+          ) : (
+            <div className="container mx-auto h-32 flex justify-center items-center">
+              <CircularProgress />
+            </div>
+          )}
         </Swiper>
         <div
           className={`swiper-button-next-unique-recommend absolute xxs:hidden sm:block top-[30px] z-10 sm:right-[-20px] `}

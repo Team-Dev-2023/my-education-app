@@ -35,7 +35,7 @@ function App() {
       dispatch(
         getUserInfoAction({
           accessToken: accessToken,
-        }),
+        })
       );
     dispatch(
       getListCartAction({
@@ -53,6 +53,7 @@ function App() {
         <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
         <Route path={ROUTES.USER.COURSES} element={<FilteredCourses />} />
+        <Route path={ROUTES.USER.TOPIC} element={<FilteredCourses />} />
         <Route
           path={ROUTES.USER.DETAIL_PRODUCT}
           element={<CourseDetailPage />}

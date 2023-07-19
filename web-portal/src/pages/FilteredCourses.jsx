@@ -26,13 +26,32 @@ function FilteredCourses() {
     const setCategories = (categories) => {
       allCategories.push(...categories);
     };
+    const pushSubCategories = async (categories) => {
+      const allSubCategories = [];
+      const pushAllSubCategoies = (subcategory) => {
+        allSubCategories.push(...subcategory);
+      };
+      for (let index = 0; index < categories.length; index++) {
+        const element = categories[index];
+
+        await getSubCategories(element.uuid, pushAllSubCategoies);
+      }
+      return allSubCategories;
+    };
     getCategory(setCategories).then(() => {
-      const categoryInfo = allCategories.filter(
-        (item) =>
-          item.name.toLowerCase() ===
-          category.split("-").join(" ").toLowerCase()
-      );
-      getSubCategories(categoryInfo[0].uuid, setSubCategories);
+      // console.log("all cate", allCategories);
+      const categoryInfo = category
+        ? allCategories.filter(
+            (item) =>
+              item.name.toLowerCase() ===
+              category.split("-").join(" ").toLowerCase()
+          )
+        : allCategories;
+      pushSubCategories(categoryInfo)
+        .then((res) => {
+          setSubCategories(res);
+        })
+        .catch((e) => console.log(e));
     });
   }, []);
 
@@ -42,17 +61,20 @@ function FilteredCourses() {
   // console.log("listCourses", listCourses);
 
   useEffect(() => {
-    const allTopics = [];
-    const setTopics = (topics) => {
-      allTopics.push(...topics);
+    const pushAllTopics = async (subCategories) => {
+      const allTopicsArray = [];
+      const setTopics = (topics) => {
+        allTopicsArray.push(...topics);
+      };
+      for (let index = 0; index < subCategories.length; index++) {
+        const subCategory = subCategories[index];
+        await getTopics(subCategory.uuid, setTopics);
+      }
+      return allTopicsArray;
     };
-    for (let index = 0; index < subCategories.length; index++) {
-      const subCategory = subCategories[index];
-      getTopics(subCategory.uuid, setTopics);
-    }
-    setAllTopics(allTopics);
-    // console.log("topics", allTopics);
+    pushAllTopics(subCategories).then((res) => setAllTopics(res));
   }, [subCategories]);
+  // console.log("topics", allTopics);
 
   return (
     <div>

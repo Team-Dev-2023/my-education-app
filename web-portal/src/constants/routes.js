@@ -4,6 +4,7 @@ export const ROUTES = {
     REGISTER: "/register",
     LOGIN: "/login",
     COURSES: "/courses/:category/:subcategory?/:topic?",
+    TOPIC: "/topic/:topic?",
     DETAIL_PRODUCT: "/detail/:uuid",
     LIST_PRODUCT: "/list",
     CART: "/cart",
