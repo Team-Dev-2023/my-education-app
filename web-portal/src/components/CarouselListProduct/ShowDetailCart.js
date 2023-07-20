@@ -73,11 +73,11 @@ function ShowDetailCart(carouseProduct, existsInCart) {
         <div className="flex flex-nowrap gap-2 items-center">
           <p className="w-fit text-[10px] flex flex-nowrap mx-[2px]">
             -
-            <p className="w-fit text-[10px] mx-[2px]">
+            <span className="w-fit text-[10px] mx-[2px]">
               {carouseProduct?.level === "beginnerLevel"
                 ? t.product.beginnerLevel
                 : t.product.allLevel}
-            </p>
+            </span>
             -
           </p>
         </div>

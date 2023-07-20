@@ -85,7 +85,7 @@ function SectionsList(props) {
                     </span>
                   )}
                   {`${Math.floor(item.videoDuration / 60)}:${String(
-                    item.videoDuration % 60,
+                    item.videoDuration % 60
                   ).padStart(2, "0")}`}
                 </span>
               </div>
@@ -103,7 +103,13 @@ function SectionsList(props) {
               <p className="text-[19px]">{title}</p>
             </div>
             <div className="w-full h-full">
-              <ReactPlayer url={urlForPlayer} width="552px" />
+              <ReactPlayer
+                controls={true}
+                playing={true}
+                onReady={() => setUrlForPlayer(urlForPlayer)}
+                url={urlForPlayer}
+                width="552px"
+              />
             </div>
             <div className="w-full text-[19px] font-[700] leading-[1.2] py-[16px]">
               <span>Free Sample Videos:</span>

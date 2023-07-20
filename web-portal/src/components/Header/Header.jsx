@@ -5,7 +5,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import qs from "qs";
 
 import {
-  AiOutlineSearch,
   AiOutlineHeart,
   AiOutlineShoppingCart,
   AiOutlineBell,
@@ -19,6 +18,7 @@ import { ROUTES } from "constants/routes";
 import HorizontalMenuDropdown from "./HorizontalMenuDropdown";
 import MenuProfile from "./MenuProfile";
 import ListCartMini from "./ListCartMini";
+import SearchOnTyping from "./SearchOnTyping";
 
 function Header() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -46,14 +46,7 @@ function Header() {
         </div>
         <Categories className="mx-2 text-base" />
         <div className="flex-auto grid w-64 py-2 mx-2">
-          <div className="inline-flex p-2 items-center rounded-full border-2 border-[#666163]">
-            <AiOutlineSearch className="ml-1 opacity-80 text-[30px]" />
-            <input
-              type="text"
-              placeholder="Search for anything"
-              className="pl-1  w-full rounded-full border-none focus:outline-none"
-            />
-          </div>
+          <SearchOnTyping />
         </div>
         <div className="mx-2 text-sm hidden lg:block">
           <a href="/" className="text-base">

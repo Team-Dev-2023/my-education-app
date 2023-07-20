@@ -14,7 +14,7 @@ function CarouselListProduct({ listProduct, namecarousel }) {
       return (
         <Fragment key={item.uuid}>
           <SwiperSlide key={item.uuid}>
-            {<ItemCarouseIlListProduct carouseProduct={item} />}
+            <ItemCarouseIlListProduct carouseProduct={item} />
           </SwiperSlide>
         </Fragment>
       );
@@ -22,8 +22,8 @@ function CarouselListProduct({ listProduct, namecarousel }) {
   };
 
   return (
-    <div className="w-full  flex justify-center">
-      <div className="relative sm:w-[calc(100%-40px)] xxs:w-full  ">
+    <div className="container w-full flex justify-center">
+      <div className="relative w-full  ">
         <Swiper
           // navigation={true}
           modules={[Navigation]}

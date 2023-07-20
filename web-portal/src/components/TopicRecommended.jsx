@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -6,70 +6,21 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 
 import { Grid, Navigation } from "swiper";
+import { CircularProgress } from "@mui/material";
 
-function TopicRecommended() {
-  const topicArray = [
-    {
-      topic: "Node.Js",
-      url: "/",
-    },
-    {
-      topic: "xxx.Js",
-      url: "/",
-    },
-    {
-      topic: "ccc.Js",
-      url: "/",
-    },
-    {
-      topic: "vvv.Js",
-      url: "/",
-    },
-    {
-      topic: "bbb.Js",
-      url: "/",
-    },
-    {
-      topic: "nnn.Js",
-      url: "/",
-    },
-    {
-      topic: "mmm.Js",
-      url: "/",
-    },
-    {
-      topic: "aaa.Js",
-      url: "/",
-    },
-    {
-      topic: "sss.Js",
-      url: "/",
-    },
-    {
-      topic: "fff.Js",
-      url: "/",
-    },
-    {
-      topic: "ggg.Js",
-      url: "/",
-    },
-    {
-      topic: "hhh.Js",
-      url: "/",
-    },
-    {
-      topic: "jjj.Js",
-      url: "/",
-    },
-  ];
+function TopicRecommended({ topics }) {
+  // console.log("topic", topics);
   const renderTopics = (array) =>
     array.map((item) => (
       <SwiperSlide
-        key={item.topic}
+        key={item.uuid}
         className=" !h-[50px] border-gray-400 border"
       >
-        <a href={item.url} className="h-full flex justify-center items-center">
-          <strong>{item.topic}</strong>
+        <a
+          href={`/topic/${item.name.toLowerCase().split(" ").join("-")}`}
+          className="h-full flex justify-center items-center text-center py-[8px] px-[16px]"
+        >
+          <strong>{item.name}</strong>
         </a>
       </SwiperSlide>
     ));
@@ -117,7 +68,13 @@ function TopicRecommended() {
           }}
           className="!h-[110px]"
         >
-          {renderTopics(topicArray)}
+          {topics.length > 0 ? (
+            renderTopics(topics)
+          ) : (
+            <div className="container mx-auto h-32 flex justify-center items-center">
+              <CircularProgress />
+            </div>
+          )}
         </Swiper>
         <div
           className={`swiper-button-next-unique-recommend absolute xxs:hidden sm:block top-[30px] z-10 sm:right-[-20px] `}
