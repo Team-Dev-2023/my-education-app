@@ -7,11 +7,11 @@ import { getFilterSortBy } from "redux/actions/filterCourses.action";
 
 function SortBy() {
   const dispatch = useDispatch();
-  const [state, setState] = useState("Newest");
+  const [inputState, setInputState] = useState("Newest");
 
   const handleChange = (event) => {
-    setState(event.target.value);
-    console.log("sort", typeof event.target.value);
+    setInputState(event.target.value);
+    // console.log("sort", typeof event.target.value);
     dispatch(
       getFilterSortBy({
         data: event.target.value,
@@ -28,7 +28,7 @@ function SortBy() {
       </div>
       <FormControl fullWidth>
         <Select
-          value={state}
+          value={inputState}
           onChange={handleChange}
           sx={{
             // border: "1px solid black",

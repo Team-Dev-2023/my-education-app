@@ -9,7 +9,7 @@ import { flushSync } from "react-dom";
 function VideoDuration() {
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
-  const [state, setState] = useState({
+  const [inputState, setInputState] = useState({
     3600: { checked: false, min: 0, max: 3600 },
     10800: { checked: false, min: 3600, max: 10800 },
     21600: { checked: false, min: 10800, max: 21600 },
@@ -23,7 +23,7 @@ function VideoDuration() {
 
   const handleChange = (event) => {
     flushSync(() => {
-      setState((prevState) => ({
+      setInputState((prevState) => ({
         ...prevState,
         [event.target.name]: {
           ...prevState[event.target.name],
@@ -34,7 +34,7 @@ function VideoDuration() {
   };
   dispatch(
     getFilterVideoDuration({
-      data: [...Object.values(state).filter((item) => item.checked)],
+      data: [...Object.values(inputState).filter((item) => item.checked)],
     })
   );
 
@@ -59,7 +59,7 @@ function VideoDuration() {
       </div>
       {isVisible && (
         <FormGroup>
-          {Object.values(state).map((item) => (
+          {Object.values(inputState).map((item) => (
             <FormControlLabel
               key={item.max}
               control={

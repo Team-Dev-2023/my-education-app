@@ -9,7 +9,7 @@ import { getFilterSubCategory } from "redux/actions/filterCourses.action";
 function SubCategory({ subCategories }) {
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
-  const [state, setState] = useState(
+  const [inputState, setInputState] = useState(
     subCategories.reduce((obj, item) => {
       obj[item.uuid] = { ...item, checked: false };
       return obj;
@@ -18,7 +18,7 @@ function SubCategory({ subCategories }) {
 
   const handleChange = (event) => {
     flushSync(() => {
-      setState((prevState) => ({
+      setInputState((prevState) => ({
         ...prevState,
         [event.target.name]: {
           ...prevState[event.target.name],
@@ -32,7 +32,7 @@ function SubCategory({ subCategories }) {
   // ]);
   dispatch(
     getFilterSubCategory({
-      data: [...Object.values(state).filter((item) => item.checked)],
+      data: [...Object.values(inputState).filter((item) => item.checked)],
     })
   );
 
@@ -59,7 +59,7 @@ function SubCategory({ subCategories }) {
       </div>
       {isVisible && (
         <FormGroup>
-          {Object.values(state).map((item) => (
+          {Object.values(inputState).map((item) => (
             <FormControlLabel
               key={item.uuid}
               control={

@@ -9,7 +9,7 @@ import { flushSync } from "react-dom";
 function Topic({ topics }) {
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
-  const [state, setState] = useState(
+  const [inputState, setInputState] = useState(
     topics.reduce((obj, item) => {
       obj[item.uuid] = { ...item, checked: false };
       return obj;
@@ -18,7 +18,7 @@ function Topic({ topics }) {
 
   const handleChange = (event) => {
     flushSync(() => {
-      setState((prevState) => ({
+      setInputState((prevState) => ({
         ...prevState,
         [event.target.name]: {
           ...prevState[event.target.name],
@@ -32,7 +32,7 @@ function Topic({ topics }) {
   // ]);
   dispatch(
     getFilterTopic({
-      data: [...Object.values(state).filter((item) => item.checked)],
+      data: [...Object.values(inputState).filter((item) => item.checked)],
     })
   );
 
@@ -57,7 +57,7 @@ function Topic({ topics }) {
       </div>
       <div className={`${!isVisible && "hidden"}`}>
         <FormGroup>
-          {Object.values(state).map((item) => (
+          {Object.values(inputState).map((item) => (
             <FormControlLabel
               key={item.uuid}
               control={

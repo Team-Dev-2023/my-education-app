@@ -9,14 +9,14 @@ import { getFilterPrice } from "redux/actions/filterCourses.action";
 function Price() {
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
-  const [state, setState] = useState({
+  const [inputState, setInputState] = useState({
     Free: { checked: false, price: "Free" },
     Paid: { checked: false, price: "Paid" },
   });
 
   const handleChange = (event) => {
     flushSync(() => {
-      setState((prevState) => ({
+      setInputState((prevState) => ({
         ...prevState,
         [event.target.name]: {
           ...prevState[event.target.name],
@@ -30,7 +30,7 @@ function Price() {
   // ]);
   dispatch(
     getFilterPrice({
-      data: [...Object.values(state).filter((item) => item.checked)],
+      data: [...Object.values(inputState).filter((item) => item.checked)],
     })
   );
   // console.log("state", state.priceFilter);
@@ -56,7 +56,7 @@ function Price() {
       </div>
       {isVisible && (
         <FormGroup>
-          {Object.values(state).map((item) => (
+          {Object.values(inputState).map((item) => (
             <FormControlLabel
               key={item.price}
               control={
