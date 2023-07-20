@@ -18,7 +18,7 @@ function TopicRecommended({ topics }) {
       >
         <a
           href={`/topic/${item.name.toLowerCase().split(" ").join("-")}`}
-          className="h-full flex justify-center items-center text-center"
+          className="h-full flex justify-center items-center text-center py-[8px] px-[16px]"
         >
           <strong>{item.name}</strong>
         </a>

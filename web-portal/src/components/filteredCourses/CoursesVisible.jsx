@@ -84,7 +84,7 @@ function CoursesVisible({ viewableCourses }) {
       {courses.length > 0 && (
         <div className="container w-full mx-auto flex justify-center mt-[16px]">
           <Pagination
-            count={Math.round(viewCourses.length / 10)}
+            count={Math.ceil(viewCourses.length / 10)}
             page={page}
             onChange={handleChange}
           />

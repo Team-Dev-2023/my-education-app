@@ -79,22 +79,20 @@ function FilteredCourses() {
   return (
     <div>
       {listCourses ? (
-        <>
-          <div className="mx-auto py-[48px] px-[24px] w-full max-w-[1340px]">
-            <h1 className="mb-[48px] text-[32px] font-[700] leading-[1.25] capitalize">
-              {sourceName} Courses
-            </h1>
-            <GetStartedCourses courses={listCourses} />
-            <FeaturedCourses courses={listCourses} />
-            <PopularTopics topics={allTopics} />
-            <AllCourses
-              courses={listCourses}
-              sourceName={sourceName}
-              topics={allTopics}
-              subCategories={subCategories}
-            />
-          </div>
-        </>
+        <div className="mx-auto py-[48px] px-[24px] w-full max-w-[1340px]">
+          <h1 className="mb-[48px] text-[32px] font-[700] leading-[1.25] capitalize">
+            {sourceName} Courses
+          </h1>
+          <GetStartedCourses courses={listCourses} />
+          <FeaturedCourses courses={listCourses} />
+          <PopularTopics topics={allTopics} />
+          <AllCourses
+            courses={listCourses}
+            sourceName={sourceName}
+            topics={allTopics}
+            subCategories={subCategories}
+          />
+        </div>
       ) : (
         <div className="container mx-auto h-32 flex justify-center items-center">
           <CircularProgress />
