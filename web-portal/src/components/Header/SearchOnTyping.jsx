@@ -3,10 +3,13 @@ import { API_ENDPOINT } from "constants/api";
 import React, { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const api = process.env.REACT_APP_API;
 
 function SearchOnTyping() {
+  const navigate = useNavigate();
+
   const [inputChange, setInputChange] = useState("");
   const [searchedCourses, setSearchedCourses] = useState([]);
 
@@ -69,13 +72,22 @@ function SearchOnTyping() {
         ref={inputFieldDivRef}
       >
         <AiOutlineSearch className="ml-1 opacity-80 text-[30px]" />
-        <input
-          type="text"
-          value={inputChange}
-          onChange={handleInputChange}
-          placeholder="Search for anything"
-          className="pl-1  w-full rounded-full border-none focus:outline-none"
-        />
+        <form
+          className="w-full"
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate(`/courses/search/${inputChange}`);
+            setInputChange("");
+          }}
+        >
+          <input
+            type="text"
+            value={inputChange}
+            onChange={handleInputChange}
+            placeholder="Search for anything"
+            className="pl-1 w-full rounded-full border-none focus:outline-none"
+          />
+        </form>
       </div>
       {searchedCourses.length > 0 && inputChange.length > 0 && (
         <div

@@ -17,6 +17,7 @@ import FilteredCourses from "pages/FilteredCourses";
 import Cart from "pages/Cart";
 import { getListCartAction } from "redux/actions/cart.action";
 import EditProfile from "pages/EditProfile";
+import SearchResult from "pages/SearchResult";
 require("moment/locale/vi");
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <Route path={ROUTES.USER.HOME_PAGE} element={<HomePage />} />
         <Route path={ROUTES.USER.REGISTER} element={<RegisterWebportal />} />
         <Route path={ROUTES.USER.LOGIN} element={<LoginPage />} />
+        <Route path={ROUTES.USER.SEARCH_RESULT} element={<SearchResult />} />
         <Route path={ROUTES.USER.LIST_PRODUCT} element={<CourseListPage />} />
         <Route path={ROUTES.USER.COURSES} element={<FilteredCourses />} />
         <Route path={ROUTES.USER.TOPIC} element={<FilteredCourses />} />
