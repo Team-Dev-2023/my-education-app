@@ -16,16 +16,16 @@ function SearchOnTyping() {
   const searchResultDivRef = useRef(null);
   const inputFieldDivRef = useRef(null);
 
-  const fetchSearchedCourses = async (query) => {
+  const fetchSearchedCourses = async (query, perPage) => {
     const result = await axios.get(`${api}${API_ENDPOINT.COURSES}`, {
       params: {
-        perPage: 5,
+        perPage: perPage,
       },
     });
-    const fullCourses = result.data.data;
-    return fullCourses.filter((item) =>
+    const fullCourses = await result.data.data.filter((item) =>
       item.title.toLowerCase().includes(query.toLowerCase())
     );
+    return fullCourses;
   };
   const handleInputChange = (event) => {
     flushSync(() => {
@@ -35,9 +35,9 @@ function SearchOnTyping() {
 
   useEffect(() => {
     const debounceSearching = setTimeout(() => {
-      fetchSearchedCourses(inputChange).then((result) => {
+      fetchSearchedCourses(inputChange, 5).then((result) => {
         setSearchedCourses(result);
-        console.log("res", result);
+        // console.log("res", result);
       });
     }, 300);
 

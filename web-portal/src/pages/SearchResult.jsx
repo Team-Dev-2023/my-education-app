@@ -4,17 +4,17 @@ import CoursesVisible from "components/filteredCourses/CoursesVisible";
 import Filtering from "components/filteredCourses/Filtering";
 import { ROUTES } from "constants/routes";
 import React, { useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import { useParams } from "react-router-dom";
 
 const api = process.env.REACT_APP_API;
 
 function SearchResult() {
   const { query } = useParams();
-  console.log("query", query);
-  const [listCourse, setListCourse] = useState([]);
-  // const [searchedCourses, setSearchedCourses] = useState([]);
-  const [topics, setTopics] = useState([]);
-  const [subCategories, setSubCategories] = useState([]);
+  // console.log("query", query);
+  const [listCourse, setListCourse] = useState(undefined);
+  const [topics, setTopics] = useState(undefined);
+  const [subCategories, setSubCategories] = useState(undefined);
 
   const fetchAllCourses = async () => {
     try {
@@ -49,7 +49,7 @@ function SearchResult() {
           perPage: 100,
         },
       });
-      console.log("sub", response.data.data);
+      // console.log("sub", response.data.data);
       return response.data.data;
     } catch (error) {
       console.log("Error: ", error);
@@ -57,7 +57,11 @@ function SearchResult() {
   };
   useEffect(() => {
     fetchAllCourses()
-      .then((result) => setListCourse(result))
+      .then((result) =>
+        flushSync(() => {
+          setListCourse(result);
+        })
+      )
       .catch((e) => console.log(e));
     fetchAllTopics()
       .then((result) => setTopics(result))
@@ -70,16 +74,23 @@ function SearchResult() {
   console.log("list courses", listCourse);
   return (
     <div className="mx-auto py-[48px] px-[24px] w-full max-w-[1340px]">
-      SearchResult
+      <div className="flex flex-col text-[#1c1d1f]">
+        <h1 className="text-[32px] font-[700] leading-[1.2] mb-[16px]">
+          {`99`} results for "{query}"
+        </h1>
+        <span className="text-[16px] font-[400] leading-[1.4] ">
+          Showing results for "{query}"
+        </span>
+      </div>
       <div className="flex flex-row">
-        {topics.length > 0 ? (
+        {topics && subCategories ? (
           <Filtering topics={topics} subCategories={subCategories} />
         ) : (
           <div className="container mx-auto h-32 flex justify-center items-center">
             <CircularProgress />
           </div>
         )}
-        {listCourse.length > 0 ? (
+        {listCourse ? (
           <CoursesVisible
             viewableCourses={listCourse.filter((item) =>
               item.title.toLowerCase().includes(query.toLowerCase())
