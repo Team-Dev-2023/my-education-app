@@ -11,14 +11,19 @@ import BuyerAction from "./BuyerAction";
 
 function Sidebar(props) {
   const { courseData } = props;
-  const imgUrl = courseData.imageUrl;
 
   return (
     <div className="text-white bg-white flex items-center flex-col w-[340px] mt-[32px] border border-[#d1d7dc] box-border shadow-md">
       <div className="w-full h-full">
         <button className="cursor-pointer block w-full h-[190px] overflow-hidden">
           <span>
-            <img src={imgUrl} alt="preview" className="w-full" />
+            <img
+              src={
+                "https://img-c.udemycdn.com/course/750x422/2099246_11dc_2.jpg"
+              }
+              alt="preview"
+              className="w-full"
+            />
           </span>
         </button>
       </div>
@@ -47,7 +52,7 @@ function Sidebar(props) {
                   className="!text-[14px] mr-[16px]"
                 />
                 <span>{`${sectionTotalLength(
-                  courseData.sections,
+                  courseData.sections
                 )} on-demand video.`}</span>
               </span>
             </li>

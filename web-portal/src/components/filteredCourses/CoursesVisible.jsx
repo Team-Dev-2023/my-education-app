@@ -35,6 +35,8 @@ function CoursesVisible({ viewableCourses }) {
 
   const filters = useSelector((state) => state.filter);
 
+  // console.log("filter", filters);
+
   useEffect(() => {
     if (courses.length > 0) {
       const finalResult = async () => await getVisibleCourses(courses, filters);

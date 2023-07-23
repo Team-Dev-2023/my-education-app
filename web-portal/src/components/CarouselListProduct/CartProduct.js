@@ -46,7 +46,7 @@ function CartProduct(carouseProduct) {
       <div>
         <img
           className="w-full max-h-[126px] object-cover "
-          src={carouseProduct.imageUrl}
+          src={"https://img-c.udemycdn.com/course/750x422/2099246_11dc_2.jpg"}
           alt="imageCarouseProductCarouselListProduct"
         />
       </div>
