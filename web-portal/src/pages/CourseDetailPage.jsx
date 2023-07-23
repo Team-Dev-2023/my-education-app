@@ -13,6 +13,7 @@ import Description from "components/productDetails/Description";
 import Sidebar from "components/productDetails/Sidebar";
 import BuyerAction from "components/productDetails/BuyerAction";
 import TargetLearners from "components/productDetails/TargetLearners";
+import CourseRating from "components/productDetails/CourseRating";
 
 const api = process.env.REACT_APP_API;
 function CourseDetailPage() {
@@ -81,6 +82,7 @@ function CourseDetailPage() {
               <Requirements courseData={data} />
               <Description courseData={data} />
               <TargetLearners courseData={data} />
+              <CourseRating rating={data.rating} reviewData={data.review} />
             </div>
             {isDivVisible && <div className="w-[30%]"></div>}
           </div>
