@@ -6,6 +6,7 @@ import { Navigation, Autoplay } from "swiper";
 import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { yellow } from "@mui/material/colors";
+import { ROUTES } from "constants/routes";
 
 function CoursesSlider({ courses }) {
   //   console.log("courses", courses);
@@ -43,12 +44,17 @@ function CoursesSlider({ courses }) {
           <SwiperSlide
             key={course.uuid}
             className="border border-[#d1d7dc] hover:bg-[#f7f9fa] p-[24px] cursor-pointer"
-            onClick={() => navigate(`/detail/${course.uuid}`)}
+            onClick={() =>
+              navigate(`${ROUTES.USER.DETAIL_PRODUCT_PATH}${course.uuid}`)
+            }
           >
             <div className="flex flex-row">
-              <div className="w-[37%] h-full">
+              <div className="w-[37%] h-full mr-[24px]">
                 <img
-                  src={course.imageUrl}
+                  // src={course.imageUrl}
+                  src={
+                    "https://img-c.udemycdn.com/course/750x422/2099246_11dc_2.jpg"
+                  }
                   alt="course-img"
                   className="w-full h-full"
                 />

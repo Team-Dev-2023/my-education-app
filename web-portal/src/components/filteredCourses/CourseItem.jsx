@@ -5,8 +5,11 @@ import StarIcon from "@mui/icons-material/Star";
 import { yellow } from "@mui/material/colors";
 import { sectionTotalLength } from "utils/helpers/totalLengthCalculator.helper";
 import { lecturesCalculator } from "utils/helpers/calculateLecturesOfCourse.helper";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "constants/routes";
 
 function CourseItem({ item }) {
+  const navigate = useNavigate();
   //format price
   const formatPrice = Intl.NumberFormat("en-US", {
     style: "currency",
@@ -17,14 +20,24 @@ function CourseItem({ item }) {
 
   return (
     <div className="flex flex-row py-[16px] border-b border-b-[#d1d7dc]">
-      <div className="flex-grow-0 mr-[16px] min-w-[262px] h-[145px]">
+      <div
+        onClick={() =>
+          navigate(`${ROUTES.USER.DETAIL_PRODUCT_PATH}${item.uuid}`)
+        }
+        className="flex-grow-0 mr-[16px] min-w-[262px] h-[145px] cursor-pointer"
+      >
         <img
-          src={item.imageUrl}
+          src={"https://img-c.udemycdn.com/course/750x422/2099246_11dc_2.jpg"}
           alt="courseThumbnail"
           className="border mb-auto h-full w-full"
         />
       </div>
-      <a href={"/"} className="flex flex-col mr-auto pr-[40px]">
+      <div
+        onClick={() =>
+          navigate(`${ROUTES.USER.DETAIL_PRODUCT_PATH}${item.uuid}`)
+        }
+        className="flex flex-col mr-auto pr-[40px] cursor-pointer"
+      >
         <span className="mb-[4px] text-[16px] text-[#1c1d1f] leading-[1.2] font-[700] text-ellipsis">
           {item.title}
         </span>
@@ -51,7 +64,7 @@ function CourseItem({ item }) {
           {sectionTotalLength(item.sections)} -{" "}
           {lecturesCalculator(item.sections)} lectures
         </span>
-      </a>
+      </div>
       <div className="text-[16px] text-[#1c1d1f] leading-[1.2] font-[700] whitespace-nowrap flex-grow-0">
         {coursePrice(item.price)}
       </div>

@@ -4,7 +4,6 @@ import CoursesVisible from "components/filteredCourses/CoursesVisible";
 import Filtering from "components/filteredCourses/Filtering";
 import { ROUTES } from "constants/routes";
 import React, { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
 import { useParams } from "react-router-dom";
 
 const api = process.env.REACT_APP_API;
@@ -57,11 +56,7 @@ function SearchResult() {
   };
   useEffect(() => {
     fetchAllCourses()
-      .then((result) =>
-        flushSync(() => {
-          setListCourse(result);
-        })
-      )
+      .then((result) => setListCourse(result))
       .catch((e) => console.log(e));
     fetchAllTopics()
       .then((result) => setTopics(result))

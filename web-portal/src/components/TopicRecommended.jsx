@@ -7,8 +7,11 @@ import "swiper/css/pagination";
 
 import { Grid, Navigation } from "swiper";
 import { CircularProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "constants/routes";
 
 function TopicRecommended({ topics }) {
+  const navigate = useNavigate();
   // console.log("topic", topics);
   const renderTopics = (array) =>
     array.map((item) => (
@@ -16,12 +19,19 @@ function TopicRecommended({ topics }) {
         key={item.uuid}
         className=" !h-[50px] border-gray-400 border"
       >
-        <a
-          href={`/topic/${item.name.toLowerCase().split(" ").join("-")}`}
-          className="h-full flex justify-center items-center text-center py-[8px] px-[16px]"
+        <div
+          onClick={() =>
+            navigate(
+              `${ROUTES.USER.TOPIC_PATH}${item.name
+                .toLowerCase()
+                .split(" ")
+                .join("-")}`
+            )
+          }
+          className="h-full flex justify-center items-center text-center py-[8px] px-[16px] cursor-pointer"
         >
           <strong>{item.name}</strong>
-        </a>
+        </div>
       </SwiperSlide>
     ));
   return (

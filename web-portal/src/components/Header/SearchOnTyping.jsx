@@ -101,7 +101,13 @@ function SearchOnTyping() {
               href={`/detail/${item.uuid}`}
             >
               <div className="w-[32px] h-[32px] mr-[16px] flex justify-center">
-                <img src={item.imageUrl} alt="course" className="h-full" />
+                <img
+                  src={
+                    "https://img-c.udemycdn.com/course/750x422/2099246_11dc_2.jpg"
+                  }
+                  alt="course"
+                  className="h-full"
+                />
               </div>
               <div className="flex flex-col">
                 <div className="text-[16px] font-[700] leading-[1.2] text-ellipsis whitespace-nowrap">
