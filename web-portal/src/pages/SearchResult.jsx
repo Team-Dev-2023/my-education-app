@@ -2,6 +2,7 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import CoursesVisible from "components/filteredCourses/CoursesVisible";
 import Filtering from "components/filteredCourses/Filtering";
+import RelatedSearches from "components/relatedSearches/RelatedSearches";
 import { ROUTES } from "constants/routes";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -66,7 +67,7 @@ function SearchResult() {
       .catch((e) => console.log(e));
   }, []);
 
-  console.log("list courses", listCourse);
+  // console.log("list courses", listCourse);
   return (
     <div className="mx-auto py-[48px] px-[24px] w-full max-w-[1340px]">
       <div className="flex flex-col text-[#1c1d1f]">
@@ -85,17 +86,20 @@ function SearchResult() {
             <CircularProgress />
           </div>
         )}
-        {listCourse ? (
-          <CoursesVisible
-            viewableCourses={listCourse.filter((item) =>
-              item.title.toLowerCase().includes(query.toLowerCase())
-            )}
-          />
-        ) : (
-          <div className="container mx-auto h-32 flex justify-center items-center">
-            <CircularProgress />
-          </div>
-        )}
+        <div className="flex flex-col">
+          {listCourse ? (
+            <CoursesVisible
+              viewableCourses={listCourse.filter((item) =>
+                item.title.toLowerCase().includes(query.toLowerCase())
+              )}
+            />
+          ) : (
+            <div className="container mx-auto h-32 flex justify-center items-center">
+              <CircularProgress />
+            </div>
+          )}
+          {topics && <RelatedSearches topics={topics} />}
+        </div>
       </div>
     </div>
   );
