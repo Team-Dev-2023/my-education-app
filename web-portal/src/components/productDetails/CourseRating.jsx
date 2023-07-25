@@ -12,7 +12,7 @@ function CourseRating({ reviewData, rating }) {
       avatar: "/",
       uuid: "23",
       rating: 4.4,
-      review: `I'm learning so much! The teacher is great, he explains everything so well. I've been struggling to learn more about blueprints for a long time, and now I'm finally understanding a lot of things.`,
+      review: `I'm learning so much! Now I'm finally understanding a lot of things.`,
     },
     {
       name: "Lorem sirun lo",

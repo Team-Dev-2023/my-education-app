@@ -1,8 +1,14 @@
+import { useEffect, useRef, useState } from "react";
 import { Rating } from "@mui/material";
 import { yellow } from "@mui/material/colors";
 import StarIcon from "@mui/icons-material/Star";
 
 function ReviewItem({ item, handleSetOpen }) {
+  const reviewDivRef = useRef(undefined);
+  const [isShowButton, setShowButton] = useState(false);
+  useEffect(() => {
+    setShowButton(reviewDivRef.current.clientHeight >= 111);
+  }, [reviewDivRef]);
   return (
     <div className="flex flex-col border-t border-t-[#d1d7dc] py-[24px] mr-[16px]">
       <div className="flex flex-row mb-[16px]">
@@ -33,13 +39,14 @@ function ReviewItem({ item, handleSetOpen }) {
         </div>
       </div>
       <div
-        className={`h-[${
+        ref={reviewDivRef}
+        className={`max-h-[${
           handleSetOpen ? "110px" : "auto"
         }] text-ellipsis overflow-hidden whitespace-normal text-[16px] font-[400] leading-[1.4]`}
       >
         {item.review}
       </div>
-      {handleSetOpen && (
+      {handleSetOpen && isShowButton && (
         <button
           onClick={handleSetOpen}
           className="underline text-[14px] text-[#000] font-[700] leading-[1.2] h-[40px] mr-auto"
