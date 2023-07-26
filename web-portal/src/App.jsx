@@ -18,6 +18,7 @@ import Cart from "pages/Cart";
 import { getListCartAction } from "redux/actions/cart.action";
 import EditProfile from "pages/EditProfile";
 import SearchResult from "pages/SearchResult";
+import Checkout from "pages/Checkout";
 require("moment/locale/vi");
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
           element={<CourseDetailPage />}
         />
         <Route path={ROUTES.USER.CART} element={<Cart />} />
+        <Route path={ROUTES.USER.CHECK_OUT} element={<Checkout />} />
         <Route path={ROUTES.USER.EDIT_PROFILE} element={<EditProfile />} />
 
         <Route
