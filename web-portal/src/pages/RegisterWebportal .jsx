@@ -65,7 +65,7 @@ function RegisterWebportal() {
           dispatch(getUserInfoAction({ accessToken: accessToken }));
           navigate(ROUTES.USER.HOME_PAGE);
         },
-      }),
+      })
     );
     setFormData({
       password: "",
@@ -84,7 +84,7 @@ function RegisterWebportal() {
     <div className="container mx-auto">
       <div className="flex flex-col justify-center items-center py-9">
         <div className="container w-[352px]">
-          <h2 className="mb-7 text-[1rem] leading-[1.2rem] font-bold">
+          <h2 className="mb-7 text-center text-[1rem] leading-[1.2rem] font-bold">
             Sign up and start learning
           </h2>
         </div>
