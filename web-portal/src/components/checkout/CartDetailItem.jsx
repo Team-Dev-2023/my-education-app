@@ -2,7 +2,7 @@ import React from "react";
 
 function CartDetailItem({ item }) {
   return (
-    <div className="flex flex-row p-[8px] mb-[48px]">
+    <div className="flex flex-row p-[8px]">
       <img
         className="h-[32px] w-[32px] mr-[8px]"
         src="https://img-c.udemycdn.com/course/750x422/2099246_11dc_2.jpg"
