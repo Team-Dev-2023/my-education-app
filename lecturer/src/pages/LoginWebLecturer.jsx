@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserInfoAction, loginAction } from "redux/actions";
+import { getUserInfoAction, loginAction, logoutAction } from "redux/actions";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { useGoogleLogin } from "@react-oauth/google";
-import refreshTokenSetup from "utils/hook/refreshTokenSetup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { ReactComponent as GoogleIcon } from "../asset/googleIcon.svg";
-
 import { ROUTES } from "constants/routes";
+import AlertAccountIncorrect from "components/AlertAccountIncorrect";
 
 function LoginWebLecturer() {
   const eye = <FontAwesomeIcon icon={faEye} />;
   const { loginData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const accessToken = localStorage.getItem("accessToken");
+  const [isAlertAccountIncorrect, setIsAlertAccountIncorrect] = useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
 
   //FORM REACT HOOK
   const {
@@ -29,7 +31,6 @@ function LoginWebLecturer() {
       loginAction({
         data: { ...data },
         callBack: (accessToken) => {
-          navigate(ROUTES.LECTURE.HOME_PAGE);
           dispatch(
             getUserInfoAction({
               accessToken: accessToken,
@@ -39,6 +40,14 @@ function LoginWebLecturer() {
       })
     );
   };
+  useEffect(() => {
+    if (accessToken && userInfo.data.role !== 2) {
+      dispatch(logoutAction());
+      setIsAlertAccountIncorrect(true);
+    } else if (userInfo.data.role === 2) {
+      navigate(ROUTES.LECTURE.HOME_PAGE);
+    }
+  }, [userInfo.data]);
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -52,9 +61,12 @@ function LoginWebLecturer() {
     },
     onError: (event) => console.log("Login fail.", event),
   });
-
   return (
     <div className="my-[100px] xxs:px-[24px] w-full flex  justify-center items-center">
+      <AlertAccountIncorrect
+        isAlertAccountIncorrect={isAlertAccountIncorrect}
+        setIsAlertAccountIncorrect={setIsAlertAccountIncorrect}
+      />
       <div className="flex flex-col items-center xxs:w-full sm:w-[400px]  justify-center gap-2">
         <div className="w-full font-[600] py-3 text-[20px]">
           Log in to your Udemy account
