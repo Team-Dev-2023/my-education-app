@@ -7,7 +7,7 @@ import { Rate } from "antd";
 import { sectionTotalLength } from "utils/helpers/totalLengthCalculator.helper";
 import { ROUTES } from "constants/routes";
 
-function Cartitem({ item, showModal, setItemDelete }) {
+function CartItem({ item, showModal, setItemDelete }) {
   const navigate = useNavigate();
   return (
     <div
@@ -68,11 +68,10 @@ function Cartitem({ item, showModal, setItemDelete }) {
       </div>
       <div className="col-span-1 flex flex-col items-center gap-2 justify-start font-[700]">
         <p className=" text-[18px] font-[700] text-[#a435f0]">
-          {" "}
-          đ{item.course?.priceAfterDiscount?.toLocaleString()}
+          ${item.course?.priceAfterDiscount?.toLocaleString()}
         </p>
         <p className="line-through text-[14px] font-[400]">
-          đ{item.course?.price?.toLocaleString()}
+          ${item.course?.price?.toLocaleString()}
         </p>
         <button
           className="md:hidden xxs:block text-[#e0294ef1] mb-0"
@@ -88,4 +87,4 @@ function Cartitem({ item, showModal, setItemDelete }) {
   );
 }
 
-export default Cartitem;
+export default CartItem;

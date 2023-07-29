@@ -6,6 +6,7 @@ const initialState = {
   cartData: {
     data: [],
     error: "",
+    load: false,
   },
   // postCartData: {
   //   load: false,

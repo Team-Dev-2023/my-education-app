@@ -97,7 +97,10 @@ function Header() {
                 <div className="mx-2 w-auto hidden md:block">
                   <AiOutlineHeart size={25} />
                 </div>
-                <div className="mx-2 h-full  items-center group relative w-auto hidden sm:flex hover:cursor-pointer">
+                <div
+                  className="mx-2 h-full  items-center group relative w-auto
+                 hidden sm:flex hover:cursor-pointer"
+                >
                   <Badge
                     count={countItemCart}
                     onClick={() => {
@@ -110,7 +113,7 @@ function Header() {
                     className="group-hover:!block hidden  w-[300px]
               group-hover:!opacity-100 !opacity-0 mt-[0.8px]
               transition duration-800 ease-in-out absolute top-[100%]
-              right-[-100%]  bg-white z-10 "
+              right-[-100%]  bg-white z-10 hover:cursor-default "
                   >
                     <ListCartMini />
                   </div>
@@ -127,7 +130,11 @@ function Header() {
                       alt="avatar"
                     />
                   ) : (
-                    <div className="w-[32px]  h-[32px] text-white flex items-center justify-center leading-[24px] text-[20px] font-bold  rounded-full bg-black hover:cursor-pointer ">
+                    <div
+                      className="w-[32px]  h-[32px] text-white flex items-center justify-center
+                       leading-[24px] text-[20px] font-bold 
+                     rounded-full bg-black hover:cursor-pointer "
+                    >
                       {userInfo?.data?.firstName?.charAt(0)}
                     </div>
                   )}
