@@ -13,7 +13,7 @@ function MenuProfile({ countItemCart }) {
     <div className="min-w-[264px] border-[0.8px] shadow-md mt-[0.8px]">
       <div className="flex items-center gap-2 p-4 border-b-[0.8px]  hover:text-[#5624d0] cursor-pointer">
         {userInfo?.data?.avatar ? (
-          <img className="w-[32px] " src="userInfo.data.avatar" alt="avatar" />
+          <img className="w-[32px] " src={userInfo.data.avatar} alt="avatar" />
         ) : (
           <div className="w-[64px] h-[64px] text-white flex items-center justify-center leading-[24px] text-[30px] font-bold  rounded-full bg-black hover:cursor-pointer ">
             {userInfo?.data?.firstName?.charAt(0)}
