@@ -34,10 +34,10 @@ function ListCartMini() {
             <p className="font-[400] text-[14px]">By {item.course.createBy}</p>
             <div className="flex gap-3 items-center">
               <h4 className="font-[700] text-[16px]">
-                đ{item.course.priceAfterDiscount.toLocaleString()}
+                ${item.course.priceAfterDiscount.toLocaleString()}
               </h4>
               <p className="line-through text-[12px] leading-4">
-                đ{item.course.price.toLocaleString()}
+                ${item.course.price.toLocaleString()}
               </p>
             </div>
           </div>
@@ -47,27 +47,45 @@ function ListCartMini() {
   }
   return (
     <div className="bg-[#fffffff9] flex flex-col w-full shadow-lg">
-      <div className="w-full">{renderListCourseInCart()} </div>
-      <div className="w-full p-[1rem] shadow-2xl flex flex-col gap-2 items-stretch">
-        <div className="flex gap-3 justify-center items-center">
-          <h4 className="font-[700] text-[18px]">
-            Total: đ{calculateTotalCartAfterDiscount(cartData.data)}
-          </h4>
-          <p className="line-through text-[15px] flex justify-center leading-6">
-            đ{calculateTotalCartBeforeDiscount(cartData.data)}
-          </p>
-        </div>
+      {cartData.data.length > 0 ? (
+        <>
+          <div className="w-full">{renderListCourseInCart()} </div>
+          <div className="w-full p-[1rem] shadow-2xl flex flex-col gap-2 items-stretch">
+            <div className="flex gap-3 justify-center items-center">
+              <h4 className="font-[700] text-[18px]">
+                Total: ${calculateTotalCartAfterDiscount(cartData.data)}
+              </h4>
+              <p className="line-through text-[15px] flex justify-center leading-6">
+                ${calculateTotalCartBeforeDiscount(cartData.data)}
+              </p>
+            </div>
 
-        <button
-          className="w-full p-[1rem] flex justify-center text-white font-[700]
+            <button
+              className="w-full p-[1rem] flex justify-center text-white font-[700]
          bg-[#1e1e1f] hover:bg-[#5e5763]"
-          onClick={() => {
-            navigate(ROUTES.USER.CART);
-          }}
-        >
-          Go to cart
-        </button>
-      </div>
+              onClick={() => {
+                navigate(ROUTES.USER.CART);
+              }}
+            >
+              Go to cart
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="w-full">
+          <p className="w-full text-center my-4 font-[500]">
+            Your cart is empty
+          </p>
+          <h2
+            className="w-full text-center my-4 text-[#a435f0] text-[20px] font-[500] hover:cursor-pointer"
+            onClick={() => {
+              navigate(ROUTES.USER.HOME_PAGE);
+            }}
+          >
+            Keep shopping
+          </h2>
+        </div>
+      )}
     </div>
   );
 }
