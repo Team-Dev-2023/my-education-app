@@ -7,7 +7,7 @@ const api = process.env.REACT_APP_API;
 function UploadImage({ avatar, setAvatar, setIsSave }) {
   const [fileList, setFileList] = useState([]);
   useEffect(() => {
-    avatar === ""
+    avatar === "" || avatar === undefined
       ? setFileList([])
       : setFileList([
           {
