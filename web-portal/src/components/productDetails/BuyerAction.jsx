@@ -91,6 +91,9 @@ function BuyerAction(props) {
           className={`h-[48px] mt-[8px] border border-${themeColor || "black"}`}
         >
           <button
+            onClick={() => {
+              Promise.all([addToCart()]).then(navigate(ROUTES.USER.CHECK_OUT));
+            }}
             className={`text-${
               themeColor || "black"
             } text-[16px] leading-[1.2] font-bold h-full w-full`}
