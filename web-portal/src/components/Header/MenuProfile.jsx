@@ -40,9 +40,11 @@ function MenuProfile({ countItemCart }) {
           }}
         >
           <p>My cart</p>
-          <p className="rounded-full flex justify-center items-center text-white font-[700] w-[25px] h-[25px] bg-[#a435f0]">
-            {countItemCart}
-          </p>
+          {countItemCart > 0 && (
+            <p className="rounded-full flex justify-center items-center text-white font-[700] w-[25px] h-[25px] bg-[#a435f0]">
+              {countItemCart}
+            </p>
+          )}
         </div>
         <div className="hover:text-[#5624d0] cursor-pointer ">Wishlist</div>
       </div>
