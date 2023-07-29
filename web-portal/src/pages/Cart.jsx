@@ -15,7 +15,6 @@ import ConfirmRemoveModal from "components/cart/ConfirmRemoveModal";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
-import { Spin } from "antd";
 function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();

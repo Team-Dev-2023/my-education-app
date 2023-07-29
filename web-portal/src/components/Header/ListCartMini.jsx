@@ -47,7 +47,7 @@ function ListCartMini() {
   }
   return (
     <div className="bg-[#fffffff9] flex flex-col w-full shadow-lg">
-      {cartData.data.length > 0 ? (
+      {cartData?.data?.length > 0 ? (
         <>
           <div className="w-full">{renderListCourseInCart()} </div>
           <div className="w-full p-[1rem] shadow-2xl flex flex-col gap-2 items-stretch">

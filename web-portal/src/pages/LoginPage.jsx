@@ -11,6 +11,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { ReactComponent as GoogleIcon } from "../asset/googleIcon.svg";
 
 import { ROUTES } from "constants/routes";
+import { getListCartAction } from "redux/actions/cart.action";
 
 function LoginPage() {
   const eye = <FontAwesomeIcon icon={faEye} />;
@@ -32,6 +33,11 @@ function LoginPage() {
           navigate(ROUTES.USER.HOME_PAGE);
           dispatch(
             getUserInfoAction({
+              accessToken: accessToken,
+            })
+          );
+          dispatch(
+            getListCartAction({
               accessToken: accessToken,
             })
           );
