@@ -49,149 +49,147 @@ export default function FadeMenu() {
   };
 
   return (
-    <>
-      <div className="px-3">
-        <button
-          className="cursor-pointer text-[16px]"
-          onMouseOver={() => {
-            handleFetchCategories();
-            setCategoriesVisible(true);
-          }}
-        >
-          Categories
-        </button>
+    <div className="px-3 flex flex-col">
+      <button
+        className="cursor-pointer text-[16px]"
+        onMouseOver={() => {
+          handleFetchCategories();
+          setCategoriesVisible(true);
+        }}
+      >
+        Categories
+      </button>
+      <div
+        className="absolute z-[1000] mt-11 bg-white flex flex-row"
+        onMouseLeave={() => {
+          setCategoriesVisible(false);
+          setTopicVisible(false);
+          setSubcategoriesVisible(false);
+        }}
+      >
         <div
-          className="absolute z-[1000] mt-11 bg-white flex flex-row"
-          onMouseLeave={() => {
-            setCategoriesVisible(false);
-            setTopicVisible(false);
-            setSubcategoriesVisible(false);
-          }}
+          className={`flex flex-col w-[260px] h-[335px] py-[8px] border border-gray-300 ${
+            isCategoriesVisible ? "visible" : "hidden"
+          }`}
         >
-          <div
-            className={`flex flex-col w-[260px] h-[335px] py-[8px] border border-gray-300 ${
-              isCategoriesVisible ? "visible" : "hidden"
-            }`}
-          >
-            {allCategories ? (
-              allCategories
-                .sort((a, b) => {
-                  return Number(a.uuid) < Number(b.uuid) ? 1 : -1;
-                })
-                .map((item) => (
-                  <button
-                    key={item.uuid}
-                    className="cursor-pointer py-[8px] px-[16px] text-left text-[16px] flex flex-row items-center"
-                    onClick={() =>
-                      navigate(
-                        `${ROUTES.USER.FULL_COURSES}/${item.name
-                          .toLowerCase()
-                          .split(" ")
-                          .join("-")}`
-                      )
-                    }
-                    onMouseOver={() => {
-                      setHoverdCategories(
-                        item.name.toLowerCase().split(" ").join("-")
-                      );
-                      handleFetchSubCategories(item.uuid);
-                      setSubcategoriesVisible(true);
-                    }}
-                  >
-                    <p className="mr-auto">{item.name}</p>
-                    <ArrowForwardIosIcon
-                      className="!text-[12px]"
-                      fontSize="inherit"
-                    />
-                  </button>
-                ))
-            ) : (
-              <div className="container mx-auto h-32 flex justify-center items-center">
-                <CircularProgress />
-              </div>
-            )}
-          </div>
-          <div
-            className={`flex flex-col border w-[260px] py-[8px] border-gray-300 border-l-0 ${
-              isSubcategoriesVisible ? "visible" : "hidden"
-            }`}
-          >
-            {allSubCategories ? (
-              allSubCategories
-                .sort((a, b) => {
-                  return Number(a.uuid) < Number(b.uuid) ? 1 : -1;
-                })
-                .map((item) => (
-                  <button
-                    key={item.uuid}
-                    className="cursor-pointer py-[8px] px-[16px] text-left text-[16px] flex flex-row items-center"
-                    onClick={() =>
-                      navigate(
-                        `${
-                          ROUTES.USER.FULL_COURSES
-                        }/${hoverdCategories}/${item.name
-                          .toLowerCase()
-                          .split(" ")
-                          .join("-")}`
-                      )
-                    }
-                    onMouseOver={() => {
-                      setHoverdSubCategories(
-                        item.name.toLowerCase().split(" ").join("-")
-                      );
-                      handleFetchTopics(item.uuid);
-                      setTopicVisible(true);
-                    }}
-                  >
-                    <p className="mr-auto">{item.name}</p>
-                    <ArrowForwardIosIcon
-                      className="!text-[12px]"
-                      fontSize="inherit"
-                    />
-                  </button>
-                ))
-            ) : (
-              <div className="container mx-auto h-32 flex justify-center items-center">
-                <CircularProgress />
-              </div>
-            )}
-          </div>
-          <div
-            className={`flex flex-col border w-[260px] py-[8px] border-gray-300 border-l-0 ${
-              isTopicVisible ? "visible" : "hidden"
-            }`}
-          >
-            {allTopics ? (
-              allTopics
-                .sort((a, b) => {
-                  return Number(a.uuid) < Number(b.uuid) ? 1 : -1;
-                })
-                .map((item) => (
-                  <button
-                    key={item.uuid}
-                    className="cursor-pointer py-[8px] px-[16px] text-left text-[16px] flex flex-row items-center"
-                    onClick={() =>
-                      navigate(
-                        `${
-                          ROUTES.USER.FULL_COURSES
-                        }/${hoverdCategories}/${hoverdSubCategories}/${item.name
-                          .toLowerCase()
-                          .split(" ")
-                          .join("-")}`
-                      )
-                    }
-                  >
-                    {item.name}
-                  </button>
-                ))
-            ) : (
-              <div className="container mx-auto h-32 flex justify-center items-center">
-                <CircularProgress />
-              </div>
-            )}
-          </div>
+          {allCategories ? (
+            allCategories
+              .sort((a, b) => {
+                return Number(a.uuid) < Number(b.uuid) ? 1 : -1;
+              })
+              .map((item) => (
+                <button
+                  key={item.uuid}
+                  className="cursor-pointer py-[8px] px-[16px] text-left text-[16px] flex flex-row items-center"
+                  onClick={() =>
+                    navigate(
+                      `${ROUTES.USER.FULL_COURSES}/${item.name
+                        .toLowerCase()
+                        .split(" ")
+                        .join("-")}`
+                    )
+                  }
+                  onMouseOver={() => {
+                    setHoverdCategories(
+                      item.name.toLowerCase().split(" ").join("-")
+                    );
+                    handleFetchSubCategories(item.uuid);
+                    setSubcategoriesVisible(true);
+                  }}
+                >
+                  <p className="mr-auto">{item.name}</p>
+                  <ArrowForwardIosIcon
+                    className="!text-[12px]"
+                    fontSize="inherit"
+                  />
+                </button>
+              ))
+          ) : (
+            <div className="container mx-auto h-32 flex justify-center items-center">
+              <CircularProgress />
+            </div>
+          )}
+        </div>
+        <div
+          className={`flex flex-col border w-[260px] py-[8px] border-gray-300 border-l-0 ${
+            isSubcategoriesVisible ? "visible" : "hidden"
+          }`}
+        >
+          {allSubCategories ? (
+            allSubCategories
+              .sort((a, b) => {
+                return Number(a.uuid) < Number(b.uuid) ? 1 : -1;
+              })
+              .map((item) => (
+                <button
+                  key={item.uuid}
+                  className="cursor-pointer py-[8px] px-[16px] text-left text-[16px] flex flex-row items-center"
+                  onClick={() =>
+                    navigate(
+                      `${
+                        ROUTES.USER.FULL_COURSES
+                      }/${hoverdCategories}/${item.name
+                        .toLowerCase()
+                        .split(" ")
+                        .join("-")}`
+                    )
+                  }
+                  onMouseOver={() => {
+                    setHoverdSubCategories(
+                      item.name.toLowerCase().split(" ").join("-")
+                    );
+                    handleFetchTopics(item.uuid);
+                    setTopicVisible(true);
+                  }}
+                >
+                  <p className="mr-auto">{item.name}</p>
+                  <ArrowForwardIosIcon
+                    className="!text-[12px]"
+                    fontSize="inherit"
+                  />
+                </button>
+              ))
+          ) : (
+            <div className="container mx-auto h-32 flex justify-center items-center">
+              <CircularProgress />
+            </div>
+          )}
+        </div>
+        <div
+          className={`flex flex-col border w-[260px] py-[8px] border-gray-300 border-l-0 ${
+            isTopicVisible ? "visible" : "hidden"
+          }`}
+        >
+          {allTopics ? (
+            allTopics
+              .sort((a, b) => {
+                return Number(a.uuid) < Number(b.uuid) ? 1 : -1;
+              })
+              .map((item) => (
+                <button
+                  key={item.uuid}
+                  className="cursor-pointer py-[8px] px-[16px] text-left text-[16px] flex flex-row items-center"
+                  onClick={() =>
+                    navigate(
+                      `${
+                        ROUTES.USER.FULL_COURSES
+                      }/${hoverdCategories}/${hoverdSubCategories}/${item.name
+                        .toLowerCase()
+                        .split(" ")
+                        .join("-")}`
+                    )
+                  }
+                >
+                  {item.name}
+                </button>
+              ))
+          ) : (
+            <div className="container mx-auto h-32 flex justify-center items-center">
+              <CircularProgress />
+            </div>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

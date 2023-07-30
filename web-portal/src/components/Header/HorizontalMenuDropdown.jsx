@@ -40,43 +40,45 @@ function HorizontalMenuDropdown() {
         setSubcategoriesVisible(false);
       }}
     >
-      <div className="shadow-md flex flex-wrap justify-center place-items-center h-14 overflow-y-hidden list-none">
-        {allCategories ? (
-          allCategories.map((item) => (
-            <div
-              onMouseOver={() => {
-                setHoverdCategories(
-                  item.name.toLowerCase().split(" ").join("-")
-                );
-                setSubcategoriesVisible(true);
-                handleFetchSubCategories(item.uuid);
-              }}
-              onClick={() =>
-                navigate(
-                  `${ROUTES.USER.FULL_COURSES}/${item.name
-                    .toLowerCase()
-                    .split(" ")
-                    .join("-")}`
-                )
-              }
-              className="relative py-[8px] px-[16px] cursor-pointer"
-              key={item.uuid}
-            >
-              {item.name}
-              <ArrowDropUpIcon
-                className={`absolute top-[95%] left-[50%] translate-x-[-50%] ${
-                  hoverdCategories ===
-                  item.name.toLowerCase().split(" ").join("-")
-                    ? "!visible"
-                    : "!hidden"
-                }`}
-                fontSize="medium"
-              />
-            </div>
-          ))
-        ) : (
-          <p>Loading categories</p>
-        )}
+      <div className="shadow-md w-full h-14">
+        <div className="container mx-auto flex flex-wrap justify-center items-center overflow-y-hidden h-full">
+          {allCategories ? (
+            allCategories.map((item) => (
+              <div
+                onMouseOver={() => {
+                  setHoverdCategories(
+                    item.name.toLowerCase().split(" ").join("-")
+                  );
+                  setSubcategoriesVisible(true);
+                  handleFetchSubCategories(item.uuid);
+                }}
+                onClick={() =>
+                  navigate(
+                    `${ROUTES.USER.FULL_COURSES}/${item.name
+                      .toLowerCase()
+                      .split(" ")
+                      .join("-")}`
+                  )
+                }
+                className="relative inline-flex justify-center items-center py-[8px] px-[16px] cursor-pointer h-full"
+                key={item.uuid}
+              >
+                {item.name}
+                <ArrowDropUpIcon
+                  className={`absolute top-[75%] left-[50%] translate-x-[-50%] ${
+                    hoverdCategories ===
+                    item.name.toLowerCase().split(" ").join("-")
+                      ? "!visible"
+                      : "!hidden"
+                  }`}
+                  fontSize="medium"
+                />
+              </div>
+            ))
+          ) : (
+            <p>Loading categories</p>
+          )}
+        </div>
       </div>
       <div
         className={`bg-[#1C1D1F] absolute z-[500] left-[50%] translate-x-[-50%] h-14 w-full flex flex-row justify-center items-center ${

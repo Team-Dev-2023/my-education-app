@@ -34,7 +34,7 @@ function Price() {
         data: [...Object.values(inputState).filter((item) => item.checked)],
       })
     );
-  }, []);
+  }, [inputState]);
   // console.log("state", state.priceFilter);
 
   return (
