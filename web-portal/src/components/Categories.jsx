@@ -60,7 +60,9 @@ export default function FadeMenu() {
         Categories
       </button>
       <div
-        className="absolute z-[1000] mt-11 bg-white flex flex-row"
+        className={`absolute z-[1000] mt-11 bg-white flex flex-row ${
+          isCategoriesVisible ? "visible" : "hidden"
+        }`}
         onMouseLeave={() => {
           setCategoriesVisible(false);
           setTopicVisible(false);
@@ -68,9 +70,7 @@ export default function FadeMenu() {
         }}
       >
         <div
-          className={`flex flex-col w-[260px] h-[335px] py-[8px] border border-gray-300 ${
-            isCategoriesVisible ? "visible" : "hidden"
-          }`}
+          className={`flex flex-col w-[260px] h-[335px] py-[8px] border border-gray-300 `}
         >
           {allCategories ? (
             allCategories
