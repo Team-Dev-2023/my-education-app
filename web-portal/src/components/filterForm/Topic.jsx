@@ -30,11 +30,13 @@ function Topic({ topics }) {
   // console.log("topic", [
   //   ...Object.values(state).filter((item) => item.checked),
   // ]);
-  dispatch(
-    getFilterTopic({
-      data: [...Object.values(inputState).filter((item) => item.checked)],
-    })
-  );
+  useEffect(() => {
+    dispatch(
+      getFilterTopic({
+        data: [...Object.values(inputState).filter((item) => item.checked)],
+      })
+    );
+  }, [inputState]);
 
   return (
     <div className="border-t border-t-[#d1d7dc] mb-[8px]">
