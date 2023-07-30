@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_ENDPOINT } from "constants/api";
+import { ROUTES } from "constants/routes";
 import React, { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -76,7 +77,7 @@ function SearchOnTyping() {
           className="w-full"
           onSubmit={(e) => {
             e.preventDefault();
-            navigate(`/courses/search/${inputChange}`);
+            navigate(`${ROUTES.USER.FULL_COURSES}/search/${inputChange}`);
             setInputChange("");
           }}
         >

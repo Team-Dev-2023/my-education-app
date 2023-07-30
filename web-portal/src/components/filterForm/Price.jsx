@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -28,11 +28,13 @@ function Price() {
   // console.log("price", [
   //   ...Object.values(state).filter((item) => item.checked),
   // ]);
-  dispatch(
-    getFilterPrice({
-      data: [...Object.values(inputState).filter((item) => item.checked)],
-    })
-  );
+  useEffect(() => {
+    dispatch(
+      getFilterPrice({
+        data: [...Object.values(inputState).filter((item) => item.checked)],
+      })
+    );
+  }, []);
   // console.log("state", state.priceFilter);
 
   return (
