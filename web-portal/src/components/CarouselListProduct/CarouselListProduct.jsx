@@ -8,7 +8,7 @@ import "../styles/carouselListProduct.css";
 
 import ItemCarouseIlListProduct from "./ItemCarouseIlListProduct";
 
-function CarouselListProduct({ listProduct, nameCarousel }) {
+function CarouselListProduct({ listProduct, name_carousel }) {
   const renderItemSwiper = (arrayItemSwiper) => {
     return arrayItemSwiper?.map((item) => {
       return (
@@ -27,15 +27,15 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
         <Swiper
           // navigation={true}
           modules={[Navigation]}
-          nameCarousel={"carouselProducts"}
+          name_carousel={"carouselProducts"}
           // centeredSlides={true}
           grabCursor={true}
           keyboard={{
             enabled: true,
           }}
           navigation={{
-            prevEl: `.swiper-button-prev-unique-${nameCarousel}`,
-            nextEl: `.swiper-button-next-unique-${nameCarousel}`,
+            prevEl: `.swiper-button-prev-unique-${name_carousel}`,
+            nextEl: `.swiper-button-next-unique-${name_carousel}`,
           }}
           breakpoints={{
             1200: {
@@ -73,7 +73,7 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
           {renderItemSwiper(listProduct)}
         </Swiper>
         <div
-          className={`swiper-button-next-unique-${nameCarousel}  absolute 
+          className={`swiper-button-next-unique-${name_carousel}  absolute 
           xxs:hidden sm:block top-[45px] z-10 sm:right-[-20px] `}
         >
           <button
@@ -88,7 +88,7 @@ function CarouselListProduct({ listProduct, nameCarousel }) {
           </button>
         </div>
         <div
-          className={`swiper-button-prev-unique-${nameCarousel} absolute 
+          className={`swiper-button-prev-unique-${name_carousel} absolute 
            xxs:hidden sm:block top-[45px] z-10 sm:left-[-20px] `}
         >
           <button

@@ -47,7 +47,7 @@ function Homepage() {
           <div className="my-[20px] w-full xxs:max-w-full lg:max-w-[1200px] flex justify-center ">
             <CarouselListProduct
               listProduct={listCourse}
-              nameCarousel={"highCourses"}
+              name_carousel={"highCourses"}
             />
           </div>
         </div>
