@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -30,11 +30,13 @@ function SubCategory({ subCategories }) {
   // console.log("sub", [
   //   ...Object.values(state).filter((item) => item.checked),
   // ]);
-  dispatch(
-    getFilterSubCategory({
-      data: [...Object.values(inputState).filter((item) => item.checked)],
-    })
-  );
+  useEffect(() => {
+    dispatch(
+      getFilterSubCategory({
+        data: [...Object.values(inputState).filter((item) => item.checked)],
+      })
+    );
+  }, [inputState]);
 
   // console.log("state", state);
 

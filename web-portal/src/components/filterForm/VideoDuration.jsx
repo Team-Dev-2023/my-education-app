@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
@@ -32,11 +32,13 @@ function VideoDuration() {
       }));
     });
   };
-  dispatch(
-    getFilterVideoDuration({
-      data: [...Object.values(inputState).filter((item) => item.checked)],
-    })
-  );
+  useEffect(() => {
+    dispatch(
+      getFilterVideoDuration({
+        data: [...Object.values(inputState).filter((item) => item.checked)],
+      })
+    );
+  }, [inputState]);
 
   return (
     <div className="border-t border-t-[#d1d7dc] mb-[8px]">
