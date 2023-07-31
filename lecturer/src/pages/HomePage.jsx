@@ -25,7 +25,7 @@ function Homepage() {
       <div className="my-[20px] xxs:max-w-full overflow-hidden lg:max-w-[1200px] flex justify-center ">
         <CarouselListProduct
           listProduct={carouselProducts}
-          nameCarousel={"highly"}
+          name_carousel={"highly"}
         />
       </div>
       <button
