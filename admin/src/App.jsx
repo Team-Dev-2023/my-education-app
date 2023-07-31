@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import CourseDetailPage from "./pages/CourseDetailPage";
@@ -12,15 +12,34 @@ import Footer from "components/Footer";
 
 import { ROUTES } from "./constants/routes";
 import "./App.css";
+import NoHeaderLayout from "layout/NoHeaderLayout";
+import MainLayout from "layout/MainLayout";
+import { useEffect } from "react";
+import { getUserInfoAction } from "redux/actions";
 
 function App() {
+  const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
+  const { pathname } = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  //GET USER INFO
+  const accessToken = localStorage.getItem("accessToken");
+  useEffect(() => {
+    if (accessToken)
+      dispatch(
+        getUserInfoAction({
+          accessToken: accessToken,
+        })
+      );
+  }, []);
   return (
     <>
-      <Header />
       <Routes>
         <Route path={ROUTES.ADMIN.LOGIN} element={<LoginPage />} />
+
         <Route
           element={
             <PrivateRoute user={userInfo} redirectPath={ROUTES.ADMIN.LOGIN} />
@@ -38,7 +57,6 @@ function App() {
         </Route>
         <Route path="*" element={<div>404</div>} />
       </Routes>
-      <Footer></Footer>
     </>
   );
 }

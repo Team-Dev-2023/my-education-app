@@ -18,32 +18,11 @@ function Homepage() {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex justify-center items-center flex-wrap h-full w-full xxs:px-[24px]">
-      <div className="w-12 h-12 border">
-        <button onClick={() => dispatch(logoutAction())}>Logout</button>
+    <div className="flex">
+      <div className="max-w-[200px] w-full max-h-[100vh]  shadow-lg">
+        dashboard
       </div>
-      <button
-        className="bg-[#7a0fe411] rounded-md p-2 mx-2"
-        onClick={() => {
-          navigate({
-            pathname: ROUTES.USER.LIST_PRODUCT,
-            search: query.locale === "vi" ? "?locale=vi" : "",
-          });
-        }}
-      >
-        CourseListPage
-      </button>
-
-      <button
-        className="bg-[#7a0fe411] rounded-md p-2"
-        onClick={() => {
-          query.locale === "vi"
-            ? navigate({ search: "" })
-            : navigate({ search: "?locale=vi" });
-        }}
-      >
-        Language: {t.commons.en}
-      </button>
+      <div className="flex flex-1"> main</div>
     </div>
   );
 }
