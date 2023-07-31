@@ -9,17 +9,14 @@ import { Navigation } from "swiper";
 import ItemCarouseIlListProduct from "./ItemCarouseIlListProduct";
 
 function CarouselListProduct({ listProduct, name_carousel }) {
-  const renderItemSwiper = (arrayItemSwiper) => {
-    return arrayItemSwiper.map((item, index) => {
-      return (
-        <Fragment key={item.title}>
-          <SwiperSlide>
-            {<ItemCarouseIlListProduct carouseProduct={item} />}
-          </SwiperSlide>
-        </Fragment>
-      );
-    });
-  };
+  const renderItemSwiper = (arrayItemSwiper) =>
+    arrayItemSwiper.map((item, index) => (
+      <Fragment key={item.id}>
+        <SwiperSlide>
+          {<ItemCarouseIlListProduct carouseProduct={item} />}
+        </SwiperSlide>
+      </Fragment>
+    ));
 
   return (
     <div className="w-full  flex justify-center">

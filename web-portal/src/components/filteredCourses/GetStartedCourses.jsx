@@ -7,7 +7,10 @@ function GetStartedCourses({ courses }) {
       <h2 className="font-[700] text-[24px] leading-[1.2] mb-[16px]">
         Courses to get you started
       </h2>
-      <CarouselListProduct listProduct={courses} nameCarousel={"highCourses"} />
+      <CarouselListProduct
+        listProduct={courses}
+        name_carousel={"highCourses"}
+      />
     </div>
   );
 }
