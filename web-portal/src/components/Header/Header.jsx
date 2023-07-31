@@ -36,7 +36,7 @@ function Header() {
 
   return (
     <div>
-      <div className="container my-0 mx-auto flex justify-around place-items-center  h-24">
+      <div className="container my-0 mx-auto flex justify-around place-items-center h-24">
         <div
           className="w-24 mx-4 hover:cursor-pointer"
           onClick={() => {
