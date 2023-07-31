@@ -95,6 +95,7 @@ export default function FadeMenu() {
                     );
                     handleFetchSubCategories(item.uuid);
                     setSubcategoriesVisible(true);
+                    setTopicVisible(false);
                   }}
                 >
                   <p className="mr-auto">{item.name}</p>
