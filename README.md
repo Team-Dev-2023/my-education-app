@@ -7,7 +7,7 @@
 The project is built using a variety of modern technologies and tools:
 
 - User interface: React - Redux - Redux Saga - Ant Design - Material UI - Tailwind CSS - SwiperJs
-- Api service: Swagger - Docker
+- Api service: Nestjs - Swagger - Docker
 
 ## Features
 
