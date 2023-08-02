@@ -7,17 +7,19 @@
 The project is built using a variety of modern technologies and tools:
 
 - User interface: React - Redux - Redux Saga - Ant Design - Material UI - Tailwind CSS - SwiperJs
-- Api service: Nestjs - Swagger - Docker
+- Api service: Nestjs - Mysql - Docker
 
 ## Features
 
-- **Authentication**: Seamless login and registration processes tailored for the student user flow.
+- **Authentication**: Login and registration processes for each user flow.
 - **Homepage**: A well-designed homepage that provides an overview of available courses and resources.
-- **Category Page**: Browse courses by category, facilitating easy navigation and discovery.
-- **Search Results**: Instantly view search results as you type, enhancing efficiency and user experience.
+- **Category Page**: Browse courses by category / sub-categories / topics, facilitating easy navigation and discovery.
+- **Search Results Page**: Instantly view search results as you type, enhancing efficiency and user experience.
 - **Product Page**: Detailed pages for individual courses, with dynamic content populated from JSON data obtained via API calls.
 - **Filtering Fields**: Advanced multi-filtering options allowing users to refine visible results on-the-fly.
 - **Header with Search**: An interactive header with a real-time search component, ensuring quick access to desired content.
+- **Create courses with lecturer role**: Entering lecturer user flow to create courses / update courses / delete courses.
+- **Manage all users' data and courses' data**: Intergrate admin user flow to manage users (students and lecturers) and courses.
 
 ## Status
 
