@@ -8,6 +8,7 @@ const api = process.env.REACT_APP_API;
 function* LoginSaga(action) {
   try {
     const { data, callback } = action.payload;
+    console.log("datasaga", data);
     const result = yield axios.post(`${api}${API_ENDPOINT.LOGIN}`, data);
     yield localStorage.setItem("accessToken", result.data.accessToken);
     yield put({
@@ -20,7 +21,7 @@ function* LoginSaga(action) {
   } catch (error) {
     console.log(error);
     yield put({
-      type: FAIL(REQUEST(AUTH_ACTION.LOGIN)),
+      type: FAIL(AUTH_ACTION.LOGIN),
       payload: {
         error: "Username or password is incorrect",
       },

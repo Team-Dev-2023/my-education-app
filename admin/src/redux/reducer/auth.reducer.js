@@ -10,40 +10,9 @@ const initialState = {
     load: false,
     error: "",
   },
-  registerData: {
-    load: false,
-    error: "",
-  },
 };
 
 const authReducer = createReducer(initialState, {
-  // REGISTER
-  [REQUEST(AUTH_ACTION.REGISTER)]: (state, action) => ({
-    ...state,
-    registerData: {
-      load: true,
-      error: "",
-    },
-  }),
-
-  [SUCCESS(AUTH_ACTION.REGISTER)]: (state, action) => ({
-    ...state,
-    userInfo: {
-      ...state.userInfo,
-      data: action.payload.data,
-    },
-    registerData: {
-      load: false,
-      error: "",
-    },
-  }),
-  [FAIL(AUTH_ACTION.REGISTER)]: (state, action) => ({
-    ...state,
-    registerData: {
-      load: false,
-      error: action.payload.error,
-    },
-  }),
   // LOGIN
   [REQUEST(AUTH_ACTION.LOGIN)]: (state, action) => {
     return {
@@ -59,13 +28,14 @@ const authReducer = createReducer(initialState, {
     return {
       ...state,
       loginData: {
-        ...state.loginData,
         load: false,
+        error: "",
       },
     };
   },
   [FAIL(AUTH_ACTION.LOGIN)]: (state, action) => {
     const { error } = action.payload;
+    console.log("error", error);
     return {
       ...state,
       loginData: {
