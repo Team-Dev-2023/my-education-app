@@ -16,6 +16,8 @@ import NoHeaderLayout from "layout/NoHeaderLayout";
 import MainLayout from "layout/MainLayout";
 import { useEffect } from "react";
 import { getUserInfoAction } from "redux/actions";
+import ListCoursePage from "pages/ListCoursePage";
+import ListAccountPage from "pages/ListAccountPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,11 +47,12 @@ function App() {
             <PrivateRoute user={userInfo} redirectPath={ROUTES.ADMIN.LOGIN} />
           }
         >
-          <Route path={ROUTES.ADMIN.HOME_PAGE} element={<HomePage />} />
+          <Route path={ROUTES.ADMIN.LIST_COURSE} element={<ListCoursePage />} />
           <Route
-            path={ROUTES.ADMIN.LIST_PRODUCT}
-            element={<CourseListPage />}
+            path={ROUTES.ADMIN.LIST_ACCOUNT}
+            element={<ListAccountPage />}
           />
+
           <Route
             path={ROUTES.ADMIN.DETAIL_PRODUCT}
             element={<CourseDetailPage />}

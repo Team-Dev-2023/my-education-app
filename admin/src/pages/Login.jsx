@@ -32,7 +32,7 @@ function LoginPage() {
   });
 
   const [passwordShown, setPasswordShown] = useState(false);
-  const togglePasswordVisiblity = () => {
+  const togglePasswordVisibility = () => {
     setPasswordShown(passwordShown ? false : true);
   };
 
@@ -122,7 +122,7 @@ function LoginPage() {
             />
             <i
               className="absolute right-4 top-[35%] hover:cursor-pointer"
-              onClick={togglePasswordVisiblity}
+              onClick={togglePasswordVisibility}
             >
               {eye}
             </i>
