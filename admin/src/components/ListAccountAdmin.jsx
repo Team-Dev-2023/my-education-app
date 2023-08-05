@@ -1,10 +1,6 @@
-//https://codesandbox.io/s/customized-filter-panel-ant-design-demo-7wns7?file=/index.js:2642-2656
-
-import React, { useState, useEffect, useRef } from "react";
-import { getListAccount } from "utils/helpers/workWithApi";
+import React from "react";
 import { Table } from "antd";
 import ColumnsAccount from "./columns/ColumnsAccount";
-import { CircularProgress } from "@mui/material";
 
 const ListAccountAdmin = ({ listAccount }) => {
   return (

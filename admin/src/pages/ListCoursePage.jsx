@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SideBar from "components/SideBar";
 import ListCourseAdmin from "components/ListCourseAdmin";
 import { getListCourse } from "utils/helpers/workWithApi";
 import { CircularProgress } from "@mui/material";

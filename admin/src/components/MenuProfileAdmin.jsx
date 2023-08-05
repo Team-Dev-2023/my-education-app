@@ -1,6 +1,6 @@
 import React from "react";
-import { TfiWorld } from "react-icons/tfi";
 import { useDispatch, useSelector } from "react-redux";
+import { TfiWorld } from "react-icons/tfi";
 import { logoutAction } from "redux/actions";
 
 const MenuProfileAdmin = () => {

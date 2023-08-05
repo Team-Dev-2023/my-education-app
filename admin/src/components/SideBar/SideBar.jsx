@@ -1,15 +1,17 @@
 import React from "react";
-import { Menu } from "antd";
-import { useEffect } from "react";
-import parse from "url-parse";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "constants/routes";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import parse from "url-parse";
+import { Menu } from "antd";
+import { ROUTES } from "constants/routes";
+import { itemMenus } from "./itemsMenu";
+
 const SideBar = ({ showSideBar, setIsShowSideBar }) => {
+  const { userInfo } = useSelector((state) => state.auth);
   const [path, setPath] = useState("");
   const navigate = useNavigate();
-  const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const currentURL = window.location.href;
@@ -23,45 +25,6 @@ const SideBar = ({ showSideBar, setIsShowSideBar }) => {
     }
   });
 
-  function getItem(label, key, icon, children, type) {
-    return {
-      key,
-      icon,
-      children,
-      label,
-      type,
-    };
-  }
-  const items = [
-    getItem(null, null, null, [getItem("Home", "0")], "group"),
-    getItem(
-      "Course",
-      "Course",
-      null,
-      [getItem("List Course", "1"), getItem("Option 14", "14")],
-      "group"
-    ),
-    getItem(
-      "User",
-      "User",
-      null,
-      userInfo.data.role === 0
-        ? [getItem("List user", "2"), getItem("Create Account Admin", "3")]
-        : [getItem("List user", "2")],
-      "group"
-    ),
-    getItem(
-      "Category",
-      "Category",
-      null,
-      [
-        getItem("Category", "4"),
-        getItem("SubCategory", "5"),
-        getItem("Topic", "6"),
-      ],
-      "group"
-    ),
-  ];
   const onClick = (e) => {
     setIsShowSideBar(!showSideBar);
     if (e.key === "1") {
@@ -93,7 +56,7 @@ const SideBar = ({ showSideBar, setIsShowSideBar }) => {
         }}
         selectedKeys={path.toString()}
         mode="inline"
-        items={items}
+        items={itemMenus(userInfo)}
       />
     </div>
   );

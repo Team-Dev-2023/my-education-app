@@ -16,11 +16,13 @@ import AlertAccountIncorrect from "components/AlertAccountIncorrect";
 function LoginPage() {
   const eye = <FontAwesomeIcon icon={faEye} />;
   const { loginData } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
   const accessToken = localStorage.getItem("accessToken");
   const [isAlertAccountIncorrect, setIsAlertAccountIncorrect] = useState(false);
-  const { userInfo } = useSelector((state) => state.auth);
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const login = useGoogleLogin({
     onSuccess: (event) => {
@@ -31,7 +33,6 @@ function LoginPage() {
     onError: (event) => console.log("Login fail.", event),
   });
 
-  const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordShown(passwordShown ? false : true);
   };
@@ -102,7 +103,6 @@ function LoginPage() {
             className="px-2 py-3 border-black border-[0.8px]  "
             {...register("username", {
               required: true,
-              // pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
             })}
           />
           {errors?.username?.type === "required" && (

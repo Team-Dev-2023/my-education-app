@@ -31,12 +31,10 @@ function App() {
         })
       );
   }, []);
-  console.log("userInfo app", userInfo);
   return (
     <>
       <Routes>
         <Route path={ROUTES.ADMIN.LOGIN} element={<LoginPage />} />
-
         <Route
           element={
             <PrivateRoute user={userInfo} redirectPath={ROUTES.ADMIN.LOGIN} />

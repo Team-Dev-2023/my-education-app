@@ -1,7 +1,6 @@
-import SearchColumnTable from "components/columns/SearchColumnTable";
-import { Button } from "antd";
-
+//https://codesandbox.io/s/customized-filter-panel-ant-design-demo-7wns7?file=/index.js:2642-2656
 import React from "react";
+import SearchColumnTable from "components/columns/SearchColumnTable";
 
 const ColumnsAccount = () => {
   const columns = [

@@ -1,26 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import MenuProfileAdmin from "./MenuProfileAdmin";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ROUTES } from "constants/routes";
-import { TfiWorld } from "react-icons/tfi";
+
 import qs from "qs";
+import MenuProfileAdmin from "./MenuProfileAdmin";
+import { TfiWorld } from "react-icons/tfi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Drawer } from "antd";
-import { useState } from "react";
+import { ROUTES } from "constants/routes";
 
 const Header = ({ isShowSideBar, setIsShowSideBar }) => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const { search } = useLocation();
   const [open, setOpen] = useState(false);
+  const query = qs.parse(search, { ignoreQueryPrefix: true });
+
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
-  const query = qs.parse(search, { ignoreQueryPrefix: true });
 
   return (
     <div className="flex justify-between items-center px-4 py-3 shadow-xl">
