@@ -6,17 +6,34 @@ import { ROUTES } from "constants/routes";
 import { TfiWorld } from "react-icons/tfi";
 import qs from "qs";
 import { AiOutlineSearch } from "react-icons/ai";
+import { Drawer } from "antd";
+import { useState } from "react";
 
-const Header = () => {
+const Header = ({ isShowSideBar, setIsShowSideBar }) => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const { search } = useLocation();
-
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
   const query = qs.parse(search, { ignoreQueryPrefix: true });
-  console.log("userInfo", userInfo);
+
   return (
     <div className="flex justify-between items-center px-4 py-3 shadow-xl">
-      <div>
+      <div className="flex gap-4">
+        <div
+          className="w-[40px] xxs:block md:hidden"
+          onClick={() => setIsShowSideBar(!isShowSideBar)}
+        >
+          <img
+            src="https://bizweb.dktcdn.net/100/438/408/themes/916476/assets/menu.jpg?1691226747108"
+            alt=""
+          />
+        </div>
         <img
           className="w-[100px]"
           src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg"
@@ -24,7 +41,7 @@ const Header = () => {
         />
       </div>
       <div>
-        <div className="relative flex flex-col items-start">
+        <div className="relative  flex-col items-start xxs:hidden md:flex">
           <div className="inline-flex max-w-full w-[400px]  p-1 items-center rounded-full border-2 border-[#666163]">
             <AiOutlineSearch className="ml-1 opacity-80 text-[30px]" />
             <form
@@ -42,7 +59,25 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="flex">
+        <div className="xxs:show md:hidden">
+          <div className="w-[40px]" onClick={showDrawer}>
+            <img
+              src="https://bizweb.dktcdn.net/100/438/408/themes/916476/assets/search_icon.jpg?1691226747108"
+              alt=""
+            />
+          </div>
+          <Drawer
+            title="Basic Drawer"
+            placement="right"
+            onClose={onClose}
+            open={open}
+          >
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Drawer>
+        </div>
         {!userInfo.data ? (
           <div className="flex">
             <div

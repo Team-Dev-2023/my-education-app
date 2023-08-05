@@ -41,7 +41,6 @@ function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log("loginData", loginData);
   const onSubmit = (data) => {
     dispatch(
       loginAction({
@@ -52,12 +51,13 @@ function LoginPage() {
       })
     );
   };
+
   useEffect(() => {
-    if (accessToken && userInfo.data.role !== 1) {
-      dispatch(logoutAction());
+    if (accessToken && (userInfo.data.role === 2 || userInfo.data.role === 3)) {
       setIsAlertAccountIncorrect(true);
-    } else if (userInfo.data.role === 1) {
-      navigate(ROUTES.ADMIN.HOME_PAGE);
+      dispatch(logoutAction());
+    } else if (userInfo.data.role === 1 || userInfo.data.role === 0) {
+      navigate(ROUTES.ADMIN.LIST_COURSE);
     }
   }, [userInfo.data]);
   return (

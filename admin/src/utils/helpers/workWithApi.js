@@ -61,6 +61,7 @@ export async function getTopics(subCategoryUuid, setTopics) {
 //COURSE
 export async function getListCourse(
   setListCourse,
+  setIsLoad,
   page = 1,
   perPage = 20,
   category,
@@ -78,10 +79,10 @@ export async function getListCourse(
       },
     });
     const listCourse = response.data.data;
-    return setListCourse(listCourse);
+    return setListCourse(listCourse), setIsLoad(false);
   } catch (error) {
     console.error(error);
-    return;
+    return setIsLoad(false);
   }
 }
 
@@ -152,18 +153,27 @@ export async function putProfile(accessToken, dataProfilePut, callback) {
   }
 }
 //USER
-export async function getListAccount(setListAccount, page = 1, perPage = 20) {
+export async function getListAccount(
+  accessToken,
+  setListAccount,
+  setIsLoad,
+  page = 1,
+  perPage = 20
+) {
   try {
     const response = await axios.get(`${api}${API_ENDPOINT.USERS}`, {
       params: {
         page: page,
         perPage: perPage,
       },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
     const listAccount = response.data.data;
-    return setListAccount(listAccount);
+    return setListAccount(listAccount), setIsLoad(false);
   } catch (error) {
     console.error(error);
-    return;
+    return setIsLoad(false);
   }
 }

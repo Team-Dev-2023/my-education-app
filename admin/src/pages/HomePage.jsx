@@ -6,7 +6,7 @@ import { ROUTES } from "constants/routes";
 import useTranslate from "utils/hook/useTranslate";
 import { useDispatch } from "react-redux";
 import SideBar from "components/SideBar";
-import ListCourseAdminPage from "components/ListCourseAdminPage";
+import ListCourseAdminPage from "components/ListCourseAdmin";
 
 function Homepage() {
   const t = useTranslate();

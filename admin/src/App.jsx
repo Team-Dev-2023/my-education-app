@@ -2,18 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
-import CourseDetailPage from "./pages/CourseDetailPage";
-import CourseListPage from "./pages/CourseListPage";
+
 import PrivateRoute from "hoc/PrivateRoute";
 import LoginPage from "pages/Login";
 
-import Header from "components/Header";
-import Footer from "components/Footer";
-
 import { ROUTES } from "./constants/routes";
 import "./App.css";
-import NoHeaderLayout from "layout/NoHeaderLayout";
-import MainLayout from "layout/MainLayout";
 import { useEffect } from "react";
 import { getUserInfoAction } from "redux/actions";
 import ListCoursePage from "pages/ListCoursePage";
@@ -37,6 +31,7 @@ function App() {
         })
       );
   }, []);
+  console.log("userInfo app", userInfo);
   return (
     <>
       <Routes>
@@ -52,11 +47,7 @@ function App() {
             path={ROUTES.ADMIN.LIST_ACCOUNT}
             element={<ListAccountPage />}
           />
-
-          <Route
-            path={ROUTES.ADMIN.DETAIL_PRODUCT}
-            element={<CourseDetailPage />}
-          />
+          <Route path={ROUTES.ADMIN.HOME_PAGE} element={<HomePage />} />
         </Route>
         <Route path="*" element={<div>404</div>} />
       </Routes>
