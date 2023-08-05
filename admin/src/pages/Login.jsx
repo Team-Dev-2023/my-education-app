@@ -58,7 +58,7 @@ function LoginPage() {
       setIsAlertAccountIncorrect(true);
       dispatch(logoutAction());
     } else if (userInfo.data.role === 1 || userInfo.data.role === 0) {
-      navigate(ROUTES.ADMIN.LIST_COURSE);
+      navigate(ROUTES.ADMIN.HOME_PAGE);
     }
   }, [userInfo.data]);
   return (

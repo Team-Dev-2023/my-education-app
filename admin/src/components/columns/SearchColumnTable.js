@@ -6,7 +6,6 @@ import { SearchOutlined } from "@ant-design/icons";
 import get from "lodash.get";
 
 const SearchColumnTable = (itemSearch) => {
-  console.log(itemSearch);
   const searchInput = useRef(null);
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();

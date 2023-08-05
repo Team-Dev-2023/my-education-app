@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { getUserInfoAction } from "redux/actions";
 import ListCoursePage from "pages/ListCoursePage";
 import ListAccountPage from "pages/ListAccountPage";
+import CoursePreviewPage from "pages/CoursePreviewPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,10 @@ function App() {
             element={<ListAccountPage />}
           />
           <Route path={ROUTES.ADMIN.HOME_PAGE} element={<HomePage />} />
+          <Route
+            path={ROUTES.ADMIN.PREVIEW_COURSE}
+            element={<CoursePreviewPage />}
+          />
         </Route>
         <Route path="*" element={<div>404</div>} />
       </Routes>
