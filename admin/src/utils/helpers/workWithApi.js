@@ -4,18 +4,21 @@ import { API_ENDPOINT } from "../../constants/api";
 const api = process.env.REACT_APP_API;
 const qs = require("qs");
 
-export async function getCategory(setCategories) {
-  let page = 1;
-  let perPage = 20;
+export async function getCategory(
+  setCategories,
+  setIsLoad,
+  page = 1,
+  perPage = 100
+) {
   try {
-    const response = await axios.get(`${api}${API_ENDPOINT.CATEGORY}`, {
+    const response = await axios.get(`${api}${API_ENDPOINT.CATEGORIES}`, {
       params: {
         page: page,
         perPage: perPage,
       },
     });
     const categories = response.data.data;
-    return setCategories(categories);
+    return setCategories(categories), setIsLoad(false);
   } catch (error) {
     console.error(error);
     return;
