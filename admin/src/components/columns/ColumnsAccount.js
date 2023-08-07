@@ -1,5 +1,4 @@
 //https://codesandbox.io/s/customized-filter-panel-ant-design-demo-7wns7?file=/index.js:2642-2656
-import React from "react";
 import SearchColumnTable from "components/columns/SearchColumnTable";
 
 const ColumnsAccount = () => {
@@ -9,7 +8,7 @@ const ColumnsAccount = () => {
       dataIndex: "firstName",
       key: "firstName",
       sorter: (a, b) => a.firstName.localeCompare(b.firstName),
-      onCell: (text) => <a>{text}</a>,
+      // onCell: (text) => <a>{text}</a>,
       ...SearchColumnTable("firstName"),
     },
     {
@@ -17,7 +16,7 @@ const ColumnsAccount = () => {
       dataIndex: "createdBy",
       key: "createdBy",
       sorter: (a, b) => a.createdBy.localeCompare(b.createdBy),
-      onCell: (text) => <a>{text}</a>,
+      // onCell: (text) => <a>{text}</a>,
       ...SearchColumnTable("createdBy"),
     },
     {

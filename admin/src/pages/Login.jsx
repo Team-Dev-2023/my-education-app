@@ -54,10 +54,13 @@ function LoginPage() {
   };
 
   useEffect(() => {
-    if (accessToken && (userInfo.data.role === 2 || userInfo.data.role === 3)) {
+    if (
+      accessToken &&
+      !(userInfo?.data?.role === 1 || userInfo?.data?.role === 0)
+    ) {
       setIsAlertAccountIncorrect(true);
       dispatch(logoutAction());
-    } else if (userInfo.data.role === 1 || userInfo.data.role === 0) {
+    } else if (userInfo?.data?.role === 1 || userInfo?.data?.role === 0) {
       navigate(ROUTES.ADMIN.HOME_PAGE);
     }
   }, [userInfo.data]);

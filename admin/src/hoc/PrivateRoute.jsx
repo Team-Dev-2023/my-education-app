@@ -5,9 +5,9 @@ import { Navigate, Outlet } from "react-router-dom";
 
 function PrivateRoute({ user, redirectPath, children }) {
   const [isShowSideBar, setIsShowSideBar] = useState(false);
-  console.log("showSideBar", isShowSideBar);
+  // console.log("showSideBar", isShowSideBar);
   const accessToken = localStorage.getItem("accessToken");
-  if (!accessToken || user?.data?.role === 2 || user?.data?.role === 3) {
+  if (!accessToken || !(user?.data?.role === 1 || user?.data?.role === 0)) {
     return <Navigate to={redirectPath} replace />;
   } else if (user?.data?.role === 1 || user?.data?.role === 0) {
     return children ? (
