@@ -13,6 +13,11 @@ import { getUserInfoAction } from "redux/actions";
 import ListCoursePage from "pages/ListCoursePage";
 import ListAccountPage from "pages/ListAccountPage";
 import CoursePreviewPage from "pages/CoursePreviewPage";
+import NotFoundPage from "pages/NotFoundPage";
+import SubCategoryPage from "pages/SubCategoryPage";
+import TopicsPage from "pages/TopicsPage";
+import { CategoryPage } from "pages/CategoryPage";
+import CreateAccountPage from "pages/CreateAccountPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,13 +51,26 @@ function App() {
             path={ROUTES.ADMIN.LIST_ACCOUNT}
             element={<ListAccountPage />}
           />
+          <Route
+            path={ROUTES.ADMIN.LIST_CATEGORIES}
+            element={<CategoryPage />}
+          />
+          <Route
+            path={ROUTES.ADMIN.LIST_SUB_CATEGORIES}
+            element={<SubCategoryPage />}
+          />
+          <Route path={ROUTES.ADMIN.LIST_TOPICS} element={<TopicsPage />} />
+          <Route
+            path={ROUTES.ADMIN.CREATE_ACCOUNT}
+            element={<CreateAccountPage />}
+          />
           <Route path={ROUTES.ADMIN.HOME_PAGE} element={<HomePage />} />
           <Route
             path={ROUTES.ADMIN.PREVIEW_COURSE}
             element={<CoursePreviewPage />}
           />
         </Route>
-        <Route path="*" element={<div>404</div>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
