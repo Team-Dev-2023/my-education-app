@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { generatePath } from "react-router-dom/dist";
 import { ROUTES } from "constants/routes";
 
-const ColumnsCategories = (showModal, setItemApproval) => {
-  const navigate = useNavigate();
+const ColumnsCategories = (showModal, setItemRemoved) => {
+  // const navigate = useNavigate();
 
   const columns = [
     {
@@ -13,17 +13,17 @@ const ColumnsCategories = (showModal, setItemApproval) => {
       dataIndex: "name",
       key: "name",
       sorter: (a, b) => a.name.localeCompare(b.name),
-      onCell: (record, rowIndex) => {
-        return {
-          onClick: () => {
-            navigate(
-              generatePath(ROUTES.ADMIN.PREVIEW_COURSE, {
-                uuid: record.uuid,
-              })
-            );
-          },
-        };
-      },
+      // onCell: (record, rowIndex) => {
+      //   return {
+      //     onClick: () => {
+      //       navigate(
+      //         generatePath(ROUTES.ADMIN.PREVIEW_COURSE, {
+      //           uuid: record.uuid,
+      //         })
+      //       );
+      //     },
+      //   };
+      // },
       //use onCell will Warning: Invalid value for prop `$$typeof` on <td> tag
       ...SearchColumnTable("name"),
     },
@@ -66,10 +66,10 @@ const ColumnsCategories = (showModal, setItemApproval) => {
           size="middle"
           onClick={() => {
             showModal();
-            setItemApproval(record);
+            setItemRemoved(record);
           }}
         >
-          <a> {record.name ? "Approval" : "!Approval"}</a>
+          Remove
         </Button>
       ),
     },

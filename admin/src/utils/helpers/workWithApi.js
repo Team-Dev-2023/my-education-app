@@ -4,6 +4,7 @@ import { API_ENDPOINT } from "../../constants/api";
 const api = process.env.REACT_APP_API;
 const qs = require("qs");
 
+// Category
 export async function getCategory(
   setCategories,
   setIsLoad,
@@ -19,6 +20,42 @@ export async function getCategory(
     });
     const categories = response.data.data;
     return setCategories(categories), setIsLoad(false);
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+}
+export async function postCategory(data, accessToken) {
+  try {
+    const response = await axios.post(
+      `${api}${API_ENDPOINT.CATEGORIES}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+}
+export async function deleteCategory(uuid, accessToken) {
+  try {
+    const response = await axios.delete(
+      `${api}${API_ENDPOINT.CATEGORIES}/${uuid}`,
+      {
+        params: {
+          uuid: uuid,
+        },
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response;
   } catch (error) {
     console.error(error);
     return;
