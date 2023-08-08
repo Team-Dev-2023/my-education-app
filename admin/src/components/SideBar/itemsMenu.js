@@ -11,13 +11,7 @@ export const itemMenus = (userInfo) => {
 
   const items = [
     getItem(null, null, null, [getItem("Home", "0")], "group"),
-    getItem(
-      "Course",
-      "Course",
-      null,
-      [getItem("List Course", "1"), getItem("Option 14", "14")],
-      "group"
-    ),
+    getItem("Course", "Course", null, [getItem("List Course", "1")], "group"),
     getItem(
       "User",
       "User",

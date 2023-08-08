@@ -16,12 +16,21 @@ const SideBar = ({ showSideBar, setIsShowSideBar }) => {
   useEffect(() => {
     const currentURL = window.location.href;
     const parsedURL = parse(currentURL);
+    // console.log("url", parsedURL);
     if (parsedURL.pathname === "/admin/list-course") {
       setPath(1);
     } else if (parsedURL.pathname === "/admin/list-account") {
       setPath(2);
+    } else if (parsedURL.pathname === "/admin/create-account") {
+      setPath(3);
     } else if (parsedURL.pathname === "/admin") {
       setPath(0);
+    } else if (parsedURL.pathname === "/admin/categories") {
+      setPath(4);
+    } else if (parsedURL.pathname === "/admin/subcategories") {
+      setPath(5);
+    } else if (parsedURL.pathname === "/admin/topics") {
+      setPath(6);
     }
   });
 
@@ -31,8 +40,16 @@ const SideBar = ({ showSideBar, setIsShowSideBar }) => {
       navigate(ROUTES.ADMIN.LIST_COURSE);
     } else if (e.key === "2") {
       navigate(ROUTES.ADMIN.LIST_ACCOUNT);
+    } else if (e.key === "3") {
+      navigate(ROUTES.ADMIN.CREATE_ACCOUNT);
     } else if (e.key === "0") {
       navigate(ROUTES.ADMIN.HOME_PAGE);
+    } else if (e.key === "4") {
+      navigate(ROUTES.ADMIN.LIST_CATEGORIES);
+    } else if (e.key === "5") {
+      navigate(ROUTES.ADMIN.LIST_SUB_CATEGORIES);
+    } else if (e.key === "6") {
+      navigate(ROUTES.ADMIN.LIST_TOPICS);
     }
   };
   return (
