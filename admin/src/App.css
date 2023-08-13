@@ -45,3 +45,19 @@
 .textShowDetailHome {
   color: green !important;
 }
+.show-sideBar {
+  position: fixed;
+  top: 0;
+  transition: all 0.2s;
+  transform: translateX(0%);
+  z-index: 10;
+}
+.hidden-sideBar {
+  position: fixed;
+  top: 0;
+  transition: all 0.2s;
+  transform: translateX(-100%);
+}
+.border-menu {
+  border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
+}
