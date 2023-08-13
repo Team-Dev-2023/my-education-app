@@ -32,14 +32,20 @@ The Education React App is currently in active development. The project team is 
 
 ## How to Use
 
-To get started with the Education React App, follow these steps:
+To run the Education React App, follow these steps:
 
-1. Open three separate terminal windows.
-2. Navigate to each of the following folders in the project directory:
+1. Download and install [Docker](https://www.docker.com/)
+2. Run the following commands in the root folder:
+   ```bash
+   docker-compose   -f docker-compose.prod.yml down
+   docker-compose   -f docker-compose.prod.yml up -d
+   ```
+3. Open three separate terminal windows.
+4. Navigate to each of the following folders in the project directory:
    - `api-service`
    - `lecturer`
    - `web-portal`
-3. In each terminal window, run the following commands:
+5. In each terminal window, run the following commands:
    ```bash
    yarn
    yarn start
